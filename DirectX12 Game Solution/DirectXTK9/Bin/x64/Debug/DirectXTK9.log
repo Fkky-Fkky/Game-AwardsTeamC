@@ -1,13 +1,1 @@
-﻿  MediaRenderer.cpp
-  ResourceRenderer.cpp
-  TextureRenderer.cpp
-  Camera.cpp
-  Model.cpp
-  pch.cpp
-  Shader.cpp
-  SkinnedModel.cpp
-  SpriteBatch9.cpp
-  SpriteFont.cpp
-  TextureLoader.cpp
-  コードを生成中...
-  DirectXTK9.vcxproj -> C:\Users\jfuki\Desktop\C_Team\DirectX12 Game Solution\DirectXTK9\Bin\x64\Debug\DirectXTK9.lib
+﻿  DirectXTK9.vcxproj -> C:\Users\jfuki\Desktop\C_Team\DirectX12 Game Solution\DirectXTK9\Bin\x64\Debug\DirectXTK9.lib
