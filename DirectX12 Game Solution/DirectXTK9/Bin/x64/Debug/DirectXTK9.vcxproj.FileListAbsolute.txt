@@ -1,0 +1,6 @@
+C:\Users\jfuki\Desktop\C_Team\DirectX12 Game Solution\DirectXTK9\Bin\x64\Debug\DirectXTK9.vcxproj.CopyComplete
+C:\Users\jfuki\Desktop\C_Team\DirectX12 Game Solution\DirectXTK9\Bin\x64\Debug\DirectXTK9.lib
+C:\Users\jfuki\Desktop\C_Team\DirectX12 Game Solution\DirectXTK9\Bin\x64\Debug\D3DCompiler_43.dll
+C:\Users\jfuki\Desktop\C_Team\DirectX12 Game Solution\DirectXTK9\Bin\x64\Debug\d3dx9d_43.dll
+C:\Users\jfuki\Desktop\C_Team\DirectX12 Game Solution\DirectXTK9\Bin\x64\Debug\d3dx10d_43.dll
+C:\Users\jfuki\Desktop\C_Team\DirectX12 Game Solution\DirectXTK9\Bin\x64\Debug\d3dx11d_43.dll

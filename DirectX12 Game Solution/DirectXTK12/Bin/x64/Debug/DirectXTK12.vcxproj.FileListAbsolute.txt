@@ -1,0 +1,1 @@
+C:\Users\jfuki\Desktop\C_Team\DirectX12 Game Solution\DirectXTK12\Bin\x64\Debug\DirectXTK12.lib
