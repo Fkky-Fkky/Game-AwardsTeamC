@@ -35,6 +35,9 @@ public:
 	void Render() override;
 
 private:
+	DX12::DESCRIPTORHEAP descriptorHeap;
+	DX12::SPRITEBATCH    spriteBatch;
+	DX12::HGPUDESCRIPTOR dx9GpuDescriptor;
 
 
 
