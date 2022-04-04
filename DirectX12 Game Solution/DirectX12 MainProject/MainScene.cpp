@@ -42,6 +42,15 @@ void MainScene::LoadAssets()
 
 
     // グラフィックリソースの初期化処理
+    D3DLIGHT9 light{};
+    light.Type      = D3DLIGHT_DIRECTIONAL;
+    light.Ambient   = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
+    light.Specular  = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
+    light.Diffuse   = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
+
+    light.Direction = DX9::VectorSet(0.0f, -1.0f, 0.0f);
+    DXTK->Direct3D9->SetLight(0, light);
+
 }
 
 // Releasing resources required for termination.
