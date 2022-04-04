@@ -16,6 +16,12 @@
     <Filter Include="Classes\My_Camera">
       <UniqueIdentifier>{1b5bc9ea-49d6-4f4a-becb-9d4fa583f343}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Enemy">
+      <UniqueIdentifier>{b6e08d42-43cb-49e4-b4b5-642af8a94627}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Enemy\Boss">
+      <UniqueIdentifier>{27a87593-31a1-48c7-940a-2b10ef4c6417}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -51,6 +57,9 @@
     <ClInclude Include="Classes\My_Camera\My_Camera.h">
       <Filter>Classes\My_Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Boss.h">
+      <Filter>Classes\Enemy\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -67,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="Classes\My_Camera\My_Camera.cpp">
       <Filter>Classes\My_Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Boss.cpp">
+      <Filter>Classes\Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

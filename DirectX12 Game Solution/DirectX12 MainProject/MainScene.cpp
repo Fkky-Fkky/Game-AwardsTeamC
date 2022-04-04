@@ -16,6 +16,7 @@ MainScene::MainScene() : dx9GpuDescriptor{}
 void MainScene::Initialize()
 {
     camera.Initialize();
+    boss.Intialize();
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -48,9 +49,10 @@ void MainScene::LoadAssets()
     light.Specular  = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
     light.Diffuse   = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
 
-    light.Direction = DX9::VectorSet(0.0f, -1.0f, 0.0f);
+    light.Direction = DX9::VectorSet(0.0f, -100.0f, -30.0f);
     DXTK->Direct3D9->SetLight(0, light);
 
+    boss.LoadAseets();
 }
 
 // Releasing resources required for termination.
@@ -83,7 +85,7 @@ NextScene MainScene::Update(const float deltaTime)
 
     // TODO: Add your game logic here.
 
-
+    boss.Update(deltaTime);
 
     return NextScene::Continue;
 }
@@ -92,11 +94,14 @@ NextScene MainScene::Update(const float deltaTime)
 void MainScene::Render()
 {
     // TODO: Add your rendering code here.
-    DXTK->Direct3D9->Clear(DX9::Colors::RGBA(0, 0, 0, 255));
+    DXTK->Direct3D9->Clear(DX9::Colors::CornflowerBlue/*RGBA(0, 0, 0, 255)*/);
 
     DXTK->Direct3D9->BeginScene();
-    DX9::SpriteBatch->Begin();
 
+    boss.Render();
+
+
+    DX9::SpriteBatch->Begin();
 
 
 

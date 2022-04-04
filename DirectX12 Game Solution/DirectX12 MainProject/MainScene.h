@@ -6,6 +6,7 @@
 
 #include "Scene.h"
 #include "Classes/My_Camera/My_Camera.h"
+#include "Classes/Enemy/Boss/Boss.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -41,5 +42,6 @@ private:
 	DX12::HGPUDESCRIPTOR dx9GpuDescriptor;
 
 	My_Camera camera;
+	Boss boss;
 
 };
