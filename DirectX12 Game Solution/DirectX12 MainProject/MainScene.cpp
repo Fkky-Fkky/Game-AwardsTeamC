@@ -15,7 +15,7 @@ MainScene::MainScene() : dx9GpuDescriptor{}
 // Initialize a variable and audio resources.
 void MainScene::Initialize()
 {
-
+    camera.Initialize();
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.

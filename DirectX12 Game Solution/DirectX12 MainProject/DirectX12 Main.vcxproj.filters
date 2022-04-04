@@ -10,6 +10,12 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{d7d56ad3-60f4-40ad-b499-8133f5f75990}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{dd2958ce-2f7b-4a6f-a9a6-6e2ed58a8081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\My_Camera">
+      <UniqueIdentifier>{1b5bc9ea-49d6-4f4a-becb-9d4fa583f343}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -42,6 +48,9 @@
     <ClInclude Include="DontDestroyOnLoad.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\My_Camera\My_Camera.h">
+      <Filter>Classes\My_Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -55,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="MainScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\My_Camera\My_Camera.cpp">
+      <Filter>Classes\My_Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
