@@ -1,4 +1,5 @@
 #include "Classes/Enemy/Boss/Boss.h"
+#include <Bezier.h>
 
 Boss::Boss() {
 	body_pos   = SimpleMath::Vector3::Zero;
@@ -6,21 +7,22 @@ Boss::Boss() {
 	l_hand_pos = SimpleMath::Vector3::Zero;
 
 	time_delta = 0.0f;
-	speed = 0.0f;
 	slap_time = 0.0f;
 	boss_state = 0;
 }
 
 void Boss::Intialize() {
 	r_hand_rote = SimpleMath::Vector3(-30.0f, 5.0f, 0.0f);
-	speed = 0.0f;
+	l_hand_rote = SimpleMath::Vector3(-30.0f, -5.0f, 0.0f);
 	boss_state = WAIT;
 	slap_time = 0.0f;
+	flag = false;
+	bezier_t = 0.0f;
 }
 
 void Boss::LoadAseets(){
 	boss_body = DX9::Model::CreateFromFile(DXTK->Device9, L"Boss/boss.X");
-	/*boss_body->SetScale(0.1f);*/
+
 	body_pos = SimpleMath::Vector3(0.0f, -30.0f, 80.0f);
 
 	right_hand = DX9::Model::CreateFromFile(DXTK->Device9, L"Boss/boss_hand_R.X");
@@ -35,16 +37,16 @@ void Boss::LoadAseets(){
 void Boss::Update(const float deltaTime) {
 	time_delta = deltaTime;
 	if (DXTK->KeyState->Right) {
-		r_hand_rote.y += 10.0f * deltaTime;
+		r_hand_rote.y += 5.0f * deltaTime;
 	}
 	if (DXTK->KeyState->Left) {
-		r_hand_rote.y -= 10.0f * deltaTime;
+		r_hand_rote.y -= 5.0f * deltaTime;
 	}
 	if (DXTK->KeyState->Up) {
-		r_hand_rote.x += 10.0f * deltaTime;
+		r_hand_rote.x += 5.0f * deltaTime;
 	}
 	if (DXTK->KeyState->Down) {
-		r_hand_rote.x -= 10.0f * deltaTime;
+		r_hand_rote.x -= 5.0f * deltaTime;
 	}
 
 	if (DXTK->KeyEvent->pressed.Enter) {
@@ -55,6 +57,9 @@ void Boss::Update(const float deltaTime) {
 		boss_state = LEFT_SLAP;
 	}
 
+	if (DXTK->KeyEvent->pressed.Space) {
+		boss_state = RIGHT_BEAT;
+	}
 	Attack();
 
 }
@@ -68,7 +73,7 @@ void Boss::Render(){
 	right_hand->Draw();
 
 	left_hand->SetPosition(l_hand_pos);
-	left_hand->SetRotation(SimpleMath::Vector3(-30.0f, -5.0f, 0.0f));
+	left_hand->SetRotation(l_hand_rote);
 	left_hand->Draw();
 }
 
@@ -85,39 +90,81 @@ void Boss::Attack() {
 	case LEFT_SLAP:
 		LeftSlap();
 		break;
+
+	case RIGHT_BEAT:
+		RightBeat();
+		break;
 	}
 }
 
 void Boss::RightSlap() {
-	//speed = std::min(speed + 500.0f * time_delta, 10000.0f);
-	//if(!flag)
-	//	r_hand_pos.x -= speed * time_delta;
-	//else
-	//	r_hand_pos.x += speed * time_delta;
-
-	//if (r_hand_pos.x <= -150.0f)
-	//	flag = true;
-
 	slap_time += time_delta;
-	r_hand_pos.x -= V0 * slap_time - 0.5f * GRAVITY * slap_time * slap_time;
+	r_hand_pos.x -= V0 * slap_time - HALF * GRAVITY * slap_time * slap_time;
 
 	if (r_hand_pos.x >= 200.0f) {
+		r_hand_pos.x = -200.0f;
+		flag = true;
+	}
+
+	if (r_hand_pos.x >= -80.0f && flag) {
 		r_hand_pos.x = -80.0f;
 		slap_time = 0.0f;
+		flag = false;
 		boss_state = WAIT;
 	}
 }
 
 void Boss::LeftSlap() {
-
 	slap_time += time_delta;
-	l_hand_pos.x += V0 * slap_time - 0.5f * GRAVITY * slap_time * slap_time;
-
+	l_hand_pos.x += V0 * slap_time - HALF * GRAVITY * slap_time * slap_time;
 
 	if (l_hand_pos.x <= -200.0f) {
+		l_hand_pos.x = 200.0f;
+		flag = true;
+	}
+
+	if (l_hand_pos.x <= 80.0f && flag) {
 		l_hand_pos.x = 80.0f;
-		speed = 0.0f;
 		slap_time = 0.0f;
+		flag = false;
+		boss_state = WAIT;
+	}
+}
+
+void Boss::RightBeat() {
+	//r_hand_pos.x += 20.0f * time_delta;
+	//r_hand_pos.y += 1.0f*sinf(XMConvertToRadians(-90.0f));
+
+}
+
+void Boss::SusiZanmai() {
+	r_hand_pos = Bezier::CubicInterpolate(
+		SimpleMath::Vector3(-80.0f, 30.0f, 80.0f),
+		SimpleMath::Vector3(100.0f, 30.0f, 80.0f),
+		SimpleMath::Vector3(-50.0f, 30.0f, 80.0f),
+		SimpleMath::Vector3(-100.0f, -40.0f, 80.0f),
+		bezier_t
+	);
+	l_hand_pos = Bezier::CubicInterpolate(
+		SimpleMath::Vector3(80.0f, 30.0f, 80.0f),
+		SimpleMath::Vector3(-100.0f, 30.0f, 80.0f),
+		SimpleMath::Vector3(50.0f, 30.0f, 80.0f),
+		SimpleMath::Vector3(100.0f, -40.0f, 80.0f),
+		bezier_t
+	);
+	r_hand_rote.x += 1.0f * time_delta;
+	if (r_hand_rote.x >= -28.0f) {
+		r_hand_rote.x = -28.0f;
+	}
+
+	l_hand_rote.x += 1.0f * time_delta;
+	if (l_hand_rote.x >= -28.0f) {
+		l_hand_rote.x = -28.0f;
+	}
+
+	bezier_t += 1.0f / 1.5f * time_delta;//1.5ïbÇ©ÇØÇƒÉSÅ[ÉãÇ…å¸Ç©Ç§
+	if (r_hand_pos.y <= -40.0f) {
+		bezier_t = 0.0f;
 		boss_state = WAIT;
 	}
 }

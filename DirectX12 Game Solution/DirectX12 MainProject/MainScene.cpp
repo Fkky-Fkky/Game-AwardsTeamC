@@ -17,6 +17,8 @@ void MainScene::Initialize()
 {
     camera.Initialize();
     boss.Intialize();
+    size = SimpleMath::Vector2(0.0f,0.0f);
+    origin = SimpleMath::Vector3(330.5f, 142.5f, 0.0f);
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -53,6 +55,8 @@ void MainScene::LoadAssets()
     DXTK->Direct3D9->SetLight(0, light);
 
     boss.LoadAseets();
+
+    susi = DX9::Sprite::CreateFromFile(DXTK->Device9, L"susi_zanmai.png");
 }
 
 // Releasing resources required for termination.
@@ -87,6 +91,16 @@ NextScene MainScene::Update(const float deltaTime)
 
     boss.Update(deltaTime);
 
+    if (DXTK->KeyState->S) {
+        size.x += 1.0f * deltaTime;
+        size.y += 1.0f * deltaTime;
+    }
+    if (size.x >= 1.0f) {
+        size.x = 1.0f;
+        size.y = 1.0f;
+
+    }
+
     return NextScene::Continue;
 }
 
@@ -103,7 +117,13 @@ void MainScene::Render()
 
     DX9::SpriteBatch->Begin();
 
-
+    DX9::SpriteBatch->Draw(
+        susi.Get(),
+        SimpleMath::Vector3(650.0f, 450.0f, 0.0f),
+        DX9::Colors::RGBA(255,255,255,255),
+        size,
+        origin
+    );
 
 
     DX9::SpriteBatch->End();
