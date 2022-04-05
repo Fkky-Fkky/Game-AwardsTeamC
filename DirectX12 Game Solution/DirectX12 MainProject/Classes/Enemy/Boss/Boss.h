@@ -13,6 +13,7 @@ public:
 	void LoadAseets();
 	void Update(const float deltaTime);
 	void Render();
+	void Render2D();
 
 private:
 	void Attack();
@@ -25,6 +26,15 @@ private:
 	DX9::MODEL right_hand;
 	DX9::MODEL left_hand;
 
+	BoundingOrientedBox right_hand_obb;
+	DX9::MODEL right_hand_obb_model;
+
+	BoundingOrientedBox left_hand_obb;
+	DX9::MODEL left_hand_obb_model;
+
+	bool hit_flag;
+	DX9::SPRITEFONT font;
+
 	SimpleMath::Vector3 body_pos;
 	SimpleMath::Vector3 r_hand_pos;
 	SimpleMath::Vector3 l_hand_pos;
@@ -33,7 +43,7 @@ private:
 
 
 	float time_delta;
-	bool flag;
+	bool hand_return_flag;
 	int boss_state;
 	float slap_time;
 	const float V0 = 5.0f;

@@ -125,6 +125,7 @@ void MainScene::Render()
         origin
     );
 
+    boss.Render2D();
 
     DX9::SpriteBatch->End();
     DXTK->Direct3D9->EndScene();
