@@ -8,8 +8,10 @@ Boss::Boss() {
 
 	time_delta = 0.0f;
 	slap_time = 0.0f;
+	beat_time = 0.0f;
 	boss_state = 0;
 	hand_return_flag = false;
+	hit_flag = false;
 }
 
 void Boss::Intialize() {
@@ -17,6 +19,7 @@ void Boss::Intialize() {
 	l_hand_rote = SimpleMath::Vector3(-30.0f, -5.0f, 0.0f);
 	boss_state = WAIT;
 	slap_time = 0.0f;
+	beat_time = 0.0f;
 	hand_return_flag = false;
 	bezier_t = 0.0f;
 	hit_flag = false;
@@ -90,6 +93,15 @@ void Boss::Update(const float deltaTime) {
 	if (DXTK->KeyEvent->pressed.Space) {
 		boss_state = RIGHT_BEAT;
 	}
+	
+	if (DXTK->KeyEvent->pressed.E) {
+		boss_state = LEFT_BEAT;
+	}
+
+	if (DXTK->KeyEvent->pressed.P) {
+		boss_state = -1;
+	}
+
 	Attack();
 
 
@@ -147,7 +159,6 @@ void Boss::Render(){
 void Boss::Attack() {
 	switch (boss_state) {
 	case WAIT:
-
 		break;
 
 	case RIGHT_SLAP:
@@ -161,15 +172,22 @@ void Boss::Attack() {
 	case RIGHT_BEAT:
 		RightBeat();
 		break;
+	case LEFT_BEAT:
+		LeftBeat();
+		break;
+
+	default:
+		r_hand_pos.y = 30.0f;
+		break;
 	}
 }
 
 void Boss::RightSlap() {
 	slap_time += time_delta;
-	r_hand_pos.x -= V0 * slap_time - HALF * GRAVITY * slap_time * slap_time;
+	r_hand_pos.x -= SLAP_SPEED * slap_time - HALF * SLAP_GRAVITY * slap_time * slap_time;
 
-	if (r_hand_pos.x >= 200.0f) {
-		r_hand_pos.x = -200.0f;
+	if (r_hand_pos.x >= 300.0f) {
+		r_hand_pos.x = -300.0f;
 		hand_return_flag = true;
 	}
 
@@ -183,10 +201,10 @@ void Boss::RightSlap() {
 
 void Boss::LeftSlap() {
 	slap_time += time_delta;
-	l_hand_pos.x += V0 * slap_time - HALF * GRAVITY * slap_time * slap_time;
+	l_hand_pos.x += SLAP_SPEED * slap_time - HALF * SLAP_GRAVITY * slap_time * slap_time;
 
-	if (l_hand_pos.x <= -200.0f) {
-		l_hand_pos.x = 200.0f;
+	if (l_hand_pos.x <= -300.0f) {
+		l_hand_pos.x = 300.0f;
 		hand_return_flag = true;
 	}
 
@@ -199,9 +217,34 @@ void Boss::LeftSlap() {
 }
 
 void Boss::RightBeat() {
-	//r_hand_pos.x += 20.0f * time_delta;
-	//r_hand_pos.y += 1.0f*sinf(XMConvertToRadians(-90.0f));
+	beat_time += time_delta;
+	r_hand_rote.x -= 2.0f * time_delta;
+	if (r_hand_rote.x <= -31.5f) {
+		r_hand_rote.x = -31.5f;
+	}
 
+	r_hand_pos.y += BEAT_SPEED * beat_time - HALF * BEAT_GRAVITY * beat_time * beat_time;
+
+	if (r_hand_pos.y <= -30.0f) {
+		r_hand_pos.y = -30.0f;
+		beat_time = 0.0f;
+		boss_state = WAIT;
+	}
+}
+void Boss::LeftBeat() {
+	beat_time += time_delta;
+	l_hand_rote.x -= 2.0f * time_delta;
+	if (l_hand_rote.x <= -31.5f) {
+		l_hand_rote.x = -31.5f;
+	}
+
+	l_hand_pos.y += BEAT_SPEED * beat_time - HALF * BEAT_GRAVITY * beat_time * beat_time;
+
+	if (l_hand_pos.y <= -30.0f) {
+		l_hand_pos.y = -30.0f;
+		beat_time = 0.0f;
+		boss_state = WAIT;
+	}
 }
 
 void Boss::SusiZanmai() {

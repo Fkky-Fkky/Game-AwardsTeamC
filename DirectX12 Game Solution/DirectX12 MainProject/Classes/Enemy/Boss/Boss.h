@@ -20,6 +20,7 @@ private:
 	void RightSlap();
 	void LeftSlap();
 	void RightBeat();
+	void LeftBeat();
 	void SusiZanmai();
 
 	DX9::MODEL boss_body;
@@ -46,15 +47,19 @@ private:
 	bool hand_return_flag;
 	int boss_state;
 	float slap_time;
-	const float V0 = 5.0f;
-	const float GRAVITY = 10.0f;
+	float beat_time;
+	const float SLAP_SPEED = 11.0f;
+	const float SLAP_GRAVITY = 23.0f;
+	const float BEAT_SPEED = 23.0f;
+	const float BEAT_GRAVITY = 80.0f;
 	const float HALF = 0.5f;
 
 	enum BOSS_STATE {
 		WAIT,
 		RIGHT_SLAP,
 		LEFT_SLAP,
-		RIGHT_BEAT
+		RIGHT_BEAT,
+		LEFT_BEAT
 	};
 	float bezier_t;
 
