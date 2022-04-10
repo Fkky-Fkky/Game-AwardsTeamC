@@ -43,6 +43,7 @@ private:
 
 	My_Camera camera;
 	Boss boss;
+
 	DX9::SPRITE susi;
 	SimpleMath::Vector2 size;
 	SimpleMath::Vector3 origin;
