@@ -6,6 +6,7 @@
 
 #include "Scene.h"
 #include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/My_Camera/My_Camera.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -42,5 +43,5 @@ private:
 
 private:
 	Boss boss;
-
+	My_Camera camera;
 };

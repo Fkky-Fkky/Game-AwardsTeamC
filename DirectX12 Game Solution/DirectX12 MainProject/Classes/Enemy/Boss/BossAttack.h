@@ -56,6 +56,8 @@ private:
 	const float BEAT_GRAVITY = 80.0f;
 	const float HALF = 0.5f;
 
+	const float R_HAND_INTIAL_POS_X = 80.0f;
+
 	enum BOSS_STATE {
 		WAIT,
 		RIGHT_SLAP,

@@ -9,7 +9,6 @@ class BossParts {
 public:
 	void Initialize(float pos_x, float pos_y, float pos_z);
 	void LoadAssets(LPCWSTR file_name);
-	void Update();
 	void Render();
 
 protected:
