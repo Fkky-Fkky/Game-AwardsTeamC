@@ -16,6 +16,7 @@ PlayerTestScene::PlayerTestScene() : dx9GpuDescriptor{}
 void PlayerTestScene::Initialize()
 {
     camera.Initialize();
+    player.Initialize();
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -48,9 +49,10 @@ void PlayerTestScene::LoadAssets()
     light.Specular  = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
     light.Diffuse   = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
 
-    light.Direction = DX9::VectorSet(0.0f, -1.0f, 0.0f);
+    light.Direction = DX9::VectorSet(0.0f, -10.0f, 5.0f);
     DXTK->Direct3D9->SetLight(0, light);
 
+    player.LoadAssets();
 }
 
 // Releasing resources required for termination.
@@ -83,7 +85,7 @@ NextScene PlayerTestScene::Update(const float deltaTime)
 
     // TODO: Add your game logic here.
 
-
+    player.Update(deltaTime);
 
     return NextScene::Continue;
 }
@@ -92,9 +94,12 @@ NextScene PlayerTestScene::Update(const float deltaTime)
 void PlayerTestScene::Render()
 {
     // TODO: Add your rendering code here.
-    DXTK->Direct3D9->Clear(DX9::Colors::RGBA(0, 0, 0, 255));
+    DXTK->Direct3D9->Clear(DX9::Colors::RGBA(157, 204, 220, 255));
 
     DXTK->Direct3D9->BeginScene();
+
+    player.Render();
+
     DX9::SpriteBatch->Begin();
 
 

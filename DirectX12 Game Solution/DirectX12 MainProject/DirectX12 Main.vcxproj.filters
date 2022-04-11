@@ -16,6 +16,12 @@
     <Filter Include="Classes\My_Camera">
       <UniqueIdentifier>{1b5bc9ea-49d6-4f4a-becb-9d4fa583f343}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Player">
+      <UniqueIdentifier>{6792b414-9c7c-4a2b-a84c-f5035ae7f1a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\PlayerTestCamera">
+      <UniqueIdentifier>{07eb04ad-d140-4387-a5e4-5b6c5a862474}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -54,6 +60,12 @@
     <ClInclude Include="PlayerTestScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Player\Player.h">
+      <Filter>Classes\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\PlayerTestCamera\PlayerTestCamera.h">
+      <Filter>Classes\PlayerTestCamera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -73,6 +85,12 @@
     </ClCompile>
     <ClCompile Include="PlayerTestScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\Player.cpp">
+      <Filter>Classes\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\PlayerTestCamera\PlayerTestCamera.cpp">
+      <Filter>Classes\PlayerTestCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
