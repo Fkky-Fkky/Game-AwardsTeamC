@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Classes/PlayerTestCamera/PlayerTestCamera.h"
 #include "Classes/Player/Player.h"
+#include "Classes/Ground/Ground.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -43,5 +44,6 @@ private:
 
 	PlayerTestCamera camera;
 	Player player;
+	Ground ground;
 
 };

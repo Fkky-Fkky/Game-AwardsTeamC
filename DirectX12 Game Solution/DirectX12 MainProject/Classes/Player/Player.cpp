@@ -8,16 +8,16 @@ void Player::Initialize() {
     v0_ = 1.0f;
     time_ = 0.0f;
     gravity_ = 0.05f;
-    ground_y_ = 0.0f;
 
     attack_x_ = 0.0f;
     attack_flg_ = false;
     attack_time_ = 0.0f;
+
+    ground_y_ = 0.0f;
 }
 
 void Player::LoadAssets() {
 	model_ = DX9::Model::CreateFromFile(DXTK->Device9, L"Player/chara_mock.x");
-	stage_ = DX9::Model::CreateFromFile(DXTK->Device9, L"Ground/stage_a.X");
 
     player_collision_ = model_->GetBoundingOrientedBox();
     player_collision_.Extents = SimpleMath::Vector3(player_collision_.Extents) * 1.0f;

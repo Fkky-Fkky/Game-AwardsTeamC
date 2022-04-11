@@ -17,6 +17,7 @@ void PlayerTestScene::Initialize()
 {
     camera.Initialize();
     player.Initialize();
+    ground.Initialize();
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -53,6 +54,7 @@ void PlayerTestScene::LoadAssets()
     DXTK->Direct3D9->SetLight(0, light);
 
     player.LoadAssets();
+    ground.LoadAssets();
 }
 
 // Releasing resources required for termination.
@@ -99,6 +101,7 @@ void PlayerTestScene::Render()
     DXTK->Direct3D9->BeginScene();
 
     player.Render();
+    ground.Render();
 
     DX9::SpriteBatch->Begin();
 

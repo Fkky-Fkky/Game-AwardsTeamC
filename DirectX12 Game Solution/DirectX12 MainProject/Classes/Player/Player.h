@@ -17,7 +17,6 @@ public:
 
 private:
 	DX9::MODEL model_;
-	DX9::MODEL stage_;
 
 	BoundingOrientedBox player_collision_;
 	DX9::MODEL player_collision_model_;
