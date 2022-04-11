@@ -15,10 +15,11 @@ MainScene::MainScene() : dx9GpuDescriptor{}
 // Initialize a variable and audio resources.
 void MainScene::Initialize()
 {
-    camera.Initialize();
+    //camera.Initialize();
     player_camera.Initialize();
     player.Initialize();
     ground.Initialize();
+    boss.Intialize();
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -56,6 +57,7 @@ void MainScene::LoadAssets()
 
     player.LoadAssets();
     ground.LoadAssets();
+    boss.LoadAseets();
 
 }
 
@@ -90,6 +92,7 @@ NextScene MainScene::Update(const float deltaTime)
     // TODO: Add your game logic here.
 
     player.Update(deltaTime);
+    boss.Update(deltaTime);
 
     return NextScene::Continue;
 }
@@ -104,6 +107,7 @@ void MainScene::Render()
 
     player.Render();
     ground.Render();
+    boss.Render();
 
     DX9::SpriteBatch->Begin();
 

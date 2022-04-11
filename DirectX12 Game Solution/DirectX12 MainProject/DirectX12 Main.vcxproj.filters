@@ -25,6 +25,12 @@
     <Filter Include="Classes\Ground">
       <UniqueIdentifier>{7f04d87a-4bde-4258-85c0-656ecfc1002c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Enemy">
+      <UniqueIdentifier>{188bc508-f632-462e-899a-133ba4033974}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Enemy\Boss">
+      <UniqueIdentifier>{0fe97da1-75be-4205-8c1d-1fe58c544c59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -72,6 +78,15 @@
     <ClInclude Include="Classes\Ground\Ground.h">
       <Filter>Classes\Ground</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\BossAttack.h">
+      <Filter>Classes\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\BossParts.h">
+      <Filter>Classes\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Boss.h">
+      <Filter>Classes\Enemy\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -100,6 +115,15 @@
     </ClCompile>
     <ClCompile Include="Classes\Ground\Ground.cpp">
       <Filter>Classes\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\BossAttack.cpp">
+      <Filter>Classes\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\BossParts.cpp">
+      <Filter>Classes\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Boss.cpp">
+      <Filter>Classes\Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
