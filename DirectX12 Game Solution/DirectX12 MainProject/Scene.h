@@ -6,6 +6,7 @@
 
 enum class NextScene : int {
 	Continue = 0,
+	BossTestScene,
 	MainScene,
 	PlayerTestScene,
 	StartScene = MainScene
