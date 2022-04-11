@@ -1,1 +1,13 @@
-﻿  DirectXTK12.vcxproj -> C:\Users\yumai\OneDrive\デスクトップ\Game Awards TeamC\DirectX12 Game Solution\DirectXTK12\Bin\x64\Debug\DirectXTK12.lib
+﻿  AudioEngine.cpp
+  AlphaTestEffect.cpp
+  BasicEffect.cpp
+  BasicPostProcess.cpp
+  BinaryReader.cpp
+  BufferHelpers.cpp
+  CommonStates.cpp
+  DDSTextureLoader.cpp
+  DebugEffect.cpp
+  DescriptorHeap.cpp
+  DirectXHelpers.cpp
+  コードを生成中...
+  DirectXTK12.vcxproj -> C:\Users\yumai\OneDrive\デスクトップ\Game Awards TeamC\DirectX12 Game Solution\DirectXTK12\Bin\x64\Debug\DirectXTK12.lib
