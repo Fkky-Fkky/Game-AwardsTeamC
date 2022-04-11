@@ -51,6 +51,9 @@
     <ClInclude Include="Classes\My_Camera\My_Camera.h">
       <Filter>Classes\My_Camera</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerTestScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -67,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="Classes\My_Camera\My_Camera.cpp">
       <Filter>Classes\My_Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerTestScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
