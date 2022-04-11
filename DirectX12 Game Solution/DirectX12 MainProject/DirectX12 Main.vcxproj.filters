@@ -66,6 +66,9 @@
     <ClInclude Include="Classes\Enemy\Boss\BossParts.h">
       <Filter>Classes\Enemy\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="BossTestScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -91,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\BossParts.cpp">
       <Filter>Classes\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossTestScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
