@@ -3,6 +3,7 @@
 //
 
 #include "MainScene.h"
+#include "PlayerTestScene.h"
 
 class SceneFactory final {
 public:
@@ -10,7 +11,8 @@ public:
 	{
 		std::unique_ptr<Scene> scene;
 		switch (nextScene) {
-		case NextScene::MainScene:	scene = std::make_unique<MainScene>();	break;
+		case NextScene::MainScene:	        scene = std::make_unique<MainScene>();	        break;
+		case NextScene::PlayerTestScene:	scene = std::make_unique<PlayerTestScene>();	break;
 		}
 		return scene;
 	}

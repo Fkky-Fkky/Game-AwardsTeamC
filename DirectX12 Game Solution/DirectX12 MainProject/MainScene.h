@@ -6,6 +6,9 @@
 
 #include "Scene.h"
 #include "Classes/My_Camera/My_Camera.h"
+#include "Classes/PlayerTestCamera/PlayerTestCamera.h"
+#include "Classes/Player/Player.h"
+#include "Classes/Ground/Ground.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -41,5 +44,8 @@ private:
 	DX12::HGPUDESCRIPTOR dx9GpuDescriptor;
 
 	My_Camera camera;
+	PlayerTestCamera player_camera;
+	Player player;
+	Ground ground;
 
 };
