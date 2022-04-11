@@ -15,8 +15,8 @@ MainScene::MainScene() : dx9GpuDescriptor{}
 // Initialize a variable and audio resources.
 void MainScene::Initialize()
 {
-    camera.Initialize();
-    //player_camera.Initialize();
+    //camera.Initialize();
+    player_camera.Initialize();
     player.Initialize();
     ground.Initialize();
     boss.Intialize();
