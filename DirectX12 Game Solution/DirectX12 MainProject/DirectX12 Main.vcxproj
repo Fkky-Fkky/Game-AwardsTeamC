@@ -189,6 +189,7 @@
     <ClInclude Include="Base\StepTimer.h" />
     <ClInclude Include="Classes\Enemy\Boss\Boss.h" />
     <ClInclude Include="Classes\Enemy\Boss\BossAttack.h" />
+    <ClInclude Include="Classes\Enemy\Boss\BossParts.h" />
     <ClInclude Include="Classes\My_Camera\My_Camera.h" />
     <ClInclude Include="DontDestroyOnLoad.h" />
     <ClInclude Include="MainScene.h" />
@@ -211,6 +212,7 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Boss.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\BossAttack.cpp" />
+    <ClCompile Include="Classes\Enemy\Boss\BossParts.cpp" />
     <ClCompile Include="Classes\My_Camera\My_Camera.cpp" />
     <ClCompile Include="MainScene.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>

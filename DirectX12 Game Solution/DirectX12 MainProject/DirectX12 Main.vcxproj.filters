@@ -63,6 +63,9 @@
     <ClInclude Include="Classes\Enemy\Boss\BossAttack.h">
       <Filter>Classes\Enemy\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\BossParts.h">
+      <Filter>Classes\Enemy\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -84,6 +87,9 @@
       <Filter>Classes\Enemy\Boss</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\BossAttack.cpp">
+      <Filter>Classes\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\BossParts.cpp">
       <Filter>Classes\Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
