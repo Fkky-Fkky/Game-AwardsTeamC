@@ -6,9 +6,11 @@ Boss::Boss() {
 	time_delta = 0.0f;
 }
 
-void Boss::Intialize() {
+void Boss::Initialize() {
 	time_delta = 0.0f;
-	boss_attack.Intialize();
+	boss_attack.Initialize();
+	hand_r.Initialize();
+	hand_l.Initialize();
 }
 
 void Boss::LoadAseets(){
@@ -19,7 +21,8 @@ void Boss::LoadAseets(){
 
 	font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 
-	boss_attack.LoadAseets();
+	hand_r.LoadAssets();
+	hand_l.LoadAssets();
 }
 
 void Boss::Update(const float deltaTime) {
@@ -27,7 +30,9 @@ void Boss::Update(const float deltaTime) {
 
 	
 	
-	boss_attack.Update(deltaTime);
+	//boss_attack.Update(deltaTime);
+	hand_r.Update(deltaTime);
+	hand_l.Update(deltaTime);
 }
 
 void Boss::Render2D() {
@@ -50,5 +55,7 @@ void Boss::Render2D() {
 void Boss::Render(){
 	boss_body->SetPosition(body_pos);
 	boss_body->Draw();
-	boss_attack.Render();
+	//boss_attack.Render();
+	hand_r.Render();
+	hand_l.Render();
 }

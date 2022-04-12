@@ -7,11 +7,12 @@ using namespace DirectX;
 
 class BossParts {
 public:
-	void Initialize(float pos_x, float pos_y, float pos_z);
+	void Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote);
 	void LoadAssets(LPCWSTR file_name);
 	void Render();
 
 protected:
 	SimpleMath::Vector3 position;
+	SimpleMath::Vector3 rotation;
 	DX9::MODEL model;
 };

@@ -2,6 +2,8 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/BossAttack.h"
+#include "Classes/Enemy/Boss/BossHandR.h"
+#include "Classes/Enemy/Boss/BossHandL.h"
 
 using namespace DirectX;
 
@@ -10,7 +12,7 @@ public:
 	Boss();
 	~Boss() {};
 
-	void Intialize();
+	void Initialize();
 	void LoadAseets();
 	void Update(const float deltaTime);
 	void Render();
@@ -26,4 +28,7 @@ private:
 
 	float time_delta;
 	BossAttack boss_attack;
+	BossHandR hand_r;
+	BossHandL hand_l;
+
 };

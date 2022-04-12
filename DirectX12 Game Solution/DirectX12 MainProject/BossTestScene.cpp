@@ -15,7 +15,7 @@ BossTestScene::BossTestScene()
 // Initialize a variable and audio resources.
 void BossTestScene::Initialize()
 {
-    boss.Intialize();
+    boss.Initialize();
     camera.Initialize();
 }
 
