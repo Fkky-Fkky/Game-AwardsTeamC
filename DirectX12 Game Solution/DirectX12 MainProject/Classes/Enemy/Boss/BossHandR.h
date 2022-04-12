@@ -19,6 +19,7 @@ private:
 	float slap_time;
 	float beat_time;
 	float time_delta;
+	float wait_time;
 	bool hand_return_flag;
 	bool action_end_flag;
 	

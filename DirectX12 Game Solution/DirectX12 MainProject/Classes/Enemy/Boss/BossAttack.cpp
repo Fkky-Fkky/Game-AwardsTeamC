@@ -70,7 +70,7 @@ void BossAttack::Attack() {
 		break;
 
 	case LEFT_SLAP:
-		//hand_l.LeftSlap();
+		hand_l.LeftSlap(this);
 		break;
 
 	case RIGHT_BEAT:
@@ -78,7 +78,7 @@ void BossAttack::Attack() {
 		break;
 
 	case LEFT_BEAT:
-		//hand_l.LeftBeat();
+		hand_l.LeftBeat(this);
 		break;
 	}
 }

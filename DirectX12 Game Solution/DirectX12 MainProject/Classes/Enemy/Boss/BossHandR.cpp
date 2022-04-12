@@ -9,6 +9,7 @@ void BossHandR::Initialize() {
 	slap_time = 0.0f;
 	beat_time = 0.0f;
 	time_delta = 0.0f;
+	wait_time = 0.0f;
 	hand_return_flag = false;
 	action_end_flag = false;
 }
@@ -77,17 +78,33 @@ void BossHandR::RightSlap(BossAttack* bossattack) {
 }
 
 void BossHandR::RightBeat(BossAttack* bossattack) {
-	beat_time += time_delta;
 	rotation.x -= 2.0f * time_delta;
 	if (rotation.x <= -31.5f) {
 		rotation.x = -31.5f;
 	}
+	if (!hand_return_flag) {
+		beat_time += time_delta;
+		position.y += BEAT_SPEED * beat_time - HALF * BEAT_GRAVITY * beat_time * beat_time;
+	}
 
-	position.y += BEAT_SPEED * beat_time - HALF * BEAT_GRAVITY * beat_time * beat_time;
-
-	if (position.y <= -30.0f) {
-		position.y = -30.0f;
+	if (position.y <= -3.0f) {
+		position.y = -3.0f;
 		beat_time = 0.0f;
+		hand_return_flag = true;
+	}
+
+	if (hand_return_flag) {
+		wait_time += time_delta;
+	}
+
+	if (wait_time >= 5.0f) {
+		position.y += 5.0f * time_delta;
+	}
+
+	if (position.y >= 0.0f && wait_time >= 5.0f) {
+		position.y = 0.0f;
+		wait_time = 0.0f;
+		hand_return_flag = false;
 		bossattack->SetBossState(0);
 	}
 }
