@@ -5,6 +5,8 @@
 
 using namespace DirectX;
 
+class BossAttack;
+
 class BossParts {
 public:
 	void Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote);

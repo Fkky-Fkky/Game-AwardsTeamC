@@ -1,10 +1,16 @@
 #include "Classes/Enemy/Boss/BossHandR.h"
+#include "Classes/Enemy/Boss/BossAttack.h"
 
 void BossHandR::Initialize() {
 	BossParts::Initialize(
-		SimpleMath::Vector3(-80.0f, 30.0f, 80.0f),
+		SimpleMath::Vector3(INITIAL_POS_X, 5.0f, 0.0f),
 		SimpleMath::Vector3(-30.0f, 5.0f, 0.0f)
 	);
+	slap_time = 0.0f;
+	beat_time = 0.0f;
+	time_delta = 0.0f;
+	hand_return_flag = false;
+	action_end_flag = false;
 }
 
 void BossHandR::LoadAssets() {
@@ -25,6 +31,7 @@ void BossHandR::LoadAssets() {
 }
 
 void BossHandR::Update(const float deltaTime) {
+	time_delta = deltaTime;
 	if (DXTK->KeyState->Right) {
 		//r_hand_rote.y += 5.0f * deltaTime;
 		position.x += 40.0f * deltaTime;
@@ -51,35 +58,36 @@ void BossHandR::Render() {
 	right_hand_obb_model->Draw();
 }
 
-//void BossHandR::RightSlap() {
-//	slap_time += time_delta;
-//	position.x -= SLAP_SPEED * slap_time - HALF * SLAP_GRAVITY * slap_time * slap_time;
-//
-//	if (position.x >= 300.0f) {
-//		position.x = -300.0f;
-//		hand_return_flag = true;
-//	}
-//
-//	if (position.x >= -80.0f && hand_return_flag) {
-//		position.x = -80.0f;
-//		slap_time = 0.0f;
-//		hand_return_flag = false;
-//		boss_state = WAIT;
-//	}
-//}
+void BossHandR::RightSlap(BossAttack* bossattack) {
+	slap_time += time_delta;
+	position.x -= SLAP_SPEED * slap_time - HALF * SLAP_GRAVITY * slap_time * slap_time;
 
-//void BossHandR::RightBeat() {
-//	beat_time += time_delta;
-//	rotation.x -= 2.0f * time_delta;
-//	if (rotation.x <= -31.5f) {
-//		rotation.x = -31.5f;
-//	}
-//
-//	position.y += BEAT_SPEED * beat_time - HALF * BEAT_GRAVITY * beat_time * beat_time;
-//
-//	if (position.y <= -30.0f) {
-//		position.y = -30.0f;
-//		beat_time = 0.0f;
-//		boss_state = WAIT;
-//	}
-//}
+	if (position.x >= 300.0f) {
+		position.x = -300.0f;
+		hand_return_flag = true;
+	}
+
+	if (position.x >= INITIAL_POS_X && hand_return_flag) {
+		position.x = INITIAL_POS_X;
+		slap_time = 0.0f;
+		hand_return_flag = false;
+		action_end_flag = true;
+		bossattack->SetBossState(0);
+	}
+}
+
+void BossHandR::RightBeat(BossAttack* bossattack) {
+	beat_time += time_delta;
+	rotation.x -= 2.0f * time_delta;
+	if (rotation.x <= -31.5f) {
+		rotation.x = -31.5f;
+	}
+
+	position.y += BEAT_SPEED * beat_time - HALF * BEAT_GRAVITY * beat_time * beat_time;
+
+	if (position.y <= -30.0f) {
+		position.y = -30.0f;
+		beat_time = 0.0f;
+		bossattack->SetBossState(0);
+	}
+}

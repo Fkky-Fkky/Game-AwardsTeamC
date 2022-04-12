@@ -2,11 +2,12 @@
 
 void BossHandL::Initialize() {
 	BossParts::Initialize(
-		SimpleMath::Vector3(80.0f, 30.0f, 80.0f),
+		SimpleMath::Vector3(80.0f, 0.0f, 0.0f),
 		SimpleMath::Vector3(-30.0f, -5.0f, 0.0f)
 	);
-	slap_time = 0.0f;;
-	time_delta = 0.0f;;
+	slap_time = 0.0f;
+	beat_time = 0.0f;
+	time_delta = 0.0f;
 	hand_return_flag = false;
 
 }
@@ -30,7 +31,7 @@ void BossHandL::LoadAssets() {
 
 void BossHandL::Update(const float deltaTime) {
 	time_delta = deltaTime;
-	LeftSlap();
+	//LeftSlap();
 	left_hand_obb.Center = model->GetPosition();
 	left_hand_obb.Orientation = model->GetRotationQuaternion();
 }
@@ -42,23 +43,23 @@ void BossHandL::Render() {
 	left_hand_obb_model->Draw();
 }
 
-void BossHandL::LeftSlap() {
-	slap_time += time_delta;
-	position.x += SLAP_SPEED * slap_time - HALF * SLAP_GRAVITY * slap_time * slap_time;
-
-	if (position.x <= -300.0f) {
-		position.x = 300.0f;
-		hand_return_flag = true;
-	}
-
-	if (position.x <= 80.0f && hand_return_flag) {
-		position.x = 80.0f;
-		slap_time = 0.0f;
-		hand_return_flag = false;
-		boss_state = WAIT;
-	}
-}
-
+//void BossHandL::LeftSlap() {
+//	slap_time += time_delta;
+//	position.x += SLAP_SPEED * slap_time - HALF * SLAP_GRAVITY * slap_time * slap_time;
+//
+//	if (position.x <= -300.0f) {
+//		position.x = 300.0f;
+//		hand_return_flag = true;
+//	}
+//
+//	if (position.x <= 80.0f && hand_return_flag) {
+//		position.x = 80.0f;
+//		slap_time = 0.0f;
+//		hand_return_flag = false;
+//		boss_state = WAIT;
+//	}
+//}
+//
 //void BossHandL::LeftBeat() {
 //	beat_time += time_delta;
 //	rotation.x -= 2.0f * time_delta;

@@ -2,8 +2,6 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/BossAttack.h"
-#include "Classes/Enemy/Boss/BossHandR.h"
-#include "Classes/Enemy/Boss/BossHandL.h"
 
 using namespace DirectX;
 
@@ -19,7 +17,6 @@ public:
 	void Render2D();
 
 private:
-
 	DX9::MODEL boss_body;
 
 	DX9::SPRITEFONT font;
@@ -28,7 +25,5 @@ private:
 
 	float time_delta;
 	BossAttack boss_attack;
-	BossHandR hand_r;
-	BossHandL hand_l;
 
 };

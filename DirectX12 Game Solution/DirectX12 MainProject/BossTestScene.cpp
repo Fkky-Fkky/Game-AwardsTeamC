@@ -17,6 +17,7 @@ void BossTestScene::Initialize()
 {
     boss.Initialize();
     camera.Initialize();
+    player.Initialize();
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -52,7 +53,7 @@ void BossTestScene::LoadAssets()
     DXTK->Direct3D9->SetLight(0, light);
 
     boss.LoadAseets();
-
+    player.LoadAssets();
 }
 
 // Releasing resources required for termination.
@@ -86,7 +87,7 @@ NextScene BossTestScene::Update(const float deltaTime)
 	// TODO: Add your game logic here.
 
     boss.Update(deltaTime);
-
+    player.Update(deltaTime);
 	return NextScene::Continue;
 }
 
@@ -99,7 +100,7 @@ void BossTestScene::Render()
     DXTK->Direct3D9->BeginScene();
 
     boss.Render();
-
+    player.Render();
 
     DX9::SpriteBatch->Begin();
 
