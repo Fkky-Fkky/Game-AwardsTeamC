@@ -2,6 +2,7 @@
 
 #include "Base/pch.h"
 #include "Base/dxtk.h"
+#include "Classes/Collision/Collision.h"
 
 using namespace DirectX;
 
@@ -38,4 +39,6 @@ private:
 	float gravity_;
 
 	float ground_y_;
+
+	Collision collision;
 };

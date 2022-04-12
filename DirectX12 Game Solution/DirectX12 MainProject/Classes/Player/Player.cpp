@@ -96,6 +96,8 @@ void Player::Update(const float deltaTime) {
 
     player_attack_collision_.Center = model_->GetPosition();
     player_attack_collision_.Orientation = model_->GetRotationQuaternion();
+
+    collision.PlayerCollision(player_collision_);
 }
 
 void Player::Render() {
