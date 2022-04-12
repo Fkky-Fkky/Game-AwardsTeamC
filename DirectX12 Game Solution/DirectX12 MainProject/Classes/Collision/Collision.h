@@ -14,10 +14,15 @@ public:
 	void LoadAssets();
 	void Update(const float deltaTime);
 	void Render();
+	void Render2D();
 	void PlayerCollision(BoundingOrientedBox player);
-	void Collision(BoundingOrientedBox player);
+	void BossCollision(BoundingOrientedBox boss);
 
 private:
 	BoundingOrientedBox player_collision_;
+	BoundingOrientedBox boss_collision_;
+
+	bool hit_flg_;
+	DX9::SPRITEFONT font;
 
 };

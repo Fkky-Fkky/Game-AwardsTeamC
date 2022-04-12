@@ -191,6 +191,7 @@
     <ClInclude Include="Classes\Enemy\Boss\Boss.h" />
     <ClInclude Include="Classes\Enemy\Boss\BossAttack.h" />
     <ClInclude Include="Classes\Enemy\Boss\BossParts.h" />
+    <ClInclude Include="Classes\Enemy\Small Enemy\SmallEnemy.h" />
     <ClInclude Include="Classes\Ground\Ground.h" />
     <ClInclude Include="Classes\My_Camera\My_Camera.h" />
     <ClInclude Include="Classes\PlayerTestCamera\PlayerTestCamera.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="Classes\Enemy\Boss\Boss.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\BossAttack.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\BossParts.cpp" />
+    <ClCompile Include="Classes\Enemy\Small Enemy\SmallEnemy.cpp" />
     <ClCompile Include="Classes\Ground\Ground.cpp" />
     <ClCompile Include="Classes\My_Camera\My_Camera.cpp" />
     <ClCompile Include="Classes\PlayerTestCamera\PlayerTestCamera.cpp" />

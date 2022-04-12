@@ -20,12 +20,16 @@ void Player::LoadAssets() {
 	model_ = DX9::Model::CreateFromFile(DXTK->Device9, L"Player/chara_mock.x");
 
     player_collision_ = model_->GetBoundingOrientedBox();
-    player_collision_.Extents = SimpleMath::Vector3(player_collision_.Extents) * 1.0f;
+    player_collision_.Extents = SimpleMath::Vector3(
+        player_collision_.Extents.x * 0.65f,
+        player_collision_.Extents.y * 1.35f,
+        player_collision_.Extents.z
+    ) * 1.0f;
 
     player_collision_model_ = DX9::Model::CreateBox(
         DXTK->Device9,
-        player_collision_.Extents.x * 0.65f,
-        player_collision_.Extents.y * 1.35f,
+        player_collision_.Extents.x,
+        player_collision_.Extents.y,
         player_collision_.Extents.z
     );
 
@@ -97,7 +101,7 @@ void Player::Update(const float deltaTime) {
     player_attack_collision_.Center = model_->GetPosition();
     player_attack_collision_.Orientation = model_->GetRotationQuaternion();
 
-    collision.PlayerCollision(player_collision_);
+    /*collision.PlayerCollision(player_collision_);*/
 }
 
 void Player::Render() {

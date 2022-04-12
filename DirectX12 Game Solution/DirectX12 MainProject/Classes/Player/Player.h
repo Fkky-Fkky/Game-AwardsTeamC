@@ -15,6 +15,7 @@ public:
 	void LoadAssets();
 	void Update(const float deltaTime);
 	void Render();
+	BoundingOrientedBox GetPlayerCollision() { return player_collision_; }
 
 private:
 	DX9::MODEL model_;

@@ -8,6 +8,8 @@
 #include "Classes/PlayerTestCamera/PlayerTestCamera.h"
 #include "Classes/Player/Player.h"
 #include "Classes/Ground/Ground.h"
+#include "Classes/Enemy/Small Enemy/SmallEnemy.h"
+#include "Classes/Collision/Collision.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -45,5 +47,6 @@ private:
 	PlayerTestCamera camera;
 	Player player;
 	Ground ground;
-
+	SmallEnemy smallEnemy;
+	Collision collision;
 };
