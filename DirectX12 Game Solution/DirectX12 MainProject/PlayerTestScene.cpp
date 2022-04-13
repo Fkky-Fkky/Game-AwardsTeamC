@@ -18,6 +18,8 @@ void PlayerTestScene::Initialize()
     camera.Initialize();
     player.Initialize();
     ground.Initialize();
+    smallEnemy.Initialize();
+    collision.Initialize();
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -55,6 +57,8 @@ void PlayerTestScene::LoadAssets()
 
     player.LoadAssets();
     ground.LoadAssets();
+    smallEnemy.LoadAssets();
+    collision.LoadAssets();
 }
 
 // Releasing resources required for termination.
@@ -88,6 +92,15 @@ NextScene PlayerTestScene::Update(const float deltaTime)
     // TODO: Add your game logic here.
 
     player.Update(deltaTime);
+    player.HitPlayer(collision.GetHitFlag());
+    smallEnemy.HitPlayerAttack(collision.GetHitAttackFlag());
+    smallEnemy.Update(deltaTime);
+    collision.Update(deltaTime, player.AttackFlag());
+    collision.PlayerCollision(player.GetPlayerCollision());
+    collision.PlayerAttackCollision(player.GetPlayerAttackCollision());
+    collision.BossCollision(smallEnemy.GetSmallEnemyCollision());
+    collision.CoreCollision(smallEnemy.GetCoreCollision());
+    
 
     return NextScene::Continue;
 }
@@ -102,10 +115,14 @@ void PlayerTestScene::Render()
 
     player.Render();
     ground.Render();
+    smallEnemy.Render();
+    collision.Render();
 
     DX9::SpriteBatch->Begin();
 
-
+    collision.Render2D();
+    player.Render2D();
+    smallEnemy.Render2D();
 
 
 

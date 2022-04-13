@@ -31,6 +31,12 @@
     <Filter Include="Classes\Enemy\Boss">
       <UniqueIdentifier>{0fe97da1-75be-4205-8c1d-1fe58c544c59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Collision">
+      <UniqueIdentifier>{074d2f25-a975-45ec-8d94-a14d3703aeb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Enemy\Small Enemy">
+      <UniqueIdentifier>{18d4a310-ba13-4278-8594-4ac34b4aab25}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -87,6 +93,12 @@
     <ClInclude Include="Classes\Enemy\Boss\Boss.h">
       <Filter>Classes\Enemy\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Collision\Collision.h">
+      <Filter>Classes\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy\Small Enemy\SmallEnemy.h">
+      <Filter>Classes\Enemy\Small Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -124,6 +136,12 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Boss.cpp">
       <Filter>Classes\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Collision\Collision.cpp">
+      <Filter>Classes\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Small Enemy\SmallEnemy.cpp">
+      <Filter>Classes\Enemy\Small Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

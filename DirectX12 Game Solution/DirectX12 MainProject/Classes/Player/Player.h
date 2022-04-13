@@ -2,6 +2,7 @@
 
 #include "Base/pch.h"
 #include "Base/dxtk.h"
+#include "Classes/Collision/Collision.h"
 
 using namespace DirectX;
 
@@ -14,9 +15,16 @@ public:
 	void LoadAssets();
 	void Update(const float deltaTime);
 	void Render();
+	void Render2D();
+	void HitPlayer(bool player_hit_flag);
+	void HitProcessing();
+	BoundingOrientedBox GetPlayerCollision() { return player_collision_; }
+	BoundingOrientedBox GetPlayerAttackCollision() { return player_attack_collision_; }
+	bool AttackFlag() { return attack_flg_; }
 
 private:
 	DX9::MODEL model_;
+	DX9::SPRITEFONT font;
 
 	BoundingOrientedBox player_collision_;
 	DX9::MODEL player_collision_model_;
@@ -38,4 +46,9 @@ private:
 	float gravity_;
 
 	float ground_y_;
+
+	int player_hp_;
+	bool hit_flag_;
+
+	Collision collision;
 };
