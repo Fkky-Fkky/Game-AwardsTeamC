@@ -5,6 +5,7 @@ BossAttack::BossAttack() {
 	bezier_t = 0.0f;
 	boss_state = 0;
 	time_delta = 0.0f;
+	wait_time = 0.0f;
 }
 
 void BossAttack::Initialize() {
@@ -33,25 +34,25 @@ void BossAttack::Update(const float deltaTime) {
 	time_delta = deltaTime;
 
 
-	if (DXTK->KeyEvent->pressed.Enter) {
-		boss_state = RIGHT_SLAP;
-	}
+	//if (DXTK->KeyEvent->pressed.Enter) {
+	//	boss_state = RIGHT_SLAP;
+	//}
 
-	if (DXTK->KeyEvent->pressed.Back) {
-		boss_state = LEFT_SLAP;
-	}
+	//if (DXTK->KeyEvent->pressed.Back) {
+	//	boss_state = LEFT_SLAP;
+	//}
 
-	if (DXTK->KeyEvent->pressed.Space) {
-		boss_state = RIGHT_BEAT;
-	}
+	//if (DXTK->KeyEvent->pressed.Space) {
+	//	boss_state = RIGHT_BEAT;
+	//}
 
-	if (DXTK->KeyState->E) {
-		boss_state = LEFT_BEAT;
-	}
+	//if (DXTK->KeyState->E) {
+	//	boss_state = LEFT_BEAT;
+	//}
 
-	if (DXTK->KeyEvent->pressed.P) {
-		boss_state = -1;
-	}
+	//if (DXTK->KeyEvent->pressed.P) {
+	//	boss_state = -1;
+	//}
 
 	Attack();
 	RandomAction();
