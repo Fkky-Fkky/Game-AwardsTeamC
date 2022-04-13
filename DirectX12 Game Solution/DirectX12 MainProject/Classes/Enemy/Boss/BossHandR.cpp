@@ -66,10 +66,12 @@ void BossHandR::RightSlap(BossAttack* bossattack) {
 		slap_time += time_delta;
 		position.x -= SLAP_SPEED * slap_time - HALF * SLAP_GRAVITY * slap_time * slap_time;
 		rotation.x = std::min(rotation.x + 1.0f * time_delta, XM_PIDIV2);
+		position.y = std::max(position.y - 10.0f * time_delta, 2.0f);
 	}
 	else {
 		position.x = std::min(position.x + 10.0f * time_delta, INITIAL_POS_X);
 		rotation.x = std::max(rotation.x - 10.0f * time_delta, XM_PIDIV4);
+		position.y = std::min(position.y + 10.0f * time_delta, INITIAL_POS_Y);
 	}
 
 
@@ -88,11 +90,6 @@ void BossHandR::RightSlap(BossAttack* bossattack) {
 }
 
 void BossHandR::RightBeat(BossAttack* bossattack) {
-	//rotation.x -= 2.0f * time_delta;
-	//if (rotation.x <= -XM_1DIV2PI) {
-	//	rotation.x = -XM_1DIV2PI;
-	//}
-
 	if (!hand_return_flag) {
 		attack_flag = true;
 		beat_time += time_delta;

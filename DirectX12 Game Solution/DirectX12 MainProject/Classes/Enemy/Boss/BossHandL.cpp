@@ -50,10 +50,12 @@ void BossHandL::LeftSlap(BossAttack* bossattack) {
 		slap_time += time_delta;
 		position.x += SLAP_SPEED * slap_time - HALF * SLAP_GRAVITY * slap_time * slap_time;
 		rotation.x = std::min(rotation.x + 1.0f * time_delta, XM_PIDIV2);
+		position.y = std::max(position.y - 10.0f * time_delta, 2.0f);
 	}
 	else {
 		position.x = std::max(position.x - 10.0f * time_delta, INITIAL_POS_X);
 		rotation.x = std::max(rotation.x - 10.0f * time_delta, XM_PIDIV4);
+		position.y = std::min(position.y + 10.0f * time_delta, INITIAL_POS_Y);
 	}
 
 
