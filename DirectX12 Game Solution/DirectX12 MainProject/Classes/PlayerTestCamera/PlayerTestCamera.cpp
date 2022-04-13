@@ -2,8 +2,8 @@
 
 void PlayerTestCamera::Initialize() {
 	camera->SetViewLookAt(
-        SimpleMath::Vector3(0, 10, -20), //カメラの座標
-        SimpleMath::Vector3(0, 0, 30),   //注視する座標(この座標が画面の中心にくる)
+        SimpleMath::Vector3(0, 4.8f, -15), //カメラの座標
+        SimpleMath::Vector3(0, 4.8f, 0),   //注視する座標(この座標が画面の中心にくる)
         SimpleMath::Vector3::Up         //カメラの上向きベクトル(ロール回転)
     );
     camera->SetPerspectiveFieldOfView(XMConvertToRadians(45.0f), 16.0f / 9.0f, 1.0f, 10000.0f);

@@ -10,14 +10,13 @@ public:
 	Boss();
 	~Boss() {};
 
-	void Intialize();
+	void Initialize();
 	void LoadAseets();
 	void Update(const float deltaTime);
 	void Render();
 	void Render2D();
 
 private:
-
 	DX9::MODEL boss_body;
 
 	DX9::SPRITEFONT font;
@@ -26,4 +25,5 @@ private:
 
 	float time_delta;
 	BossAttack boss_attack;
+
 };

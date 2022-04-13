@@ -6,20 +6,18 @@ Boss::Boss() {
 	time_delta = 0.0f;
 }
 
-void Boss::Intialize() {
+void Boss::Initialize() {
 	time_delta = 0.0f;
-	boss_attack.Intialize();
+	boss_attack.Initialize();
 }
 
 void Boss::LoadAseets(){
 	boss_body = DX9::Model::CreateFromFile(DXTK->Device9, L"Boss/boss.X");
-
-	body_pos = SimpleMath::Vector3(0.0f, -30.0f, 80.0f);
+	body_pos = SimpleMath::Vector3(0.0f, 1.0f, 1.0f);
 
 
 	font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
-
-	boss_attack.LoadAseets();
+	boss_attack.LoadAssets();
 }
 
 void Boss::Update(const float deltaTime) {

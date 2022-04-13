@@ -2,60 +2,38 @@
 
 #include "Base/pch.h"
 #include "Base/dxtk.h"
+#include "Classes/Enemy/Boss/BossHandR.h"
+#include "Classes/Enemy/Boss/BossHandL.h"
+#include <random>
 
 using namespace DirectX;
 
-class BossAttack {
+class BossAttack{
 public:
 	BossAttack();
 	~BossAttack() {};
-	void Intialize();
-	void LoadAseets();
-
+	void Initialize();
+	void LoadAssets();
 	void Update(const float deltaTime);
 	void Render();
 	void Attack();
 	bool GetHitFlag() { return hit_flag; }
-
+	void SetBossState(int state) { boss_state = state; }
 private:
 
-	void RightSlap();
-	void LeftSlap();
-	void RightBeat();
-	void LeftBeat();
 	void SusiZanmai();
-
-	DX9::MODEL right_hand;
-	DX9::MODEL left_hand;
-
-	BoundingOrientedBox right_hand_obb;
-	DX9::MODEL right_hand_obb_model;
-
-	BoundingOrientedBox left_hand_obb;
-	DX9::MODEL left_hand_obb_model;
-
-
-	SimpleMath::Vector3 r_hand_pos;
-	SimpleMath::Vector3 l_hand_pos;
-	SimpleMath::Vector3 r_hand_rote;
-	SimpleMath::Vector3 l_hand_rote;
-
-	int boss_state;
+	void RandomAction();
 
 	float bezier_t;
 	float time_delta;
-	float slap_time;
-	float beat_time;
 
 	bool hit_flag;
-	bool hand_return_flag;
 
-	const float SLAP_SPEED = 11.0f;
-	const float SLAP_GRAVITY = 23.0f;
-	const float BEAT_SPEED = 23.0f;
-	const float BEAT_GRAVITY = 80.0f;
-	const float HALF = 0.5f;
+	std::mt19937 randomEngine;
+	std::uniform_int_distribution<int> randomDist;
+	float wait_time;
 
+	int boss_state;
 	enum BOSS_STATE {
 		WAIT,
 		RIGHT_SLAP,
@@ -63,4 +41,8 @@ private:
 		RIGHT_BEAT,
 		LEFT_BEAT
 	};
+
+	BossHandR hand_r;
+	BossHandL hand_l;
+
 };

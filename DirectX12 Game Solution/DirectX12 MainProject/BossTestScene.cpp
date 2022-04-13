@@ -15,8 +15,10 @@ BossTestScene::BossTestScene()
 // Initialize a variable and audio resources.
 void BossTestScene::Initialize()
 {
-    boss.Intialize();
-
+    boss.Initialize();
+    camera.Initialize();
+    player.Initialize();
+    ground.Initialize();
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -42,10 +44,18 @@ void BossTestScene::LoadAssets()
     uploadResourcesFinished.wait();
 
     // グラフィックリソースの初期化処理
+    D3DLIGHT9 light{};
+    light.Type = D3DLIGHT_DIRECTIONAL;
+    light.Ambient = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
+    light.Specular = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
+    light.Diffuse = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
+
+    light.Direction = DX9::VectorSet(0.0f, -10.0f, 5.0f);
+    DXTK->Direct3D9->SetLight(0, light);
 
     boss.LoadAseets();
-
-
+    player.LoadAssets();
+    ground.LoadAssets();
 }
 
 // Releasing resources required for termination.
@@ -79,8 +89,7 @@ NextScene BossTestScene::Update(const float deltaTime)
 	// TODO: Add your game logic here.
 
     boss.Update(deltaTime);
-
-
+    player.Update(deltaTime);
 	return NextScene::Continue;
 }
 
@@ -88,12 +97,13 @@ NextScene BossTestScene::Update(const float deltaTime)
 void BossTestScene::Render()
 {
 	// TODO: Add your rendering code here.
-    DXTK->Direct3D9->Clear(static_cast<D3DCOLOR>(DX9::Colors::RGBA(0, 0, 0, 255)));
+    DXTK->Direct3D9->Clear(static_cast<D3DCOLOR>(DX9::Colors::RGBA(157, 204, 220, 255)));
 
     DXTK->Direct3D9->BeginScene();
 
     boss.Render();
-
+    player.Render();
+    ground.Render();
 
     DX9::SpriteBatch->Begin();
 

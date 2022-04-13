@@ -19,7 +19,7 @@ void MainScene::Initialize()
     player_camera.Initialize();
     player.Initialize();
     ground.Initialize();
-    boss.Intialize();
+    boss.Initialize();
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
