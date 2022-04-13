@@ -20,6 +20,8 @@ void MainScene::Initialize()
     player.Initialize();
     ground.Initialize();
     boss.Initialize();
+    smallEnemy.Initialize();
+    collision.Initialize();
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -58,7 +60,8 @@ void MainScene::LoadAssets()
     player.LoadAssets();
     ground.LoadAssets();
     boss.LoadAseets();
-
+    smallEnemy.LoadAssets();
+    collision.LoadAssets();
 }
 
 // Releasing resources required for termination.
@@ -92,7 +95,15 @@ NextScene MainScene::Update(const float deltaTime)
     // TODO: Add your game logic here.
 
     player.Update(deltaTime);
+    player.HitPlayer(collision.GetHitFlag());
     boss.Update(deltaTime);
+    smallEnemy.HitPlayerAttack(collision.GetHitAttackFlag());
+    smallEnemy.Update(deltaTime);
+    collision.Update(deltaTime, player.AttackFlag());
+    collision.PlayerCollision(player.GetPlayerCollision());
+    collision.PlayerAttackCollision(player.GetPlayerAttackCollision());
+    collision.BossCollision(smallEnemy.GetSmallEnemyCollision());
+    collision.CoreCollision(smallEnemy.GetCoreCollision());
 
     return NextScene::Continue;
 }
@@ -108,10 +119,14 @@ void MainScene::Render()
     player.Render();
     ground.Render();
     boss.Render();
+    smallEnemy.Render();
+    collision.Render();
 
     DX9::SpriteBatch->Begin();
 
-
+    collision.Render2D();
+    player.Render2D();
+    smallEnemy.Render2D();
 
 
 
