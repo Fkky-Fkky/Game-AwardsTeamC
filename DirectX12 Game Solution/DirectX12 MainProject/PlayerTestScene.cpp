@@ -92,10 +92,15 @@ NextScene PlayerTestScene::Update(const float deltaTime)
     // TODO: Add your game logic here.
 
     player.Update(deltaTime);
+    player.HitPlayer(collision.GetHitFlag());
+    smallEnemy.HitPlayerAttack(collision.GetHitAttackFlag());
     smallEnemy.Update(deltaTime);
-    collision.Update(deltaTime);
+    collision.Update(deltaTime, player.AttackFlag());
     collision.PlayerCollision(player.GetPlayerCollision());
+    collision.PlayerAttackCollision(player.GetPlayerAttackCollision());
     collision.BossCollision(smallEnemy.GetSmallEnemyCollision());
+    collision.CoreCollision(smallEnemy.GetCoreCollision());
+    
 
     return NextScene::Continue;
 }
@@ -116,6 +121,8 @@ void PlayerTestScene::Render()
     DX9::SpriteBatch->Begin();
 
     collision.Render2D();
+    player.Render2D();
+    smallEnemy.Render2D();
 
 
 
