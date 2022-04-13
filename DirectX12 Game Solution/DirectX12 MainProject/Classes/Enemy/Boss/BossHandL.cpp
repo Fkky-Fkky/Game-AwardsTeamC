@@ -17,7 +17,7 @@ void BossHandL::LoadAssets() {
 	BossParts::LoadAssets(L"Boss/boss_hand_L.X");
 
 	left_hand_obb = model->GetBoundingOrientedBox();
-	left_hand_obb.Extents = SimpleMath::Vector3(left_hand_obb.Extents) * 0.2f;
+	left_hand_obb.Extents = SimpleMath::Vector3(left_hand_obb.Extents);
 
 	left_hand_obb_model = DX9::Model::CreateBox(
 		DXTK->Device9,
@@ -69,10 +69,6 @@ void BossHandL::LeftSlap(BossAttack* bossattack) {
 }
 
 void BossHandL::LeftBeat(BossAttack* bossattack) {
-	//rotation.x -= 2.0f * time_delta;
-	//if (rotation.x <= -31.5f) {
-	//	rotation.x = -31.5f;
-	//}
 	if (!hand_return_flag) {
 		beat_time += time_delta;
 		position.y += BEAT_SPEED * beat_time - HALF * BEAT_GRAVITY * beat_time * beat_time;

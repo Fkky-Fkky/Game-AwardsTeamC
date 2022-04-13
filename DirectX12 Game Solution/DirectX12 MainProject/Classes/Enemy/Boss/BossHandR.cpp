@@ -15,9 +15,8 @@ void BossHandR::Initialize() {
 
 void BossHandR::LoadAssets() {
 	BossParts::LoadAssets(L"Boss/boss_hand_R.X");
-
 	right_hand_obb = model->GetBoundingOrientedBox();
-	right_hand_obb.Extents = SimpleMath::Vector3(right_hand_obb.Extents) * 0.2f;
+	right_hand_obb.Extents = SimpleMath::Vector3(right_hand_obb.Extents);
 
 	right_hand_obb_model = DX9::Model::CreateBox(
 		DXTK->Device9,

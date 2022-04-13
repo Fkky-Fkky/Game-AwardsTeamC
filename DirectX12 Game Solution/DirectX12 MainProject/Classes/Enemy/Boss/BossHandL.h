@@ -22,7 +22,7 @@ private:
 	float wait_time;
 	bool hand_return_flag;
 
-	const float INITIAL_POS_X = 10.0f;
+	const float INITIAL_POS_X = 5.0f;
 	const float INITIAL_POS_Y = 5.0f;
 	const float SLAP_SPEED = 1.5f;
 	const float SLAP_GRAVITY = 5.0f;
