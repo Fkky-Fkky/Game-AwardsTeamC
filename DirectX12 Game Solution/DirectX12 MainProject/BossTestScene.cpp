@@ -18,6 +18,7 @@ void BossTestScene::Initialize()
     boss.Initialize();
     camera.Initialize();
     player.Initialize();
+    ground.Initialize();
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -54,6 +55,7 @@ void BossTestScene::LoadAssets()
 
     boss.LoadAseets();
     player.LoadAssets();
+    ground.LoadAssets();
 }
 
 // Releasing resources required for termination.
@@ -101,6 +103,7 @@ void BossTestScene::Render()
 
     boss.Render();
     player.Render();
+    ground.Render();
 
     DX9::SpriteBatch->Begin();
 

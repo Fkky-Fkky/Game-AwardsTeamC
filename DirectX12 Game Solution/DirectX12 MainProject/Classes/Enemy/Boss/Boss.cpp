@@ -14,7 +14,7 @@ void Boss::Initialize() {
 void Boss::LoadAseets(){
 	boss_body = DX9::Model::CreateFromFile(DXTK->Device9, L"Boss/boss.X");
 	//boss_body->SetScale(1.0f);
-	body_pos = SimpleMath::Vector3(0.0f, 0.0f, 0.0f);
+	body_pos = SimpleMath::Vector3(0.0f, 2.0f, 3.0f);
 
 
 	font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);

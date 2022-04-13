@@ -4,6 +4,7 @@
 #include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/BossHandR.h"
 #include "Classes/Enemy/Boss/BossHandL.h"
+#include <random>
 
 using namespace DirectX;
 
@@ -21,11 +22,16 @@ public:
 private:
 
 	void SusiZanmai();
+	void RandomAction();
 
 	float bezier_t;
 	float time_delta;
 
 	bool hit_flag;
+
+	std::mt19937 randomEngine;
+	std::uniform_int_distribution<int> randomDist;
+	float wait_time;
 
 	int boss_state;
 	enum BOSS_STATE {

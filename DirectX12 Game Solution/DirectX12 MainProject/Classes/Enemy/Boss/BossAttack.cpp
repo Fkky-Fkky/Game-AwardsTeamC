@@ -16,6 +16,11 @@ void BossAttack::Initialize() {
 	time_delta = 0.0f;
 	hand_r.Initialize();
 	hand_l.Initialize();
+
+	std::random_device seed;
+	randomEngine = std::mt19937(seed());
+	randomDist = std::uniform_int_distribution<>(1, 4);
+	wait_time = 0.0f;
 }
 
 void BossAttack::LoadAssets(){
@@ -51,7 +56,7 @@ void BossAttack::Update(const float deltaTime) {
 	}
 
 	Attack();
-
+	RandomAction();
 	//hit_flag = right_hand_obb.Intersects(left_hand_obb);
 }
 
@@ -80,6 +85,17 @@ void BossAttack::Attack() {
 	case LEFT_BEAT:
 		hand_l.LeftBeat(this);
 		break;
+	}
+}
+
+void BossAttack::RandomAction() {
+	if (boss_state == WAIT) {
+		wait_time += time_delta;
+	}
+
+	if(wait_time >= 3.0f){
+		boss_state = randomDist(randomEngine);
+		wait_time = 0.0f;
 	}
 }
 

@@ -8,6 +8,7 @@
 #include "Classes/Enemy/Boss/Boss.h"
 #include "Classes/PlayerTestCamera/PlayerTestCamera.h"
 #include "Classes/Player/Player.h"
+#include "Classes/Ground/Ground.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -46,4 +47,5 @@ private:
 	Boss boss;
 	PlayerTestCamera camera;
 	Player player;
+	Ground ground;
 };
