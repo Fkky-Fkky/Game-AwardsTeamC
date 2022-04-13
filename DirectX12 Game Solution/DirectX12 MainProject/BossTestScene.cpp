@@ -19,6 +19,7 @@ void BossTestScene::Initialize()
     camera.Initialize();
     player.Initialize();
     ground.Initialize();
+    collision.Initialize();
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -56,6 +57,8 @@ void BossTestScene::LoadAssets()
     boss.LoadAseets();
     player.LoadAssets();
     ground.LoadAssets();
+    collision.LoadAssets();
+
 }
 
 // Releasing resources required for termination.
@@ -90,6 +93,13 @@ NextScene BossTestScene::Update(const float deltaTime)
 
     boss.Update(deltaTime);
     player.Update(deltaTime);
+
+    collision.Update(deltaTime, player.AttackFlag());
+    collision.PlayerCollision(player.GetPlayerCollision());
+    collision.PlayerAttackCollision(player.GetPlayerAttackCollision());
+    collision.BossCollision(boss.GetRHandCollision());
+    //collision.CoreCollision(smallEnemy.GetCoreCollision());
+
 	return NextScene::Continue;
 }
 
@@ -107,7 +117,6 @@ void BossTestScene::Render()
 
     DX9::SpriteBatch->Begin();
 
-    boss.Render2D();
 
 
     DX9::SpriteBatch->End();
