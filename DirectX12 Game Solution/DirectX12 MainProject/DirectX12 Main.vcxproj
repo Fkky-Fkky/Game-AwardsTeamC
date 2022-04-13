@@ -187,9 +187,12 @@
     <ClInclude Include="Base\GameBase.h" />
     <ClInclude Include="Base\pch.h" />
     <ClInclude Include="Base\StepTimer.h" />
+    <ClInclude Include="BossTestScene.h" />
     <ClInclude Include="Classes\Collision\Collision.h" />
     <ClInclude Include="Classes\Enemy\Boss\Boss.h" />
     <ClInclude Include="Classes\Enemy\Boss\BossAttack.h" />
+    <ClInclude Include="Classes\Enemy\Boss\BossHandL.h" />
+    <ClInclude Include="Classes\Enemy\Boss\BossHandR.h" />
     <ClInclude Include="Classes\Enemy\Boss\BossParts.h" />
     <ClInclude Include="Classes\Enemy\Small Enemy\SmallEnemy.h" />
     <ClInclude Include="Classes\Ground\Ground.h" />
@@ -216,9 +219,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="BossTestScene.cpp" />
     <ClCompile Include="Classes\Collision\Collision.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Boss.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\BossAttack.cpp" />
+    <ClCompile Include="Classes\Enemy\Boss\BossHandL.cpp" />
+    <ClCompile Include="Classes\Enemy\Boss\BossHandR.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\BossParts.cpp" />
     <ClCompile Include="Classes\Enemy\Small Enemy\SmallEnemy.cpp" />
     <ClCompile Include="Classes\Ground\Ground.cpp" />

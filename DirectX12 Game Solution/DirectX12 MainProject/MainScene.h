@@ -10,6 +10,8 @@
 #include "Classes/Player/Player.h"
 #include "Classes/Ground/Ground.h"
 #include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/Enemy/Small Enemy/SmallEnemy.h"
+#include "Classes/Collision/Collision.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -49,5 +51,7 @@ private:
 	Player player;
 	Ground ground;
 	Boss boss;
+	SmallEnemy smallEnemy;
+	Collision collision;
 
 };

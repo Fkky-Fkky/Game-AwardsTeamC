@@ -99,6 +99,15 @@
     <ClInclude Include="Classes\Enemy\Small Enemy\SmallEnemy.h">
       <Filter>Classes\Enemy\Small Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\BossHandL.h">
+      <Filter>Classes\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\BossHandR.h">
+      <Filter>Classes\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossTestScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -142,6 +151,15 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Small Enemy\SmallEnemy.cpp">
       <Filter>Classes\Enemy\Small Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\BossHandR.cpp">
+      <Filter>Classes\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\BossHandL.cpp">
+      <Filter>Classes\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossTestScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
