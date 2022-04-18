@@ -20,6 +20,7 @@ void PlayerTestScene::Initialize()
     ground.Initialize();
     smallEnemy.Initialize();
     collision.Initialize();
+    boss.Initialize();
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -59,6 +60,7 @@ void PlayerTestScene::LoadAssets()
     ground.LoadAssets();
     smallEnemy.LoadAssets();
     collision.LoadAssets();
+    boss.LoadAseets();
 }
 
 // Releasing resources required for termination.
@@ -93,12 +95,14 @@ NextScene PlayerTestScene::Update(const float deltaTime)
 
     player.Update(deltaTime);
     player.HitPlayer(collision.GetHitFlag());
+    boss.Update(deltaTime);
     smallEnemy.HitPlayerAttack(collision.GetHitAttackFlag());
     smallEnemy.Update(deltaTime);
-    collision.Update(deltaTime, player.AttackFlag());
+    collision.Update(deltaTime, player.AttackFlag(), boss.GetRHandAttackFlag(), boss.GetLHandAttackFlag());
     collision.PlayerCollision(player.GetPlayerCollision());
     collision.PlayerAttackCollision(player.GetPlayerAttackCollision());
-    collision.BossCollision(smallEnemy.GetSmallEnemyCollision());
+    collision.BossHandRightCollision(boss.GetRHandCollision());
+    collision.BossHandLeftCollision(boss.GetLHandCollision());
     collision.CoreCollision(smallEnemy.GetCoreCollision());
     
 
@@ -117,6 +121,7 @@ void PlayerTestScene::Render()
     ground.Render();
     smallEnemy.Render();
     collision.Render();
+    boss.Render();
 
     DX9::SpriteBatch->Begin();
 

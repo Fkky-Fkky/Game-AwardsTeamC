@@ -94,10 +94,10 @@ NextScene BossTestScene::Update(const float deltaTime)
     boss.Update(deltaTime);
     player.Update(deltaTime);
 
-    collision.Update(deltaTime, player.AttackFlag());
+    //collision.Update(deltaTime, player.AttackFlag());
     collision.PlayerCollision(player.GetPlayerCollision());
     collision.PlayerAttackCollision(player.GetPlayerAttackCollision());
-    collision.BossCollision(boss.GetRHandCollision());
+    //collision.BossCollision(boss.GetRHandCollision());
     //collision.CoreCollision(smallEnemy.GetCoreCollision());
 
 	return NextScene::Continue;
