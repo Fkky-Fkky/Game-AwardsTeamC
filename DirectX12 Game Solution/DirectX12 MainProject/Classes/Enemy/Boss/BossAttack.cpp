@@ -20,6 +20,8 @@ void BossAttack::Initialize() {
 	randomEngine = std::mt19937(seed());
 	randomDist = std::uniform_int_distribution<>(1, 4);
 	wait_time = 0.0f;
+
+	player_pos_ = SimpleMath::Vector3(0.0f, 0.0f, 0.0f);
 }
 
 void BossAttack::LoadAssets(){
@@ -27,13 +29,13 @@ void BossAttack::LoadAssets(){
 	hand_l.LoadAssets();
 }
 
-void BossAttack::Update(const float deltaTime) {
-	hand_r.Update(deltaTime);
+void BossAttack::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {
+	hand_r.Update(deltaTime, player_pos_);
 	hand_l.Update(deltaTime);
 
 	time_delta = deltaTime;
 
-
+	player_pos_ = player_pos;
 	//if (DXTK->KeyEvent->pressed.Enter) {
 	//	boss_state = RIGHT_SLAP;
 	//}
@@ -42,9 +44,9 @@ void BossAttack::Update(const float deltaTime) {
 	//	boss_state = LEFT_SLAP;
 	//}
 
-	//if (DXTK->KeyEvent->pressed.Space) {
-	//	boss_state = RIGHT_BEAT;
-	//}
+	if (DXTK->KeyEvent->pressed.Space) {
+		boss_state = RIGHT_BEAT;
+	}
 
 	//if (DXTK->KeyState->E) {
 	//	boss_state = LEFT_BEAT;
@@ -81,7 +83,7 @@ void BossAttack::Attack() {
 		break;
 
 	case LEFT_BEAT:
-		hand_l.LeftBeat(this);
+		hand_l.LeftBeat(this, player_pos_);
 		break;
 	}
 }

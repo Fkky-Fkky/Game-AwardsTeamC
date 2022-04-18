@@ -14,7 +14,7 @@ public:
 	~BossAttack() {};
 	void Initialize();
 	void LoadAssets();
-	void Update(const float deltaTime);
+	void Update(const float deltaTime, SimpleMath::Vector3 player_pos);
 	void Render();
 	void Attack();
 	void SetBossState(int state) { boss_state = state; }
@@ -31,7 +31,7 @@ private:
 
 	float bezier_t;
 	float time_delta;
-
+	SimpleMath::Vector3 player_pos_;
 
 	std::mt19937 randomEngine;
 	std::uniform_int_distribution<int> randomDist;

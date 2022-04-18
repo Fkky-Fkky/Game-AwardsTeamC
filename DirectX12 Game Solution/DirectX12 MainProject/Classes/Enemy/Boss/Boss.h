@@ -12,7 +12,7 @@ public:
 
 	void Initialize();
 	void LoadAseets();
-	void Update(const float deltaTime);
+	void Update(const float deltaTime, SimpleMath::Vector3 player_pos);
 	void Render();
 
 	bool GetRHandAttackFlag() { return boss_attack.GetRHandAttackFlag(); }

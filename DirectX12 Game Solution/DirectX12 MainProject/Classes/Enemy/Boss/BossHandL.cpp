@@ -73,7 +73,7 @@ void BossHandL::LeftSlap(BossAttack* bossattack) {
 	}
 }
 
-void BossHandL::LeftBeat(BossAttack* bossattack) {
+void BossHandL::LeftBeat(BossAttack* bossattack, SimpleMath::Vector3 player_pos) {
 	if (!hand_return_flag) {
 		attack_flag = true;
 		beat_time += time_delta;

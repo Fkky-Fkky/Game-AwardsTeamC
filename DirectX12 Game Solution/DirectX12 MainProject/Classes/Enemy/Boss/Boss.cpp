@@ -1,4 +1,5 @@
 #include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/Player/Player.h"
 
 Boss::Boss() {
 	body_pos   = SimpleMath::Vector3::Zero;
@@ -15,8 +16,8 @@ void Boss::LoadAseets(){
 	boss_attack.LoadAssets();
 }
 
-void Boss::Update(const float deltaTime) {	
-	boss_attack.Update(deltaTime);
+void Boss::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {
+	boss_attack.Update(deltaTime, player_pos);
 }
 
 void Boss::Render(){

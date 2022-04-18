@@ -10,7 +10,7 @@ public:
 	void Render();
 
 	void LeftSlap(BossAttack* bossattack);
-	void LeftBeat(BossAttack* bossattack);
+	void LeftBeat(BossAttack* bossattack, SimpleMath::Vector3 player_pos);
 	bool GetAttackFlag() { return attack_flag; }
 	BoundingOrientedBox GetLHandCollision() { return left_hand_obb; }
 private:
