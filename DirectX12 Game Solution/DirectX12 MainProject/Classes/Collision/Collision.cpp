@@ -9,8 +9,12 @@ void Collision::LoadAssets() {
 	font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 }
 
-void Collision::Update(const float deltaTime, bool attack_flag_) {
-    hit_flg_ = player_collision_.Intersects(boss_collision_);
+void Collision::Update(const float deltaTime, bool attack_flag_, bool boss_r_attack_flag_, bool boss_l_attack_flag_) {
+	if (boss_r_attack_flag_ || boss_l_attack_flag_) {
+		hit_flg_ = player_collision_.Intersects(boss_hand_right_collision_) ||
+				   player_collision_.Intersects(boss_hand_left_collision_);
+	}
+		
 
 	if (attack_flag_)
 		hit_attack_flg_ = player_attack_collision_.Intersects(core_collision_);
@@ -47,8 +51,12 @@ void Collision::PlayerAttackCollision(BoundingOrientedBox player_attack_) {
 	player_attack_collision_ = player_attack_;
 }
 
-void Collision::BossCollision(BoundingOrientedBox boss) {
-    boss_collision_ = boss;
+void Collision::BossHandRightCollision(BoundingOrientedBox boss_hand_right_) {
+    boss_hand_right_collision_ = boss_hand_right_;
+}
+
+void Collision::BossHandLeftCollision(BoundingOrientedBox boss_hand_left_) {
+	boss_hand_left_collision_ = boss_hand_left_;
 }
 
 void Collision::CoreCollision(BoundingOrientedBox core) {
