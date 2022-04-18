@@ -17,8 +17,13 @@ public:
 	void Update(const float deltaTime);
 	void Render();
 	void Attack();
-	bool GetHitFlag() { return hit_flag; }
 	void SetBossState(int state) { boss_state = state; }
+
+	bool GetRHandAttackFlag() { return hand_r.GetAttackFlag(); }
+	bool GetLHandAttackFlag() { return hand_l.GetAttackFlag(); }
+	BoundingOrientedBox GetRHandCollision() { return hand_r.GetRHandCollision(); }
+	BoundingOrientedBox GetLHandCollision() { return hand_l.GetLHandCollision(); }
+
 private:
 
 	void SusiZanmai();
@@ -27,7 +32,6 @@ private:
 	float bezier_t;
 	float time_delta;
 
-	bool hit_flag;
 
 	std::mt19937 randomEngine;
 	std::uniform_int_distribution<int> randomDist;

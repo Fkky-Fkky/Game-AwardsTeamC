@@ -14,16 +14,18 @@ public:
 	void LoadAseets();
 	void Update(const float deltaTime);
 	void Render();
-	void Render2D();
+
+	bool GetRHandAttackFlag() { return boss_attack.GetRHandAttackFlag(); }
+	bool GetLHandAttackFlag() { return boss_attack.GetLHandAttackFlag(); }
+	BoundingOrientedBox GetRHandCollision() { return boss_attack.GetRHandCollision(); }
+	BoundingOrientedBox GetLHandCollision() { return boss_attack.GetLHandCollision(); }
 
 private:
 	DX9::MODEL boss_body;
 
-	DX9::SPRITEFONT font;
 
 	SimpleMath::Vector3 body_pos;
 
-	float time_delta;
 	BossAttack boss_attack;
 
 };

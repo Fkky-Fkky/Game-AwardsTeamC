@@ -8,9 +8,12 @@ public:
 	void LoadAssets();
 	void Update(const float deltaTime);
 	void Render();
+
 	void RightSlap(BossAttack* bossattack);
 	void RightBeat(BossAttack* bossattack);
 
+	bool GetAttackFlag() { return attack_flag; }
+	BoundingOrientedBox GetRHandCollision() { return right_hand_obb; }
 private:
 
 	BoundingOrientedBox right_hand_obb;
@@ -21,7 +24,8 @@ private:
 	float time_delta;
 	float wait_time;
 	bool hand_return_flag;
-	
+	bool attack_flag;
+
 	const float INITIAL_POS_X = -5.0f;
 	const float INITIAL_POS_Y = 5.0f;
 	const float SLAP_SPEED = 1.5f;

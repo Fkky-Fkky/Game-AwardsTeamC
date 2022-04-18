@@ -11,6 +11,7 @@ void BossHandL::Initialize() {
 	wait_time = 0.0f;
 	time_delta = 0.0f;
 	hand_return_flag = false;
+	attack_flag = false;
 }
 
 void BossHandL::LoadAssets() {
@@ -45,18 +46,22 @@ void BossHandL::Render() {
 
 void BossHandL::LeftSlap(BossAttack* bossattack) {
 	if (!hand_return_flag) {
+		attack_flag = true;
 		slap_time += time_delta;
 		position.x += SLAP_SPEED * slap_time - HALF * SLAP_GRAVITY * slap_time * slap_time;
 		rotation.x = std::min(rotation.x + 1.0f * time_delta, XM_PIDIV2);
+		position.y = std::max(position.y - 10.0f * time_delta, 2.0f);
 	}
 	else {
 		position.x = std::max(position.x - 10.0f * time_delta, INITIAL_POS_X);
 		rotation.x = std::max(rotation.x - 10.0f * time_delta, XM_PIDIV4);
+		position.y = std::min(position.y + 10.0f * time_delta, INITIAL_POS_Y);
 	}
 
 
 	if (position.x <= -70.0f) {
 		position.x = 30.0f;
+		attack_flag = false;
 		hand_return_flag = true;
 	}
 
@@ -70,6 +75,7 @@ void BossHandL::LeftSlap(BossAttack* bossattack) {
 
 void BossHandL::LeftBeat(BossAttack* bossattack) {
 	if (!hand_return_flag) {
+		attack_flag = true;
 		beat_time += time_delta;
 		position.y += BEAT_SPEED * beat_time - HALF * BEAT_GRAVITY * beat_time * beat_time;
 		rotation.x = std::max(rotation.x - 1.0f * time_delta, -XM_1DIV2PI);
@@ -81,6 +87,7 @@ void BossHandL::LeftBeat(BossAttack* bossattack) {
 	}
 
 	if (hand_return_flag) {
+		attack_flag = false;
 		wait_time += time_delta;
 	}
 

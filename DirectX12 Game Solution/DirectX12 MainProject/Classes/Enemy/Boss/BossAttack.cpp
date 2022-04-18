@@ -4,15 +4,14 @@
 BossAttack::BossAttack() {
 	bezier_t = 0.0f;
 	boss_state = 0;
-	hit_flag = false;
 	time_delta = 0.0f;
+	wait_time = 0.0f;
 }
 
 void BossAttack::Initialize() {
 	bezier_t = 0.0f;
 
 	boss_state = WAIT;
-	hit_flag = false;
 	time_delta = 0.0f;
 	hand_r.Initialize();
 	hand_l.Initialize();
@@ -35,29 +34,28 @@ void BossAttack::Update(const float deltaTime) {
 	time_delta = deltaTime;
 
 
-	if (DXTK->KeyEvent->pressed.Enter) {
-		boss_state = RIGHT_SLAP;
-	}
+	//if (DXTK->KeyEvent->pressed.Enter) {
+	//	boss_state = RIGHT_SLAP;
+	//}
 
-	if (DXTK->KeyEvent->pressed.Back) {
-		boss_state = LEFT_SLAP;
-	}
+	//if (DXTK->KeyEvent->pressed.Back) {
+	//	boss_state = LEFT_SLAP;
+	//}
 
-	if (DXTK->KeyEvent->pressed.Space) {
-		boss_state = RIGHT_BEAT;
-	}
+	//if (DXTK->KeyEvent->pressed.Space) {
+	//	boss_state = RIGHT_BEAT;
+	//}
 
-	if (DXTK->KeyState->E) {
-		boss_state = LEFT_BEAT;
-	}
+	//if (DXTK->KeyState->E) {
+	//	boss_state = LEFT_BEAT;
+	//}
 
-	if (DXTK->KeyEvent->pressed.P) {
-		boss_state = -1;
-	}
+	//if (DXTK->KeyEvent->pressed.P) {
+	//	boss_state = -1;
+	//}
 
 	Attack();
 	RandomAction();
-	//hit_flag = right_hand_obb.Intersects(left_hand_obb);
 }
 
 void BossAttack::Render(){
