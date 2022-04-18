@@ -21,6 +21,7 @@ public:
 	BoundingOrientedBox GetPlayerCollision() { return player_collision_; }
 	BoundingOrientedBox GetPlayerAttackCollision() { return player_attack_collision_; }
 	bool AttackFlag() { return attack_flg_; }
+	SimpleMath::Vector3 GetPlayerPosition() { return pos_player_; }
 
 private:
 	DX9::MODEL model_;

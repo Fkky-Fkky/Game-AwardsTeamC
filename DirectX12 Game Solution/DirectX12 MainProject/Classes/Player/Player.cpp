@@ -5,9 +5,9 @@ void Player::Initialize() {
 	rot_player_ = SimpleMath::Vector3(0, 0, 0);
 
     jump_flg_ = false;
-    v0_ = 1.0f;
+    v0_ = 0.8f;
     time_ = 0.0f;
-    gravity_ = 0.05f;
+    gravity_ = 0.045f;
 
     attack_x_ = 0.0f;
     attack_flg_ = false;
