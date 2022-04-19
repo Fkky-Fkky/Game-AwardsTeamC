@@ -16,7 +16,6 @@ void BossHandL::Initialize() {
 
 void BossHandL::LoadAssets() {
 	BossParts::LoadAssets(L"Boss/boss_hand_L.X");
-
 	left_hand_obb = model->GetBoundingOrientedBox();
 	left_hand_obb.Extents = SimpleMath::Vector3(left_hand_obb.Extents);
 

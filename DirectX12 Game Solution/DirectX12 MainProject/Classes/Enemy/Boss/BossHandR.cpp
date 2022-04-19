@@ -20,7 +20,6 @@ void BossHandR::Initialize() {
 
 void BossHandR::LoadAssets() {
 	BossParts::LoadAssets(L"Boss/boss_hand_R.X");
-	model->SetScale(0.1f);
 	right_hand_obb = model->GetBoundingOrientedBox();
 	right_hand_obb.Extents = SimpleMath::Vector3(right_hand_obb.Extents);
 
