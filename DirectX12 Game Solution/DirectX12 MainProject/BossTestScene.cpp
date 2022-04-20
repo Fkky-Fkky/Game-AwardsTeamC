@@ -91,7 +91,7 @@ NextScene BossTestScene::Update(const float deltaTime)
 
 	// TODO: Add your game logic here.
 
-    boss.Update(deltaTime);
+    boss.Update(deltaTime,player.GetPlayerPosition());
     player.Update(deltaTime);
 
     //collision.Update(deltaTime, player.AttackFlag());

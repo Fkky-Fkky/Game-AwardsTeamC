@@ -16,7 +16,6 @@ void BossHandL::Initialize() {
 
 void BossHandL::LoadAssets() {
 	BossParts::LoadAssets(L"Boss/boss_hand_L.X");
-
 	left_hand_obb = model->GetBoundingOrientedBox();
 	left_hand_obb.Extents = SimpleMath::Vector3(left_hand_obb.Extents);
 
@@ -73,7 +72,7 @@ void BossHandL::LeftSlap(BossAttack* bossattack) {
 	}
 }
 
-void BossHandL::LeftBeat(BossAttack* bossattack) {
+void BossHandL::LeftBeat(BossAttack* bossattack, SimpleMath::Vector3 player_pos) {
 	if (!hand_return_flag) {
 		attack_flag = true;
 		beat_time += time_delta;
