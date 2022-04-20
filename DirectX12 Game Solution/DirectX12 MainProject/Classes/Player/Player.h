@@ -4,6 +4,9 @@
 #include "Base/dxtk.h"
 #include "Classes/Collision/Collision.h"
 
+#include "Classes/Player/PlayerMove.h"
+#include "Classes/Player/PlayerJump.h"
+
 using namespace DirectX;
 
 class Player {
@@ -21,7 +24,7 @@ public:
 	BoundingOrientedBox GetPlayerCollision() { return player_collision_; }
 	BoundingOrientedBox GetPlayerAttackCollision() { return player_attack_collision_; }
 	bool AttackFlag() { return attack_flg_; }
-	SimpleMath::Vector3 GetPlayerPosition() { return pos_player_; }
+	SimpleMath::Vector3 GetPlayerPosition() { return pos_; }
 
 private:
 	DX9::MODEL model_;
@@ -33,8 +36,8 @@ private:
 	BoundingOrientedBox player_attack_collision_;
 	DX9::MODEL player_attack_collision_model_;
 
-	SimpleMath::Vector3 pos_player_;
-	SimpleMath::Vector3 rot_player_;
+	SimpleMath::Vector3 pos_;
+	SimpleMath::Vector3 rot_;
 
 	float attack_x_;
 	float attack_time_;
@@ -52,4 +55,6 @@ private:
 	bool hit_flag_;
 
 	Collision collision;
+	PlayerMove player_move_;
+	PlayerJump player_jump_;
 };

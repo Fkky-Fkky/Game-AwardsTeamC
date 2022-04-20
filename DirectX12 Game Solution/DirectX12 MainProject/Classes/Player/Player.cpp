@@ -1,8 +1,8 @@
 #include "Classes/Player/Player.h"
 
 void Player::Initialize() {
-	pos_player_ = SimpleMath::Vector3(0, 0, 0);
-	rot_player_ = SimpleMath::Vector3(0, 0, 0);
+	pos_ = SimpleMath::Vector3(0, 0, 0);
+	rot_ = SimpleMath::Vector3(0, 0, 0);
 
     jump_flg_ = false;
     v0_ = 0.8f;
@@ -59,23 +59,18 @@ void Player::LoadAssets() {
 }
 
 void Player::Update(const float deltaTime) {
-    time_ += 1.0f;
 
-    if (DXTK->KeyState->D) {
-        pos_player_.x += 10.0 * deltaTime;
-        rot_player_.y = -90;
+    player_move_.Update(deltaTime, pos_, rot_);
+    player_jump_.Update(deltaTime, pos_);
+
+    float player_y_angle_ = DirectX::XMConvertToDegrees(rot_.y);
+
+    if (player_y_angle_ < 0) {
         attack_x_ = 1.5f;
     }
 
-    if (DXTK->KeyState->A) {
-        pos_player_.x -= 10.0 * deltaTime;
-        rot_player_.y = 90;
+    if (player_y_angle_ > 0) {
         attack_x_ = -1.5f;
-    }
-
-    if (!jump_flg_ && DXTK->KeyEvent->pressed.W) {
-        jump_flg_ = true;
-        time_ = 0.0f;
     }
 
     if (!attack_flg_ && DXTK->KeyEvent->pressed.Space) {
@@ -90,15 +85,6 @@ void Player::Update(const float deltaTime) {
         }
     }
 
-    if (jump_flg_) {
-        pos_player_.y = -0.5 * gravity_ * time_ * time_ + v0_ * time_ + ground_y_;
-    }
-
-    if (pos_player_.y < ground_y_) {
-        pos_player_.y = ground_y_;
-        jump_flg_ = false;
-    }
-
     player_collision_.Center = model_->GetPosition() + SimpleMath::Vector3(0, 1.5f, 0);
     player_collision_.Orientation = model_->GetRotationQuaternion();
 
@@ -110,8 +96,8 @@ void Player::Update(const float deltaTime) {
 
 void Player::Render() {
     
-    model_->SetPosition(pos_player_);
-    model_->SetRotation(rot_player_);
+    model_->SetPosition(pos_);
+    model_->SetRotation(rot_);
 	model_->Draw();
 
     player_collision_model_->SetPosition(player_collision_.Center);

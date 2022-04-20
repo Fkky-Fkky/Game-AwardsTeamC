@@ -108,6 +108,15 @@
     <ClInclude Include="BossTestScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Player\PlayerAttack.h">
+      <Filter>Classes\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\PlayerJump.h">
+      <Filter>Classes\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\PlayerMove.h">
+      <Filter>Classes\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -160,6 +169,15 @@
     </ClCompile>
     <ClCompile Include="BossTestScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\PlayerAttack.cpp">
+      <Filter>Classes\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\PlayerJump.cpp">
+      <Filter>Classes\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\PlayerMove.cpp">
+      <Filter>Classes\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
