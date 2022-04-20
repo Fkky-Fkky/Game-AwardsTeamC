@@ -54,12 +54,12 @@ void SmallEnemy::Update(const float deltaTime) {
 }
 
 void SmallEnemy::Render() {
-    model_->SetPosition(position_);
-    model_->Draw();
+    //model_->SetPosition(position_);
+    //model_->Draw();
 
-    collision_model_->SetPosition(collision_.Center + SimpleMath::Vector3(0, 1.5f, 0));
-    collision_model_->SetRotationQuaternion(collision_.Orientation);
-    collision_model_->Draw();
+    //collision_model_->SetPosition(collision_.Center + SimpleMath::Vector3(0, 1.5f, 0));
+    //collision_model_->SetRotationQuaternion(collision_.Orientation);
+    //collision_model_->Draw();
 
     collision_model_2->SetPosition(SimpleMath::Vector3(0, 1.5f, 0));
     collision_model_2->Draw();
