@@ -1,6 +1,8 @@
 #pragma once
 #include "Base/pch.h"
 #include "Base/dxtk.h"
+#include "Classes/Enemy/Boss/BossBody.h"
+#include "Classes/Enemy/Boss/BossCore.h"
 #include "Classes/Enemy/Boss/BossHandL.h"
 #include "Classes/Enemy/Boss/BossHandR.h"
 
@@ -8,7 +10,7 @@ using namespace DirectX;
 
 class Boss {
 public:
-	Boss();
+	Boss(){};
 	~Boss() {};
 
 	void Initialize();
@@ -22,13 +24,8 @@ public:
 	BoundingOrientedBox GetRHandCollision() { return hand_r.GetRHandCollision(); }
 
 private:
-	DX9::MODEL boss_body;
-
-	SimpleMath::Vector3 body_pos;
-	DX9::MODEL boss_core;
-	SimpleMath::Vector3 core_pos;
-
+	BossBody body;
+	BossCore core;
 	BossHandL hand_l;
 	BossHandR hand_r;
-
 };

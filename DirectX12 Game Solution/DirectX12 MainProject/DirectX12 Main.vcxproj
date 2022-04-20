@@ -190,6 +190,8 @@
     <ClInclude Include="BossTestScene.h" />
     <ClInclude Include="Classes\Collision\Collision.h" />
     <ClInclude Include="Classes\Enemy\Boss\Boss.h" />
+    <ClInclude Include="Classes\Enemy\Boss\BossBody.h" />
+    <ClInclude Include="Classes\Enemy\Boss\BossCore.h" />
     <ClInclude Include="Classes\Enemy\Boss\BossHand.h" />
     <ClInclude Include="Classes\Enemy\Boss\BossHandL.h" />
     <ClInclude Include="Classes\Enemy\Boss\BossHandR.h" />
@@ -222,6 +224,8 @@
     <ClCompile Include="BossTestScene.cpp" />
     <ClCompile Include="Classes\Collision\Collision.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Boss.cpp" />
+    <ClCompile Include="Classes\Enemy\Boss\BossBody.cpp" />
+    <ClCompile Include="Classes\Enemy\Boss\BossCore.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\BossHand.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\BossHandL.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\BossHandR.cpp" />
