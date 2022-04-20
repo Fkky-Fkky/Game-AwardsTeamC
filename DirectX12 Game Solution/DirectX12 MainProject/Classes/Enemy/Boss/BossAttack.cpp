@@ -44,9 +44,9 @@ void BossAttack::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {
 	//	boss_state = LEFT_SLAP;
 	//}
 
-	if (DXTK->KeyEvent->pressed.Space) {
-		boss_state = RIGHT_BEAT;
-	}
+	//if (DXTK->KeyEvent->pressed.Space) {
+	//	boss_state = RIGHT_BEAT;
+	//}
 
 	//if (DXTK->KeyState->E) {
 	//	boss_state = LEFT_BEAT;
