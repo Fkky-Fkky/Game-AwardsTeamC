@@ -1,25 +1,23 @@
 #pragma once
 
-#include "Classes/Enemy/Boss/BossParts.h"
+#include "Classes/Enemy/Boss/BossHand.h"
 
-class BossHandR : public BossParts {
+class BossHandR : public BossHand {
 public:
 	void Initialize();
 	void LoadAssets();
 	void Update(const float deltaTime, SimpleMath::Vector3 player_pos);
 	void Render();
 
-	void RightSlap(BossAttack* bossattack);
-	void RightBeat(BossAttack* bossattack);
+	void RightSlap();
+	void RightBeat();
 
 	bool GetAttackFlag() { return attack_flag; }
-	BoundingOrientedBox GetRHandCollision() { return right_hand_obb; }
+	BoundingOrientedBox GetRHandCollision() { return collision; }
 private:
 	void HandMove();
 	void RightBeatAttack();
 	void HandReturn();
-	BoundingOrientedBox right_hand_obb;
-	DX9::MODEL right_hand_obb_model;
 	
 	float slap_time;
 	float beat_time;
@@ -28,8 +26,9 @@ private:
 	bool hand_return_flag;
 	bool attack_flag;
 	bool getposflag;
-	SimpleMath::Vector3 player_pos_;
+
 	SimpleMath::Vector3 move_pos;
+
 	const float INITIAL_POS_X = -5.0f;
 	const float INITIAL_POS_Y = 5.0f;
 	const float SLAP_SPEED = 1.5f;

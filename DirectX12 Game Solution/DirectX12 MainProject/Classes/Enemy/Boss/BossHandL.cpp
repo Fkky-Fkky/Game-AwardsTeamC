@@ -1,8 +1,7 @@
 #include "Classes/Enemy/Boss/BossHandL.h"
-#include "Classes/Enemy/Boss/BossAttack.h"
 
 void BossHandL::Initialize() {
-	BossParts::Initialize(
+	BossHand::Initialize(
 		SimpleMath::Vector3(INITIAL_POS_X, INITIAL_POS_Y, 0.0f),
 		SimpleMath::Vector3(XM_PIDIV4, -5.0f, 0.0f)
 	);
@@ -15,35 +14,19 @@ void BossHandL::Initialize() {
 }
 
 void BossHandL::LoadAssets() {
-	BossParts::LoadAssets(L"Boss/boss_hand_L.X");
-	left_hand_obb = model->GetBoundingOrientedBox();
-	left_hand_obb.Extents = SimpleMath::Vector3(left_hand_obb.Extents);
-
-	left_hand_obb_model = DX9::Model::CreateBox(
-		DXTK->Device9,
-		left_hand_obb.Extents.x,
-		left_hand_obb.Extents.y,
-		left_hand_obb.Extents.z
-	);
-	D3DMATERIAL9 material{};
-	material.Diffuse = DX9::Colors::Value(0.0f, 1.0f, 0.0f, 0.75f);
-	left_hand_obb_model->SetMaterial(material);
+	BossHand::LoadAssets(L"Boss/boss_hand_L.X");
 }
 
-void BossHandL::Update(const float deltaTime) {
+void BossHandL::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {
+	BossHand::Update(deltaTime, player_pos);
 	time_delta = deltaTime;
-	left_hand_obb.Center = model->GetPosition();
-	left_hand_obb.Orientation = model->GetRotationQuaternion();
 }
 
 void BossHandL::Render() {
-	BossParts::Render();
-	left_hand_obb_model->SetPosition(left_hand_obb.Center);
-	left_hand_obb_model->SetRotationQuaternion(left_hand_obb.Orientation);
-	left_hand_obb_model->Draw();
+	BossHand::Render();
 }
 
-void BossHandL::LeftSlap(BossAttack* bossattack) {
+void BossHandL::LeftSlap() {
 	if (!hand_return_flag) {
 		attack_flag = true;
 		slap_time += time_delta;
@@ -68,11 +51,11 @@ void BossHandL::LeftSlap(BossAttack* bossattack) {
 		position.x = INITIAL_POS_X;
 		slap_time = 0.0f;
 		hand_return_flag = false;
-		bossattack->SetBossState(0);
+		//bossattack->SetBossState(0);
 	}
 }
 
-void BossHandL::LeftBeat(BossAttack* bossattack, SimpleMath::Vector3 player_pos) {
+void BossHandL::LeftBeat() {
 	if (!hand_return_flag) {
 		attack_flag = true;
 		beat_time += time_delta;
@@ -100,6 +83,6 @@ void BossHandL::LeftBeat(BossAttack* bossattack, SimpleMath::Vector3 player_pos)
 		wait_time = 0.0f;
 		beat_time = 0.0f;
 		hand_return_flag = false;
-		bossattack->SetBossState(0);
+		//bossattack->SetBossState(0);
 	}
 }

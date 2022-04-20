@@ -1,22 +1,20 @@
 #pragma once
 
-#include "Classes/Enemy/Boss/BossParts.h"
+#include "Classes/Enemy/Boss/BossHand.h"
 
-class BossHandL : public BossParts {
+class BossHandL : public BossHand {
 public:
 	void Initialize();
 	void LoadAssets();
-	void Update(const float deltaTime);
+	void Update(const float deltaTime, SimpleMath::Vector3 player_pos);
 	void Render();
 
-	void LeftSlap(BossAttack* bossattack);
-	void LeftBeat(BossAttack* bossattack, SimpleMath::Vector3 player_pos);
+	void LeftSlap();
+	void LeftBeat();
 	bool GetAttackFlag() { return attack_flag; }
-	BoundingOrientedBox GetLHandCollision() { return left_hand_obb; }
+	BoundingOrientedBox GetLHandCollision() { return collision; }
 private:
 
-	BoundingOrientedBox left_hand_obb;
-	DX9::MODEL left_hand_obb_model;
 
 	float slap_time;
 	float beat_time;

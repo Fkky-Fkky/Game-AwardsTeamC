@@ -1,8 +1,7 @@
 #include "Classes/Enemy/Boss/BossHandR.h"
-#include "Classes/Enemy/Boss/BossAttack.h"
 
 void BossHandR::Initialize() {
-	BossParts::Initialize(
+	BossHand::Initialize(
 		SimpleMath::Vector3(INITIAL_POS_X, INITIAL_POS_Y, 0.0f),
 		SimpleMath::Vector3(XM_PIDIV4, 5.0f, 0.0f)
 	);
@@ -13,34 +12,24 @@ void BossHandR::Initialize() {
 	hand_return_flag = false;
 	attack_flag = false;
 	getposflag = false;
-	boss_action_state = 0;
+	boss_action_state = -1;
 	player_pos_ = SimpleMath::Vector3(0.0f, 0.0f, 0.0f);
 	move_pos = SimpleMath::Vector3(0.0f, 0.0f, 0.0f);
 }
 
 void BossHandR::LoadAssets() {
-	BossParts::LoadAssets(L"Boss/boss_hand_R.X");
-	right_hand_obb = model->GetBoundingOrientedBox();
-	right_hand_obb.Extents = SimpleMath::Vector3(right_hand_obb.Extents);
-
-	right_hand_obb_model = DX9::Model::CreateBox(
-		DXTK->Device9,
-		right_hand_obb.Extents.x,
-		right_hand_obb.Extents.y,
-		right_hand_obb.Extents.z
-	);
-	D3DMATERIAL9 material{};
-	material.Diffuse = DX9::Colors::Value(1.0f, 0.0f, 0.0f, 0.75f);
-	right_hand_obb_model->SetMaterial(material);
+	BossHand::LoadAssets(L"Boss/boss_hand_R.X");
 }
 
 void BossHandR::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {
+	BossHand::Update(deltaTime, player_pos);
+
 	time_delta = deltaTime;
-	player_pos_ = player_pos;
 
 	//if (DXTK->KeyState->Right) {
 	//	//r_hand_rote.y += 5.0f * deltaTime;
-	//	position.x += 40.0f * deltaTime;
+	//	//position.x += 40.0f * deltaTime;
+	//	boss_action_state = 0;
 	//}
 	//if (DXTK->KeyState->Left) {
 	//	//r_hand_rote.y -= 5.0f * deltaTime;
@@ -55,18 +44,13 @@ void BossHandR::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {
 	//	rotation.x = std::max(rotation.x - 1.0f * time_delta, -XM_1DIV2PI);
 	//}
 
-	right_hand_obb.Center = model->GetPosition();
-	right_hand_obb.Orientation = model->GetRotationQuaternion();
 }
 
 void BossHandR::Render() {
-	BossParts::Render();
-	right_hand_obb_model->SetPosition(right_hand_obb.Center);
-	right_hand_obb_model->SetRotationQuaternion(right_hand_obb.Orientation);
-	right_hand_obb_model->Draw();
+	BossHand::Render();
 }
 
-void BossHandR::RightSlap(BossAttack* bossattack) {
+void BossHandR::RightSlap() {
 	if (!hand_return_flag) {
 		attack_flag = true;
 		slap_time += time_delta;
@@ -91,11 +75,11 @@ void BossHandR::RightSlap(BossAttack* bossattack) {
 		position.x = INITIAL_POS_X;
 		slap_time = 0.0f;
 		hand_return_flag = false;
-		bossattack->SetBossState(0);
+		//bossattack->SetBossState(0);
 	}
 }
 
-void BossHandR::RightBeat(BossAttack* bossattack) {
+void BossHandR::RightBeat() {
 
 	switch (boss_action_state)
 	{
@@ -113,7 +97,7 @@ void BossHandR::RightBeat(BossAttack* bossattack) {
 
 	case ACTION_END:
 		boss_action_state = MOVE;
-		bossattack->SetBossState(0);
+		//bossattack->SetBossState(0);
 		break;
 	}
 }
