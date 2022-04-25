@@ -129,7 +129,7 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\BossHand.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossHandMove.h">
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\RightSlap.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossAttack.h">
@@ -140,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\RightHand\BossHandR.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\RightHand</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\RightBeat.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,7 +197,7 @@
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\BossHand.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossHandMove.cpp">
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\RightSlap.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\LeftHand\BossHandL.cpp">
@@ -202,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\RightHand\BossHandR.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\RightHand</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\RightBeat.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

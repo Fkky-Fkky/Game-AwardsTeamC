@@ -1,6 +1,6 @@
-#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossHandMove.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/RightSlap.h"
 
-void BossHandMove::Update(const float deltaTime) {
+void RightSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {
 	if (!hand_return_flag) {
 		pos = boss_handR_->GetHandPos();
 		rote = boss_handR_->GetRotation();

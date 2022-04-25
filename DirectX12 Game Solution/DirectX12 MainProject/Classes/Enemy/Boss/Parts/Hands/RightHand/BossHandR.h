@@ -9,16 +9,15 @@ public:
 	void Update(const float deltaTime, SimpleMath::Vector3 player_pos);
 	void Render();
 
-	void RightSlap();
-	void RightBeat();
+	//void RightSlap();
+	//void RightBeat();
 
 private:
-	void HandMove();
-	void RightBeatAttack();
-	void HandReturn();
+	//void HandMove();
+	//void RightBeatAttack();
+	//void HandReturn();
 	
 	float slap_time;
-	float beat_time;
 	float time_delta;
 	float wait_time;
 	bool hand_return_flag;

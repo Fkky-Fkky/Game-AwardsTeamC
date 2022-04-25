@@ -12,9 +12,18 @@ public:
 		boss_handL_ = boss_handL;
 		boss_handR_ = bosshandR;
 	};
-	virtual void Update(const float deltaTime) = 0;
+	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos) = 0;
 
 protected:
 	BossHand* boss_handL_;
 	BossHand* boss_handR_;
+
+	const float SLAP_SPEED = 1.5f;
+	const float SLAP_GRAVITY = 5.0f;
+
+	const float BEAT_SPEED = 1.5f;
+	const float BEAT_GRAVITY = 5.0f;
+
+	const float HALF = 0.5f;
+
 };
