@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Classes/Enemy/Boss/BossHand.h"
+#include "Classes/Enemy/Boss/Parts/Hands/BossHand.h"
 
 class BossHandL : public BossHand {
 public:
@@ -11,6 +11,7 @@ public:
 
 	void LeftSlap();
 	void LeftBeat();
+
 	bool GetAttackFlag() { return attack_flag; }
 	BoundingOrientedBox GetLHandCollision() { return collision; }
 private:
@@ -25,9 +26,5 @@ private:
 
 	const float INITIAL_POS_X = 5.0f;
 	const float INITIAL_POS_Y = 5.0f;
-	const float SLAP_SPEED = 1.5f;
-	const float SLAP_GRAVITY = 5.0f;
-	const float BEAT_SPEED = 1.5f;
-	const float BEAT_GRAVITY = 5.0f;
-	const float HALF = 0.5f;
+	
 };

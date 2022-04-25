@@ -1,10 +1,11 @@
 #pragma once
 #include "Base/pch.h"
 #include "Base/dxtk.h"
-#include "Classes/Enemy/Boss/BossBody.h"
-#include "Classes/Enemy/Boss/BossCore.h"
-#include "Classes/Enemy/Boss/BossHandL.h"
-#include "Classes/Enemy/Boss/BossHandR.h"
+#include "Classes/Enemy/Boss/Parts/Body/BossBody.h"
+#include "Classes/Enemy/Boss/Parts/Core/BossCore.h"
+#include "Classes/Enemy/Boss/Parts/Hands/LeftHand/BossHandL.h"
+#include "Classes/Enemy/Boss/Parts/Hands/RightHand/BossHandR.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
 
 using namespace DirectX;
 
@@ -22,10 +23,13 @@ public:
 	bool GetRHandAttackFlag() { return hand_r.GetAttackFlag(); }
 	BoundingOrientedBox GetLHandCollision() { return hand_l.GetLHandCollision(); }
 	BoundingOrientedBox GetRHandCollision() { return hand_r.GetRHandCollision(); }
-
+	
 private:
 	BossBody body;
 	BossCore core;
 	BossHandL hand_l;
 	BossHandR hand_r;
+
+	BossAttack* attack;
+
 };

@@ -1,4 +1,4 @@
-#include "Classes/Enemy/Boss/BossParts.h"
+#include "Classes/Enemy/Boss/Parts/BossParts.h"
 
 void BossParts::Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote) {
 	position = pos;

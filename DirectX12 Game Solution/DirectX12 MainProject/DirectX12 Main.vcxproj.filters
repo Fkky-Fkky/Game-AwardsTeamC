@@ -37,6 +37,27 @@
     <Filter Include="Classes\Enemy\Small Enemy">
       <UniqueIdentifier>{18d4a310-ba13-4278-8594-4ac34b4aab25}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Enemy\Boss\Parts">
+      <UniqueIdentifier>{0f871d5c-f9b8-4b02-9df6-356b7363824b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Enemy\Boss\Parts\Body">
+      <UniqueIdentifier>{a6180696-0dca-40e0-8c22-e7ad1e96b4a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Enemy\Boss\Parts\Core">
+      <UniqueIdentifier>{19b05977-def6-4d6d-8d9b-18baee45f11e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Enemy\Boss\Parts\Hands">
+      <UniqueIdentifier>{7349bd19-d3a5-46e8-85cf-3203e782ec81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Enemy\Boss\Parts\Hands\Attack">
+      <UniqueIdentifier>{bbe7deec-8661-4eff-a28f-c2a7c3e23e44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Enemy\Boss\Parts\Hands\RightHand">
+      <UniqueIdentifier>{1c80a96a-b425-47ab-93da-dddc11c75194}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Enemy\Boss\Parts\Hands\LeftHand">
+      <UniqueIdentifier>{228c714a-d875-4194-96dd-05de6300f3c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -84,12 +105,6 @@
     <ClInclude Include="Classes\Ground\Ground.h">
       <Filter>Classes\Ground</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Enemy\Boss\BossHand.h">
-      <Filter>Classes\Enemy\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Enemy\Boss\BossParts.h">
-      <Filter>Classes\Enemy\Boss</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Boss.h">
       <Filter>Classes\Enemy\Boss</Filter>
     </ClInclude>
@@ -99,20 +114,32 @@
     <ClInclude Include="Classes\Enemy\Small Enemy\SmallEnemy.h">
       <Filter>Classes\Enemy\Small Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Enemy\Boss\BossHandL.h">
-      <Filter>Classes\Enemy\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Enemy\Boss\BossHandR.h">
-      <Filter>Classes\Enemy\Boss</Filter>
-    </ClInclude>
     <ClInclude Include="BossTestScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Enemy\Boss\BossBody.h">
-      <Filter>Classes\Enemy\Boss</Filter>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\BossParts.h">
+      <Filter>Classes\Enemy\Boss\Parts</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Enemy\Boss\BossCore.h">
-      <Filter>Classes\Enemy\Boss</Filter>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Body\BossBody.h">
+      <Filter>Classes\Enemy\Boss\Parts\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Core\BossCore.h">
+      <Filter>Classes\Enemy\Boss\Parts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\BossHand.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossHandMove.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossAttack.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\LeftHand\BossHandL.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\LeftHand</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\RightHand\BossHandR.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\RightHand</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -143,12 +170,6 @@
     <ClCompile Include="Classes\Ground\Ground.cpp">
       <Filter>Classes\Ground</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Enemy\Boss\BossHand.cpp">
-      <Filter>Classes\Enemy\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Enemy\Boss\BossParts.cpp">
-      <Filter>Classes\Enemy\Boss</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Boss.cpp">
       <Filter>Classes\Enemy\Boss</Filter>
     </ClCompile>
@@ -158,20 +179,29 @@
     <ClCompile Include="Classes\Enemy\Small Enemy\SmallEnemy.cpp">
       <Filter>Classes\Enemy\Small Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Enemy\Boss\BossHandR.cpp">
-      <Filter>Classes\Enemy\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Enemy\Boss\BossHandL.cpp">
-      <Filter>Classes\Enemy\Boss</Filter>
-    </ClCompile>
     <ClCompile Include="BossTestScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Enemy\Boss\BossBody.cpp">
-      <Filter>Classes\Enemy\Boss</Filter>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\BossParts.cpp">
+      <Filter>Classes\Enemy\Boss\Parts</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Enemy\Boss\BossCore.cpp">
-      <Filter>Classes\Enemy\Boss</Filter>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Body\BossBody.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Core\BossCore.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\BossHand.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossHandMove.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\LeftHand\BossHandL.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\LeftHand</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\RightHand\BossHandR.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\RightHand</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

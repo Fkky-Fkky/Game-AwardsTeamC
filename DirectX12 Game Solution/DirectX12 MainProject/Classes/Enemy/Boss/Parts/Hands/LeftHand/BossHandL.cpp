@@ -1,4 +1,4 @@
-#include "Classes/Enemy/Boss/BossHandL.h"
+#include "Classes/Enemy/Boss/Parts/Hands/LeftHand/BossHandL.h"
 
 void BossHandL::Initialize() {
 	BossHand::Initialize(

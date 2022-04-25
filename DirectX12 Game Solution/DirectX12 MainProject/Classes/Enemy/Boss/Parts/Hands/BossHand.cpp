@@ -1,4 +1,4 @@
-#include "Classes/Enemy/Boss/BossHand.h"
+#include "Classes/Enemy/Boss/Parts/Hands/BossHand.h"
 #include <Bezier.h>
 
 BossHand::BossHand() {
@@ -37,6 +37,8 @@ void BossHand::LoadAssets(LPCWSTR file_name){
 	D3DMATERIAL9 material{};
 	material.Diffuse = DX9::Colors::Value(0.0f, 1.0f, 0.0f, 0.75f);
 	collision_model->SetMaterial(material);
+
+	model->SetScale(2.0f);
 }
 
 void BossHand::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {

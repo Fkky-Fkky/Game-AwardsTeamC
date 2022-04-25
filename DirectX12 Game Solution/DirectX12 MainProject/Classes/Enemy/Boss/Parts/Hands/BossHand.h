@@ -2,7 +2,7 @@
 
 #include "Base/pch.h"
 #include "Base/dxtk.h"
-#include "Classes/Enemy/Boss/BossParts.h"
+#include "Classes/Enemy/Boss/Parts/BossParts.h"
 #include <random>
 
 using namespace DirectX;
@@ -17,6 +17,14 @@ public:
 	virtual void Render();
 	//virtual void Attack();
 	virtual void SetBossState(int state) { boss_state = state; }
+	bool GetAttackFlag() { return attack_flag; }
+	BoundingOrientedBox GetRHandCollision() { return collision; }
+	SimpleMath::Vector3 GetHandPos() { return position; }
+	SimpleMath::Vector3 GetRotation() { return rotation; }
+	void SetHandPos(SimpleMath::Vector3 position_) { position = position_; }
+	void SetHandRote(SimpleMath::Vector3 rotation_) { rotation = rotation_; }
+	void SetAttackFlag(bool attack_flag_) { attack_flag = attack_flag_; }
+
 
 private:
 
@@ -40,9 +48,18 @@ private:
 	};
 
 protected:
+	bool attack_flag;
+
 	BoundingOrientedBox collision;
 	DX9::MODEL collision_model;
 
 	SimpleMath::Vector3 player_pos_;
 
+	const float SLAP_SPEED = 1.5f;
+	const float SLAP_GRAVITY = 5.0f;
+
+	const float BEAT_SPEED = 1.5f;
+	const float BEAT_GRAVITY = 5.0f;
+
+	const float HALF = 0.5f;
 };
