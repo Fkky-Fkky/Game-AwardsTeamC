@@ -64,11 +64,11 @@ void RightBeat::HandReturn() {
 		else
 			pos.x = std::max(pos.x - 10.0f * time_delta, HAND_R_INITIAL_POS_X);
 
-		pos.y = std::min(pos.y + 5.0f * time_delta, HAND_R_INITIAL_POS_Y);
+		pos.y = std::min(pos.y + 5.0f * time_delta, HAND_INITIAL_POS_Y);
 		rote.x = std::min(rote.x + 1.0f * time_delta, XM_PIDIV4);
 	}
 
-	if (pos.y >= HAND_R_INITIAL_POS_Y && pos.x == HAND_R_INITIAL_POS_X) {
+	if (pos.y >= HAND_INITIAL_POS_Y && pos.x == HAND_R_INITIAL_POS_X) {
 		wait_time = 0.0f;
 		beat_time = 0.0f;
 		getposflag = false;

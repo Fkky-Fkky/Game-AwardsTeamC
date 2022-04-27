@@ -18,7 +18,7 @@ public:
 	//virtual void Attack();
 	virtual void SetBossState(int state) { boss_state = state; }
 	bool GetAttackFlag() { return attack_flag; }
-	BoundingOrientedBox GetRHandCollision() { return collision; }
+	BoundingOrientedBox GetHandCollision() { return collision; }
 	SimpleMath::Vector3 GetHandPos() { return position; }
 	SimpleMath::Vector3 GetRotation() { return rotation; }
 	void SetHandPos(SimpleMath::Vector3 position_) { position = position_; }

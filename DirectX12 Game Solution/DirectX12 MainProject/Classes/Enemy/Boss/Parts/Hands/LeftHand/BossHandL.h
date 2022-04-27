@@ -6,14 +6,12 @@ class BossHandL : public BossHand {
 public:
 	void Initialize();
 	void LoadAssets();
-	void Update(const float deltaTime, SimpleMath::Vector3 player_pos);
+	void Update(const float deltaTime);
 	void Render();
 
-	void LeftSlap();
-	void LeftBeat();
+	//void LeftSlap();
+	//void LeftBeat();
 
-	bool GetAttackFlag() { return attack_flag; }
-	BoundingOrientedBox GetLHandCollision() { return collision; }
 private:
 
 
@@ -22,7 +20,6 @@ private:
 	float time_delta;
 	float wait_time;
 	bool hand_return_flag;
-	bool attack_flag;
 
 	const float INITIAL_POS_X = 5.0f;
 	const float INITIAL_POS_Y = 5.0f;

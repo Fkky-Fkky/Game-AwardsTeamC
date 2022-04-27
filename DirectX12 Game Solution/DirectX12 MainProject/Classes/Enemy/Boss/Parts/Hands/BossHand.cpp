@@ -6,6 +6,7 @@ BossHand::BossHand() {
 	boss_state = 0;
 	time_delta = 0.0f;
 	wait_time = 0.0f;
+	attack_flag = false;
 }
 
 void BossHand::Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote) {

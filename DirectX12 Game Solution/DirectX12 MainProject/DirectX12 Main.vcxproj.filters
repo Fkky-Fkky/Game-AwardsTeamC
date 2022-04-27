@@ -144,6 +144,9 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\RightBeat.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\LeftSlap.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -207,6 +210,9 @@
       <Filter>Classes\Enemy\Boss\Parts\Hands\RightHand</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\RightBeat.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\LeftSlap.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClCompile>
   </ItemGroup>

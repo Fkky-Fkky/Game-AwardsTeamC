@@ -12,8 +12,8 @@ void RightSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {
 		rote.x = std::min(rote.x + 1.0f * deltaTime, XM_PIDIV2);
 	}
 	else {
-		pos.x = std::min(pos.x + 10.0f * deltaTime, HAND_R_INITIAL_POS_X);
-		pos.y = std::min(pos.y + 10.0f * deltaTime, HAND_R_INITIAL_POS_Y);
+		pos.x = std::max(pos.x - 10.0f * deltaTime, HAND_R_INITIAL_POS_X);
+		pos.y = std::min(pos.y + 10.0f * deltaTime, HAND_INITIAL_POS_Y);
 		rote.x = std::max(rote.x - 10.0f * deltaTime, XM_PIDIV4);
 	}
 

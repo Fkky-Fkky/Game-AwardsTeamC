@@ -21,8 +21,8 @@ public:
 
 	bool GetLHandAttackFlag() { return hand_l.GetAttackFlag(); }
 	bool GetRHandAttackFlag() { return hand_r.GetAttackFlag(); }
-	BoundingOrientedBox GetLHandCollision() { return hand_l.GetLHandCollision(); }
-	BoundingOrientedBox GetRHandCollision() { return hand_r.GetRHandCollision(); }
+	BoundingOrientedBox GetLHandCollision() { return hand_l.GetHandCollision(); }
+	BoundingOrientedBox GetRHandCollision() { return hand_r.GetHandCollision(); }
 	
 private:
 	BossBody body;

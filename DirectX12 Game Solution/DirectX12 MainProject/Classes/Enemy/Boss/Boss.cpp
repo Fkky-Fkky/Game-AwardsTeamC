@@ -2,13 +2,14 @@
 #include "Classes/Player/Player.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightSlap.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightBeat.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/LeftSlap.h"
 
 void Boss::Initialize() {
 	body.Initialize();
 	core.Initialize();
 	hand_l.Initialize();
 	hand_r.Initialize();
-	attack = new RightBeat;
+	attack = new LeftSlap;
 	attack->Initialize(&hand_l, &hand_r);
 }
 
@@ -20,8 +21,8 @@ void Boss::LoadAseets(){
 }
 
 void Boss::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {
-	hand_l.Update(deltaTime, player_pos);
-	hand_r.Update(deltaTime, player_pos);
+	hand_l.Update(deltaTime);
+	hand_r.Update(deltaTime);
 	attack->Update(deltaTime, player_pos);
 }
 
