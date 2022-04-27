@@ -5,7 +5,7 @@ void BossBody::Initialize() {
 }
 void BossBody::LoadAssets() {
 	BossParts::LoadAssets(L"Boss/boss.X");
-	model->SetScale(2.4f);
+	model->SetScale(1.0f);
 }
 
 void BossBody::Render() {

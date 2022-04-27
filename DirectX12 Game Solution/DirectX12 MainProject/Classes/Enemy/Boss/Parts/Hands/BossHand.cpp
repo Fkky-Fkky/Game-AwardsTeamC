@@ -19,12 +19,13 @@ void BossHand::Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote) {
 	randomEngine = std::mt19937(seed());
 	randomDist = std::uniform_int_distribution<>(1, 4);
 	wait_time = 0.0f;
-
-	player_pos_ = SimpleMath::Vector3(0.0f, 0.0f, 0.0f);
 }
 
 void BossHand::LoadAssets(LPCWSTR file_name){
 	BossParts::LoadAssets(file_name);
+
+	model->SetScale(0.05f);
+
 	collision = model->GetBoundingOrientedBox();
 	collision.Extents = SimpleMath::Vector3(collision.Extents);
 
@@ -38,14 +39,12 @@ void BossHand::LoadAssets(LPCWSTR file_name){
 	material.Diffuse = DX9::Colors::Value(0.0f, 1.0f, 0.0f, 0.75f);
 	collision_model->SetMaterial(material);
 
-	model->SetScale(2.0f);
 }
 
-void BossHand::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {
+void BossHand::Update(const float deltaTime) {
 
 	time_delta = deltaTime;
 
-	player_pos_ = player_pos;
 	//if (DXTK->KeyEvent->pressed.Enter) {
 	//	boss_state = RIGHT_SLAP;
 	//}

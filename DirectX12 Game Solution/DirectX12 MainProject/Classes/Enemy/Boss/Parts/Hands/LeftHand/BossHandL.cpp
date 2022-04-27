@@ -17,8 +17,8 @@ void BossHandL::LoadAssets() {
 	BossHand::LoadAssets(L"Boss/boss_hand_L.X");
 }
 
-void BossHandL::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {
-	BossHand::Update(deltaTime, player_pos);
+void BossHandL::Update(const float deltaTime) {
+	BossHand::Update(deltaTime);
 	time_delta = deltaTime;
 }
 

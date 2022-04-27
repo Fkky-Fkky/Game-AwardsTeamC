@@ -37,8 +37,6 @@ private:
 	SimpleMath::Vector3 rote;
 	SimpleMath::Vector3 move_pos;
 
-	const float INITIAL_POS_X = -5.0f;
-	const float INITIAL_POS_Y = 5.0f;
 
 	int boss_action_state;
 	enum BOSS_ACTION_STATE {

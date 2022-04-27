@@ -13,7 +13,7 @@ public:
 	~BossHand() {};
 	virtual void Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote);
 	virtual void LoadAssets(LPCWSTR file_name);
-	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos);
+	virtual void Update(const float deltaTime);
 	virtual void Render();
 	//virtual void Attack();
 	virtual void SetBossState(int state) { boss_state = state; }
@@ -52,14 +52,4 @@ protected:
 
 	BoundingOrientedBox collision;
 	DX9::MODEL collision_model;
-
-	SimpleMath::Vector3 player_pos_;
-
-	const float SLAP_SPEED = 1.5f;
-	const float SLAP_GRAVITY = 5.0f;
-
-	const float BEAT_SPEED = 1.5f;
-	const float BEAT_GRAVITY = 5.0f;
-
-	const float HALF = 0.5f;
 };

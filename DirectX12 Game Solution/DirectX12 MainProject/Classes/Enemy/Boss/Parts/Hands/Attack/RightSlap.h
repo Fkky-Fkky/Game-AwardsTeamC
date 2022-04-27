@@ -17,9 +17,4 @@ public:
 private:
 	float slap_time;
 	bool hand_return_flag;
-	SimpleMath::Vector3 pos;
-	SimpleMath::Vector3 rote;
-	const float INITIAL_POS_X = -5.0f;
-	const float INITIAL_POS_Y = 5.0f;
-
 };

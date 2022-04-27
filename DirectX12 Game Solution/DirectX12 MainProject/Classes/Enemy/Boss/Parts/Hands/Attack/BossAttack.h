@@ -18,6 +18,10 @@ protected:
 	BossHand* boss_handL_;
 	BossHand* boss_handR_;
 
+	const float HAND_R_INITIAL_POS_X = -5.0f;
+	const float HAND_R_INITIAL_POS_Y = 5.0f;
+
+
 	const float SLAP_SPEED = 1.5f;
 	const float SLAP_GRAVITY = 5.0f;
 
