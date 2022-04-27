@@ -6,6 +6,7 @@
 
 #include "Classes/Player/PlayerMove.h"
 #include "Classes/Player/PlayerJump.h"
+#include "Classes/Player/PlayerColision.h"
 
 using namespace DirectX;
 
@@ -43,18 +44,11 @@ private:
 	float attack_time_;
 	bool attack_flg_;
 
-	bool jump_flg_;
-
-	float v0_;
-	float time_;
-	float gravity_;
-
-	float ground_y_;
-
 	int player_hp_;
 	bool hit_flag_;
 
 	Collision collision;
-	PlayerMove player_move_;
-	PlayerJump player_jump_;
+	PlayerMove     player_move_;
+	PlayerJump     player_jump_;
+	PlayerColision player_colision_;
 };

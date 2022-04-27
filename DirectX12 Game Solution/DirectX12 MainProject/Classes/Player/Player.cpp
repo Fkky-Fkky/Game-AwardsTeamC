@@ -1,19 +1,13 @@
 #include "Classes/Player/Player.h"
 
 void Player::Initialize() {
-	pos_ = SimpleMath::Vector3(0, 0, 0);
-	rot_ = SimpleMath::Vector3(0, 0, 0);
-
-    jump_flg_ = false;
-    v0_ = 0.8f;
-    time_ = 0.0f;
-    gravity_ = 0.045f;
+	pos_ = SimpleMath::Vector3::Zero;
+	rot_ = SimpleMath::Vector3::Zero;
 
     attack_x_ = 0.0f;
     attack_flg_ = false;
     attack_time_ = 0.0f;
 
-    ground_y_ = 0.0f;
     player_hp_ = 30.0f;
     hit_flag_ = false;
 }
@@ -22,24 +16,7 @@ void Player::LoadAssets() {
 	model_ = DX9::Model::CreateFromFile(DXTK->Device9, L"Player/chara_mock.x");
     font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 
-    player_collision_ = model_->GetBoundingOrientedBox();
-    player_collision_.Extents = SimpleMath::Vector3(
-        player_collision_.Extents.x * 0.65f,
-        player_collision_.Extents.y * 1.35f,
-        player_collision_.Extents.z
-    ) * 1.0f;
-
-    player_collision_model_ = DX9::Model::CreateBox(
-        DXTK->Device9,
-        player_collision_.Extents.x,
-        player_collision_.Extents.y,
-        player_collision_.Extents.z
-    );
-
-    D3DMATERIAL9 material{};
-    material.Diffuse = DX9::Colors::Value(1.0f, 0.0f, 0.0f, 0.75f);
-    player_collision_model_->SetMaterial(material);
-
+    player_colision_.LoadAssets(model_.get());
 
     player_attack_collision_ = model_->GetBoundingOrientedBox();
     player_attack_collision_.Extents = SimpleMath::Vector3(player_attack_collision_.Extents) * 1.0f;
@@ -85,8 +62,7 @@ void Player::Update(const float deltaTime) {
         }
     }
 
-    player_collision_.Center = model_->GetPosition() + SimpleMath::Vector3(0, 1.5f, 0);
-    player_collision_.Orientation = model_->GetRotationQuaternion();
+    player_colision_.Update(deltaTime, model_.get());
 
     player_attack_collision_.Center = model_->GetPosition() + SimpleMath::Vector3(attack_x_,1.5f,0);
     player_attack_collision_.Orientation = model_->GetRotationQuaternion();
@@ -100,9 +76,7 @@ void Player::Render() {
     model_->SetRotation(rot_);
 	model_->Draw();
 
-    player_collision_model_->SetPosition(player_collision_.Center);
-    player_collision_model_->SetRotationQuaternion(player_collision_.Orientation);
-    player_collision_model_->Draw();
+    player_colision_.Render();
 
     if (attack_flg_) {
         player_attack_collision_model_->SetPosition(player_attack_collision_.Center);

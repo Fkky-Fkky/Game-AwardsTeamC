@@ -14,7 +14,7 @@ public:
 
 private:
 	float time_;
-	bool flag_;
+	bool  flag_;
 
 	const float GRAVITY_  = 0.045f;
 	const float V0_       = 0.8f;
