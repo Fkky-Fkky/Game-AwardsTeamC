@@ -9,30 +9,25 @@ using namespace DirectX;
 class RightBeat : public BossAttack {
 public:
 	RightBeat() {
-		slap_time = 0.0f;
 		time_delta = 0.0f;
 		beat_time = 0.0f;
 		wait_time = 0.0f;
-		getposflag = false;
+		player_pos_get_flag = false;
 		boss_action_state = 0;
-		hand_return_flag = false;
 	}
-	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos);
+	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss);
 
 private:
-
 	void HandMove(SimpleMath::Vector3 player_pos);
 	void RightBeatAttack();
 	void HandReturn();
 
 
-	float slap_time;
 	float time_delta;
 	float beat_time;
 	float wait_time;
 
-	bool getposflag;
-	bool hand_return_flag;
+	bool player_pos_get_flag;
 	SimpleMath::Vector3 pos;
 	SimpleMath::Vector3 rote;
 	SimpleMath::Vector3 move_pos;

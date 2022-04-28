@@ -15,7 +15,7 @@ public:
 		player_pos_get_flag = false;
 		boss_action_state = 0;
 	}
-	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, bool& attack_flag);
+	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss);
 
 private:
 	void HandMove(SimpleMath::Vector3 player_pos);

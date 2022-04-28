@@ -12,7 +12,7 @@ public:
 		slap_time = 0.0f;
 		hand_return_flag = false;
 	}
-	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos);
+	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss);
 
 private:
 	float slap_time;

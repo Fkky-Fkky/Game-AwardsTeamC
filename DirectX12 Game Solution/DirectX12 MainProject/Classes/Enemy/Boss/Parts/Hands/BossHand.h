@@ -3,7 +3,6 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/BossParts.h"
-#include <random>
 
 using namespace DirectX;
 
@@ -15,8 +14,7 @@ public:
 	virtual void LoadAssets(LPCWSTR file_name);
 	virtual void Update(const float deltaTime);
 	virtual void Render();
-	//virtual void Attack();
-	virtual void SetBossState(int state) { boss_state = state; }
+
 	bool GetAttackFlag() { return attack_flag; }
 	BoundingOrientedBox GetHandCollision() { return collision; }
 	SimpleMath::Vector3 GetHandPos() { return position; }
@@ -29,27 +27,17 @@ public:
 private:
 
 	void SusiZanmai();
-	void RandomAction();
 
 	float bezier_t;
-	float time_delta;
 
-	std::mt19937 randomEngine;
-	std::uniform_int_distribution<int> randomDist;
-	float wait_time;
-
-	int boss_state;
-	enum BOSS_STATE {
-		WAIT,
-		RIGHT_SLAP,
-		LEFT_SLAP,
-		RIGHT_BEAT,
-		LEFT_BEAT
-	};
+	bool attack_flag;
 
 protected:
-	bool attack_flag;
 
 	BoundingOrientedBox collision;
 	DX9::MODEL collision_model;
+
+	const float INITIAL_POS_Y = 10.0f;
+	const float INITIAL_POS_Z = 3.0f;
+
 };

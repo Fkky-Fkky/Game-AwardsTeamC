@@ -6,6 +6,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/LeftHand/BossHandL.h"
 #include "Classes/Enemy/Boss/Parts/Hands/RightHand/BossHandR.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
+#include <random>
 
 using namespace DirectX;
 
@@ -23,13 +24,29 @@ public:
 	bool GetRHandAttackFlag() { return hand_r.GetAttackFlag(); }
 	BoundingOrientedBox GetLHandCollision() { return hand_l.GetHandCollision(); }
 	BoundingOrientedBox GetRHandCollision() { return hand_r.GetHandCollision(); }
-	
+	void ActionEnd();
+	void RandomAttackState();
+
 private:
+	void SwitchStateAttack();
+	void SwitchStateWait();
 	BossBody body;
 	BossCore core;
 	BossHandL hand_l;
 	BossHandR hand_r;
 
 	BossAttack* attack;
+	std::mt19937 randomEngine;
+	std::uniform_int_distribution<int> randomDist;
+	int attack_state;
+
+	bool action_end_flag;
+	enum BOSS_STATE {
+		WAIT,
+		RIGHT_SLAP,
+		LEFT_SLAP,
+		RIGHT_BEAT,
+		LEFT_BEAT
+	};
 
 };

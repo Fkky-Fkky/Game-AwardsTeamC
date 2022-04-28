@@ -1,9 +1,12 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightBeat.h"
+#include "Classes/Enemy/Boss/Boss.h"
 
-void RightBeat::Update(const float deltaTime, SimpleMath::Vector3 player_pos){
+void RightBeat::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss){
 	pos  = boss_handR_->GetHandPos();
 	rote = boss_handR_->GetRotation();
+
 	time_delta = deltaTime;
+
 	switch (boss_action_state)
 	{
 	case MOVE:
@@ -20,23 +23,27 @@ void RightBeat::Update(const float deltaTime, SimpleMath::Vector3 player_pos){
 
 	case ACTION_END:
 		boss_action_state = MOVE;
+		boss->ActionEnd();
 		break;
 	}
 
 	boss_handR_->SetHandPos(pos);
 	boss_handR_->SetHandRote(rote);
+
 }
 
 void RightBeat::HandMove(SimpleMath::Vector3 player_pos) {
-	if (!getposflag) {
+	if (!player_pos_get_flag) {
 		move_pos = player_pos;
-		getposflag = true;
+		player_pos_get_flag = true;
 	}
 
+	pos.z = std::max(pos.z - 10.0f * time_delta, 0.0f);
+
 	if (pos.x < move_pos.x)
-		pos.x = std::min(pos.x + 10.0f * time_delta, move_pos.x);
+		pos.x = std::min(pos.x + MOVE_SPEED_X * time_delta, move_pos.x);
 	else
-		pos.x = std::max(pos.x - 10.0f * time_delta, move_pos.x);
+		pos.x = std::max(pos.x - MOVE_SPEED_X * time_delta, move_pos.x);
 
 	if (pos.x == move_pos.x)
 		boss_action_state = ATTACK;
@@ -52,26 +59,28 @@ void RightBeat::RightBeatAttack() {
 		pos.y = 0.0f;
 		boss_handR_->SetAttackFlag(false);
 		boss_action_state = RETURN_POSITION;
-	}
+	}	
 }
 
 void RightBeat::HandReturn() {
 	wait_time += time_delta;
 
-	if (wait_time >= 2.0f) {
+	if (wait_time >= 0.2f) {
 		if (pos.x < HAND_R_INITIAL_POS_X)
-			pos.x = std::min(pos.x + 10.0f * time_delta, HAND_R_INITIAL_POS_X);
+			pos.x = std::min(pos.x + MOVE_SPEED_X * time_delta, HAND_R_INITIAL_POS_X);
 		else
-			pos.x = std::max(pos.x - 10.0f * time_delta, HAND_R_INITIAL_POS_X);
+			pos.x = std::max(pos.x - MOVE_SPEED_X * time_delta, HAND_R_INITIAL_POS_X);
 
-		pos.y = std::min(pos.y + 5.0f * time_delta, HAND_INITIAL_POS_Y);
+		pos.y = std::min(pos.y + MOVE_SPEED_Y * time_delta, HAND_INITIAL_POS_Y);
+		pos.z = std::min(pos.z + 10.0f * time_delta, HAND_INITIAL_POS_Z);
 		rote.x = std::min(rote.x + 1.0f * time_delta, XM_PIDIV4);
 	}
 
 	if (pos.y >= HAND_INITIAL_POS_Y && pos.x == HAND_R_INITIAL_POS_X) {
 		wait_time = 0.0f;
 		beat_time = 0.0f;
-		getposflag = false;
+
+		player_pos_get_flag = false;
 		boss_action_state = ACTION_END;
 	}
 }

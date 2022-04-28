@@ -3,14 +3,20 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightSlap.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightBeat.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/LeftSlap.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/LeftBeat.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/Wait.h"
 
 void Boss::Initialize() {
 	body.Initialize();
 	core.Initialize();
 	hand_l.Initialize();
 	hand_r.Initialize();
-	attack = new LeftSlap;
+	std::random_device seed;
+	randomEngine = std::mt19937(seed());
+	randomDist = std::uniform_int_distribution<>(1, 4);
+	attack = new Wait;
 	attack->Initialize(&hand_l, &hand_r);
+	action_end_flag = false;
 }
 
 void Boss::LoadAseets(){
@@ -23,7 +29,8 @@ void Boss::LoadAseets(){
 void Boss::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {
 	hand_l.Update(deltaTime);
 	hand_r.Update(deltaTime);
-	attack->Update(deltaTime, player_pos);
+	attack->Update(deltaTime, player_pos, this);
+	SwitchStateWait();
 }
 
 void Boss::Render(){
@@ -31,4 +38,45 @@ void Boss::Render(){
 	core.Render();
 	hand_l.Render();
 	hand_r.Render();
+}
+
+void Boss::RandomAttackState() {
+	attack_state = randomDist(randomEngine);
+	SwitchStateAttack();
+}
+
+void Boss::SwitchStateAttack() {
+	delete attack;
+	switch (attack_state)
+	{
+	case RIGHT_SLAP:
+		attack = new RightSlap;
+		break;
+
+	case RIGHT_BEAT:
+		attack = new RightBeat;	
+		break;
+
+	case LEFT_SLAP:
+		attack = new LeftBeat;
+		break;
+
+	case LEFT_BEAT:
+		attack = new LeftBeat;
+		break;
+	}
+	attack->Initialize(&hand_l, &hand_r);
+}
+
+void Boss::ActionEnd(){
+	action_end_flag = true;
+}
+
+void Boss::SwitchStateWait(){
+	if (action_end_flag) {
+		delete attack;
+		attack = new Wait;
+		attack->Initialize(&hand_l, &hand_r);
+		action_end_flag = false;
+	}
 }
