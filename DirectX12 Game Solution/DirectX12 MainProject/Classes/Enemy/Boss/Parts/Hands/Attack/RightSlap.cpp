@@ -14,8 +14,7 @@ void RightSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Bo
 		rote.x = std::min(rote.x + 1.0f * deltaTime, XM_PIDIV2);
 	}
 	else {
-		pos.x = std::min(pos.x + 10.0f * deltaTime, HAND_R_INITIAL_POS_X);
-		pos.y = std::min(pos.y + 10.0f * deltaTime, HAND_INITIAL_POS_Y);
+		pos.x = std::min(pos.x + MOVE_SPEED_X * deltaTime, HAND_R_INITIAL_POS_X);
 		pos.z = std::min(pos.z + 10.0f * deltaTime, HAND_INITIAL_POS_Z);
 		rote.x = std::max(rote.x - 10.0f * deltaTime, XM_PIDIV4);
 	}
@@ -23,6 +22,7 @@ void RightSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Bo
 
 	if (pos.x >= 70.0f) {
 		pos.x = -30.0f;
+		pos.y = HAND_INITIAL_POS_Y;
 		hand_return_flag = true;
 		boss_handR_->SetAttackFlag(false);
 	}

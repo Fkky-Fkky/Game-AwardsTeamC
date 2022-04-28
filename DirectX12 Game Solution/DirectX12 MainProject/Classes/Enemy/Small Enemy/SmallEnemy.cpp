@@ -88,4 +88,3 @@ void SmallEnemy::HitProcessing() {
     core_hp_ -= 1;
     hit_flag_ = true;
 }
-

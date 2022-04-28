@@ -58,7 +58,7 @@ void Boss::SwitchStateAttack() {
 		break;
 
 	case LEFT_SLAP:
-		attack = new LeftBeat;
+		attack = new LeftSlap;
 		break;
 
 	case LEFT_BEAT:

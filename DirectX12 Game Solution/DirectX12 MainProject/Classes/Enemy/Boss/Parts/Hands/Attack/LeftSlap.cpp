@@ -14,8 +14,7 @@ void LeftSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Bos
 		rote.x = std::min(rote.x + 1.0f * deltaTime, XM_PIDIV2);
 	}
 	else {
-		pos.x = std::max(pos.x - 10.0f * deltaTime, HAND_L_INITIAL_POS_X);
-		pos.y = std::min(pos.y + 10.0f * deltaTime, HAND_INITIAL_POS_Y);
+		pos.x = std::max(pos.x - MOVE_SPEED_X * deltaTime, HAND_L_INITIAL_POS_X);
 		pos.z = std::min(pos.z + 10.0f * deltaTime, HAND_INITIAL_POS_Z);
 		rote.x = std::max(rote.x - 10.0f * deltaTime, XM_PIDIV4);
 	}
@@ -23,11 +22,12 @@ void LeftSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Bos
 
 	if (pos.x <= -70.0f) {
 		pos.x = 30.0f;
+		pos.y = HAND_INITIAL_POS_Y;
 		hand_return_flag = true;
 		boss_handL_->SetAttackFlag(false);
 	}
 
-	if (pos.x <= HAND_L_INITIAL_POS_X && hand_return_flag) {
+	if (pos.x <= HAND_L_INITIAL_POS_X && pos.y == HAND_INITIAL_POS_Y && hand_return_flag) {
 		pos.x = HAND_L_INITIAL_POS_X;
 		slap_time = 0.0f;
 		hand_return_flag = false;

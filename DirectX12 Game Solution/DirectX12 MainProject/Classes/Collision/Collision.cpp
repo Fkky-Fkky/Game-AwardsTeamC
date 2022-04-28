@@ -10,11 +10,14 @@ void Collision::LoadAssets() {
 }
 
 void Collision::Update(const float deltaTime, bool attack_flag_, bool boss_r_attack_flag_, bool boss_l_attack_flag_) {
-	if (boss_r_attack_flag_ || boss_l_attack_flag_) {
-		hit_flg_ = player_collision_.Intersects(boss_hand_right_collision_) ||
-				   player_collision_.Intersects(boss_hand_left_collision_);
+	if (boss_r_attack_flag_) {
+		hit_flg_ = player_collision_.Intersects(boss_hand_right_collision_);
 	}
-		
+
+	if (boss_l_attack_flag_) {
+		hit_flg_ = player_collision_.Intersects(boss_hand_left_collision_);
+	}
+
 
 	if (attack_flag_)
 		hit_attack_flg_ = player_attack_collision_.Intersects(core_collision_);
