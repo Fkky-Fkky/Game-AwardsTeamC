@@ -9,7 +9,7 @@ void PlayerColision::LoadAssets(DX9::Model* model_) {
         collision_.Extents.z
     );
 
-    //デバッグ用↓
+    //デバッグ用
     collision_model_ = DX9::Model::CreateBox(
         DXTK->Device9,
         collision_.Extents.x,

@@ -120,6 +120,12 @@
     <ClInclude Include="Classes\Player\PlayerColision.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Player\PlayerAttackColision.h">
+      <Filter>Classes\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Collision\ObjectManager.h">
+      <Filter>Classes\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -184,6 +190,12 @@
     </ClCompile>
     <ClCompile Include="Classes\Player\PlayerColision.cpp">
       <Filter>Classes\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\PlayerAttackColision.cpp">
+      <Filter>Classes\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Collision\ObjectManager.cpp">
+      <Filter>Classes\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

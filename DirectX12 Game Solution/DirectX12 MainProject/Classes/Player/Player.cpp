@@ -14,25 +14,12 @@ void Player::Initialize() {
 
 void Player::LoadAssets() {
 	model_ = DX9::Model::CreateFromFile(DXTK->Device9, L"Player/chara_mock.x");
-    font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
+    model_->SetScale(1.0f);
 
     player_colision_.LoadAssets(model_.get());
+    player_attack_colision_.LoadAssets(model_.get());
 
-    player_attack_collision_ = model_->GetBoundingOrientedBox();
-    player_attack_collision_.Extents = SimpleMath::Vector3(player_attack_collision_.Extents) * 1.0f;
-
-    player_attack_collision_model_ = DX9::Model::CreateBox(
-        DXTK->Device9,
-        player_attack_collision_.Extents.x,
-        player_attack_collision_.Extents.y,
-        player_attack_collision_.Extents.z
-    );
-
-    D3DMATERIAL9 material_attack_{};
-    material_attack_.Diffuse = DX9::Colors::Value(0.0f, 0.0f, 1.0f, 0.75f);
-    player_attack_collision_model_->SetMaterial(material_attack_);
-
-    model_->SetScale(1.0f);
+    font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 }
 
 void Player::Update(const float deltaTime) {
@@ -63,11 +50,8 @@ void Player::Update(const float deltaTime) {
     }
 
     player_colision_.Update(deltaTime, model_.get());
+    player_attack_colision_.Update(deltaTime, model_.get());
 
-    player_attack_collision_.Center = model_->GetPosition() + SimpleMath::Vector3(attack_x_,1.5f,0);
-    player_attack_collision_.Orientation = model_->GetRotationQuaternion();
-
-    /*collision.PlayerCollision(player_collision_);*/
 }
 
 void Player::Render() {
@@ -79,9 +63,7 @@ void Player::Render() {
     player_colision_.Render();
 
     if (attack_flg_) {
-        player_attack_collision_model_->SetPosition(player_attack_collision_.Center);
-        player_attack_collision_model_->SetRotationQuaternion(player_collision_.Orientation);
-        player_attack_collision_model_->Draw();
+        player_attack_colision_.Render();
     }
 }
 
