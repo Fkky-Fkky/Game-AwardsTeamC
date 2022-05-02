@@ -26,7 +26,8 @@ void Boss::LoadAseets(){
 	hand_r.LoadAssets();
 }
 
-void Boss::Update(const float deltaTime, SimpleMath::Vector3 player_pos) {
+void Boss::Update(const float deltaTime, SimpleMath::Vector3 player_pos, bool core_hit_flag) {
+	core.Update(deltaTime, core_hit_flag);
 	hand_l.Update(deltaTime);
 	hand_r.Update(deltaTime);
 	attack->Update(deltaTime, player_pos, this);
@@ -38,6 +39,10 @@ void Boss::Render(){
 	core.Render();
 	hand_l.Render();
 	hand_r.Render();
+}
+
+void Boss::Render2D() {
+	core.Render2D();
 }
 
 void Boss::RandomAttackState() {

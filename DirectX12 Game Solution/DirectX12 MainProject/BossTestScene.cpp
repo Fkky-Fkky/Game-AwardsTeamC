@@ -46,10 +46,10 @@ void BossTestScene::LoadAssets()
 
     // グラフィックリソースの初期化処理
     D3DLIGHT9 light{};
-    light.Type = D3DLIGHT_DIRECTIONAL;
-    light.Ambient = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
+    light.Type     = D3DLIGHT_DIRECTIONAL;
+    light.Ambient  = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
     light.Specular = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
-    light.Diffuse = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
+    light.Diffuse  = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
 
     light.Direction = DX9::VectorSet(0.0f, -10.0f, 5.0f);
     DXTK->Direct3D9->SetLight(0, light);
@@ -91,14 +91,15 @@ NextScene BossTestScene::Update(const float deltaTime)
 
 	// TODO: Add your game logic here.
 
-    boss.Update(deltaTime,player.GetPlayerPosition());
     player.Update(deltaTime);
-
-    //collision.Update(deltaTime, player.AttackFlag());
+    player.HitPlayer(collision.GetHitFlag());
+    boss.Update(deltaTime, player.GetPlayerPosition(),collision.GetHitAttackFlag());
+    collision.Update(deltaTime, player.AttackFlag(), boss.GetRHandAttackFlag(), boss.GetLHandAttackFlag());
     collision.PlayerCollision(player.GetPlayerCollision());
     collision.PlayerAttackCollision(player.GetPlayerAttackCollision());
-    //collision.BossCollision(boss.GetRHandCollision());
-    //collision.CoreCollision(smallEnemy.GetCoreCollision());
+    collision.BossHandRightCollision(boss.GetRHandCollision());
+    collision.BossHandLeftCollision(boss.GetLHandCollision());
+    collision.CoreCollision(boss.GetCoreCollision());
 
 	return NextScene::Continue;
 }
@@ -117,7 +118,9 @@ void BossTestScene::Render()
 
     DX9::SpriteBatch->Begin();
 
-
+    collision.Render2D();
+    player.Render2D();
+    boss.Render2D();
 
     DX9::SpriteBatch->End();
     DXTK->Direct3D9->EndScene();

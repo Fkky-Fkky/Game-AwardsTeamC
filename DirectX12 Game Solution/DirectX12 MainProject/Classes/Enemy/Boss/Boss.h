@@ -17,13 +17,15 @@ public:
 
 	void Initialize();
 	void LoadAseets();
-	void Update(const float deltaTime, SimpleMath::Vector3 player_pos);
+	void Update(const float deltaTime, SimpleMath::Vector3 player_pos, bool core_hit_flag);
 	void Render();
+	void Render2D();
 
 	bool GetLHandAttackFlag() { return hand_l.GetAttackFlag(); }
 	bool GetRHandAttackFlag() { return hand_r.GetAttackFlag(); }
 	BoundingOrientedBox GetLHandCollision() { return hand_l.GetHandCollision(); }
 	BoundingOrientedBox GetRHandCollision() { return hand_r.GetHandCollision(); }
+	BoundingOrientedBox GetCoreCollision() { return core.GetCoreCollision(); }
 	void ActionEnd();
 	void RandomAttackState();
 
