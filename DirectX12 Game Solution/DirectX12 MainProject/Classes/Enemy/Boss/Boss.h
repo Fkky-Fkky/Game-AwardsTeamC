@@ -48,7 +48,8 @@ private:
 		RIGHT_SLAP,
 		LEFT_SLAP,
 		RIGHT_BEAT,
-		LEFT_BEAT
+		LEFT_BEAT,
+		BEAT_RUSH_R
 	};
 
 };
