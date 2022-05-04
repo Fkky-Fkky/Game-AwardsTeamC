@@ -14,7 +14,7 @@ void BossHand::Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote) {
 void BossHand::LoadAssets(LPCWSTR file_name){
 	BossParts::LoadAssets(file_name);
 
-	model->SetScale(4.5f);
+	//model->SetScale(1.0f);
 
 	collision = model->GetBoundingOrientedBox();
 	collision.Extents = SimpleMath::Vector3(collision.Extents);

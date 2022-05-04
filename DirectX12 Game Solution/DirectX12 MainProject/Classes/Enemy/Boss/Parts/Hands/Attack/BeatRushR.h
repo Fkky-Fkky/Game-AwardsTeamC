@@ -53,6 +53,7 @@ private:
 	const float WAIT_TIME_LIMIT = 1.0f;
 	const float BEAT_L_START_TIME = 0.5f;
 	const float LIMIT_POS_X = 25.0f;
+	const float LIMIT_POS_Y = -1.0f;
 	const float RETURN_POS_X = -20.0f;
 	const float ADD_POS_NUM = 13.0f;
 };
