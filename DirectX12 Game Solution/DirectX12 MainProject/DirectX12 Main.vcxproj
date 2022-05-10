@@ -189,6 +189,7 @@
     <ClInclude Include="Base\StepTimer.h" />
     <ClInclude Include="BossTestScene.h" />
     <ClInclude Include="Classes\Collision\Collision.h" />
+    <ClInclude Include="Classes\Collision\ObjectManager.h" />
     <ClInclude Include="Classes\Enemy\Boss\Boss.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Body\BossBody.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\BossParts.h" />
@@ -208,6 +209,11 @@
     <ClInclude Include="Classes\My_Camera\My_Camera.h" />
     <ClInclude Include="Classes\PlayerTestCamera\PlayerTestCamera.h" />
     <ClInclude Include="Classes\Player\Player.h" />
+    <ClInclude Include="Classes\Player\PlayerAttack.h" />
+    <ClInclude Include="Classes\Player\PlayerAttackColision.h" />
+    <ClInclude Include="Classes\Player\PlayerColision.h" />
+    <ClInclude Include="Classes\Player\PlayerJump.h" />
+    <ClInclude Include="Classes\Player\PlayerMove.h" />
     <ClInclude Include="DontDestroyOnLoad.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="PlayerTestScene.h" />
@@ -230,6 +236,7 @@
     </ClCompile>
     <ClCompile Include="BossTestScene.cpp" />
     <ClCompile Include="Classes\Collision\Collision.cpp" />
+    <ClCompile Include="Classes\Collision\ObjectManager.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Boss.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Body\BossBody.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\BossParts.cpp" />
@@ -248,6 +255,11 @@
     <ClCompile Include="Classes\My_Camera\My_Camera.cpp" />
     <ClCompile Include="Classes\PlayerTestCamera\PlayerTestCamera.cpp" />
     <ClCompile Include="Classes\Player\Player.cpp" />
+    <ClCompile Include="Classes\Player\PlayerAttack.cpp" />
+    <ClCompile Include="Classes\Player\PlayerAttackColision.cpp" />
+    <ClCompile Include="Classes\Player\PlayerColision.cpp" />
+    <ClCompile Include="Classes\Player\PlayerJump.cpp" />
+    <ClCompile Include="Classes\Player\PlayerMove.cpp" />
     <ClCompile Include="MainScene.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>

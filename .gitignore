@@ -3,3 +3,17 @@ DirectX12 Game Solution/x64/
 DirectX12 Game Solution/DirectX12 MainProject/x64/
 DirectX12 Game Solution/DirectXTK12/
 DirectX12 Game Solution/DirectXTK9/
+DirectX12 Game Solution/DirectX12 MainProject/Base/DX12Effekseer.h
+DirectX12 Game Solution/Effekseer/include/Effekseer.h
+DirectX12 Game Solution/Effekseer/include/Effekseer.Internal.h
+DirectX12 Game Solution/Effekseer/include/EffekseerRendererDX12.h
+DirectX12 Game Solution/Effekseer/lib/Effekseer.lib
+DirectX12 Game Solution/Effekseer/lib/Effekseerd.lib
+DirectX12 Game Solution/Effekseer/lib/EffekseerRendererDX11.lib
+DirectX12 Game Solution/Effekseer/lib/EffekseerRendererDX11d.lib
+DirectX12 Game Solution/Effekseer/lib/EffekseerRendererDX12.lib
+DirectX12 Game Solution/Effekseer/lib/EffekseerRendererDX12d.lib
+DirectX12 Game Solution/Effekseer/lib/EffekseerRendererDX9.lib
+DirectX12 Game Solution/Effekseer/lib/EffekseerRendererDX9d.lib
+DirectX12 Game Solution/Effekseer/lib/LLGI.lib
+DirectX12 Game Solution/Effekseer/lib/LLGId.lib

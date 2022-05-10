@@ -11,6 +11,7 @@
 #include "Classes/Enemy/Small Enemy/SmallEnemy.h"
 #include "Classes/Collision/Collision.h"
 #include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/Collision/ObjectManager.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -51,4 +52,5 @@ private:
 	Boss boss;
 	SmallEnemy smallEnemy;
 	Collision collision;
+	ObjectManager object_manager_;
 };
