@@ -3,6 +3,7 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
+#include "Base/DX12Effekseer.h"
 
 using namespace DirectX;
 

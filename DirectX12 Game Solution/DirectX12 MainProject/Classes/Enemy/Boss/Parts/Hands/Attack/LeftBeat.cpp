@@ -56,6 +56,7 @@ void LeftBeat::LeftBeatAttack() {
 
 	if (pos.y <= 0.0f) {
 		pos.y = 0.0f;
+		DX12Effect.PlayOneShot("hit", pos);
 		boss_handL_->SetAttackFlag(false);
 		boss_action_state = RETURN_POSITION;
 	}

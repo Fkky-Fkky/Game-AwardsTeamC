@@ -1,4 +1,5 @@
 #include "Classes/PlayerTestCamera/PlayerTestCamera.h"
+#include "Base/DX12Effekseer.h"
 
 void PlayerTestCamera::Initialize() {
 	camera->SetViewLookAt(
@@ -8,6 +9,7 @@ void PlayerTestCamera::Initialize() {
     );
     camera->SetPerspectiveFieldOfView(XMConvertToRadians(45.0f), 16.0f / 9.0f, 1.0f, 10000.0f);
     DXTK->Direct3D9->SetCamera(camera);
+    DX12Effect.SetCameraPosition(&camera);
 }
 
 void PlayerTestCamera::Update() {

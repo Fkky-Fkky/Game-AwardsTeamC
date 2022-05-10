@@ -5,6 +5,7 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 #include "SceneFactory.h"
+#include <Base/DX12Effekseer.h>
 
 // Initialize member variables.
 BossTestScene::BossTestScene()
@@ -15,6 +16,7 @@ BossTestScene::BossTestScene()
 // Initialize a variable and audio resources.
 void BossTestScene::Initialize()
 {
+    DX12Effect.Initialize();
     boss.Initialize();
     camera.Initialize();
     player.Initialize();
@@ -54,11 +56,11 @@ void BossTestScene::LoadAssets()
     light.Direction = DX9::VectorSet(0.0f, -10.0f, 5.0f);
     DXTK->Direct3D9->SetLight(0, light);
 
+
     boss.LoadAseets();
     player.LoadAssets();
     ground.LoadAssets();
     collision.LoadAssets();
-
 }
 
 // Releasing resources required for termination.
@@ -74,7 +76,7 @@ void BossTestScene::Terminate()
 // Direct3D resource cleanup.
 void BossTestScene::OnDeviceLost()
 {
-
+    DX12Effect.Reset();
 }
 
 // Restart any looped sounds here
@@ -100,7 +102,7 @@ NextScene BossTestScene::Update(const float deltaTime)
     collision.BossHandRightCollision(boss.GetRHandCollision());
     collision.BossHandLeftCollision(boss.GetLHandCollision());
     collision.CoreCollision(boss.GetCoreCollision());
-
+    DX12Effect.Update(deltaTime);
 	return NextScene::Continue;
 }
 
@@ -140,6 +142,8 @@ void BossTestScene::Render()
         SimpleMath::Vector2(0.0f, 0.0f)
     );
     spriteBatch->End();
+
+    DX12Effect.Renderer();
 
     DXTK->Direct3D9->WaitUpdate();
     DXTK->ExecuteCommandList();
