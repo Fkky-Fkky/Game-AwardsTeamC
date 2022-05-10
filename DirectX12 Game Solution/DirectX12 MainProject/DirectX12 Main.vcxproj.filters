@@ -58,6 +58,9 @@
     <Filter Include="Classes\Enemy\Boss\Parts\Hands\LeftHand">
       <UniqueIdentifier>{228c714a-d875-4194-96dd-05de6300f3c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Effeseer">
+      <UniqueIdentifier>{f30dea61-07bb-4224-a7de-d1fcba261350}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -156,6 +159,9 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BeatRushR.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
+    <ClInclude Include="Base\DX12Effekseer.h">
+      <Filter>Classes\Effeseer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -232,6 +238,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\BeatRushR.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\DX12Effekseer.cpp">
+      <Filter>Classes\Effeseer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

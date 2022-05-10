@@ -25,6 +25,7 @@ void Boss::LoadAseets(){
 	core.LoadAssets();
 	hand_l.LoadAssets();
 	hand_r.LoadAssets();
+	DX12Effect.Create(L"Effect/Eff_shock_001/shock_001.efk", "hit");
 }
 
 void Boss::Update(const float deltaTime, SimpleMath::Vector3 player_pos, bool core_hit_flag) {
