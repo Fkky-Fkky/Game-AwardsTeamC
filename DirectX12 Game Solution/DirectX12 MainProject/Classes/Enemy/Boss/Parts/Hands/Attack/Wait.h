@@ -7,12 +7,12 @@
 class Wait : public BossAttack {
 public:
 	Wait() {
-		wait_time = 0.0f;
+		wait_time_ = 0.0f;
 		max_wait_time = 0.1f;
 	}
 	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss);
 
 private:
-	float wait_time;
+	float wait_time_;
 	float max_wait_time;
 };

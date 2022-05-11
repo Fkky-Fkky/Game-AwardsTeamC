@@ -3,7 +3,6 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
-#include "Base/DX12Effekseer.h"
 
 using namespace DirectX;
 
@@ -11,9 +10,9 @@ class LeftBeat : public BossAttack {
 public:
 	LeftBeat() {
 		time_delta = 0.0f;
-		beat_time = 0.0f;
-		wait_time = 0.0f;
-		player_pos_get_flag = false;
+		beat_time_ = 0.0f;
+		wait_time_ = 0.0f;
+		player_pos_get_flag_ = false;
 		boss_action_state = 0;
 	}
 	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss);
@@ -25,10 +24,10 @@ private:
 
 
 	float time_delta;
-	float beat_time;
-	float wait_time;
+	float beat_time_;
+	float wait_time_;
 
-	bool player_pos_get_flag;
+	bool player_pos_get_flag_;
 	SimpleMath::Vector3 pos;
 	SimpleMath::Vector3 rote;
 	SimpleMath::Vector3 move_pos;

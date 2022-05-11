@@ -33,8 +33,8 @@ void BeatRushR::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Bo
 }
 
 void BeatRushR::Ready() {
-	pos_r.x = std::max(pos_r.x - MOVE_SPEED_X * time_delta, R_START_POS_X);
-	pos_l.x = std::max(pos_l.x - MOVE_SPEED_X * time_delta, L_START_POS_X);
+	pos_r.x = std::max(pos_r.x - MOVE_SPEED_X_ * time_delta, R_START_POS_X);
+	pos_l.x = std::max(pos_l.x - MOVE_SPEED_X_ * time_delta, L_START_POS_X);
 	rote_r.x = std::max(rote_r.x - ROTATION_SPEED * time_delta, -XM_1DIV2PI);
 	rote_l.x = std::max(rote_l.x - ROTATION_SPEED * time_delta, -XM_1DIV2PI);
 	if (pos_l.x == L_START_POS_X) {
@@ -45,8 +45,8 @@ void BeatRushR::Ready() {
 void BeatRushR::Attack() {
 	BeatR();
 
-	wait_time = std::min(wait_time + time_delta, WAIT_TIME_LIMIT);
-	if (wait_time >= BEAT_L_START_TIME) {
+	wait_time_ = std::min(wait_time_ + time_delta, WAIT_TIME_LIMIT);
+	if (wait_time_ >= BEAT_L_START_TIME) {
 		BeatL();
 	}
 
@@ -61,12 +61,12 @@ void BeatRushR::BeatR() {
 	if (!r_hand_up_flag) {
 		boss_handR_->SetAttackFlag(true);
 		r_beat_time += time_delta;
-		pos_r.y += BEAT_SPEED * r_beat_time - HALF * BEAT_GRAVITY * r_beat_time * r_beat_time;
+		pos_r.y += BEAT_SPEED_ * r_beat_time - HALF_ * BEAT_GRAVITY_ * r_beat_time * r_beat_time;
 	}
 	else {
 		boss_handR_->SetAttackFlag(false);
-		pos_r.y = std::min(pos_r.y + MOVE_SPEED_X * time_delta, HAND_INITIAL_POS_Y);
-		pos_r.x = std::min(pos_r.x + MOVE_SPEED_X * time_delta, MOVE_POS);
+		pos_r.y = std::min(pos_r.y + MOVE_SPEED_X_ * time_delta, HAND_INITIAL_POS_Y_);
+		pos_r.x = std::min(pos_r.x + MOVE_SPEED_X_ * time_delta, MOVE_POS);
 	}
 
 	if (pos_r.y <= LIMIT_POS_Y) {
@@ -75,7 +75,7 @@ void BeatRushR::BeatR() {
 		r_add_pos += ADD_POS_NUM;
 	}
 
-	if (pos_r.y == HAND_INITIAL_POS_Y && 
+	if (pos_r.y == HAND_INITIAL_POS_Y_ && 
 		pos_r.x == MOVE_POS) {
 		r_hand_up_flag = false;
 		r_beat_time = 0.0f;
@@ -88,12 +88,12 @@ void BeatRushR::BeatL() {
 	if (!l_hand_up_flag) {
 		boss_handL_->SetAttackFlag(true);
 		l_beat_time += time_delta;
-		pos_l.y += BEAT_SPEED * l_beat_time - HALF * BEAT_GRAVITY * l_beat_time * l_beat_time;
+		pos_l.y += BEAT_SPEED_ * l_beat_time - HALF_ * BEAT_GRAVITY_ * l_beat_time * l_beat_time;
 	}
 	else {
 		boss_handL_->SetAttackFlag(false);
-		pos_l.y = std::min(pos_l.y + MOVE_SPEED_X * time_delta, HAND_INITIAL_POS_Y);
-		pos_l.x = std::min(pos_l.x + MOVE_SPEED_X * time_delta, MOVE_POS);
+		pos_l.y = std::min(pos_l.y + MOVE_SPEED_X_ * time_delta, HAND_INITIAL_POS_Y_);
+		pos_l.x = std::min(pos_l.x + MOVE_SPEED_X_ * time_delta, MOVE_POS);
 	}
 
 	if (pos_l.y <= LIMIT_POS_Y) {
@@ -102,7 +102,7 @@ void BeatRushR::BeatL() {
 		l_add_pos += ADD_POS_NUM;
 	}
 
-	if (pos_l.y == HAND_INITIAL_POS_Y && 
+	if (pos_l.y == HAND_INITIAL_POS_Y_ && 
 		pos_l.x == MOVE_POS) {
 		l_hand_up_flag = false;
 		l_beat_time = 0.0f;
@@ -116,14 +116,14 @@ void BeatRushR::Reset() {
 		pos_r.x  = RETURN_POS_X;
 	}
 
-	pos_r.x = std::min(pos_r.x + MOVE_SPEED_X * time_delta, HAND_R_INITIAL_POS_X);
-	pos_l.x = std::max(pos_l.x - MOVE_SPEED_X * time_delta, HAND_L_INITIAL_POS_X);
-	pos_r.y = HAND_INITIAL_POS_Y;
-	pos_l.y = HAND_INITIAL_POS_Y;
+	pos_r.x = std::min(pos_r.x + MOVE_SPEED_X_ * time_delta, HAND_R_INITIAL_POS_X_);
+	pos_l.x = std::max(pos_l.x - MOVE_SPEED_X_ * time_delta, HAND_L_INITIAL_POS_X_);
+	pos_r.y = HAND_INITIAL_POS_Y_;
+	pos_l.y = HAND_INITIAL_POS_Y_;
 	rote_r.x = XM_PIDIV4;
 	rote_l.x = XM_PIDIV4;
-	if (pos_r.x == HAND_R_INITIAL_POS_X &&
-		pos_l.x == HAND_L_INITIAL_POS_X) {
+	if (pos_r.x == HAND_R_INITIAL_POS_X_ &&
+		pos_l.x == HAND_L_INITIAL_POS_X_) {
 		attack_state = ACTION_END;
 	}
 }

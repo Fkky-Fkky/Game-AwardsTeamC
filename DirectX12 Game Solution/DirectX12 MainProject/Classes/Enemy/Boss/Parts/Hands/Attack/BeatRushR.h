@@ -13,7 +13,7 @@ public:
 		r_add_pos = 0.0f;
 		l_add_pos = 0.0f;
 		time_delta = 0.0f;
-		wait_time = 0.0f;
+		wait_time_ = 0.0f;
 		r_hand_up_flag = false;
 		l_hand_up_flag = false;
 	}
@@ -37,7 +37,7 @@ private:
 	float r_add_pos;
 	float l_add_pos;
 	float time_delta;
-	float wait_time;
+	float wait_time_;
 	bool r_hand_up_flag;
 	bool l_hand_up_flag;
 	enum ATTACK_STATE {

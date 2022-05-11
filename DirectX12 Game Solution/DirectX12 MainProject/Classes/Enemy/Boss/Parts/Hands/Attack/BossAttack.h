@@ -3,6 +3,7 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/Hands/BossHand.h"
+#include "Base/DX12Effekseer.h"
 
 class Boss;
 
@@ -20,19 +21,20 @@ protected:
 	BossHand* boss_handL_;
 	BossHand* boss_handR_;
 
-	const float HAND_R_INITIAL_POS_X = -13.0f;
-	const float HAND_L_INITIAL_POS_X = 13.0f;
-	const float HAND_INITIAL_POS_Y = 10.0f;
-	const float HAND_INITIAL_POS_Z = 3.0f;
+	const float HAND_R_INITIAL_POS_X_ = -13.0f;
+	const float HAND_L_INITIAL_POS_X_ = 13.0f;
+	const float HAND_INITIAL_POS_Y_ = 10.0f;
+	const float HAND_INITIAL_POS_Z_ = 3.0f;
 
-	const float SLAP_SPEED = 1.5f;
-	const float SLAP_GRAVITY = 5.0f;
+	const float SLAP_SPEED_ = 1.5f;
+	const float SLAP_GRAVITY_ = 5.0f;
 
-	const float BEAT_SPEED = 1.5f;
-	const float BEAT_GRAVITY = 15.0f;
-	const float MOVE_SPEED_X = 30.0f;
-	const float MOVE_SPEED_Y = 10.0f;
+	const float BEAT_SPEED_ = 1.5f;
+	const float BEAT_GRAVITY_ = 15.0f;
+	const float MOVE_SPEED_X_ = 30.0f;
+	const float MOVE_SPEED_Y_ = 10.0f;
+	const float ROTE_SPEED_ = 1.0f;
 
-	const float HALF = 0.5f;
+	const float HALF_ = 0.5f;
 
 };
