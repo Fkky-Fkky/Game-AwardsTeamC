@@ -21,7 +21,7 @@ public:
 	void Render();
 	void Render2D();
 	void HitPlayer(bool player_hit_flag);
-	int GetPlayerHP() { return player_hp_; }
+	float GetPlayerHP() { return player_hp_; }
 	BoundingOrientedBox GetPlayerCollision() { return player_colision_.GetColision(); }
 	BoundingOrientedBox GetPlayerAttackCollision() { return player_attack_colision_.GetAttackCollision(); }
 	bool AttackFlag() { return player_attack_colision_.GeatAttackFlag(); }
@@ -43,7 +43,7 @@ private:
 	SimpleMath::Vector3 pos_;
 	SimpleMath::Vector3 rot_;
 
-	int player_hp_;
+	float player_hp_;
 	bool hit_flag_;
 
 	PlayerMove           player_move_;

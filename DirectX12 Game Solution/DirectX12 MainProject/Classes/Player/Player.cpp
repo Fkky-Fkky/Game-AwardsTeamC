@@ -6,7 +6,7 @@ void Player::Initialize() {
 	rot_ = SimpleMath::Vector3::Zero;
 
 
-    player_hp_ = 30;
+    player_hp_ = 30.0f;
     hit_flag_ = false;
 }
 
@@ -64,6 +64,6 @@ void Player::HitPlayer(bool player_hit_flag) {
 }
 
 void Player::HitProcessing() {
-    player_hp_ -= 1;
+    player_hp_ -= 1.0f;
     hit_flag_ = true;
 }
