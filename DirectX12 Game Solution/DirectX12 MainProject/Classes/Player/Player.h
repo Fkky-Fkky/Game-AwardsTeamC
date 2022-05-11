@@ -21,7 +21,7 @@ public:
 	void Render();
 	void Render2D();
 	void HitPlayer(bool player_hit_flag);
-	void HitProcessing();
+	int GetPlayerHP() { return player_hp_; }
 	BoundingOrientedBox GetPlayerCollision() { return player_colision_.GetColision(); }
 	BoundingOrientedBox GetPlayerAttackCollision() { return player_attack_colision_.GetAttackCollision(); }
 	bool AttackFlag() { return player_attack_colision_.GeatAttackFlag(); }
@@ -29,6 +29,8 @@ public:
 	PlayerColision* GetColision() { return &player_colision_; }
 
 private:
+	void HitProcessing();
+
 	DX9::MODEL model_;
 	DX9::SPRITEFONT font;
 

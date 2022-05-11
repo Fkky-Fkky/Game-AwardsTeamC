@@ -30,6 +30,10 @@ BoundingOrientedBox ObjectManager::GetBossLHandCollision() {
 	return boss_->GetLHandCollision();
 }
 
+int ObjectManager::GetPlayerHP() {
+	return player_->GetPlayerHP();
+}
+
 bool ObjectManager::GetPlayerAttackFlag() {
 	return player_->AttackFlag();
 }
