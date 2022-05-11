@@ -2,7 +2,6 @@
 
 #include "Base/pch.h"
 #include "Base/dxtk.h"
-#include "Classes/Collision/Collision.h"
 
 #include "Classes/Player/PlayerMove.h"
 #include "Classes/Player/PlayerJump.h"
@@ -23,9 +22,9 @@ public:
 	void Render2D();
 	void HitPlayer(bool player_hit_flag);
 	void HitProcessing();
-	BoundingOrientedBox GetPlayerCollision() { return ; }
-	BoundingOrientedBox GetPlayerAttackCollision() { return ; }
-	bool AttackFlag() { return attack_flg_; }
+	BoundingOrientedBox GetPlayerCollision() { return player_colision_.GetColision(); }
+	BoundingOrientedBox GetPlayerAttackCollision() { return player_attack_colision_.GetAttackCollision(); }
+	bool AttackFlag() { return player_attack_colision_.GeatAttackFlag(); }
 	SimpleMath::Vector3 GetPlayerPosition() { return pos_; }
 	PlayerColision* GetColision() { return &player_colision_; }
 
@@ -42,14 +41,9 @@ private:
 	SimpleMath::Vector3 pos_;
 	SimpleMath::Vector3 rot_;
 
-	float attack_x_;
-	float attack_time_;
-	bool attack_flg_;
-
 	int player_hp_;
 	bool hit_flag_;
 
-	Collision collision;
 	PlayerMove           player_move_;
 	PlayerJump           player_jump_;
 	PlayerColision       player_colision_;

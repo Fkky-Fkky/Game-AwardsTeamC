@@ -99,7 +99,7 @@ NextScene MainScene::Update(const float deltaTime)
     boss.Update(deltaTime,player.GetPlayerPosition(),collision.GetHitAttackFlag());
     smallEnemy.HitPlayerAttack(collision.GetHitAttackFlag());
     smallEnemy.Update(deltaTime);
-    collision.Update(deltaTime, player.AttackFlag(), boss.GetRHandAttackFlag(), boss.GetLHandAttackFlag());
+    collision.Update(deltaTime, player.AttackFlag(), boss.GetRHandAttackFlag(), boss.GetLHandAttackFlag()/*, object*/);
     collision.PlayerCollision(player.GetPlayerCollision());
     collision.PlayerAttackCollision(player.GetPlayerAttackCollision());
     collision.BossHandRightCollision(smallEnemy.GetSmallEnemyCollision());

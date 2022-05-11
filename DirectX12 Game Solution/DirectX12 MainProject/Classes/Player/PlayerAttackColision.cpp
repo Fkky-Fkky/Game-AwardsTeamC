@@ -18,12 +18,29 @@ void PlayerAttackColision::LoadAssets(DX9::Model* model_) {
 }
 
 void PlayerAttackColision::Update(const float deltaTime, DX9::Model* model_) {
-    collision_.Center = model_->GetPosition() + SimpleMath::Vector3(0, 1.5f, 0);
+    if (!attack_flg_ && DXTK->KeyEvent->pressed.Space) {
+        attack_flg_ = true;
+    }
+
+    if (attack_flg_) {
+        attack_time_ += deltaTime;
+
+        if (attack_time_ > MAX_ATTACK_TIME) {
+            attack_time_ = 0.0f;
+            attack_flg_  = false;
+        }
+    }
+
+    float player_angle_ = DirectX::XMConvertToRadians(model_->GetRotation().z);
+    float attack_x_ = (player_angle_ < 0.0f) ? ATTACK_DISTANCE_X : -ATTACK_DISTANCE_X;
+    collision_.Center = model_->GetPosition() + SimpleMath::Vector3(attack_x_, ATTACK_DISTANCE_Y, 0.0f);
     collision_.Orientation = model_->GetRotationQuaternion();
 }
 
 void PlayerAttackColision::Render() {
-    collision_model_->SetPosition(collision_.Center);
-    collision_model_->SetRotationQuaternion(collision_.Orientation);
-    collision_model_->Draw();
+    if (attack_flg_) {
+        collision_model_->SetPosition(collision_.Center);
+        collision_model_->SetRotationQuaternion(collision_.Orientation);
+        collision_model_->Draw();
+    }
 }

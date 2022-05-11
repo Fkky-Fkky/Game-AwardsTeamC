@@ -21,8 +21,8 @@ void PlayerTestScene::Initialize()
     smallEnemy.Initialize();
     collision.Initialize();
     boss.Initialize();
-    object_manager_.SetPlayer(&player);
-    object_manager_.SetBoss(&boss);
+    //object_manager_.SetPlayer(&player);
+    //object_manager_.SetBoss(&boss);
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -100,7 +100,7 @@ NextScene PlayerTestScene::Update(const float deltaTime)
     boss.Update(deltaTime, player.GetPlayerPosition(),collision.GetHitAttackFlag());
     smallEnemy.HitPlayerAttack(collision.GetHitAttackFlag());
     smallEnemy.Update(deltaTime);
-    collision.Update(deltaTime, player.AttackFlag(), boss.GetRHandAttackFlag(), boss.GetLHandAttackFlag(), object_manager_);
+    collision.Update(deltaTime, player.AttackFlag(), boss.GetRHandAttackFlag(), boss.GetLHandAttackFlag()/*, object_manager_*/);
     collision.PlayerCollision(player.GetPlayerCollision());
     collision.PlayerAttackCollision(player.GetPlayerAttackCollision());
     collision.BossHandRightCollision(boss.GetRHandCollision());

@@ -11,6 +11,7 @@
 #include "Classes/Ground/Ground.h"
 #include "Classes/My_Camera/My_Camera.h"
 #include "Classes/Collision/Collision.h"
+#include "Classes/Collision/ObjectManager.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -51,5 +52,5 @@ private:
 	Player player;
 	Ground ground;
 	Collision collision;
-
+	ObjectManager object;
 };

@@ -96,7 +96,7 @@ NextScene BossTestScene::Update(const float deltaTime)
     player.Update(deltaTime);
     player.HitPlayer(collision.GetHitFlag());
     boss.Update(deltaTime, player.GetPlayerPosition(),collision.GetHitAttackFlag());
-    collision.Update(deltaTime, player.AttackFlag(), boss.GetRHandAttackFlag(), boss.GetLHandAttackFlag());
+    collision.Update(deltaTime, player.AttackFlag(), boss.GetRHandAttackFlag(), boss.GetLHandAttackFlag()/*, object*/);
     collision.PlayerCollision(player.GetPlayerCollision());
     collision.PlayerAttackCollision(player.GetPlayerAttackCollision());
     collision.BossHandRightCollision(boss.GetRHandCollision());

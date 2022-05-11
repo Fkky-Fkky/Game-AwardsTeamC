@@ -2,8 +2,8 @@
 
 #include "Base/pch.h"
 #include "Base/dxtk.h"
+#include <Classes/Collision/ObjectManager.h>
 
-#include "Classes/Collision/ObjectManager.h"
 
 using namespace DirectX;
 
@@ -14,7 +14,7 @@ public:
 
 	void Initialize();
 	void LoadAssets();
-	void Update(const float deltaTime, bool attack_flag_, bool boss_r_attack_flag_, bool boss_l_attack_flag_, ObjectManager& obj_m_);
+	void Update(const float deltaTime, bool attack_flag_, bool boss_r_attack_flag_, bool boss_l_attack_flag_/*, ObjectManager& obj_m_*/);
 	void Render();
 	void Render2D();
 	void PlayerCollision(BoundingOrientedBox player);
@@ -36,5 +36,4 @@ private:
 	bool hit_attack_flg_;
 	DX9::SPRITEFONT font;
 
-	ObjectManager object_manager_;
 };
