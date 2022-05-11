@@ -20,7 +20,6 @@ void BossTestScene::Initialize()
     boss.Initialize();
     camera.Initialize();
     player.Initialize();
-    ground.Initialize();
     collision.Initialize();
 }
 
@@ -103,6 +102,7 @@ NextScene BossTestScene::Update(const float deltaTime)
     collision.BossHandLeftCollision(boss.GetLHandCollision());
     collision.CoreCollision(boss.GetCoreCollision());
     DX12Effect.Update(deltaTime);
+    ground.Update(&boss);
 	return NextScene::Continue;
 }
 
@@ -123,6 +123,7 @@ void BossTestScene::Render()
     collision.Render2D();
     player.Render2D();
     boss.Render2D();
+    ground.Render2D();
 
     DX9::SpriteBatch->End();
     DXTK->Direct3D9->EndScene();

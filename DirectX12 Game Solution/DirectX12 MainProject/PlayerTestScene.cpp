@@ -17,7 +17,6 @@ void PlayerTestScene::Initialize()
 {
     camera.Initialize();
     player.Initialize();
-    ground.Initialize();
     smallEnemy.Initialize();
     collision.Initialize();
     boss.Initialize();

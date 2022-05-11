@@ -18,7 +18,6 @@ void MainScene::Initialize()
     //camera.Initialize();
     player_camera.Initialize();
     player.Initialize();
-    ground.Initialize();
     boss.Initialize();
     smallEnemy.Initialize();
     collision.Initialize();
