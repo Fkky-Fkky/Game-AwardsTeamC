@@ -1,5 +1,10 @@
 #include "Classes/Collision/Collision.h"
 
+Collision::Collision() {
+	hit_flg_ = false;
+	hit_attack_flg_ = false;
+}
+
 void Collision::Initialize() {
 	hit_flg_ = false;
 	hit_attack_flg_ = false;
@@ -9,24 +14,28 @@ void Collision::LoadAssets() {
 	font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 }
 
-void Collision::Update(const float deltaTime, bool attack_flag_, bool boss_r_attack_flag_, bool boss_l_attack_flag_) {
-	if (boss_r_attack_flag_) {
-		hit_flg_ = player_collision_.Intersects(boss_hand_right_collision_);
+void Collision::Update(const float deltaTime, ObjectManager& obj_m_) {
+	bool boss_r_atk_flag_ = obj_m_.GetBossRAttackFlag();
+	bool boss_l_atk_flag_ = obj_m_.GetBossLAttackFlag();
+	bool player_atk_flag_ = obj_m_.GetPlayerAttackFlag();
+	BoundingOrientedBox player_col_		 = obj_m_.GetPlayerCollision();
+	BoundingOrientedBox player_atk_col_	 = obj_m_.GetPlayerAttackCollision();
+	BoundingOrientedBox boss_core_col_	 = obj_m_.GetBossCoreCollision();
+	BoundingOrientedBox boss_r_hand_col_ = obj_m_.GetBossRHandCollision();
+	BoundingOrientedBox boss_l_hand_col_ = obj_m_.GetBossLHandCollision();
+
+	if (boss_r_atk_flag_) {
+		hit_flg_ = player_col_.Intersects(boss_r_hand_col_);
 	}
 
-	if (boss_l_attack_flag_) {
-		hit_flg_ = player_collision_.Intersects(boss_hand_left_collision_);
+	if (boss_l_atk_flag_) {
+		hit_flg_ = player_col_.Intersects(boss_l_hand_col_);
 	}
-
-
-	if (attack_flag_)
-		hit_attack_flg_ = player_attack_collision_.Intersects(core_collision_);
+	
+	if (player_atk_flag_)
+		hit_attack_flg_ = player_atk_col_.Intersects(boss_core_col_);
 	else
 		hit_attack_flg_ = false;
-}
-
-void Collision::Render() {
-    
 }
 
 void Collision::Render2D() {
@@ -44,24 +53,4 @@ void Collision::Render2D() {
 			DX9::Colors::Red,
 			L"“–‚½‚Á‚Ä‚È‚¢"
 		);
-}
-
-void Collision::PlayerCollision(BoundingOrientedBox player) {
-    player_collision_ = player;
-}
-
-void Collision::PlayerAttackCollision(BoundingOrientedBox player_attack_) {
-	player_attack_collision_ = player_attack_;
-}
-
-void Collision::BossHandRightCollision(BoundingOrientedBox boss_hand_right_) {
-    boss_hand_right_collision_ = boss_hand_right_;
-}
-
-void Collision::BossHandLeftCollision(BoundingOrientedBox boss_hand_left_) {
-	boss_hand_left_collision_ = boss_hand_left_;
-}
-
-void Collision::CoreCollision(BoundingOrientedBox core) {
-	core_collision_ = core;
 }

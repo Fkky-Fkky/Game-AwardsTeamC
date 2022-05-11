@@ -3,20 +3,25 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 
-#include "Classes/Player/Player.h"
-#include "Classes/Enemy/Boss/Boss.h"
+class Player;
+class Boss;
 
 using namespace DirectX;
 
 class ObjectManager {
 public:
-	//void SetPlayer(Player* p_);
-	//void SetBoss(Boss* b_);
-	//Player* GetPlayer() { return player_; }
-	//Boss* GetBoss() { return boss_; }
-	void Initialize();
+	void SetPlayer(Player* p_);
+	void SetBoss(Boss* b_);
+	BoundingOrientedBox GetPlayerCollision();
+	BoundingOrientedBox GetPlayerAttackCollision();
+	BoundingOrientedBox GetBossCoreCollision();
+	BoundingOrientedBox GetBossRHandCollision();
+	BoundingOrientedBox GetBossLHandCollision();
+	bool GetPlayerAttackFlag();
+	bool GetBossRAttackFlag();
+	bool GetBossLAttackFlag();
 
 private:
-	//Player* player_;
-	//Boss*  boss_;
+	Player* player_;
+	Boss*  boss_;
 };

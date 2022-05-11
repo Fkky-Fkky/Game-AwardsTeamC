@@ -99,12 +99,7 @@ NextScene PlayerTestScene::Update(const float deltaTime)
     boss.Update(deltaTime, player.GetPlayerPosition(),collision.GetHitAttackFlag());
     smallEnemy.HitPlayerAttack(collision.GetHitAttackFlag());
     smallEnemy.Update(deltaTime);
-    collision.Update(deltaTime, player.AttackFlag(), boss.GetRHandAttackFlag(), boss.GetLHandAttackFlag()/*, object_manager_*/);
-    collision.PlayerCollision(player.GetPlayerCollision());
-    collision.PlayerAttackCollision(player.GetPlayerAttackCollision());
-    collision.BossHandRightCollision(boss.GetRHandCollision());
-    collision.BossHandLeftCollision(boss.GetLHandCollision());
-    collision.CoreCollision(smallEnemy.GetCoreCollision());
+    collision.Update(deltaTime, object_manager_);
     
 
     return NextScene::Continue;
@@ -121,7 +116,6 @@ void PlayerTestScene::Render()
     player.Render();
     ground.Render();
     smallEnemy.Render();
-    collision.Render();
     boss.Render();
 
     DX9::SpriteBatch->Begin();

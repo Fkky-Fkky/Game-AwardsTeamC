@@ -95,14 +95,11 @@ NextScene BossTestScene::Update(const float deltaTime)
     player.Update(deltaTime);
     player.HitPlayer(collision.GetHitFlag());
     boss.Update(deltaTime, player.GetPlayerPosition(),collision.GetHitAttackFlag());
-    collision.Update(deltaTime, player.AttackFlag(), boss.GetRHandAttackFlag(), boss.GetLHandAttackFlag()/*, object*/);
-    collision.PlayerCollision(player.GetPlayerCollision());
-    collision.PlayerAttackCollision(player.GetPlayerAttackCollision());
-    collision.BossHandRightCollision(boss.GetRHandCollision());
-    collision.BossHandLeftCollision(boss.GetLHandCollision());
-    collision.CoreCollision(boss.GetCoreCollision());
     DX12Effect.Update(deltaTime);
     ground.Update(&boss);
+    object.SetPlayer(&player);
+    object.SetBoss(&boss);
+    collision.Update(deltaTime, object);
 	return NextScene::Continue;
 }
 
