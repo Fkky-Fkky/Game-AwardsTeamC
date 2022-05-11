@@ -1,4 +1,5 @@
 #include "Classes/Player/PlayerAttackColision.h"
+#include <Base/DX12Effekseer.h>
 
 void PlayerAttackColision::LoadAssets(DX9::Model* model_) {
     collision_ = model_->GetBoundingOrientedBox();
@@ -20,6 +21,7 @@ void PlayerAttackColision::LoadAssets(DX9::Model* model_) {
 void PlayerAttackColision::Update(const float deltaTime, DX9::Model* model_) {
     if (!attack_flg_ && DXTK->KeyEvent->pressed.Space) {
         attack_flg_ = true;
+        DX12Effect.Play("swaord", model_->GetPosition());
     }
 
     if (attack_flg_) {

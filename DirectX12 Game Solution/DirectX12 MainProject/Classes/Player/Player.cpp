@@ -1,4 +1,5 @@
 #include "Classes/Player/Player.h"
+#include "Base/DX12Effekseer.h"
 
 void Player::Initialize() {
 	pos_ = SimpleMath::Vector3::Zero;
@@ -17,6 +18,8 @@ void Player::LoadAssets() {
     player_attack_colision_.LoadAssets(model_.get());
 
     font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
+
+    DX12Effect.Create(L"Effect/Eff_Sword_001/Eff_Sword_001.efk", "swaord");
 }
 
 void Player::Update(const float deltaTime) {
