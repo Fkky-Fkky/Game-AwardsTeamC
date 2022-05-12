@@ -95,10 +95,10 @@ NextScene BossTestScene::Update(const float deltaTime)
     player.Update(deltaTime);
     player.HitPlayer(collision.GetHitFlag());
     boss.Update(deltaTime, player.GetPlayerPosition(),collision.GetHitAttackFlag());
-    DX12Effect.Update(deltaTime);
-    ground.Update(&boss);
     object.SetPlayer(&player);
     object.SetBoss(&boss);
+    DX12Effect.Update(deltaTime);
+    ground.Update(&object);
     collision.Update(deltaTime, object);
 	return NextScene::Continue;
 }

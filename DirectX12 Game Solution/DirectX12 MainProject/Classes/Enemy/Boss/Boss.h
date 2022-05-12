@@ -21,6 +21,7 @@ public:
 	void Render();
 	void Render2D();
 
+	int GetBossHP() { return core.GetBossHP(); }
 	bool GetLHandAttackFlag() { return hand_l.GetAttackFlag(); }
 	bool GetRHandAttackFlag() { return hand_r.GetAttackFlag(); }
 	BoundingOrientedBox GetLHandCollision() { return hand_l.GetHandCollision(); }

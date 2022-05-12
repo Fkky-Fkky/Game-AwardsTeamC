@@ -2,7 +2,8 @@
 
 #include "Base/pch.h"
 #include "Base/dxtk.h"
-#include <Classes/Enemy/Boss/Boss.h>
+
+class ObjectManager;
 
 using namespace DirectX;
 
@@ -12,7 +13,7 @@ public:
 	~Ground() {};
 
 	void LoadAssets();
-	void Update(Boss* boss);
+	void Update(ObjectManager* object);
 	void Render();
 	void Render2D();
 

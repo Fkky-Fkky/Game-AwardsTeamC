@@ -12,6 +12,7 @@ public:
 	virtual void Update(const float deltaTime, bool core_hit_flag);
 	void Render2D();
 
+	int GetBossHP() { return core_hp_; }
 	BoundingOrientedBox GetCoreCollision() { return collision; }
 private:
 	void HitPlayerAttack(bool core_hit_flag);

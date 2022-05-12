@@ -1,4 +1,5 @@
 #include "Classes/Ground/Ground.h"
+#include "Classes/Collision/ObjectManager.h"
 
 void Ground::LoadAssets() {
     stage_flooring_ = DX9::Model::CreateFromFile(DXTK->Device9, L"Ground/Stage/stage_flooring.X");
@@ -7,9 +8,11 @@ void Ground::LoadAssets() {
     bg_vortex_->Play();
 }
 
-void Ground::Update(Boss* boss) {
+void Ground::Update(ObjectManager* object) {
     if (bg_vortex_->isComplete())
         bg_vortex_->Replay();
+
+    int boss_hp_ = object->GetBossHP();
 }
 
 void Ground::Render() {
