@@ -220,6 +220,7 @@
     <ClInclude Include="DontDestroyOnLoad.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="PlayerTestScene.h" />
+    <ClInclude Include="ResultScene.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="TitleScene.h" />
@@ -270,6 +271,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="PlayerTestScene.cpp" />
+    <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>

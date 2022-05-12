@@ -1,5 +1,5 @@
 //
-// TitleScene.h
+// ResultScene.h
 //
 
 #pragma once
@@ -11,16 +11,16 @@ using std::unique_ptr;
 using std::make_unique;
 using namespace DirectX;
 
-class TitleScene final : public Scene {
+class ResultScene final : public Scene {
 public:
-	TitleScene();
-	virtual ~TitleScene() { Terminate(); }
+	ResultScene();
+	virtual ~ResultScene() { Terminate(); }
 
-	TitleScene(TitleScene&&) = default;
-	TitleScene& operator= (TitleScene&&) = default;
+	ResultScene(ResultScene&&) = default;
+	ResultScene& operator= (ResultScene&&) = default;
 
-	TitleScene(TitleScene const&) = delete;
-	TitleScene& operator= (TitleScene const&) = delete;
+	ResultScene(ResultScene const&) = delete;
+	ResultScene& operator= (ResultScene const&) = delete;
 
 	// These are the functions you will implement.
 	void Initialize() override;
@@ -40,5 +40,5 @@ private:
     DX12::HGPUDESCRIPTOR dx9GpuDescriptor;
 
 private:
-	DX9::SPRITE title_;
+	DX9::SPRITE result_;
 };

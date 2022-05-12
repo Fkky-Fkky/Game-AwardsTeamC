@@ -1,5 +1,5 @@
 //
-// TitleScene.cpp
+// ResultScene.cpp
 //
 
 #include "Base/pch.h"
@@ -7,19 +7,19 @@
 #include "SceneFactory.h"
 
 // Initialize member variables.
-TitleScene::TitleScene()
+ResultScene::ResultScene()
 {
 
 }
 
 // Initialize a variable and audio resources.
-void TitleScene::Initialize()
+void ResultScene::Initialize()
 {
 
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
-void TitleScene::LoadAssets()
+void ResultScene::LoadAssets()
 {
     descriptorHeap = DX12::CreateDescriptorHeap(DXTK->Device, 1);
 
@@ -42,12 +42,12 @@ void TitleScene::LoadAssets()
 
     // グラフィックリソースの初期化処理
 
-    title_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Scene/Title.png");
+    result_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Scene/Result.png");
 
 }
 
 // Releasing resources required for termination.
-void TitleScene::Terminate()
+void ResultScene::Terminate()
 {
 	DXTK->ResetAudioEngine();
 	DXTK->WaitForGpu();
@@ -57,19 +57,19 @@ void TitleScene::Terminate()
 }
 
 // Direct3D resource cleanup.
-void TitleScene::OnDeviceLost()
+void ResultScene::OnDeviceLost()
 {
 
 }
 
 // Restart any looped sounds here
-void TitleScene::OnRestartSound()
+void ResultScene::OnRestartSound()
 {
 
 }
 
 // Updates the scene.
-NextScene TitleScene::Update(const float deltaTime)
+NextScene ResultScene::Update(const float deltaTime)
 {
 	// If you use 'deltaTime', remove it.
 	UNREFERENCED_PARAMETER(deltaTime);
@@ -77,22 +77,22 @@ NextScene TitleScene::Update(const float deltaTime)
 	// TODO: Add your game logic here.
 
     if (DXTK->KeyEvent->pressed.Enter)
-        return NextScene::BossTestScene;
+        return NextScene::TitleScene;
 
 	return NextScene::Continue;
 }
 
 // Draws the scene.
-void TitleScene::Render()
+void ResultScene::Render()
 {
 	// TODO: Add your rendering code here.
-    DXTK->Direct3D9->Clear(static_cast<D3DCOLOR>(DX9::Colors::CornflowerBlue));
+    DXTK->Direct3D9->Clear(static_cast<D3DCOLOR>(DX9::Colors::RGBA(0, 0, 0, 255)));
 
     DXTK->Direct3D9->BeginScene();
     DX9::SpriteBatch->Begin();
 
     DX9::SpriteBatch->DrawSimple(
-        title_.Get(),
+        result_.Get(),
         SimpleMath::Vector3::Zero
     );
 

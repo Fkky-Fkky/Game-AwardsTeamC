@@ -6,6 +6,7 @@
 #include "MainScene.h"
 #include "PlayerTestScene.h"
 #include "BossTestScene.h"
+#include "ResultScene.h"
 
 class SceneFactory final {
 public:
@@ -17,6 +18,7 @@ public:
 		case NextScene::MainScene:	        scene = std::make_unique<MainScene>();	        break;
 		case NextScene::PlayerTestScene:	scene = std::make_unique<PlayerTestScene>();	break;
 		case NextScene::BossTestScene:		scene = std::make_unique<BossTestScene>();		break;
+		case NextScene::ResultScene:		scene = std::make_unique<ResultScene>();		break;
 		}
 		return scene;
 	}
