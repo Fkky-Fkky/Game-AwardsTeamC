@@ -120,10 +120,10 @@ void BossTestScene::Render()
 
     DX9::SpriteBatch->Begin();
 
+    ground.Render2D();
     collision.Render2D();
     player.Render2D();
     boss.Render2D();
-    ground.Render2D();
 
     DX9::SpriteBatch->End();
     DXTK->Direct3D9->EndScene();

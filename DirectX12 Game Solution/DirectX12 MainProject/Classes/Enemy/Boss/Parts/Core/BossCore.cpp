@@ -8,7 +8,7 @@ BossCore::BossCore()
 
 void BossCore::Initialize() {
 	BossParts::Initialize(SimpleMath::Vector3(0.0f, 0.0f, 0.0f), SimpleMath::Vector3::Zero);
-	core_hp_ = 10;
+	core_hp_ = 30;
 	hit_flag_ = false;
 }
 void BossCore::LoadAssets() {
