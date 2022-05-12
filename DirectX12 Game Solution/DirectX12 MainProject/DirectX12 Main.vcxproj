@@ -222,6 +222,7 @@
     <ClInclude Include="PlayerTestScene.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneFactory.h" />
+    <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\DX12Effekseer.cpp" />
@@ -269,6 +270,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="PlayerTestScene.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource\resource.rc" />

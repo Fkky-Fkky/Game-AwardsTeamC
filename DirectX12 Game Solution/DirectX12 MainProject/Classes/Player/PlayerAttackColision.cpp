@@ -22,6 +22,8 @@ void PlayerAttackColision::Update(const float deltaTime, DX9::Model* model_) {
     if (!attack_flg_ && DXTK->KeyEvent->pressed.Space) {
         attack_flg_ = true;
         DX12Effect.Play("swaord", model_->GetPosition());
+        //DX12Effect.SetRotation("swaord", SimpleMath::Vector3(0.0f, XM_PIDIV2, 0.0f));
+
     }
 
     if (attack_flg_) {
