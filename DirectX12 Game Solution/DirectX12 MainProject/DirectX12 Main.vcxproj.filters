@@ -61,6 +61,9 @@
     <Filter Include="Classes\Effeseer">
       <UniqueIdentifier>{f30dea61-07bb-4224-a7de-d1fcba261350}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameScene">
+      <UniqueIdentifier>{b36d915d-b452-4852-87ab-c57a25815217}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -186,6 +189,9 @@
     <ClInclude Include="ResultScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\GameScene\SceneChange.h">
+      <Filter>Classes\GameScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -289,6 +295,9 @@
     </ClCompile>
     <ClCompile Include="ResultScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameScene\SceneChange.cpp">
+      <Filter>Classes\GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
