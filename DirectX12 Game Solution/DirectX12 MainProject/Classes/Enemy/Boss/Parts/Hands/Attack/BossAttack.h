@@ -26,6 +26,9 @@ protected:
 	const float HAND_INITIAL_POS_Y_ = 10.0f;
 	const float HAND_INITIAL_POS_Z_ = 3.0f;
 
+	const float HAND_LIMIT_POS_X_ = 70.0f;
+	const float HAND_RETURN_POS_X_ = 30.0f;
+
 	const float SLAP_SPEED_ = 1.5f;
 	const float SLAP_GRAVITY_ = 5.0f;
 
@@ -33,6 +36,7 @@ protected:
 	const float BEAT_GRAVITY_ = 15.0f;
 	const float MOVE_SPEED_X_ = 30.0f;
 	const float MOVE_SPEED_Y_ = 10.0f;
+	const float MOVE_SPEED_Z_ = 10.0f;
 	const float ROTE_SPEED_ = 1.0f;
 
 	const float HALF_ = 0.5f;

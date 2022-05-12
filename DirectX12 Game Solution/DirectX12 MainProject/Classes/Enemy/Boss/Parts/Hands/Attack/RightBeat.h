@@ -28,8 +28,8 @@ private:
 	float wait_time_;
 
 	bool player_pos_get_flag_;
-	SimpleMath::Vector3 pos;
-	SimpleMath::Vector3 rote;
+	SimpleMath::Vector3 pos_;
+	SimpleMath::Vector3 rote_;
 	SimpleMath::Vector3 move_pos;
 
 

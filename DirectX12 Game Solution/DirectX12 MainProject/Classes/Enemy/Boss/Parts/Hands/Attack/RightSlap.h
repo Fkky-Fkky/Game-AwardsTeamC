@@ -9,12 +9,12 @@ using namespace DirectX;
 class RightSlap : public BossAttack {
 public:
 	RightSlap() {
-		slap_time = 0.0f;
-		hand_return_flag = false;
+		slap_time_ = 0.0f;
+		hand_return_flag_ = false;
 	}
 	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss);
 
 private:
-	float slap_time;
-	bool hand_return_flag;
+	float slap_time_;
+	bool hand_return_flag_;
 };
