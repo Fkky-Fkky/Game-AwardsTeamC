@@ -21,6 +21,9 @@ void BossTestScene::Initialize()
     camera.Initialize();
     player.Initialize();
     collision.Initialize();
+    object.SetPlayer(&player);
+    object.SetBoss(&boss);
+    object.SetCollision(&collision);
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -93,13 +96,13 @@ NextScene BossTestScene::Update(const float deltaTime)
 	// TODO: Add your game logic here.
 
     player.Update(deltaTime);
-    player.HitPlayer(collision.GetHitFlag());
-    boss.Update(deltaTime, player.GetPlayerPosition(),collision.GetHitAttackFlag());
-    object.SetPlayer(&player);
-    object.SetBoss(&boss);
+    boss.Update(deltaTime, &object);
+
+    player.HitPlayer(object.GetPlayerDmgFlag());
+
     DX12Effect.Update(deltaTime);
     ground.Update(&object);
-    collision.Update(deltaTime, object);
+    collision.Update(deltaTime, &object);
 	return NextScene::Continue;
 }
 

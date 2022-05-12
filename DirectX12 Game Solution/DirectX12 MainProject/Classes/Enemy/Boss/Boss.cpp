@@ -1,5 +1,5 @@
 #include "Classes/Enemy/Boss/Boss.h"
-#include "Classes/Player/Player.h"
+#include "Classes/Collision/ObjectManager.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightSlap.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightBeat.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/LeftSlap.h"
@@ -28,11 +28,11 @@ void Boss::LoadAseets(){
 	DX12Effect.Create(L"Effect/Eff_shock_001/shock_001.efk", "hit");
 }
 
-void Boss::Update(const float deltaTime, SimpleMath::Vector3 player_pos, bool core_hit_flag) {
-	core.Update(deltaTime, core_hit_flag);
+void Boss::Update(const float deltaTime, ObjectManager* obj_m) {
+	core.Update(deltaTime, obj_m->GetBossDmgFlag());
 	hand_l.Update(deltaTime);
 	hand_r.Update(deltaTime);
-	attack->Update(deltaTime, player_pos, this);
+	attack->Update(deltaTime, obj_m->GetPlayerPos(), this);
 	SwitchStateWait();
 }
 

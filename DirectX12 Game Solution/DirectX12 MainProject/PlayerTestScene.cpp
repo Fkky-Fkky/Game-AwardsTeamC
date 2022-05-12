@@ -95,11 +95,11 @@ NextScene PlayerTestScene::Update(const float deltaTime)
     // TODO: Add your game logic here.
 
     player.Update(deltaTime);
-    player.HitPlayer(collision.GetHitFlag());
-    boss.Update(deltaTime, player.GetPlayerPosition(),collision.GetHitAttackFlag());
-    smallEnemy.HitPlayerAttack(collision.GetHitAttackFlag());
-    smallEnemy.Update(deltaTime);
-    collision.Update(deltaTime, object_manager_);
+    player.HitPlayer(object_manager_.GetPlayerDmgFlag());
+    boss.Update(deltaTime, &object_manager_);
+    //smallEnemy.HitPlayerAttack(collision.GetHitAttackFlag());
+    //smallEnemy.Update(deltaTime);
+    collision.Update(deltaTime, &object_manager_);
     
 
     return NextScene::Continue;

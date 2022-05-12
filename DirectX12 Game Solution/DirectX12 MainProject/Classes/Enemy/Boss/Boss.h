@@ -10,6 +10,8 @@
 
 using namespace DirectX;
 
+class ObjectManager;
+
 class Boss {
 public:
 	Boss(){};
@@ -17,7 +19,7 @@ public:
 
 	void Initialize();
 	void LoadAseets();
-	void Update(const float deltaTime, SimpleMath::Vector3 player_pos, bool core_hit_flag);
+	void Update(const float deltaTime, ObjectManager* obj_m);
 	void Render();
 	void Render2D();
 

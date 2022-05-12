@@ -1,6 +1,7 @@
 #include "Classes/Collision/ObjectManager.h"
 #include "Classes/Player/Player.h"
 #include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/Collision/Collision.h"
 
 void ObjectManager::SetPlayer(Player* p_) {
 	player_ = p_;
@@ -8,6 +9,10 @@ void ObjectManager::SetPlayer(Player* p_) {
 
 void ObjectManager::SetBoss(Boss* b_) {
 	boss_ = b_;
+}
+
+void ObjectManager::SetCollision(Collision* col_) {
+	collision_ = col_;
 }
 
 BoundingOrientedBox ObjectManager::GetPlayerCollision() {
@@ -42,10 +47,22 @@ bool ObjectManager::GetPlayerAttackFlag() {
 	return player_->AttackFlag();
 }
 
+bool ObjectManager::GetPlayerDmgFlag() {
+	return collision_->GetPlyerDmgFlag();
+}
+
 bool ObjectManager::GetBossRAttackFlag() {
 	return boss_->GetRHandAttackFlag();
 }
 
 bool ObjectManager::GetBossLAttackFlag() {
 	return boss_->GetLHandAttackFlag();
+}
+
+bool ObjectManager::GetBossDmgFlag() {
+	return collision_->GetBossDmgFlag();
+}
+
+SimpleMath::Vector3 ObjectManager::GetPlayerPos() {
+	return player_->GetPlayerPosition();
 }

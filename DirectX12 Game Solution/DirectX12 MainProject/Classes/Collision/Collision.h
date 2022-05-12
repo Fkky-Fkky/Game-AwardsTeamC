@@ -2,10 +2,10 @@
 
 #include "Base/pch.h"
 #include "Base/dxtk.h"
-#include <Classes/Collision/ObjectManager.h>
-
 
 using namespace DirectX;
+
+class ObjectManager;
 
 class Collision {
 public:
@@ -14,14 +14,14 @@ public:
 
 	void Initialize();
 	void LoadAssets();
-	void Update(const float deltaTime, ObjectManager& obj_m_);
+	void Update(const float deltaTime, ObjectManager* obj_m_);
 	void Render2D();
-	bool GetHitFlag() { return hit_flg_; }
-	bool GetHitAttackFlag() { return hit_attack_flg_; }
+	bool GetPlyerDmgFlag() { return player_dmg_flg_; }
+	bool GetBossDmgFlag() { return boss_dmg_flg_; }
 
 private:
 
-	bool hit_flg_;
-	bool hit_attack_flg_;
+	bool player_dmg_flg_;
+	bool boss_dmg_flg_;
 	DX9::SPRITEFONT font;
 };
