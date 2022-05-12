@@ -17,13 +17,13 @@ BossTestScene::BossTestScene()
 void BossTestScene::Initialize()
 {
     DX12Effect.Initialize();
-    boss.Initialize();
-    camera.Initialize();
-    player.Initialize();
-    collision.Initialize();
-    object.SetPlayer(&player);
-    object.SetBoss(&boss);
-    object.SetCollision(&collision);
+    boss_.Initialize();
+    camera_.Initialize();
+    player_.Initialize();
+    collision_.Initialize();
+    object_.SetPlayer(&player_);
+    object_.SetBoss(&boss_);
+    object_.SetCollision(&collision_);
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -59,10 +59,10 @@ void BossTestScene::LoadAssets()
     DXTK->Direct3D9->SetLight(0, light);
 
 
-    boss.LoadAseets();
-    player.LoadAssets();
-    ground.LoadAssets();
-    collision.LoadAssets();
+    boss_.LoadAseets();
+    player_.LoadAssets();
+    ground_.LoadAssets();
+    collision_.LoadAssets();
 }
 
 // Releasing resources required for termination.
@@ -95,14 +95,20 @@ NextScene BossTestScene::Update(const float deltaTime)
 
 	// TODO: Add your game logic here.
 
-    player.Update(deltaTime);
-    boss.Update(deltaTime, &object);
+    player_.Update(deltaTime);
+    boss_.Update(deltaTime, &object_);
 
-    player.HitPlayer(object.GetPlayerDmgFlag());
+    player_.HitPlayer(object_.GetPlayerDmgFlag());
 
     DX12Effect.Update(deltaTime);
-    ground.Update(&object);
-    collision.Update(deltaTime, &object);
+    ground_.Update(&object_);
+    collision_.Update(deltaTime, &object_);
+    scene_change_.Update(&object_);
+
+    if (scene_change_.GetSceneChangeFlag()) {
+        return NextScene::ResultScene;
+    }
+
 	return NextScene::Continue;
 }
 
@@ -114,16 +120,16 @@ void BossTestScene::Render()
 
     DXTK->Direct3D9->BeginScene();
 
-    boss.Render();
-    player.Render();
-    ground.Render();
+    boss_.Render();
+    player_.Render();
+    ground_.Render();
 
     DX9::SpriteBatch->Begin();
 
-    ground.Render2D();
-    collision.Render2D();
-    player.Render2D();
-    boss.Render2D();
+    ground_.Render2D();
+    collision_.Render2D();
+    player_.Render2D();
+    boss_.Render2D();
 
     DX9::SpriteBatch->End();
     DXTK->Direct3D9->EndScene();

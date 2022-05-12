@@ -12,6 +12,7 @@
 #include "Classes/My_Camera/My_Camera.h"
 #include "Classes/Collision/Collision.h"
 #include "Classes/Collision/ObjectManager.h"
+#include "Classes/GameScene/SceneChange.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -47,10 +48,11 @@ private:
     DX12::HGPUDESCRIPTOR dx9GpuDescriptor;
 
 private:
-	Boss boss;
-	PlayerTestCamera camera;
-	Player player;
-	Ground ground;
-	Collision collision;
-	ObjectManager object;
+	Boss boss_;
+	PlayerTestCamera camera_;
+	Player player_;
+	Ground ground_;
+	Collision collision_;
+	ObjectManager object_;
+	SceneChange scene_change_;
 };

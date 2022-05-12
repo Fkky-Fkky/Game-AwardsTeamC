@@ -49,7 +49,7 @@ void Player::Render2D() {
         font.Get(),
         SimpleMath::Vector2(0.0f, 30.0f),
         DX9::Colors::Red,
-        L"プレイヤー:%i", player_hp_
+        L"プレイヤー:%f", player_hp_
     );
 }
 
