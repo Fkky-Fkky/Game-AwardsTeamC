@@ -2,12 +2,14 @@
 #include "Classes/Collision/ObjectManager.h"
 
 Collision::Collision() {
-	player_dmg_flg_ = false;
+	player_dmg_flag_r_ = false;
+	player_dmg_flag_l_ = false;
 	boss_dmg_flg_ = false;
 }
 
 void Collision::Initialize() {
-	player_dmg_flg_ = false;
+	player_dmg_flag_r_ = false;
+	player_dmg_flag_l_ = false;
 	boss_dmg_flg_ = false;
 }
 
@@ -26,32 +28,37 @@ void Collision::Update(const float deltaTime, ObjectManager* obj_m_) {
 	BoundingOrientedBox boss_l_hand_col_ = obj_m_->GetBossLHandCollision();
 
 	if (boss_r_atk_flag_) {
-		player_dmg_flg_ = player_col_.Intersects(boss_r_hand_col_);
+		player_dmg_flag_r_ = player_col_.Intersects(boss_r_hand_col_);
 	}
 
 	if (boss_l_atk_flag_) {
-		player_dmg_flg_ = player_col_.Intersects(boss_l_hand_col_);
+		player_dmg_flag_l_ = player_col_.Intersects(boss_l_hand_col_);
 	}
 	
-	if (player_atk_flag_)
+	if (player_atk_flag_) {
 		boss_dmg_flg_ = player_atk_col_.Intersects(boss_core_col_);
-	else
+	}
+	else {
 		boss_dmg_flg_ = false;
+	}
 }
 
 void Collision::Render2D() {
-	if (player_dmg_flg_)
+	if (player_dmg_flag_r_ ||
+		player_dmg_flag_l_) {
 		DX9::SpriteBatch->DrawString(
 			font.Get(),
 			SimpleMath::Vector2(0.0f, 0.0f),
 			DX9::Colors::Red,
 			L"“–‚½‚Á‚Ä‚é"
 		);
-	else
+	}
+	else {
 		DX9::SpriteBatch->DrawString(
 			font.Get(),
 			SimpleMath::Vector2(0.0f, 0.0f),
 			DX9::Colors::Red,
 			L"“–‚½‚Á‚Ä‚È‚¢"
 		);
+	}
 }

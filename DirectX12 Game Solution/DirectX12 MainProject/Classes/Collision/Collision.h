@@ -16,12 +16,14 @@ public:
 	void LoadAssets();
 	void Update(const float deltaTime, ObjectManager* obj_m_);
 	void Render2D();
-	bool GetPlyerDmgFlag() { return player_dmg_flg_; }
+	bool GetPlayerDmgFlagR() { return player_dmg_flag_r_; }
+	bool GetPlayerDmgFlagL() { return player_dmg_flag_l_; }
 	bool GetBossDmgFlag() { return boss_dmg_flg_; }
 
 private:
 
-	bool player_dmg_flg_;
+	bool player_dmg_flag_r_; 
+	bool player_dmg_flag_l_;
 	bool boss_dmg_flg_;
 	DX9::SPRITEFONT font;
 };

@@ -48,7 +48,13 @@ bool ObjectManager::GetPlayerAttackFlag() {
 }
 
 bool ObjectManager::GetPlayerDmgFlag() {
-	return collision_->GetPlyerDmgFlag();
+	if (collision_->GetPlayerDmgFlagR() ||
+		collision_->GetPlayerDmgFlagL()) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 bool ObjectManager::GetBossRAttackFlag() {
