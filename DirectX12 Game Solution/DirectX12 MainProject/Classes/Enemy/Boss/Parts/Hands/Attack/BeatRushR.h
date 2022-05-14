@@ -40,12 +40,6 @@ private:
 	float wait_time_;
 	bool r_hand_up_flag;
 	bool l_hand_up_flag;
-	enum ATTACK_STATE {
-		READY,
-		ATTACK,
-		RESET,
-		ACTION_END
-	};
 
 	const float R_START_POS_X = -15.0f;
 	const float L_START_POS_X = -10.0f;
