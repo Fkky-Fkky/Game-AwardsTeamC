@@ -192,6 +192,9 @@
     <ClInclude Include="Classes\GameScene\SceneChange.h">
       <Filter>Classes\GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\DoubleSlap.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -298,6 +301,9 @@
     </ClCompile>
     <ClCompile Include="Classes\GameScene\SceneChange.cpp">
       <Filter>Classes\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\DoubleSlap.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
