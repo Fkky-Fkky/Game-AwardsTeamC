@@ -1,11 +1,12 @@
 #include "Classes/Enemy/Boss/Boss.h"
 #include "Classes/Collision/ObjectManager.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/Wait.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightSlap.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightBeat.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/LeftSlap.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/LeftBeat.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRushR.h"
-#include "Classes/Enemy/Boss/Parts/Hands/Attack/Wait.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
 
 void Boss::Initialize() {
 	body.Initialize();
@@ -14,7 +15,7 @@ void Boss::Initialize() {
 	hand_r.Initialize();
 	std::random_device seed;
 	randomEngine = std::mt19937(seed());
-	randomDist = std::uniform_int_distribution<>(1, 5);
+	randomDist = std::uniform_int_distribution<>(1, 6);
 	attack = new Wait;
 	attack->Initialize(&hand_l, &hand_r);
 	action_end_flag = false;
@@ -74,6 +75,10 @@ void Boss::SwitchStateAttack() {
 
 	case BEAT_RUSH_R:
 		attack = new BeatRushR;
+		break;
+
+	case DOUBLE_SLAP:
+		attack = new DoubleSlap;
 		break;
 	}
 	attack->Initialize(&hand_l, &hand_r);
