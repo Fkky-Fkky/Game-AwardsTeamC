@@ -7,8 +7,10 @@ DoubleSlap::DoubleSlap() {
 	l_pos_  = SimpleMath::Vector3::Zero;
 	l_rote_ = SimpleMath::Vector3::Zero;
 
-	action_state_ = 0;
-	time_delta_ = 0.0f;
+	action_state_ = ATTACK;
+	time_delta_  = 0.0f;
+	r_slap_time_ = 0.0f;
+	l_slap_time_ = 0.0f;
 }
 
 void DoubleSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss)	{
@@ -17,11 +19,9 @@ void DoubleSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, B
 	l_pos_  = boss_handL_->GetHandPos();
 	l_rote_ = boss_handL_->GetRotation();
 
-	switch (action_state_) {
-	case READY:
-		Ready();
-		break;
+	time_delta_ = deltaTime;
 
+	switch (action_state_) {
 	case ATTACK:
 		Attack();
 		break;
@@ -30,7 +30,13 @@ void DoubleSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, B
 		Reset();
 		break;
 
+	case RETURN:
+		ReturnHand();
+		break;
+
 	case ACTION_END:
+		boss->ActionEnd();
+		action_state_ = ATTACK;
 		break;
 	}
 
@@ -40,23 +46,56 @@ void DoubleSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, B
 	boss_handL_->SetHandRote(l_rote_);
 }
 
-void DoubleSlap::Ready() {
-
-}
-
 void DoubleSlap::Attack() {
 	SlapR();
 	SlapL();
+
+	if (r_pos_.x >=  HAND_LIMIT_POS_X_ ||
+		l_pos_.x <= -HAND_LIMIT_POS_X_) {
+		action_state_ = RESET;
+	}
 }
 
 void DoubleSlap::SlapR() {
-
+	boss_handR_->SetAttackFlag(true);
+	r_slap_time_ += time_delta_;
+	r_pos_.x -= SLAP_SPEED_ * r_slap_time_ - HALF_ * SLAP_GRAVITY_ * r_slap_time_ * r_slap_time_;
+	r_pos_.y = std::max(r_pos_.y - MOVE_SPEED_Y_ * time_delta_, R_HAND_DEST_Y_);
+	r_pos_.z = std::max(r_pos_.z - MOVE_SPEED_Z_ * time_delta_, 0.0f);
+	r_rote_.x = std::min(r_rote_.x + ROTE_SPEED_ * time_delta_, XM_PIDIV2);
 }
 
 void DoubleSlap::SlapL() {
-
+	boss_handL_->SetAttackFlag(true);
+	l_slap_time_ += time_delta_;
+	l_pos_.x += SLAP_SPEED_ * l_slap_time_ - HALF_ * SLAP_GRAVITY_ * l_slap_time_ * l_slap_time_;
+	l_pos_.y = std::max(l_pos_.y - MOVE_SPEED_Y_ * time_delta_, 8.0f);
+	l_pos_.z = std::max(l_pos_.z - MOVE_SPEED_Z_ * time_delta_, 0.0f);
+	l_rote_.x = std::min(l_rote_.x + ROTE_SPEED_ * time_delta_, XM_PIDIV2);
 }
 
 void DoubleSlap::Reset() {
+	r_pos_.x = -HAND_RETURN_POS_X_;
+	r_pos_.y = HAND_INITIAL_POS_Y_;
+	r_pos_.z = HAND_INITIAL_POS_Z_;
+	r_rote_.x = XM_PIDIV4;
+	boss_handR_->SetAttackFlag(false);
 
+	l_pos_.x = HAND_RETURN_POS_X_;
+	l_pos_.y = HAND_INITIAL_POS_Y_;
+	l_pos_.z = HAND_INITIAL_POS_Z_;
+	l_rote_.x = XM_PIDIV4;
+	boss_handL_->SetAttackFlag(false);
+
+	action_state_ = RETURN;
+}
+
+void DoubleSlap::ReturnHand() {
+	r_pos_.x = std::min(r_pos_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
+	l_pos_.x = std::max(l_pos_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
+
+	if (r_pos_.x == HAND_R_INITIAL_POS_X_ &&
+		l_pos_.x == HAND_L_INITIAL_POS_X_) {
+		action_state_ = ACTION_END;
+	}
 }

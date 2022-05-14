@@ -8,11 +8,11 @@ public:
 	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss);
 
 private:
-	void Ready();
 	void Attack();
 	void SlapR();
 	void SlapL();
 	void Reset();
+	void ReturnHand();
 
 	SimpleMath::Vector3 r_pos_;
 	SimpleMath::Vector3 r_rote_;
@@ -21,4 +21,8 @@ private:
 
 	int action_state_;
 	float time_delta_;
+	float r_slap_time_;
+	float l_slap_time_;
+
+	const float R_HAND_DEST_Y_ = 2.0f;
 };
