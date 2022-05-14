@@ -23,6 +23,9 @@ private:
 	float time_delta_;
 	float r_slap_time_;
 	float l_slap_time_;
+	float wait_time;
 
-	const float R_HAND_DEST_Y_ = 2.0f;
+	const float R_HAND_DEST_Y_  = 2.0f;
+	const float L_HAND_DEST_Y_  = 8.0f;
+	const float WAIT_TIME_LIMIT = 1.0f;
 };
