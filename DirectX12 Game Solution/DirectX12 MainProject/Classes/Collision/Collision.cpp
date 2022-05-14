@@ -30,9 +30,15 @@ void Collision::Update(const float deltaTime, ObjectManager* obj_m_) {
 	if (boss_r_atk_flag_) {
 		player_dmg_flag_r_ = player_col_.Intersects(boss_r_hand_col_);
 	}
+	else {
+		player_dmg_flag_r_ = false;
+	}
 
 	if (boss_l_atk_flag_) {
 		player_dmg_flag_l_ = player_col_.Intersects(boss_l_hand_col_);
+	}
+	else {
+		player_dmg_flag_l_ = false;
 	}
 	
 	if (player_atk_flag_) {
