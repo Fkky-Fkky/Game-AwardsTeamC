@@ -64,6 +64,9 @@
     <Filter Include="Classes\GameScene">
       <UniqueIdentifier>{b36d915d-b452-4852-87ab-c57a25815217}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\UI">
+      <UniqueIdentifier>{a9a6c46f-7f7e-435e-ac6f-9796cf9b9db5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -195,6 +198,9 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\DoubleSlap.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\UI\UI.h">
+      <Filter>Classes\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -304,6 +310,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\DoubleSlap.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UI\UI.cpp">
+      <Filter>Classes\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

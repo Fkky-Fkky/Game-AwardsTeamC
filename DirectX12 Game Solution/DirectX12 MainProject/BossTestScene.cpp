@@ -63,6 +63,7 @@ void BossTestScene::LoadAssets()
     player_.LoadAssets();
     ground_.LoadAssets();
     collision_.LoadAssets();
+    ui.LoadAssets();
 }
 
 // Releasing resources required for termination.
@@ -130,6 +131,7 @@ void BossTestScene::Render()
     collision_.Render2D();
     player_.Render2D();
     boss_.Render2D();
+    ui.Render();
 
     DX9::SpriteBatch->End();
     DXTK->Direct3D9->EndScene();

@@ -13,6 +13,7 @@
 #include "Classes/Collision/Collision.h"
 #include "Classes/Collision/ObjectManager.h"
 #include "Classes/GameScene/SceneChange.h"
+#include "Classes/UI/UI.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -55,4 +56,5 @@ private:
 	Collision collision_;
 	ObjectManager object_;
 	SceneChange scene_change_;
+	UI ui;
 };
