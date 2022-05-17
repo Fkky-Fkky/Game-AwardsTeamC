@@ -15,14 +15,14 @@ void UI::LoadAssets() {
 }
 
 void UI::Update(const float deltaTime, ObjectManager* obj_m) {
-	player_hp_width_ = obj_m->GetPlayerHP() * 34.0f;
+	player_hp_width_ = obj_m->GetPlayerHP() * PLAYER_HP_WIDTH_DIVIDE_;
 }
 
 void UI::Render() {
 	DX9::SpriteBatch->DrawSimple(
 		player_hp_top_.Get(),
-		SimpleMath::Vector3(0.0f, 0.0f, -1.0f),
-		RectWH(0, 0, (int)player_hp_width_, PLAYER_HP_HIGHT)
+		SimpleMath::Vector3(0.0f, 0.0f, PLAYER_HP_TOP_POS_Z_),
+		RectWH(0, 0, (int)player_hp_width_, PLAYER_HP_HIGHT_)
 	);
 
 	DX9::SpriteBatch->DrawSimple(

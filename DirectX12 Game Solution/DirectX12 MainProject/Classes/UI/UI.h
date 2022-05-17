@@ -23,7 +23,8 @@ private:
 
 	float player_hp_width_;
 
-	const int PLAYER_HP_HIGHT = 71;
-	const float PLAYER_HP_MAX_WIDTH = 1021.0f;
-
+	const int PLAYER_HP_HIGHT_ = 71;
+	const float PLAYER_HP_MAX_WIDTH_ = 1021.0f;
+	const float PLAYER_HP_WIDTH_DIVIDE_ = 34.0f;	//HPÉQÅ[ÉW1/30ÇÃêî
+	const float PLAYER_HP_TOP_POS_Z_ = -1.0f;
 };
