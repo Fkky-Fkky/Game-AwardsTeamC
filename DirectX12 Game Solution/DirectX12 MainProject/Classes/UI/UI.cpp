@@ -2,11 +2,11 @@
 #include "Classes/Collision/ObjectManager.h"
 
 UI::UI() {
-
+	player_hp_width_ = 0.0f;
 }
 
 void UI::Initialize() {
-
+	player_hp_width_ = 0.0f;
 }
 
 void UI::LoadAssets() {
@@ -14,19 +14,19 @@ void UI::LoadAssets() {
 	player_hp_bottom_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/line_002.png");
 }
 
-void UI::Update(const float deltaTime, ObjectManager obj_m) {
-
+void UI::Update(const float deltaTime, ObjectManager* obj_m) {
+	player_hp_width_ = obj_m->GetPlayerHP() * 34.0f;
 }
 
 void UI::Render() {
 	DX9::SpriteBatch->DrawSimple(
 		player_hp_top_.Get(),
 		SimpleMath::Vector3(0.0f, 0.0f, -1.0f),
-		RectWH(0, 0, PLAYER_HP_HIGHT, PLAYER_HP_HIGHT)
+		RectWH(0, 0, (int)player_hp_width_, PLAYER_HP_HIGHT)
 	);
 
 	DX9::SpriteBatch->DrawSimple(
-		player_hp_top_.Get(),
+		player_hp_bottom_.Get(),
 		SimpleMath::Vector3::Zero
 	);
 }

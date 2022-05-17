@@ -105,6 +105,7 @@ NextScene BossTestScene::Update(const float deltaTime)
     ground_.Update(&object_);
     collision_.Update(deltaTime, &object_);
     scene_change_.Update(&object_);
+    ui.Update(deltaTime, &object_);
 
     if (scene_change_.GetSceneChangeFlag()) {
         return NextScene::ResultScene;
