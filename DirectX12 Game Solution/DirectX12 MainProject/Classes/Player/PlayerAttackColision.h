@@ -25,7 +25,7 @@ private:
 	float attack_time_;
 	bool attack_flg_;
 
-	const float MAX_ATTACK_TIME = 0.3f;
-	const float ATTACK_DISTANCE_X = 1.5f;
-	const float ATTACK_DISTANCE_Y = 1.5f;
+	const float MAX_ATTACK_TIME_ = 0.3f;
+	const float ATTACK_DISTANCE_X_ = 1.5f;
+	const float ATTACK_DISTANCE_Y_ = 1.5f;
 };

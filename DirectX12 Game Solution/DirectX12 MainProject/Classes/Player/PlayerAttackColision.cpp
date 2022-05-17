@@ -21,7 +21,7 @@ void PlayerAttackColision::LoadAssets(DX9::Model* model_) {
 void PlayerAttackColision::Update(const float deltaTime, DX9::Model* model_) {
     if (!attack_flg_ && DXTK->KeyEvent->pressed.Space) {
         attack_flg_ = true;
-        DX12Effect.Play("swaord", model_->GetPosition());
+        DX12Effect.PlayOneShot("swaord", model_->GetPosition());
         //DX12Effect.SetRotation("swaord", SimpleMath::Vector3(0.0f, XM_PIDIV2, 0.0f));
 
     }
@@ -29,15 +29,15 @@ void PlayerAttackColision::Update(const float deltaTime, DX9::Model* model_) {
     if (attack_flg_) {
         attack_time_ += deltaTime;
 
-        if (attack_time_ > MAX_ATTACK_TIME) {
+        if (attack_time_ > MAX_ATTACK_TIME_) {
             attack_time_ = 0.0f;
             attack_flg_  = false;
         }
     }
 
     float player_angle_ = DirectX::XMConvertToRadians(model_->GetRotation().z);
-    float attack_x_ = (player_angle_ < 0.0f) ? ATTACK_DISTANCE_X : -ATTACK_DISTANCE_X;
-    collision_.Center = model_->GetPosition() + SimpleMath::Vector3(attack_x_, ATTACK_DISTANCE_Y, 0.0f);
+    float attack_x_ = (player_angle_ < 0.0f) ? ATTACK_DISTANCE_X_ : -ATTACK_DISTANCE_X_;
+    collision_.Center = model_->GetPosition() + SimpleMath::Vector3(attack_x_, ATTACK_DISTANCE_Y_, 0.0f);
     collision_.Orientation = model_->GetRotationQuaternion();
 }
 
