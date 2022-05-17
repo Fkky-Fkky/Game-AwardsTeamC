@@ -1,4 +1,5 @@
 #include "Classes/Player/PlayerJump.h"
+#include "Base/DX12Effekseer.h"
 
 PlayerJump::PlayerJump() {
     flag_ = false;
@@ -11,6 +12,7 @@ void PlayerJump::Update(const float deltaTime, SimpleMath::Vector3& pos_) {
     if (!flag_ && DXTK->KeyEvent->pressed.W) {
         flag_ = true;
         time_ = 0.0f;
+        DX12Effect.PlayOneShot("jump", pos_);
     }
 
     if (flag_) {
