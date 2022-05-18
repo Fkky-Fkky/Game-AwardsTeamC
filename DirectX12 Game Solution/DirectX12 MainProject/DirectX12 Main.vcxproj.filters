@@ -201,6 +201,9 @@
     <ClInclude Include="Classes\UI\UI.h">
       <Filter>Classes\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Player\PlayerAvoid.h">
+      <Filter>Classes\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -313,6 +316,9 @@
     </ClCompile>
     <ClCompile Include="Classes\UI\UI.cpp">
       <Filter>Classes\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\PlayerAvoid.cpp">
+      <Filter>Classes\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
