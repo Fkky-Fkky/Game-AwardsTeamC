@@ -221,6 +221,7 @@
     <ClInclude Include="Classes\Player\PlayerJump.h" />
     <ClInclude Include="Classes\Player\PlayerMove.h" />
     <ClInclude Include="Classes\Player\PlayerState.h" />
+    <ClInclude Include="Classes\Player\PlayerWait.h" />
     <ClInclude Include="Classes\UI\UI.h" />
     <ClInclude Include="DontDestroyOnLoad.h" />
     <ClInclude Include="MainScene.h" />
@@ -274,6 +275,7 @@
     <ClCompile Include="Classes\Player\PlayerColision.cpp" />
     <ClCompile Include="Classes\Player\PlayerJump.cpp" />
     <ClCompile Include="Classes\Player\PlayerMove.cpp" />
+    <ClCompile Include="Classes\Player\PlayerWait.cpp" />
     <ClCompile Include="Classes\UI\UI.cpp" />
     <ClCompile Include="MainScene.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
