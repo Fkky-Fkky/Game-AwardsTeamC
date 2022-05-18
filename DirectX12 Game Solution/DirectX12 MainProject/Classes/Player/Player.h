@@ -7,6 +7,7 @@
 #include "Classes/Player/PlayerJump.h"
 #include "Classes/Player/PlayerColision.h"
 #include "Classes/Player/PlayerAttackColision.h"
+#include "Classes/Player/PlayerAvoid.h"
 
 using namespace DirectX;
 
@@ -25,6 +26,7 @@ public:
 	BoundingOrientedBox GetPlayerCollision() { return player_colision_.GetColision(); }
 	BoundingOrientedBox GetPlayerAttackCollision() { return player_attack_colision_.GetAttackCollision(); }
 	bool AttackFlag() { return player_attack_colision_.GeatAttackFlag(); }
+	bool IsPlayerInvincible() { return player_avoid_.IsInvincible(); }
 	SimpleMath::Vector3 GetPlayerPosition() { return pos_; }
 	PlayerColision* GetColision() { return &player_colision_; }
 
@@ -50,4 +52,5 @@ private:
 	PlayerJump           player_jump_;
 	PlayerColision       player_colision_;
 	PlayerAttackColision player_attack_colision_;
+	PlayerAvoid			 player_avoid_;
 };

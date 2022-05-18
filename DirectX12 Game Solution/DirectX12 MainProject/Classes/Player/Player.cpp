@@ -27,11 +27,10 @@ void Player::Update(const float deltaTime) {
 
     player_move_.Update(deltaTime, pos_, rot_);
     player_jump_.Update(deltaTime, pos_);
-
+    player_avoid_.Update(deltaTime, pos_, rot_);
 
     player_colision_.Update(deltaTime, model_.get());
     player_attack_colision_.Update(deltaTime, model_.get());
-
 }
 
 void Player::Render() {
