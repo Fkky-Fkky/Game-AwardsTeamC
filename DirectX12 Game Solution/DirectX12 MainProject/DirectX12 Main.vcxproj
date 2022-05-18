@@ -219,7 +219,8 @@
     <ClInclude Include="Classes\Player\PlayerAvoid.h" />
     <ClInclude Include="Classes\Player\PlayerColision.h" />
     <ClInclude Include="Classes\Player\PlayerJump.h" />
-    <ClInclude Include="Classes\Player\PlayerMove.h" />
+    <ClInclude Include="Classes\Player\PlayerLeftMove.h" />
+    <ClInclude Include="Classes\Player\PlayerRightMove.h" />
     <ClInclude Include="Classes\Player\PlayerState.h" />
     <ClInclude Include="Classes\Player\PlayerWait.h" />
     <ClInclude Include="Classes\UI\UI.h" />
@@ -274,7 +275,8 @@
     <ClCompile Include="Classes\Player\PlayerAvoid.cpp" />
     <ClCompile Include="Classes\Player\PlayerColision.cpp" />
     <ClCompile Include="Classes\Player\PlayerJump.cpp" />
-    <ClCompile Include="Classes\Player\PlayerMove.cpp" />
+    <ClCompile Include="Classes\Player\PlayerLeftMove.cpp" />
+    <ClCompile Include="Classes\Player\PlayerRightMove.cpp" />
     <ClCompile Include="Classes\Player\PlayerWait.cpp" />
     <ClCompile Include="Classes\UI\UI.cpp" />
     <ClCompile Include="MainScene.cpp">
