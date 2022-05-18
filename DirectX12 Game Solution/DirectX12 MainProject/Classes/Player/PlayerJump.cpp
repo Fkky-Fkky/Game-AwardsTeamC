@@ -7,7 +7,7 @@ PlayerJump::PlayerJump() {
 }
 
 void PlayerJump::Update(const float deltaTime, SimpleMath::Vector3& pos_) {
-    time_ += 1.0f;
+    time_ += JUMP_TIME_SPEED_ * deltaTime;
 
     if (!flag_ && DXTK->KeyEvent->pressed.W) {
         flag_ = true;
@@ -16,7 +16,7 @@ void PlayerJump::Update(const float deltaTime, SimpleMath::Vector3& pos_) {
     }
 
     if (flag_) {
-        pos_.y = -0.5 * GRAVITY_ * time_ * time_ + V0_ * time_ + GROUND_Y_;
+        pos_.y = -HALF_ * GRAVITY_ * time_ * time_ + V0_ * time_ + GROUND_Y_;
     }
 
     if (pos_.y < GROUND_Y_) {
