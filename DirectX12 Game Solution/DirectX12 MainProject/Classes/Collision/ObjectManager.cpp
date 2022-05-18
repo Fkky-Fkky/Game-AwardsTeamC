@@ -57,6 +57,10 @@ bool ObjectManager::GetPlayerDmgFlag() {
 	}
 }
 
+bool ObjectManager::IsPlayerInvincible() {
+	return player_->IsPlayerInvincible();
+}
+
 bool ObjectManager::GetBossRAttackFlag() {
 	return boss_->GetRHandAttackFlag();
 }

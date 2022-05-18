@@ -23,6 +23,7 @@ public:
 	float GetPlayerHP();
 	bool GetPlayerAttackFlag();
 	bool GetPlayerDmgFlag();
+	bool IsPlayerInvincible();
 	bool GetBossRAttackFlag();
 	bool GetBossLAttackFlag();
 	bool GetBossDmgFlag();
