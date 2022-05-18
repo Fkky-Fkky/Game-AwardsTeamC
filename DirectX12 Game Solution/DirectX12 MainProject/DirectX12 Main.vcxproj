@@ -220,6 +220,7 @@
     <ClInclude Include="Classes\Player\PlayerColision.h" />
     <ClInclude Include="Classes\Player\PlayerJump.h" />
     <ClInclude Include="Classes\Player\PlayerMove.h" />
+    <ClInclude Include="Classes\Player\PlayerState.h" />
     <ClInclude Include="Classes\UI\UI.h" />
     <ClInclude Include="DontDestroyOnLoad.h" />
     <ClInclude Include="MainScene.h" />

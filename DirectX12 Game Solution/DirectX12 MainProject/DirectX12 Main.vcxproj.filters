@@ -204,6 +204,9 @@
     <ClInclude Include="Classes\Player\PlayerAvoid.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Player\PlayerState.h">
+      <Filter>Classes\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
