@@ -19,7 +19,7 @@ void Player::LoadAssets() {
 
     font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 
-    DX12Effect.Create(L"Effect/Eff_Sword_001/Eff_Sword_001.efk", "swaord");
+    DX12Effect.Create(L"Effect/Eff_Sword/Eff_sword.efk", "swaord");
     DX12Effect.Create(L"Effect/Eff_Jump_001/Eff_jump_001.efk", "jump");
 }
 
