@@ -1,14 +1,15 @@
 #include "Classes/Enemy/Boss/Parts/Core/BossCore.h"
+#include "Base/DX12Effekseer.h"
 
-BossCore::BossCore()
-{
-	core_hp_ = 0;
+BossCore::BossCore() {
+	core_hp_  = 0;
 	hit_flag_ = false;
+	core_pos_ = SimpleMath::Vector3::Zero;
 }
 
 void BossCore::Initialize() {
-	BossParts::Initialize(SimpleMath::Vector3(0.0f, 0.0f, 0.0f), SimpleMath::Vector3::Zero);
-	core_hp_ = 30;
+	BossParts::Initialize(core_pos_, SimpleMath::Vector3::Zero);
+	core_hp_ = BOSS_MAX_HP_;
 	hit_flag_ = false;
 }
 void BossCore::LoadAssets() {
@@ -17,15 +18,15 @@ void BossCore::LoadAssets() {
 	material.Diffuse = DX9::Colors::Value(1.0f, 0.0f, 0.0f, 0.75f);
 	model->SetMaterial(material);
 
-	collision = model->GetBoundingOrientedBox();
-	collision.Extents = SimpleMath::Vector3(collision.Extents);
+	collision_ = model->GetBoundingOrientedBox();
+	collision_.Extents = SimpleMath::Vector3(collision_.Extents);
 
 	font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 }
 
 void BossCore::Update(const float deltaTime, bool core_hit_flag) {
-	collision.Center = model->GetPosition();
-	collision.Orientation = model->GetRotationQuaternion();
+	collision_.Center = model->GetPosition();
+	collision_.Orientation = model->GetRotationQuaternion();
 	HitPlayerAttack(core_hit_flag);
 }
 
@@ -49,6 +50,7 @@ void BossCore::HitPlayerAttack(bool core_hit_flag) {
 }
 
 void BossCore::HitProcessing() {
-	core_hp_ -= 1;
+	core_hp_--;
+	DX12Effect.PlayOneShot("hit", core_pos_);
 	hit_flag_ = true;
 }
