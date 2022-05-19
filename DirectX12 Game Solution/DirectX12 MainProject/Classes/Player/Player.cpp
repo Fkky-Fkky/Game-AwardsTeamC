@@ -5,7 +5,7 @@ void Player::Initialize() {
 	pos_ = SimpleMath::Vector3::Zero;
 	rot_ = SimpleMath::Vector3::Zero;
 
-
+    SwitchState(PLAYER_STATE::WAIT);
     player_hp_ = 30.0f;
     hit_flag_ = false;
 }
@@ -24,10 +24,7 @@ void Player::LoadAssets() {
 }
 
 void Player::Update(const float deltaTime) {
-
-    player_move_.Update(deltaTime, pos_, rot_);
-    player_jump_.Update(deltaTime, pos_);
-    player_avoid_.Update(deltaTime, pos_, rot_);
+    player_state_->Update(deltaTime, *this);
 
     player_colision_.Update(deltaTime, model_.get());
     player_attack_colision_.Update(deltaTime, model_.get());
@@ -66,4 +63,14 @@ void Player::HitPlayer(bool player_hit_flag) {
 void Player::HitProcessing() {
     player_hp_ -= 1.0f;
     hit_flag_ = true;
+}
+
+void Player::SwitchState(PLAYER_STATE state) {
+    switch (state) {
+    case PLAYER_STATE::WAIT:        player_state_ = &player_wait_;          break;
+    case PLAYER_STATE::RIGHT_MOVE:  player_state_ = &player_right_move_;    break;
+    case PLAYER_STATE::LEFT_MOVE :  player_state_ = &player_left_move_;     break;
+    case PLAYER_STATE::JUMP:        player_state_ = &player_jump_;          break;
+    case PLAYER_STATE::AVOID:       player_state_ = &player_avoid_;         break;
+    }
 }

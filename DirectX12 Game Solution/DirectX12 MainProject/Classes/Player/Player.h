@@ -3,13 +3,24 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 
-#include "Classes/Player/PlayerMove.h"
+#include "Classes/Player/PlayerRightMove.h"
+#include "Classes/Player/PlayerLeftMove.h"
 #include "Classes/Player/PlayerJump.h"
 #include "Classes/Player/PlayerColision.h"
 #include "Classes/Player/PlayerAttackColision.h"
 #include "Classes/Player/PlayerAvoid.h"
+#include "Classes/Player/PlayerWait.h"
+#include "Classes/Player/PlayerState.h"
 
 using namespace DirectX;
+
+enum class PLAYER_STATE {
+	WAIT,
+	RIGHT_MOVE,
+	LEFT_MOVE,
+	JUMP,
+	AVOID
+};
 
 class Player {
 public:
@@ -22,12 +33,16 @@ public:
 	void Render();
 	void Render2D();
 	void HitPlayer(bool player_hit_flag);
+	void SwitchState(PLAYER_STATE state);
 	float GetPlayerHP() { return player_hp_; }
 	BoundingOrientedBox GetPlayerCollision() { return player_colision_.GetColision(); }
 	BoundingOrientedBox GetPlayerAttackCollision() { return player_attack_colision_.GetAttackCollision(); }
 	bool AttackFlag() { return player_attack_colision_.GeatAttackFlag(); }
 	bool IsPlayerInvincible() { return player_avoid_.IsInvincible(); }
 	SimpleMath::Vector3 GetPlayerPosition() { return pos_; }
+	SimpleMath::Vector3 GetPlayerRotation() { return rot_; }
+	void SetPlayerPosition(SimpleMath::Vector3 position) { pos_ = position; }
+	void SetPlayerRotation(SimpleMath::Vector3 rotation) { rot_ = rotation; }
 	PlayerColision* GetColision() { return &player_colision_; }
 
 private:
@@ -48,9 +63,12 @@ private:
 	float player_hp_;
 	bool hit_flag_;
 
-	PlayerMove           player_move_;
+	PlayerRightMove      player_right_move_;
+	PlayerLeftMove		 player_left_move_;
 	PlayerJump           player_jump_;
 	PlayerColision       player_colision_;
 	PlayerAttackColision player_attack_colision_;
 	PlayerAvoid			 player_avoid_;
+	PlayerWait			 player_wait_;
+	PlayerState*		 player_state_;
 };

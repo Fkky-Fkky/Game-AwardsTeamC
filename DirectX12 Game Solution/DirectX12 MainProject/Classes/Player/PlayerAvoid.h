@@ -1,15 +1,12 @@
 #pragma once
 
-#include "Base/pch.h"
-#include "Base/dxtk.h"
+#include "Classes/Player/PlayerState.h"
 
-using namespace DirectX;
-
-class PlayerAvoid {
+class PlayerAvoid : public PlayerState {
 public:
 	PlayerAvoid();
 	~PlayerAvoid() {};
-	void Update(const float deltaTime, SimpleMath::Vector3& pos, SimpleMath::Vector3& rote_);
+	virtual void Update(const float deltaTime, Player& player);
 	bool IsInvincible() { return invincible_flag_; }
 private:
 	bool IsPayerRightWard() { return player_rote_.y >= PLAYER_ROTATION_ANGLE_; }
