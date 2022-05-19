@@ -39,6 +39,8 @@ void PlayerJump::Update(const float deltaTime, Player& player) {
         rot_.y = PLAYER_ROTATION_ANGLE_;
     }
 
+    pos_.x = std::clamp(pos_.x, PLAYER_LIMIT_MIN_POS_X_, PLAYER_LIMIT_MAX_POS_X_);
+
     player.SetPlayerPosition(pos_);
     player.SetPlayerRotation(rot_);
 }
