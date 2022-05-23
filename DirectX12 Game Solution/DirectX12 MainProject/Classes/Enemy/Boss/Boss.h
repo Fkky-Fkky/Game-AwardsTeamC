@@ -14,7 +14,7 @@ class ObjectManager;
 
 class Boss {
 public:
-	Boss(){};
+	Boss();
 	~Boss() {};
 
 	void Initialize();
@@ -31,6 +31,8 @@ public:
 	BoundingOrientedBox GetCoreCollision() { return core.GetCoreCollision(); }
 	void ActionEnd();
 	void RandomAttackState();
+	void PlaySlapSE() { slap_se_->Play(); }
+	void PlayBeatSE() { beat_se_->Play(); }
 
 private:
 	void SwitchStateAttack();
@@ -56,4 +58,6 @@ private:
 		DOUBLE_SLAP
 	};
 
+	XAudio::SOUNDEFFECT slap_se_;
+	XAudio::SOUNDEFFECT	beat_se_;
 };

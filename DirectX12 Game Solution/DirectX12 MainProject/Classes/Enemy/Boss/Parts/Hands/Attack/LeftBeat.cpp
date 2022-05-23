@@ -14,7 +14,7 @@ void LeftBeat::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Bos
 		break;
 
 	case ATTACK:
-		LeftBeatAttack();
+		LeftBeatAttack(boss);
 		break;
 
 	case RETURN_POSITION:
@@ -48,7 +48,7 @@ void LeftBeat::HandMove(SimpleMath::Vector3 player_pos) {
 		boss_action_state_ = ATTACK;
 }
 
-void LeftBeat::LeftBeatAttack() {
+void LeftBeat::LeftBeatAttack(Boss* boss) {
 	boss_handL_->SetAttackFlag(true);
 	beat_time_ += time_delta_;
 	pos_.y += BEAT_SPEED_ * beat_time_ - HALF_ * BEAT_GRAVITY_ * beat_time_ * beat_time_;
@@ -56,6 +56,7 @@ void LeftBeat::LeftBeatAttack() {
 
 	if (pos_.y <= 0.0f) {
 		pos_.y = 0.0f;
+		boss->PlayBeatSE();
 		DX12Effect.PlayOneShot("shock", pos_);
 		boss_handL_->SetAttackFlag(false);
 		boss_action_state_ = RETURN_POSITION;

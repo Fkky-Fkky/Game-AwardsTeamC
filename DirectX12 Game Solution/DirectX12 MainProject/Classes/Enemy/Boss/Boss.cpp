@@ -8,6 +8,12 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRushR.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
 
+Boss::Boss() {
+	attack = nullptr;
+	attack_state = WAIT;
+	action_end_flag = false;
+}
+
 void Boss::Initialize() {
 	body.Initialize();
 	core.Initialize();
@@ -19,9 +25,11 @@ void Boss::Initialize() {
 	attack = new Wait;
 	attack->Initialize(&hand_l, &hand_r);
 	action_end_flag = false;
+	slap_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Slap.wav");
+	beat_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Beat.wav");
 }
 
-void Boss::LoadAseets(){
+void Boss::LoadAseets() {
 	body.LoadAssets();
 	core.LoadAssets();
 	hand_l.LoadAssets();
@@ -38,7 +46,7 @@ void Boss::Update(const float deltaTime, ObjectManager* obj_m) {
 	SwitchStateWait();
 }
 
-void Boss::Render(){
+void Boss::Render() {
 	body.Render();
 	core.Render();
 	hand_l.Render();
@@ -58,38 +66,21 @@ void Boss::SwitchStateAttack() {
 	delete attack;
 	switch (attack_state)
 	{
-	case RIGHT_SLAP:
-		attack = new RightSlap;
-		break;
-
-	case RIGHT_BEAT:
-		attack = new RightBeat;	
-		break;
-
-	case LEFT_SLAP:
-		attack = new LeftSlap;
-		break;
-
-	case LEFT_BEAT:
-		attack = new LeftBeat;
-		break;
-
-	case BEAT_RUSH_R:
-		attack = new BeatRushR;
-		break;
-
-	case DOUBLE_SLAP:
-		attack = new DoubleSlap;
-		break;
+	case RIGHT_SLAP:	attack = new RightSlap;		break;
+	case RIGHT_BEAT:	attack = new RightBeat;		break;
+	case LEFT_SLAP:		attack = new LeftSlap;		break;
+	case LEFT_BEAT:		attack = new LeftBeat;		break;
+	case BEAT_RUSH_R:	attack = new BeatRushR;		break;
+	case DOUBLE_SLAP:	attack = new DoubleSlap;	break;
 	}
 	attack->Initialize(&hand_l, &hand_r);
 }
 
-void Boss::ActionEnd(){
+void Boss::ActionEnd() {
 	action_end_flag = true;
 }
 
-void Boss::SwitchStateWait(){
+void Boss::SwitchStateWait() {
 	if (action_end_flag) {
 		delete attack;
 		attack = new Wait;

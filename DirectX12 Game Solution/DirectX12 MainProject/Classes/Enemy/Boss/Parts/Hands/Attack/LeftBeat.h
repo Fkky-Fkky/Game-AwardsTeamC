@@ -19,7 +19,7 @@ public:
 
 private:
 	void HandMove(SimpleMath::Vector3 player_pos);
-	void LeftBeatAttack();
+	void LeftBeatAttack(Boss* boss);
 	void HandReturn();
 
 
