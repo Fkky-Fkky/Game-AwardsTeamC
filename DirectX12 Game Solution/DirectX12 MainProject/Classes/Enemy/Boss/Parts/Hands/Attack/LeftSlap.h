@@ -1,20 +1,28 @@
 #pragma once
 
-#include "Base/pch.h"
-#include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
-
-using namespace DirectX;
 
 class LeftSlap : public BossAttack {
 public:
 	LeftSlap() {
-		slap_time_ = 0.0f;
-		hand_return_flag_ = false;
+		action_state_ = ATTACK;
+		slap_time_  = 0.0f;
+		time_delta_ = 0.0f;
+		pos_  = SimpleMath::Vector3::Zero;
+		rote_ = SimpleMath::Vector3::Zero;
 	}
 	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss);
 
 private:
+	void LeftSlapAttack();
+	void Reset();
+	void HandReturn();
+
+	int action_state_;
+
 	float slap_time_;
-	bool hand_return_flag_;
+	float time_delta_;
+
+	SimpleMath::Vector3 pos_;
+	SimpleMath::Vector3 rote_;
 };
