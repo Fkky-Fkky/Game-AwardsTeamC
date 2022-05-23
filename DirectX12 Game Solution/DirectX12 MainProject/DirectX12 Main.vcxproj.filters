@@ -34,9 +34,6 @@
     <Filter Include="Classes\Collision">
       <UniqueIdentifier>{074d2f25-a975-45ec-8d94-a14d3703aeb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Enemy\Small Enemy">
-      <UniqueIdentifier>{18d4a310-ba13-4278-8594-4ac34b4aab25}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Enemy\Boss\Parts">
       <UniqueIdentifier>{0f871d5c-f9b8-4b02-9df6-356b7363824b}</UniqueIdentifier>
     </Filter>
@@ -119,9 +116,6 @@
     </ClInclude>
     <ClInclude Include="Classes\Collision\Collision.h">
       <Filter>Classes\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Enemy\Small Enemy\SmallEnemy.h">
-      <Filter>Classes\Enemy\Small Enemy</Filter>
     </ClInclude>
     <ClInclude Include="BossTestScene.h">
       <Filter>Scene</Filter>
@@ -247,9 +241,6 @@
     </ClCompile>
     <ClCompile Include="Classes\Collision\Collision.cpp">
       <Filter>Classes\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Enemy\Small Enemy\SmallEnemy.cpp">
-      <Filter>Classes\Enemy\Small Enemy</Filter>
     </ClCompile>
     <ClCompile Include="BossTestScene.cpp">
       <Filter>Scene</Filter>

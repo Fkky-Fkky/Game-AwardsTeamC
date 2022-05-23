@@ -208,7 +208,6 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\BossHand.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\LeftHand\BossHandL.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\RightHand\BossHandR.h" />
-    <ClInclude Include="Classes\Enemy\Small Enemy\SmallEnemy.h" />
     <ClInclude Include="Classes\GameScene\SceneChange.h" />
     <ClInclude Include="Classes\Ground\Ground.h" />
     <ClInclude Include="Classes\My_Camera\My_Camera.h" />
@@ -264,7 +263,6 @@
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\BossHand.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\LeftHand\BossHandL.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\RightHand\BossHandR.cpp" />
-    <ClCompile Include="Classes\Enemy\Small Enemy\SmallEnemy.cpp" />
     <ClCompile Include="Classes\GameScene\SceneChange.cpp" />
     <ClCompile Include="Classes\Ground\Ground.cpp" />
     <ClCompile Include="Classes\My_Camera\My_Camera.cpp" />

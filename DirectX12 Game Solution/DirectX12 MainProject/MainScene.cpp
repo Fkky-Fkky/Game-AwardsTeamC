@@ -19,7 +19,6 @@ void MainScene::Initialize()
     player_camera.Initialize();
     player.Initialize();
     boss.Initialize();
-    smallEnemy.Initialize();
     collision.Initialize();
 }
 
@@ -59,7 +58,6 @@ void MainScene::LoadAssets()
     player.LoadAssets();
     ground.LoadAssets();
     boss.LoadAseets();
-    smallEnemy.LoadAssets();
     collision.LoadAssets();
 }
 
@@ -114,13 +112,11 @@ void MainScene::Render()
     player.Render();
     ground.Render();
     boss.Render();
-    smallEnemy.Render();
 
     DX9::SpriteBatch->Begin();
 
     collision.Render2D();
     player.Render2D();
-    smallEnemy.Render2D();
 
 
 

@@ -8,7 +8,6 @@
 #include "Classes/PlayerTestCamera/PlayerTestCamera.h"
 #include "Classes/Player/Player.h"
 #include "Classes/Ground/Ground.h"
-#include "Classes/Enemy/Small Enemy/SmallEnemy.h"
 #include "Classes/Collision/Collision.h"
 #include "Classes/Enemy/Boss/Boss.h"
 #include "Classes/Collision/ObjectManager.h"
@@ -50,7 +49,6 @@ private:
 	Player player;
 	Ground ground;
 	Boss boss;
-	SmallEnemy smallEnemy;
 	Collision collision;
 	ObjectManager object_manager_;
 };

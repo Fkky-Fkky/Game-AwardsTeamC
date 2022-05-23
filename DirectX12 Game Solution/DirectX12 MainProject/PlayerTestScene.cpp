@@ -17,7 +17,6 @@ void PlayerTestScene::Initialize()
 {
     camera.Initialize();
     player.Initialize();
-    smallEnemy.Initialize();
     collision.Initialize();
     boss.Initialize();
     //object_manager_.SetPlayer(&player);
@@ -59,7 +58,6 @@ void PlayerTestScene::LoadAssets()
 
     player.LoadAssets();
     ground.LoadAssets();
-    smallEnemy.LoadAssets();
     collision.LoadAssets();
     boss.LoadAseets();
 }
@@ -115,14 +113,12 @@ void PlayerTestScene::Render()
 
     player.Render();
     ground.Render();
-    smallEnemy.Render();
     boss.Render();
 
     DX9::SpriteBatch->Begin();
 
     collision.Render2D();
     player.Render2D();
-    smallEnemy.Render2D();
 
 
 
