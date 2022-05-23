@@ -2,37 +2,50 @@
 #include "Classes/Enemy/Boss/Boss.h"
 
 void RightSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss) {
-	SimpleMath::Vector3 pos = boss_handR_->GetHandPos();
-	SimpleMath::Vector3 rote = boss_handR_->GetRotation();
+	pos_  = boss_handR_->GetHandPos();
+	rote_ = boss_handR_->GetRotation();
 	
-	if (!hand_return_flag_) {
-		boss_handR_->SetAttackFlag(true);
-		slap_time_ += deltaTime;
-		pos.x -= SLAP_SPEED_ * slap_time_ - HALF_ * SLAP_GRAVITY_ * slap_time_ * slap_time_;
-		pos.y = std::max(pos.y - 10.0f * deltaTime, 2.0f);
-		pos.z = std::max(pos.z - MOVE_SPEED_Z_ * deltaTime, 0.0f);
-		rote.x = std::min(rote.x + 1.0f * deltaTime, XM_PIDIV2);
-	}
-	else {
-		pos.x  = std::min(pos.x + MOVE_SPEED_X_ * deltaTime, HAND_R_INITIAL_POS_X_);
-		pos.z  = std::min(pos.z + MOVE_SPEED_Z_ * deltaTime, HAND_INITIAL_POS_Z_);
-		rote.x = std::max(rote.x - 10.0f * deltaTime, XM_PIDIV4);
-	}
+	time_delta_ = deltaTime;
 
-
-	if (pos.x >= HAND_LIMIT_POS_X_) {
-		pos.x = -HAND_RETURN_POS_X_;
-		pos.y = HAND_INITIAL_POS_Y_;
-		hand_return_flag_ = true;
-		boss_handR_->SetAttackFlag(false);
-	}
-
-	if (pos.x >= HAND_R_INITIAL_POS_X_ && hand_return_flag_) {
-		slap_time_ = 0.0f;
-		hand_return_flag_ = false;
+	switch (action_state_) {
+	case ATTACK:		RightSlapAttack();	break;
+	case RESET:			Reset();			break;
+	case RETURN:		HandReturn();		break;
+	case ACTION_END:
 		boss->ActionEnd();
+		action_state_ = ATTACK;				break;
 	}
 
-	boss_handR_->SetHandPos(pos);
-	boss_handR_->SetHandRote(rote);
+	boss_handR_->SetHandPos(pos_);
+	boss_handR_->SetHandRote(rote_);
+}
+
+void RightSlap::RightSlapAttack() {	//‰EŽè“ã‚¬•¥‚¢UŒ‚
+	boss_handR_->SetAttackFlag(true);
+	slap_time_ += time_delta_;
+	float slap_ = SLAP_SPEED_ * slap_time_ - HALF_ * SLAP_GRAVITY_ * slap_time_ * slap_time_;
+	pos_.x -= slap_;
+	pos_.y = std::max(pos_.y - MOVE_SPEED_Y_ * time_delta_, SLAP_POS_Y_);
+	pos_.z = std::max(pos_.z - MOVE_SPEED_Z_ * time_delta_, 0.0f);
+	rote_.x = std::min(rote_.x + ROTE_SPEED_ * time_delta_, XM_PIDIV2);
+	if (pos_.x >= HAND_LIMIT_POS_X_) {
+		action_state_ = RESET;
+	}
+}
+
+void RightSlap::Reset() {	//Žè‚ð‰æ–Ê‚Ì”½‘Î‘¤‚ÉˆÚ“®
+	boss_handR_->SetAttackFlag(false);
+	pos_.x  = -HAND_RETURN_POS_X_;
+	pos_.y  = HAND_INITIAL_POS_Y_;
+	pos_.z  = HAND_INITIAL_POS_Z_;
+	rote_.x = XM_PIDIV4;
+	action_state_ = RETURN;
+}
+
+void RightSlap::HandReturn() {	//‰æ–ÊŠO‚©‚ç‰ŠúˆÊ’u‚ÖˆÚ“®
+	pos_.x = std::min(pos_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
+	if (pos_.x >= HAND_R_INITIAL_POS_X_ ) {
+		slap_time_ = 0.0f;
+		action_state_ = ACTION_END;
+	}
 }
