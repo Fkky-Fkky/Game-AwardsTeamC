@@ -1,19 +1,5 @@
-#include "DoubleSlap.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
 #include "Classes/Enemy/Boss/Boss.h"
-
-DoubleSlap::DoubleSlap() {
-	r_pos_  = SimpleMath::Vector3::Zero;
-	r_rote_ = SimpleMath::Vector3::Zero;
-	l_pos_  = SimpleMath::Vector3::Zero;
-	l_rote_ = SimpleMath::Vector3::Zero;
-
-	action_state_ = ATTACK;
-
-	time_delta_  = 0.0f;
-	r_slap_time_ = 0.0f;
-	l_slap_time_ = 0.0f;
-	wait_time	 = 0.0f;
-}
 
 void DoubleSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss)	{
 	r_pos_  = boss_handR_->GetHandPos();
@@ -24,22 +10,12 @@ void DoubleSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, B
 	time_delta_ = deltaTime;
 
 	switch (action_state_) {
-	case ATTACK:
-		Attack();
-		break;
-
-	case RESET:
-		Reset();
-		break;
-
-	case RETURN:
-		ReturnHand();
-		break;
-
+	case ATTACK:	Attack();		break;
+	case RESET:		Reset();		break;
+	case RETURN:	HandReturn();	break;
 	case ACTION_END:
 		boss->ActionEnd();
-		action_state_ = ATTACK;
-		break;
+		action_state_ = ATTACK;		break;
 	}
 
 	boss_handR_->SetHandPos(r_pos_);
@@ -51,8 +27,8 @@ void DoubleSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, B
 void DoubleSlap::Attack() {
 	SlapR();
 
-	wait_time = std::min(wait_time + time_delta_, WAIT_TIME_LIMIT);
-	if (wait_time == WAIT_TIME_LIMIT) {
+	wait_time_ = std::min(wait_time_ + time_delta_, WAIT_TIME_MAX_);
+	if (wait_time_ == WAIT_TIME_MAX_) {
 		SlapL();
 	}
 
@@ -95,12 +71,12 @@ void DoubleSlap::Reset() {
 	l_rote_.x = XM_PIDIV4;
 	boss_handL_->SetAttackFlag(false);
 
-	wait_time = 0.0f;
+	wait_time_ = 0.0f;
 
 	action_state_ = RETURN;
 }
 
-void DoubleSlap::ReturnHand() {
+void DoubleSlap::HandReturn() {
 	r_pos_.x = std::min(r_pos_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
 	l_pos_.x = std::max(l_pos_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
 
