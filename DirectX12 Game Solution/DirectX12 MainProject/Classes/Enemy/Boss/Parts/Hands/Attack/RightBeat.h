@@ -1,10 +1,6 @@
 #pragma once
 
-#include "Base/pch.h"
-#include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
-
-using namespace DirectX;
 
 class RightBeat : public BossAttack {
 public:
