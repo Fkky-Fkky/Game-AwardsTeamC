@@ -23,16 +23,16 @@ public:
 	void Render();
 	void Render2D();
 
+	void ActionEnd();
+	void RandomAttackState();
+	void PlaySlapSE() { slap_se_->Play(); }
+	void PlayBeatSE() { beat_se_->Play(); }
 	int GetBossHP() { return core.GetBossHP(); }
 	bool GetLHandAttackFlag() { return hand_l.GetAttackFlag(); }
 	bool GetRHandAttackFlag() { return hand_r.GetAttackFlag(); }
 	BoundingOrientedBox GetLHandCollision() { return hand_l.GetHandCollision(); }
 	BoundingOrientedBox GetRHandCollision() { return hand_r.GetHandCollision(); }
 	BoundingOrientedBox GetCoreCollision() { return core.GetCoreCollision(); }
-	void ActionEnd();
-	void RandomAttackState();
-	void PlaySlapSE() { slap_se_->Play(); }
-	void PlayBeatSE() { beat_se_->Play(); }
 
 private:
 	void SwitchStateAttack();
