@@ -3,10 +3,17 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/BossParts.h"
+#include "Base/DX12Effekseer.h"
 
 class BossCore : public BossParts {
 public:
-	BossCore();
+	BossCore() {
+		core_hp_  = 0;
+		hit_flag_ = false;
+		core_pos_ = SimpleMath::Vector3::Zero;
+		hit_efc_  = nullptr;
+	}
+
 	virtual void Initialize();
 	virtual void LoadAssets();
 	virtual void Update(const float deltaTime, bool core_hit_flag);
@@ -20,9 +27,10 @@ private:
 
 	BoundingOrientedBox collision_;
 	DX9::SPRITEFONT font;
+	EFFECT hit_efc_;
+
 	int core_hp_;
 	bool hit_flag_;
-
 	SimpleMath::Vector3 core_pos_;
 
 	const int BOSS_MAX_HP_ = 30;
