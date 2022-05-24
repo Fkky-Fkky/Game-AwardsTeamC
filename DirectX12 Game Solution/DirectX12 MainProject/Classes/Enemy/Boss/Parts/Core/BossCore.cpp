@@ -1,7 +1,7 @@
 #include "Classes/Enemy/Boss/Parts/Core/BossCore.h"
 
-
 void BossCore::Initialize() {
+	core_pos_.y = BOSS_CORE_POS_Y_;
 	BossParts::Initialize(core_pos_, SimpleMath::Vector3::Zero);
 	core_hp_  = BOSS_MAX_HP_;
 	hit_flag_ = false;

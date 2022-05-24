@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Base/pch.h"
-#include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/BossParts.h"
 #include "Base/DX12Effekseer.h"
 
@@ -34,4 +32,5 @@ private:
 	SimpleMath::Vector3 core_pos_;
 
 	const int BOSS_MAX_HP_ = 30;
+	const float BOSS_CORE_POS_Y_ = 7.0f;
 };
