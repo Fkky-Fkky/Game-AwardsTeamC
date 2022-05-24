@@ -20,7 +20,7 @@ public:
 private:
 	DX9::MODEL stage_flooring_;
 	DX9::MODEL stage_bed_;
-	//DX9::MEDIARENDERER bg_vortex_;
+	DX9::MEDIARENDERER bg_vortex_;
 	DX9::SPRITE crack_[4];
 
 	int crack_level_;

@@ -12,13 +12,13 @@ void Ground::LoadAssets() {
     crack_[2] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BackGround/hibiware2.png");
     crack_[1] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BackGround/hibiware3.png");
     crack_[0] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BackGround/hibiware4.png");
-    //bg_vortex_      = DX9::MediaRenderer::CreateFromFile(DXTK->Device9, L"Ground/BackGround/guryuguryu.wmv");
-    //bg_vortex_->Play();
+    bg_vortex_      = DX9::MediaRenderer::CreateFromFile(DXTK->Device9, L"Ground/BackGround/guryuguryu.wmv");
+    bg_vortex_->Play();
 }
 
 void Ground::Update(ObjectManager* object) {
-    //if (bg_vortex_->isComplete())
-    //    bg_vortex_->Replay();
+    if (bg_vortex_->isComplete())
+        bg_vortex_->Replay();
 
     int boss_hp_ = object->GetBossHP();
     
@@ -39,8 +39,8 @@ void Ground::Render2D() {
         SimpleMath::Vector3(0.0f, 0.0f, CRACK_POS_Z_)
     );
 
-    //DX9::SpriteBatch->DrawSimple(
-    //    bg_vortex_->Get(),
-    //    SimpleMath::Vector3(0.0f, VORTEX_POS_Y_, VORTEX_POS_Z_)
-    //);
+    DX9::SpriteBatch->DrawSimple(
+        bg_vortex_->Get(),
+        SimpleMath::Vector3(0.0f, VORTEX_POS_Y_, VORTEX_POS_Z_)
+    );
 }
