@@ -2,6 +2,7 @@
 #include "Classes/Player/Player.h"
 
 void PlayerWait::Update(const float deltaTime, Player& player) {
+	player.SetMotion(PLAYER_MOTION::WAIT);
 	if (DXTK->KeyEvent->pressed.W) {
 		player.SwitchState(PLAYER_STATE::JUMP);
 	}

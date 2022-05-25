@@ -1,7 +1,8 @@
 #include "Classes/Player/PlayerAttackColision.h"
 #include <Base/DX12Effekseer.h>
+#include "Classes/Player/Player.h"
 
-void PlayerAttackColision::LoadAssets(DX9::Model* model_) {
+void PlayerAttackColision::LoadAssets(DX9::SkinnedModel* model_) {
     collision_ = model_->GetBoundingOrientedBox();
     collision_.Extents = SimpleMath::Vector3(collision_.Extents);
 
@@ -18,20 +19,22 @@ void PlayerAttackColision::LoadAssets(DX9::Model* model_) {
     collision_model_->SetMaterial(material_);
 }
 
-void PlayerAttackColision::Update(const float deltaTime, DX9::Model* model_) {
+void PlayerAttackColision::Update(const float deltaTime, DX9::SkinnedModel* model_, Player* player) {
     if (!attack_flg_ && DXTK->KeyEvent->pressed.Space) {
         attack_flg_ = true;
         DX12Effect.PlayOneShot("swaord", model_->GetPosition());
-        //DX12Effect.SetRotation("swaord", SimpleMath::Vector3(0.0f, XM_PIDIV2, 0.0f));
-
+        //DX12Effect.SetRotation("swaord", SimpleMath::Vector3(0.0f, DirectX::XMConvertToRadians(0.0f), 0.0f));
+        
     }
 
     if (attack_flg_) {
         attack_time_ += deltaTime;
+        player->SetMotion(PLAYER_MOTION::ATTACK);
 
         if (attack_time_ > MAX_ATTACK_TIME_) {
             attack_time_ = 0.0f;
             attack_flg_  = false;
+            player->SetMotion(PLAYER_MOTION::WAIT);
         }
     }
 

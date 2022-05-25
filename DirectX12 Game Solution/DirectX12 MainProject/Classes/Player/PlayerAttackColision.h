@@ -4,6 +4,7 @@
 #include "Base/dxtk.h"
 
 using namespace DirectX;
+class Player;
 
 class PlayerAttackColision {
 public:
@@ -13,8 +14,8 @@ public:
 	}
 	~PlayerAttackColision() {};
 
-	void LoadAssets(DX9::Model* model_);
-	void Update(const float deltaTime, DX9::Model* model_);
+	void LoadAssets(DX9::SkinnedModel* model_);
+	void Update(const float deltaTime, DX9::SkinnedModel* model_, Player* player);
 	void Render();
 
 	bool GeatAttackFlag() { return attack_flg_; }
@@ -25,7 +26,7 @@ private:
 	float attack_time_;
 	bool attack_flg_;
 
-	const float MAX_ATTACK_TIME_ = 0.3f;
+	const float MAX_ATTACK_TIME_ = 0.68f/* 0.3f*/;
 	const float ATTACK_DISTANCE_X_ = 1.5f;
 	const float ATTACK_DISTANCE_Y_ = 1.5f;
 };
