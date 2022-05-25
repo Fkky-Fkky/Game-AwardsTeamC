@@ -4,7 +4,12 @@
 
 void PlayerAttackColision::LoadAssets(DX9::SkinnedModel* model_) {
     collision_ = model_->GetBoundingOrientedBox();
-    collision_.Extents = SimpleMath::Vector3(collision_.Extents);
+
+    collision_.Extents = SimpleMath::Vector3(   //当たり判定のサイズ調整
+        collision_.Extents.x * COLLISION_SIZE_MULTIPLY_X_,
+        collision_.Extents.y * COLLISION_SIZE_MULTIPLY_Y_,
+        collision_.Extents.z * COLLISION_SIZE_MULTIPLY_Z_
+    );
 
     //デバッグ用
     collision_model_ = DX9::Model::CreateBox(
