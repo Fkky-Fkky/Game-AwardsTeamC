@@ -40,15 +40,20 @@ void PlayerJump::Update(const float deltaTime, Player& player) {
         }
     }
 
-    if (!landing_flag_) {
-        if (DXTK->KeyState->D) {
-            pos_.x += PLAYER_MOVE_SPEED_ * deltaTime;
-            rot_.y = -PLAYER_ROTATION_ANGLE_;
-        }
+    const bool is_player_right_ward_ = rot_.y < 0;
 
-        if (DXTK->KeyState->A) {
-            pos_.x -= PLAYER_MOVE_SPEED_ * deltaTime;
-            rot_.y = PLAYER_ROTATION_ANGLE_;
+    if (!landing_flag_) {
+        if (is_player_right_ward_) {
+            if (DXTK->KeyState->D) {
+                pos_.x += JUMPING_MOVE_ * deltaTime;
+                rot_.y = -PLAYER_ROTATION_ANGLE_;
+            }
+        }
+        else {
+            if (DXTK->KeyState->A) {
+                pos_.x -= JUMPING_MOVE_ * deltaTime;
+                rot_.y = PLAYER_ROTATION_ANGLE_;
+            }
         }
     }
 

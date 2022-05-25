@@ -32,4 +32,5 @@ private:
 	const float DOWN_SPEED_ = 2.0f;
 	const float GROUND_Y_ = 0.0f;
 	const float COOL_TIME_MAX_ = 0.2f;
+	const float JUMPING_MOVE_ = 5.0f;
 };
