@@ -10,8 +10,8 @@ public:
 	PlayerColision() {};
 	~PlayerColision() {};
 
-	void LoadAssets(DX9::Model* model_);
-	void Update(const float deltaTime, DX9::Model* model_);
+	void LoadAssets(DX9::SkinnedModel* model_);
+	void Update(const float deltaTime, DX9::SkinnedModel* model_);
 	void Render();
 	BoundingOrientedBox GetColision() { return collision_; }
 
@@ -19,7 +19,8 @@ private:
 	BoundingOrientedBox collision_;
 	DX9::MODEL          collision_model_;
 
-	const float EXTECTS_X_MULUTIPLY_VALUE_ = 0.65f;
-	const float EXTECTS_Y_MULUTIPLY_VALUE_ = 1.35f;
-	const float CENTER_PLUS_Y_VALUE_       = 1.5f;
+	const float COLLISION_SIZE_MULTIPLY_X_ = 0.5f;
+	const float COLLISION_SIZE_MULTIPLY_Y_ = 2.5f;
+	const float COLLISION_SIZE_MULTIPLY_Z_ = 0.5f;
+	const float CENTER_PLUS_Y_VALUE_       = 1.0f;
 };
