@@ -11,7 +11,7 @@ void Player::Initialize() {
 }
 
 void Player::LoadAssets() {
-	model_ = DX9::Model::CreateFromFile(DXTK->Device9, L"Player/chara_mock.x");
+	model_ = DX9::SkinnedModel::CreateFromFile(DXTK->Device9, L"Player/chara_anim_model.x");
     model_->SetScale(1.0f);
 
     player_colision_.LoadAssets(model_.get());
@@ -21,13 +21,18 @@ void Player::LoadAssets() {
 
     DX12Effect.Create(L"Effect/Eff_Sword/Eff_sword.efk", "swaord");
     DX12Effect.Create(L"Effect/Eff_Jump_001/Eff_jump_001.efk", "jump");
+
+    for (int i = 0; i < MOTION_MAX_; ++i) {
+        model_->SetTrackEnable(i, FALSE);
+    }
 }
 
 void Player::Update(const float deltaTime) {
+    model_->AdvanceTime(deltaTime);
     player_state_->Update(deltaTime, *this);
 
     player_colision_.Update(deltaTime, model_.get());
-    player_attack_colision_.Update(deltaTime, model_.get());
+    player_attack_colision_.Update(deltaTime, model_.get(), this);
 }
 
 void Player::Render() {
@@ -58,6 +63,14 @@ void Player::HitPlayer(bool player_hit_flag) {
     else {
         hit_flag_ = false;
     }
+}
+
+void Player::SetMotion(PLAYER_MOTION motion_track) {
+    for (int i = 0; i < MOTION_MAX_; ++i) {
+        model_->SetTrackEnable(i, FALSE);
+    }
+    int motion_track_ = (int)motion_track;
+    model_->SetTrackEnable(motion_track_, true);
 }
 
 void Player::HitProcessing() {

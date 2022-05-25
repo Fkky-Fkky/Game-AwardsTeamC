@@ -22,6 +22,13 @@ enum class PLAYER_STATE {
 	AVOID
 };
 
+enum class PLAYER_MOTION {
+	MOVE,
+	KNOCK_BACK,
+	WAIT,
+	ATTACK
+};
+
 class Player {
 public:
 	Player() {};
@@ -32,36 +39,35 @@ public:
 	void Update(const float deltaTime);
 	void Render();
 	void Render2D();
+
 	void HitPlayer(bool player_hit_flag);
 	void SwitchState(PLAYER_STATE state);
+	void SetPlayerPosition(SimpleMath::Vector3 position) { pos_ = position; }
+	void SetPlayerRotation(SimpleMath::Vector3 rotation) { rot_ = rotation; }
+	void SetMotion(PLAYER_MOTION motion_track);
 	float GetPlayerHP() { return player_hp_; }
-	BoundingOrientedBox GetPlayerCollision() { return player_colision_.GetColision(); }
-	BoundingOrientedBox GetPlayerAttackCollision() { return player_attack_colision_.GetAttackCollision(); }
 	bool AttackFlag() { return player_attack_colision_.GeatAttackFlag(); }
 	bool IsPlayerInvincible() { return player_avoid_.IsInvincible(); }
 	SimpleMath::Vector3 GetPlayerPosition() { return pos_; }
 	SimpleMath::Vector3 GetPlayerRotation() { return rot_; }
-	void SetPlayerPosition(SimpleMath::Vector3 position) { pos_ = position; }
-	void SetPlayerRotation(SimpleMath::Vector3 rotation) { rot_ = rotation; }
+	BoundingOrientedBox GetPlayerCollision() { return player_colision_.GetColision(); }
+	BoundingOrientedBox GetPlayerAttackCollision() { return player_attack_colision_.GetAttackCollision(); }
 	PlayerColision* GetColision() { return &player_colision_; }
 
 private:
 	void HitProcessing();
 
-	DX9::MODEL model_;
+	DX9::SKINNEDMODEL model_;
 	DX9::SPRITEFONT font;
 
-	/*BoundingOrientedBox player_collision_;
-	DX9::MODEL player_collision_model_;
+	float player_hp_;
 
-	BoundingOrientedBox player_attack_collision_;
-	DX9::MODEL player_attack_collision_model_;*/
+	bool hit_flag_;
 
 	SimpleMath::Vector3 pos_;
 	SimpleMath::Vector3 rot_;
 
-	float player_hp_;
-	bool hit_flag_;
+	const int MOTION_MAX_ = 4;
 
 	PlayerRightMove      player_right_move_;
 	PlayerLeftMove		 player_left_move_;
