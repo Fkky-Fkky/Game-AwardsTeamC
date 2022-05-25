@@ -24,9 +24,9 @@ enum class PLAYER_STATE {
 
 enum class PLAYER_MOTION {
 	MOVE,
+	ATTACK,
 	KNOCK_BACK,
-	WAIT,
-	ATTACK
+	WAIT
 };
 
 class Player {
