@@ -20,19 +20,10 @@ void PlayerAvoid::Update(const float deltaTime, Player& player) {
 
 	time_delta_ = deltaTime;
 
-	switch (action_state_)
-	{
-	case READY:
-		Ready();
-		break;
-
-	case AVOID:
-		Avoid();
-		break;
-
-	case COOL_TIME:
-		CoolTime();
-		break;
+	switch (action_state_) {
+	case READY:			Ready();		break;
+	case AVOID:			Avoid();		break;
+	case COOL_TIME:		CoolTime();		break;
 	}
 
 	player.SetPlayerPosition(pos_);
@@ -76,6 +67,8 @@ void PlayerAvoid::CoolTime() {	//クールタイム
 		pos_.x += PLAYER_MOVE_SPEED_ * time_delta_;
 		rot_.y  = -PLAYER_ROTATION_ANGLE_;
 	}
+
+	pos_.x = std::clamp(pos_.x, PLAYER_LIMIT_MIN_POS_X_, PLAYER_LIMIT_MAX_POS_X_);
 
 	if (cool_time_ >= COOL_TIME_MAX) {
 		cool_time_	   = 0.0f;
