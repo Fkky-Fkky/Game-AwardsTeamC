@@ -207,6 +207,9 @@
     <ClInclude Include="Classes\Player\PlayerLeftMove.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Player\PlayerDamage.h">
+      <Filter>Classes\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -324,6 +327,9 @@
       <Filter>Classes\Player</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Player\PlayerLeftMove.cpp">
+      <Filter>Classes\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\PlayerDamage.cpp">
       <Filter>Classes\Player</Filter>
     </ClCompile>
   </ItemGroup>

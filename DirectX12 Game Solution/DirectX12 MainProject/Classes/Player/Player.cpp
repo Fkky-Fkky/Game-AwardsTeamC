@@ -85,5 +85,6 @@ void Player::SwitchState(PLAYER_STATE state) {
     case PLAYER_STATE::LEFT_MOVE :  player_state_ = &player_left_move_;     break;
     case PLAYER_STATE::JUMP:        player_state_ = &player_jump_;          break;
     case PLAYER_STATE::AVOID:       player_state_ = &player_avoid_;         break;
+    case PLAYER_STATE::DAMAGE:      player_state_ = &player_dmg_;           break;
     }
 }

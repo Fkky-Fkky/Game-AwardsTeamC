@@ -11,6 +11,7 @@
 #include "Classes/Player/PlayerAvoid.h"
 #include "Classes/Player/PlayerWait.h"
 #include "Classes/Player/PlayerState.h"
+#include "Classes/Player/PlayerDamage.h"
 
 using namespace DirectX;
 
@@ -19,7 +20,8 @@ enum class PLAYER_STATE {
 	RIGHT_MOVE,
 	LEFT_MOVE,
 	JUMP,
-	AVOID
+	AVOID,
+	DAMAGE
 };
 
 enum class PLAYER_MOTION {
@@ -76,5 +78,6 @@ private:
 	PlayerAttackColision player_attack_colision_;
 	PlayerAvoid			 player_avoid_;
 	PlayerWait			 player_wait_;
+	PlayerDamage		 player_dmg_;
 	PlayerState*		 player_state_;
 };
