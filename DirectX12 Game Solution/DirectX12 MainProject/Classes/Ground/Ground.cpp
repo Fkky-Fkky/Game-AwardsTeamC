@@ -1,28 +1,31 @@
 #include "Classes/Ground/Ground.h"
 #include "Classes/Collision/ObjectManager.h"
 
-Ground::Ground() {
-    crack_level_ = 0;
-}
-
 void Ground::LoadAssets() {
-    stage_flooring_ = DX9::Model::CreateFromFile(DXTK->Device9, L"Ground/Stage/stage_flooring.X");
-    stage_bed_      = DX9::Model::CreateFromFile(DXTK->Device9, L"Ground/Stage/bet.X");
-    crack_[3] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BackGround/hibiware1.png");
-    crack_[2] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BackGround/hibiware2.png");
-    crack_[1] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BackGround/hibiware3.png");
-    crack_[0] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BackGround/hibiware4.png");
-    bg_vortex_      = DX9::MediaRenderer::CreateFromFile(DXTK->Device9, L"Ground/BackGround/guryuguryu.wmv");
-    bg_vortex_->Play();
+    stage_flooring_ = DX9::Model::CreateFromFile(DXTK->Device9, L"Ground/Stage/Flooring/flooring.X");
+    stage_bed_      = DX9::Model::CreateFromFile(DXTK->Device9, L"Ground/Stage/Bet/bet.X");
+    building_block  = DX9::SkinnedModel::CreateFromFile(DXTK->Device9, L"Ground/Stage/Flooring/object1.X");
+    building_block->SetTrackEnable(0, true);
+
+    //crack_[3] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BackGround/hibiware1.png");
+    //crack_[2] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BackGround/hibiware2.png");
+    //crack_[1] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BackGround/hibiware3.png");
+    //crack_[0] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BackGround/hibiware4.png");
+    
+    bgm_main_ = DX9::MediaRenderer::CreateFromFile(DXTK->Device9, L"BGM/game_main.mp3");
+    bgm_main_->Play();
 }
 
-void Ground::Update(ObjectManager* object) {
-    if (bg_vortex_->isComplete())
-        bg_vortex_->Replay();
+void Ground::Update(const float deltaTime, ObjectManager* object) {
+    building_block->AdvanceTime(deltaTime);
+
+    if (bgm_main_->isComplete())
+        bgm_main_->Replay();
 
     int boss_hp_ = object->GetBossHP();
-    
-    crack_level_ = boss_hp_ / 10;
+
+    const int TEN = 10;
+    crack_level_ = boss_hp_ / TEN;
 }
 
 void Ground::Render() {
@@ -31,16 +34,14 @@ void Ground::Render() {
 
     stage_flooring_->SetPosition(SimpleMath::Vector3::Zero);
     stage_flooring_->Draw();
+
+    building_block->SetPosition(SimpleMath::Vector3::Zero);
+    building_block->Draw();
 }
 
 void Ground::Render2D() {
-    DX9::SpriteBatch->DrawSimple(
-        crack_[crack_level_].Get(),
-        SimpleMath::Vector3(0.0f, 0.0f, CRACK_POS_Z_)
-    );
-
-    DX9::SpriteBatch->DrawSimple(
-        bg_vortex_->Get(),
-        SimpleMath::Vector3(0.0f, VORTEX_POS_Y_, VORTEX_POS_Z_)
-    );
+    //DX9::SpriteBatch->DrawSimple(
+    //    crack_[crack_level_].Get(),
+    //    SimpleMath::Vector3(0.0f, 0.0f, CRACK_POS_Z_)
+    //);
 }

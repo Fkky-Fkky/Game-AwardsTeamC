@@ -102,7 +102,7 @@ NextScene BossTestScene::Update(const float deltaTime)
     player_.HitPlayer(object_.GetPlayerDmgFlag());
 
     DX12Effect.Update(deltaTime);
-    ground_.Update(&object_);
+    ground_.Update(deltaTime, &object_);
     collision_.Update(deltaTime, &object_);
     scene_change_.Update(&object_);
     ui.Update(deltaTime, &object_);
