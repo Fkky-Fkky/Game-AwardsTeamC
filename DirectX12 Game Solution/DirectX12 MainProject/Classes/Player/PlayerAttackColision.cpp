@@ -28,7 +28,7 @@ void PlayerAttackColision::Update(const float deltaTime, DX9::SkinnedModel* mode
     if (!attack_flg_ && DXTK->KeyEvent->pressed.Space) {
         attack_flg_ = true;
         DX12Effect.PlayOneShot("swaord", model_->GetPosition());
-        //DX12Effect.SetRotation("swaord", SimpleMath::Vector3(0.0f, DirectX::XMConvertToRadians(0.0f), 0.0f));
+        //DX12Effect.SetRotation("swaord", SimpleMath::Vector3(0.0f, XMConvertToRadians(270.0f), 0.0f));
         
     }
 
@@ -43,7 +43,7 @@ void PlayerAttackColision::Update(const float deltaTime, DX9::SkinnedModel* mode
         }
     }
 
-    float player_angle_ = DirectX::XMConvertToRadians(model_->GetRotation().z);
+    float player_angle_ = XMConvertToRadians(model_->GetRotation().z);
     float attack_x_ = (player_angle_ < 0.0f) ? ATTACK_DISTANCE_X_ : -ATTACK_DISTANCE_X_;
     collision_.Center = model_->GetPosition() + SimpleMath::Vector3(attack_x_, ATTACK_DISTANCE_Y_, 0.0f);
     collision_.Orientation = model_->GetRotationQuaternion();

@@ -34,7 +34,7 @@ void Boss::LoadAseets() {
 	core.LoadAssets();
 	hand_l.LoadAssets();
 	hand_r.LoadAssets();
-	DX12Effect.Create(L"Effect/Eff_shock_001/shock_001.efk", "shock");
+	DX12Effect.Create(L"Effect/Eff_shock/Eff_shock.efk", "shock");
 }
 
 void Boss::Update(const float deltaTime, ObjectManager* obj_m) {
