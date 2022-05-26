@@ -32,5 +32,5 @@ private:
 	SimpleMath::Vector3 core_pos_;
 
 	const int BOSS_MAX_HP_ = 30;
-	const float BOSS_CORE_POS_Y_ = 7.0f;
+	const float BOSS_CORE_POS_Y_ = 9.0f;
 };

@@ -9,10 +9,7 @@ void BossCore::Initialize() {
 
 void BossCore::LoadAssets() {
 	BossParts::LoadAssets(L"Boss/boss_core.x");
-	D3DMATERIAL9 material{};
-	material.Diffuse = DX9::Colors::Value(1.0f, 0.0f, 0.0f, 0.75f);
-	model->SetMaterial(material);
-
+	
 	collision_ = model->GetBoundingOrientedBox();
 	collision_.Extents = SimpleMath::Vector3(collision_.Extents);
 

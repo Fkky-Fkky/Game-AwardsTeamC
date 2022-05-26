@@ -37,9 +37,9 @@ void BossHand::Update(const float deltaTime) {
 
 void BossHand::Render(){
 	BossParts::Render();
-	collision_model->SetPosition(collision.Center);
-	collision_model->SetRotationQuaternion(collision.Orientation);
-	collision_model->Draw();
+	//collision_model->SetPosition(collision.Center);
+	//collision_model->SetRotationQuaternion(collision.Orientation);
+	//collision_model->Draw();
 }
 
 //void BossAttack::SusiZanmai() {
