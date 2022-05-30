@@ -8,7 +8,7 @@ void BossCore::Initialize() {
 }
 
 void BossCore::LoadAssets() {
-	BossParts::LoadAssets(L"Boss/boss_core.x");
+	BossParts::LoadAssets(L"Boss/boss_Core.X");
 	
 	collision_ = model->GetBoundingOrientedBox();
 	collision_.Extents = SimpleMath::Vector3(collision_.Extents);
