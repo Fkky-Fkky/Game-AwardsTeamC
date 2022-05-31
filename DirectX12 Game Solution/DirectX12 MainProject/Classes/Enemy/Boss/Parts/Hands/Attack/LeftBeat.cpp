@@ -22,7 +22,7 @@ void LeftBeat::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Bos
 	boss_handL_->SetHandRote(rote_);
 }
 
-void LeftBeat::Ready(SimpleMath::Vector3 player_pos) {
+void LeftBeat::Ready(SimpleMath::Vector3 player_pos) { //UŒ‚‚É•K—p‚È•Ï”‚ÌÝ’è
 	if (!player_pos_get_flag_) {
 		move_dest_ = player_pos;
 		player_pos_get_flag_ = true;
@@ -39,7 +39,7 @@ void LeftBeat::Ready(SimpleMath::Vector3 player_pos) {
 		boss_action_state_ = ATTACK;
 }
 
-void LeftBeat::LeftBeatAttack(Boss* boss) {
+void LeftBeat::LeftBeatAttack(Boss* boss) { //’@‚«‚Â‚¯UŒ‚
 	boss_handL_->SetAttackFlag(true);
 	beat_time_ += time_delta_;
 	float beat_ = BEAT_SPEED_* beat_time_ - HALF_ * BEAT_GRAVITY_ * beat_time_ * beat_time_;
@@ -49,13 +49,13 @@ void LeftBeat::LeftBeatAttack(Boss* boss) {
 	if (pos_.y <= 0.0f) {
 		pos_.y = 0.0f;
 		boss->PlayBeatSE();
-		DX12Effect.PlayOneShot("shock", pos_);
+		boss->PlayBeatEffect(pos_);
 		boss_handL_->SetAttackFlag(false);
 		boss_action_state_ = RETURN;
 	}
 }
 
-void LeftBeat::HandReturn() {
+void LeftBeat::HandReturn() { //Žè‚ð‰ŠúˆÊ’u‚ÖˆÚ“®
 	wait_time_ += time_delta_;
 
 	if (wait_time_ >= WAIT_TIME_MAX_) {
