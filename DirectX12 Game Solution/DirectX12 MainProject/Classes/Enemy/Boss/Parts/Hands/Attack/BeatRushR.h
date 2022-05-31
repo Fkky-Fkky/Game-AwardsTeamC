@@ -19,9 +19,9 @@ public:
 
 private:
 	void Ready();
-	void Attack();
-	void BeatR();
-	void BeatL();
+	void Attack(Boss* boss);
+	void BeatR(Boss* boss);
+	void BeatL(Boss* boss);
 	void Reset();
 	void HandReturn();
 

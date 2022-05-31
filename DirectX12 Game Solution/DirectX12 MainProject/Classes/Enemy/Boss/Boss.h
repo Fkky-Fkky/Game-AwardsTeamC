@@ -7,6 +7,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/RightHand/BossHandR.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
 #include <random>
+#include "Base/DX12Effekseer.h"
 
 using namespace DirectX;
 
@@ -14,7 +15,13 @@ class ObjectManager;
 
 class Boss {
 public:
-	Boss();
+	Boss() {
+		attack = nullptr;
+		attack_state = WAIT;
+		action_end_flag = false;
+		beat_effect_ = nullptr;
+	}
+
 	~Boss() {};
 
 	void Initialize();
@@ -25,8 +32,9 @@ public:
 
 	void ActionEnd();
 	void RandomAttackState();
-	void PlaySlapSE() { slap_se_->Play(); }
-	void PlayBeatSE() { beat_se_->Play(); }
+	void PlaySlapSE();
+	void PlayBeatSE();
+	void PlayBeatEffect(SimpleMath::Vector3 effect_pos);
 	int GetBossHP() { return core.GetBossHP(); }
 	bool GetLHandAttackFlag() { return hand_l.GetAttackFlag(); }
 	bool GetRHandAttackFlag() { return hand_r.GetAttackFlag(); }
@@ -57,6 +65,8 @@ private:
 		BEAT_RUSH_R,
 		DOUBLE_SLAP
 	};
+
+	EFFECT beat_effect_;
 
 	XAudio::SOUNDEFFECT slap_se_;
 	XAudio::SOUNDEFFECT	beat_se_;

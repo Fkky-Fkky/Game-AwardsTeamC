@@ -8,12 +8,6 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRushR.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
 
-Boss::Boss() {
-	attack = nullptr;
-	attack_state = WAIT;
-	action_end_flag = false;
-}
-
 void Boss::Initialize() {
 	body.Initialize();
 	core.Initialize();
@@ -34,7 +28,7 @@ void Boss::LoadAseets() {
 	core.LoadAssets();
 	hand_l.LoadAssets();
 	hand_r.LoadAssets();
-	DX12Effect.Create(L"Effect/Eff_shock/Eff_shock.efk", "shock");
+	beat_effect_ = DX12Effect.Create(L"Effect/Eff_shock/Eff_shock.efk");
 }
 
 void Boss::Update(const float deltaTime, ObjectManager* obj_m) {
@@ -63,8 +57,7 @@ void Boss::RandomAttackState() {
 
 void Boss::SwitchStateAttack() {
 	delete attack;
-	switch (attack_state)
-	{
+	switch (attack_state) {
 	case RIGHT_SLAP:	attack = new RightSlap;		break;
 	case RIGHT_BEAT:	attack = new RightBeat;		break;
 	case LEFT_SLAP:		attack = new LeftSlap;		break;
@@ -86,4 +79,16 @@ void Boss::SwitchStateWait() {
 		attack->Initialize(&hand_l, &hand_r);
 		action_end_flag = false;
 	}
+}
+
+void Boss::PlaySlapSE() {
+	slap_se_->Play();
+}
+
+void Boss::PlayBeatSE() {
+	beat_se_->Play(); 
+}
+
+void Boss::PlayBeatEffect(SimpleMath::Vector3 effect_pos) {
+	DX12Effect.Play(beat_effect_, effect_pos); 
 }

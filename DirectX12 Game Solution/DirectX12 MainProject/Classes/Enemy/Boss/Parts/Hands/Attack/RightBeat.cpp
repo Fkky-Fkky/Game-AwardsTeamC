@@ -49,7 +49,7 @@ void RightBeat::RightBeatAttack(Boss* boss) {	//’@‚«‚Â‚¯UŒ‚
 	if (pos_.y <= 0.0f) {
 		pos_.y = 0.0f;
 		boss->PlayBeatSE();
-		DX12Effect.PlayOneShot("shock", pos_);
+		boss->PlayBeatEffect(pos_);
 		boss_handR_->SetAttackFlag(false);
 		boss_action_state_ = RETURN;
 	}
