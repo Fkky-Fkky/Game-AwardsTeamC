@@ -64,6 +64,9 @@
     <Filter Include="Classes\UI">
       <UniqueIdentifier>{a9a6c46f-7f7e-435e-ac6f-9796cf9b9db5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\My_Light">
+      <UniqueIdentifier>{08d279e1-8d7c-4f5f-bdb5-a4c4857d713b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -210,6 +213,9 @@
     <ClInclude Include="Classes\Player\PlayerDamage.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\My_Light\My_Light.h">
+      <Filter>Classes\My_Light</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -331,6 +337,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Player\PlayerDamage.cpp">
       <Filter>Classes\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\My_Light\My_Light.cpp">
+      <Filter>Classes\My_Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
