@@ -14,6 +14,7 @@
 #include "Classes/Collision/ObjectManager.h"
 #include "Classes/GameScene/SceneChange.h"
 #include "Classes/UI/UI.h"
+#include "Classes/My_Light/My_Light.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -57,4 +58,5 @@ private:
 	ObjectManager object_;
 	SceneChange scene_change_;
 	UI ui;
+	My_Light light_;
 };
