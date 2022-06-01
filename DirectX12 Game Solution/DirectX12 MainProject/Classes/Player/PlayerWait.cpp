@@ -12,10 +12,12 @@ void PlayerWait::Update(const float deltaTime, Player& player) {
 	}
 
 	if (DXTK->KeyState->D) {
+		player.SetMotion(PLAYER_MOTION::MOVE);
 		player.SwitchState(PLAYER_STATE::RIGHT_MOVE);
 	}
 
 	if (DXTK->KeyState->A) {
+		player.SetMotion(PLAYER_MOTION::MOVE);
 		player.SwitchState(PLAYER_STATE::LEFT_MOVE);
 	}
 }
