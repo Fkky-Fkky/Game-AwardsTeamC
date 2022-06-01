@@ -16,9 +16,9 @@ void My_Light::LoadAssets() {
     DXTK->Direct3D9->SetLight(1, light);
 
     //3‚Â–Ú‚Ìƒ‰ƒCƒg
-    light.Ambient   = DX9::Colors::Value(0.3f, 0.3f, 0.3f, 1.0f);
-    light.Diffuse   = DX9::Colors::Value(0.3f, 0.3f, 0.3f, 1.0f);
-    light.Specular  = DX9::Colors::Value(0.3f, 0.3f, 0.3f, 1.0f);
+    light.Ambient   = DX9::Colors::Value(0.5f, 0.5f, 0.5f, 1.0f);
+    light.Diffuse   = DX9::Colors::Value(0.5f, 0.5f, 0.5f, 1.0f);
+    light.Specular  = DX9::Colors::Value(0.5f, 0.5f, 0.5f, 1.0f);
 
     light.Direction = DX9::VectorSet(0.0f, -10.0f, 0.0f);
     DXTK->Direct3D9->SetLight(2, light);
