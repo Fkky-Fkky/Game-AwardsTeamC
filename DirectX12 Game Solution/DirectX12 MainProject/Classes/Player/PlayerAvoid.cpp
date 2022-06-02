@@ -1,13 +1,13 @@
 #include "Classes/Player/PlayerAvoid.h"
 #include "Classes/Player/Player.h"
 
-PlayerAvoid::PlayerAvoid() {
+void PlayerAvoid::Initialize() {
 	action_state_ = READY;
-	
-	avoid_speed_   = 0.0f;
-	player_dest_x_ = 0.0f;
-	cool_time_  = 0.0f;
-	time_delta_ = 0.0f;
+
+	avoid_speed_	= 0.0f;
+	player_dest_x_  = 0.0f;
+	cool_time_		= 0.0f;
+	time_delta_		= 0.0f;
 
 	invincible_flag_ = false;
 

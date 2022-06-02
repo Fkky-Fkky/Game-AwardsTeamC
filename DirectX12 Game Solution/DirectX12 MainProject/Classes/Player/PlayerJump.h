@@ -10,12 +10,13 @@ public:
 		jump_time_  = 0.0f;
 		cool_time_  = 0.0f;
 		player_up_flag_ = false;
-		pos_ = SimpleMath::Vector3::Zero;
-		rot_ = SimpleMath::Vector3::Zero;
+		pos_			= SimpleMath::Vector3::Zero;
+		rot_			= SimpleMath::Vector3::Zero;
 		old_player_pos_ = SimpleMath::Vector3::Zero;
 	}
 	~PlayerJump() {};
 
+	virtual void Initialize();
 	virtual void Update(const float deltaTime, Player& player);
 
 private:

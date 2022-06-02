@@ -2,6 +2,17 @@
 #include "Base/DX12Effekseer.h"
 #include "Classes/Player/Player.h"
 
+void PlayerJump::Initialize() {
+    action_state_ = READY;
+    time_delta_ = 0.0f;
+    jump_time_  = 0.0f;
+    cool_time_  = 0.0f;
+    player_up_flag_ = false;
+    pos_            = SimpleMath::Vector3::Zero;
+    rot_            = SimpleMath::Vector3::Zero;
+    old_player_pos_ = SimpleMath::Vector3::Zero;
+}
+
 void PlayerJump::Update(const float deltaTime, Player& player) {
     pos_ = player.GetPlayerPosition();
     rot_ = player.GetPlayerRotation();
@@ -31,6 +42,7 @@ void PlayerJump::Ready() {  //ジャンプに必要な変数の処理
     jump_time_      = 0.0f;
     action_state_   = JUMP;
 }
+
 
 void PlayerJump::Jump() {   //ジャンプ
     if (player_up_flag_) {  //プレイヤージャンプ処理(上昇)

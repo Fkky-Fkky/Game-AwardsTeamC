@@ -7,5 +7,6 @@ public:
 	PlayerRightMove() {};
 	~PlayerRightMove() {};
 
+	virtual void Initialize() {};
 	virtual void Update(const float deltaTime, Player& player);
 };

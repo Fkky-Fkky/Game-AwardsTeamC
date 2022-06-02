@@ -4,9 +4,24 @@
 
 class PlayerAvoid : public PlayerState {
 public:
-	PlayerAvoid();
+	PlayerAvoid() {
+		action_state_ = READY;
+
+		avoid_speed_	= 0.0f;
+		player_dest_x_  = 0.0f;
+		cool_time_		= 0.0f;
+		time_delta_		= 0.0f;
+
+		invincible_flag_ = false;
+
+		player_rote_ = SimpleMath::Vector3::Zero;
+	}
+
 	~PlayerAvoid() {};
+
+	virtual void Initialize();
 	virtual void Update(const float deltaTime, Player& player);
+
 	bool IsInvincible() { return invincible_flag_; }
 private:
 	void Ready();
