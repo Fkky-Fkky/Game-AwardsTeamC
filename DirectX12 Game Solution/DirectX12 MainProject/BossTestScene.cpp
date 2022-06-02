@@ -88,10 +88,8 @@ NextScene BossTestScene::Update(const float deltaTime)
 
 	// TODO: Add your game logic here.
 
-    player_.Update(deltaTime);
+    player_.Update(deltaTime, &object_);
     boss_.Update(deltaTime, &object_);
-
-    player_.HitPlayer(object_.GetPlayerDmgFlag());
 
     DX12Effect.Update(deltaTime);
     ground_.Update(deltaTime, &object_);

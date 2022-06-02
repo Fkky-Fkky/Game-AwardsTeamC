@@ -1,13 +1,15 @@
 #include "Classes/Player/Player.h"
 #include "Base/DX12Effekseer.h"
+#include "Classes/Collision/ObjectManager.h"
 
 void Player::Initialize() {
+    initialize_stop_flag_ = false;
+
 	pos_ = SimpleMath::Vector3::Zero;
 	rot_ = SimpleMath::Vector3::Zero;
 
     SwitchState(PLAYER_STATE::WAIT);
-    player_hp_ = 30.0f;
-    hit_flag_ = false;
+    player_state_->Initialize();
 }
 
 void Player::LoadAssets() {
@@ -27,7 +29,10 @@ void Player::LoadAssets() {
     }
 }
 
-void Player::Update(const float deltaTime) {
+void Player::Update(const float deltaTime, ObjectManager* obj_m) {
+    if (obj_m->GetPlayerDmgFlag()) {
+        SwitchState(PLAYER_STATE::DAMAGE);
+    }
     model_->AdvanceTime(deltaTime);
     player_state_->Update(deltaTime, *this);
 
@@ -51,18 +56,8 @@ void Player::Render2D() {
         font.Get(),
         SimpleMath::Vector2(0.0f, 30.0f),
         DX9::Colors::Red,
-        L"プレイヤー:%f", player_hp_
+        L"プレイヤー:%f", player_dmg_.GetPlayerHP()
     );
-}
-
-void Player::HitPlayer(bool player_hit_flag) {
-    if (player_hit_flag) {
-        if(!hit_flag_)
-            HitProcessing();
-    }
-    else {
-        hit_flag_ = false;
-    }
 }
 
 void Player::SetMotion(PLAYER_MOTION motion_track) {
@@ -73,11 +68,6 @@ void Player::SetMotion(PLAYER_MOTION motion_track) {
     model_->SetTrackEnable(motion_track_, true);
 }
 
-void Player::HitProcessing() {
-    player_hp_ -= 1.0f;
-    hit_flag_ = true;
-}
-
 void Player::SwitchState(PLAYER_STATE state) {
     switch (state) {
     case PLAYER_STATE::WAIT:        player_state_ = &player_wait_;          break;
@@ -86,5 +76,8 @@ void Player::SwitchState(PLAYER_STATE state) {
     case PLAYER_STATE::JUMP:        player_state_ = &player_jump_;          break;
     case PLAYER_STATE::AVOID:       player_state_ = &player_avoid_;         break;
     case PLAYER_STATE::DAMAGE:      player_state_ = &player_dmg_;           break;
+    }
+    if (!initialize_stop_flag_) {
+        player_state_->Initialize();
     }
 }

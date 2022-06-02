@@ -91,8 +91,7 @@ NextScene MainScene::Update(const float deltaTime)
 
     // TODO: Add your game logic here.
 
-    player.Update(deltaTime);
-    player.HitPlayer(object.GetPlayerDmgFlag());
+    player.Update(deltaTime, &object);
     boss.Update(deltaTime, &object);
     //smallEnemy.HitPlayerAttack(collision.GetHitAttackFlag());
     //smallEnemy.Update(deltaTime);

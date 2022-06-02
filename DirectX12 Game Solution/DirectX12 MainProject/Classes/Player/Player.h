@@ -15,6 +15,8 @@
 
 using namespace DirectX;
 
+class ObjectManager;
+
 enum class PLAYER_STATE {
 	WAIT,
 	RIGHT_MOVE,
@@ -33,21 +35,26 @@ enum class PLAYER_MOTION {
 
 class Player {
 public:
-	Player() {};
+	Player() {
+		player_state_ = nullptr;
+		initialize_stop_flag_ = false;
+		pos_ = SimpleMath::Vector3::Zero;
+		rot_ = SimpleMath::Vector3::Zero;
+	}
 	~Player() {};
 
 	void Initialize();
 	void LoadAssets();
-	void Update(const float deltaTime);
+	void Update(const float deltaTime, ObjectManager* obj_m);
 	void Render();
 	void Render2D();
 
-	void HitPlayer(bool player_hit_flag);
 	void SwitchState(PLAYER_STATE state);
 	void SetPlayerPosition(SimpleMath::Vector3 position) { pos_ = position; }
 	void SetPlayerRotation(SimpleMath::Vector3 rotation) { rot_ = rotation; }
 	void SetMotion(PLAYER_MOTION motion_track);
-	float GetPlayerHP() { return player_hp_; }
+	void SetStopInitializeFlag(bool enable) { initialize_stop_flag_ = enable; }
+	float GetPlayerHP() { return player_dmg_.GetPlayerHP(); }
 	bool AttackFlag() { return player_attack_colision_.GeatAttackFlag(); }
 	bool IsPlayerInvincible() { return player_avoid_.IsInvincible(); }
 	SimpleMath::Vector3 GetPlayerPosition() { return pos_; }
@@ -57,14 +64,12 @@ public:
 	PlayerColision* GetColision() { return &player_colision_; }
 
 private:
-	void HitProcessing();
 
 	DX9::SKINNEDMODEL model_;
 	DX9::SPRITEFONT font;
 
-	float player_hp_;
 
-	bool hit_flag_;
+	bool initialize_stop_flag_;
 
 	SimpleMath::Vector3 pos_;
 	SimpleMath::Vector3 rot_;

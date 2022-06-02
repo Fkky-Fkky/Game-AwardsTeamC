@@ -5,7 +5,7 @@
 class PlayerDamage : public PlayerState {
 public:
 	PlayerDamage() {
-		player_hp_ = 30.0f;
+		player_hp_ = PLAYER_HP_MAX_;
 		dmg_time   = 0.0f;
 		hit_flag_  = false;
 	}
@@ -26,5 +26,7 @@ private:
 	SimpleMath::Vector3 pos_;
 	SimpleMath::Vector3 rot_;
 
-	const float DMG_TIME_MAX = 0.5f;
+	const float PLAYER_HP_MAX_ = 30.0f;
+	const float FALL_SPEED_	   = 15.0f;
+	const float DMG_TIME_MAX_  = 0.64f;
 };
