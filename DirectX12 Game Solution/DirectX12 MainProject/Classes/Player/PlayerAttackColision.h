@@ -14,6 +14,7 @@ public:
 	}
 	~PlayerAttackColision() {};
 
+	void Initialize();
 	void LoadAssets(DX9::SkinnedModel* model_);
 	void Update(const float deltaTime, DX9::SkinnedModel* model_, Player* player);
 	void Render();
@@ -26,6 +27,11 @@ private:
 	float attack_time_;
 	bool attack_flg_;
 
+	const float RIGHT_ = -90.0f;
+	const float RIGHT_ANGLE_ = 90.0f;
+	const float LEFT_ANGLE_ = 270.0f;
+	const float ADD_POS_X_  = 3.0f;
+	const float ADD_POS_Y_  = 2.0f;
 	const float MAX_ATTACK_TIME_ = 0.68f;
 	const float ATTACK_DISTANCE_X_ = 1.5f;
 	const float ATTACK_DISTANCE_Y_ = 1.5f;

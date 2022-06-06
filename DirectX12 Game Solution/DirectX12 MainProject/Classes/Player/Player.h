@@ -54,6 +54,8 @@ public:
 	void SetPlayerRotation(SimpleMath::Vector3 rotation) { rot_ = rotation; }
 	void SetMotion(PLAYER_MOTION motion_track);
 	void SetStopInitializeFlag(bool enable) { initialize_stop_flag_ = enable; }
+	void PlayAvoidSE();
+	void PlayJumpSE();
 	float GetPlayerHP() { return player_dmg_.GetPlayerHP(); }
 	bool AttackFlag() { return player_attack_colision_.GeatAttackFlag(); }
 	bool IsPlayerInvincible() { return player_avoid_.IsInvincible(); }
@@ -62,12 +64,17 @@ public:
 	BoundingOrientedBox GetPlayerCollision() { return player_colision_.GetColision(); }
 	BoundingOrientedBox GetPlayerAttackCollision() { return player_attack_colision_.GetAttackCollision(); }
 	PlayerColision* GetColision() { return &player_colision_; }
+	PLAYER_STATE GetPlayerState() { return player_action_state_; }
 
 private:
 
 	DX9::SKINNEDMODEL model_;
 	DX9::SPRITEFONT font;
 
+	XAudio::SOUNDEFFECT avoid_se_;
+	XAudio::SOUNDEFFECT jump_se_;
+
+	PLAYER_STATE player_action_state_;
 
 	bool initialize_stop_flag_;
 
@@ -75,6 +82,7 @@ private:
 	SimpleMath::Vector3 rot_;
 
 	const int MOTION_MAX_ = 4;
+	const float RIGHT_WARD_ = -90.0f;
 
 	PlayerRightMove      player_right_move_;
 	PlayerLeftMove		 player_left_move_;
