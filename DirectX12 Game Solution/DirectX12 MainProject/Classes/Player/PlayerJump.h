@@ -20,7 +20,7 @@ public:
 	virtual void Update(const float deltaTime, Player& player);
 
 private:
-	void Ready();
+	void Ready(Player& player);
 	void Jump();
 	void CoolTime();
 	void JumpingMove();

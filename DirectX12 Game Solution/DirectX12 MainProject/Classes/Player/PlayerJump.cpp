@@ -20,7 +20,7 @@ void PlayerJump::Update(const float deltaTime, Player& player) {
     time_delta_ = deltaTime;
 
     switch (action_state_) {
-    case READY:     Ready();    break;
+    case READY: Ready(player);  break;
     case JUMP:
         Jump();
         JumpingMove();          break;
@@ -36,10 +36,11 @@ void PlayerJump::Update(const float deltaTime, Player& player) {
     }
 }
 
-void PlayerJump::Ready() {  //ジャンプに必要な変数の処理
+void PlayerJump::Ready(Player& player) {  //ジャンプに必要な変数の処理
     DX12Effect.PlayOneShot("jump", pos_);
     player_up_flag_ = true;
     jump_time_      = 0.0f;
+    player.PlayJumpSE();
     action_state_   = JUMP;
 }
 

@@ -21,7 +21,7 @@ void PlayerAvoid::Update(const float deltaTime, Player& player) {
 	time_delta_ = deltaTime;
 
 	switch (action_state_) {
-	case READY:			Ready();		break;
+	case READY:			Ready(player);	break;
 	case AVOID:			Avoid();		break;
 	case COOL_TIME:		CoolTime();		break;
 	}
@@ -34,12 +34,13 @@ void PlayerAvoid::Update(const float deltaTime, Player& player) {
 	}
 }
 
-void PlayerAvoid::Ready() {	//回避に必要な変数の準備
+void PlayerAvoid::Ready(Player& player) {	//回避に必要な変数の準備
 	invincible_flag_ = true;
 	player_rote_   = rot_;
 	float add_pos_ = (IsPayerRightWard()) ? -ADD_POS_X_ : ADD_POS_X_;
 	player_dest_x_ = pos_.x + add_pos_;
 	player_dest_x_ = std::clamp(player_dest_x_, PLAYER_LIMIT_MIN_POS_X_, PLAYER_LIMIT_MAX_POS_X_);
+	player.PlayAvoidSE();
 	action_state_  = AVOID;
 }
 

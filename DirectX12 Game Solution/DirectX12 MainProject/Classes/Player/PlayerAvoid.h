@@ -24,7 +24,7 @@ public:
 
 	bool IsInvincible() { return invincible_flag_; }
 private:
-	void Ready();
+	void Ready(Player& player);
 	void Avoid();
 	void CoolTime();
 
