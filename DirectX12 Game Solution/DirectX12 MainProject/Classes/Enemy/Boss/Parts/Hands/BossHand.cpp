@@ -17,7 +17,11 @@ void BossHand::LoadAssets(LPCWSTR file_name){
 	//model->SetScale(1.0f);
 
 	collision = model->GetBoundingOrientedBox();
-	collision.Extents = SimpleMath::Vector3(collision.Extents);
+	collision.Extents = SimpleMath::Vector3(
+		collision.Extents.x * 0.5f,
+		collision.Extents.y * 0.3f,
+		collision.Extents.z * 0.5f
+	);
 
 	collision_model = DX9::Model::CreateBox(
 		DXTK->Device9,
@@ -37,9 +41,9 @@ void BossHand::Update(const float deltaTime) {
 
 void BossHand::Render(){
 	BossParts::Render();
-	//collision_model->SetPosition(collision.Center);
-	//collision_model->SetRotationQuaternion(collision.Orientation);
-	//collision_model->Draw();
+	collision_model->SetPosition(collision.Center);
+	collision_model->SetRotationQuaternion(collision.Orientation);
+	collision_model->Draw();
 }
 
 //void BossAttack::SusiZanmai() {
