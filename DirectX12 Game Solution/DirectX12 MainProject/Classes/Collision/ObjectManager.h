@@ -27,6 +27,7 @@ public:
 	bool GetBossRAttackFlag();
 	bool GetBossLAttackFlag();
 	bool GetBossDmgFlag();
+	bool IsBossHandOpen();
 	SimpleMath::Vector3 GetPlayerPos();
 
 private:

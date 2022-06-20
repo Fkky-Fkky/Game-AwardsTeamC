@@ -39,6 +39,10 @@ int ObjectManager::GetBossHP() {
 	return boss_->GetBossHP();
 }
 
+bool ObjectManager::IsBossHandOpen() {
+	return boss_->GetHnadState();
+}
+
 float ObjectManager::GetPlayerHP() {
 	return player_->GetPlayerHP();
 }
