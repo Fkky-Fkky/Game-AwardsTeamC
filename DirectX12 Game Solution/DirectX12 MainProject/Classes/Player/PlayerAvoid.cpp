@@ -1,5 +1,6 @@
 #include "Classes/Player/PlayerAvoid.h"
 #include "Classes/Player/Player.h"
+#include <Base/DX12Effekseer.h>
 
 void PlayerAvoid::Initialize() {
 	action_state_ = READY;
@@ -7,6 +8,7 @@ void PlayerAvoid::Initialize() {
 	avoid_speed_	= 0.0f;
 	player_dest_x_  = 0.0f;
 	cool_time_		= 0.0f;
+	avoid_time_		= 0.0f;
 	time_delta_		= 0.0f;
 
 	invincible_flag_ = false;
@@ -25,6 +27,7 @@ void PlayerAvoid::Update(const float deltaTime, Player& player) {
 	case AVOID:			Avoid();		break;
 	case COOL_TIME:		CoolTime();		break;
 	}
+	player.SetMotion(PLAYER_MOTION::AVOID);
 
 	player.SetPlayerPosition(pos_);
 	player.SetPlayerRotation(rot_);
@@ -41,15 +44,17 @@ void PlayerAvoid::Ready(Player& player) {	//‰ñ”ð‚É•K—v‚È•Ï”‚Ì€”õ
 	player_dest_x_ = pos_.x + add_pos_;
 	player_dest_x_ = std::clamp(player_dest_x_, PLAYER_LIMIT_MIN_POS_X_, PLAYER_LIMIT_MAX_POS_X_);
 	player.PlayAvoidSE();
+	DX12Effect.PlayOneShot("avoid", pos_);
 	action_state_  = AVOID;
 }
 
 void PlayerAvoid::Avoid() {	//‰ñ”ð
+	avoid_time_ = std::min(avoid_time_ + time_delta_, 0.4f);
 	avoid_speed_ = std::min(avoid_speed_ + ADD_AVOID_SPEED_ * time_delta_, AVOID_MAX_SPEED_);
 	pos_.x = (IsPayerRightWard()) ?
 		std::max(pos_.x - avoid_speed_ * time_delta_, player_dest_x_) :
 		std::min(pos_.x + avoid_speed_ * time_delta_, player_dest_x_);
-	if (pos_.x == player_dest_x_) {
+	if (avoid_time_ >= 0.4f) {
 		invincible_flag_ = false;
 		avoid_speed_	 = 0.0f;
 		action_state_	 = COOL_TIME;

@@ -10,6 +10,7 @@ public:
 		avoid_speed_	= 0.0f;
 		player_dest_x_  = 0.0f;
 		cool_time_		= 0.0f;
+		avoid_time_		= 0.0f;
 		time_delta_		= 0.0f;
 
 		invincible_flag_ = false;
@@ -41,6 +42,7 @@ private:
 
 	float avoid_speed_;
 	float player_dest_x_;
+	float avoid_time_;
 	float cool_time_;
 	float time_delta_;
 	bool invincible_flag_;
@@ -55,5 +57,5 @@ private:
 	const float ADD_POS_X_ = 5.5f;
 	const float ADD_AVOID_SPEED_ = 100.0f;
 	const float AVOID_MAX_SPEED_ = 100.0f;
-	const float COOL_TIME_MAX = 0.25f;
+	const float COOL_TIME_MAX = 0.21f;
 };
