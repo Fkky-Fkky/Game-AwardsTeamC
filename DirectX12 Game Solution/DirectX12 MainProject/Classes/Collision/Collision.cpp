@@ -1,16 +1,13 @@
 #include "Classes/Collision/Collision.h"
 #include "Classes/Collision/ObjectManager.h"
 
-Collision::Collision() {
-	player_dmg_flag_r_ = false;
-	player_dmg_flag_l_ = false;
-	boss_dmg_flg_ = false;
-}
-
 void Collision::Initialize() {
 	player_dmg_flag_r_ = false;
 	player_dmg_flag_l_ = false;
 	boss_dmg_flg_ = false;
+	boss_hand_r_dmg_flag_ = false;
+	boss_hand_l_dmg_flag_ = false;
+	is_boss_hand_open_	  = false;
 }
 
 void Collision::LoadAssets() {
@@ -27,6 +24,8 @@ void Collision::Update(const float deltaTime, ObjectManager* obj_m_) {
 	BoundingOrientedBox boss_core_col_	 = obj_m_->GetBossCoreCollision();
 	BoundingOrientedBox boss_r_hand_col_ = obj_m_->GetBossRHandCollision();
 	BoundingOrientedBox boss_l_hand_col_ = obj_m_->GetBossLHandCollision();
+
+	is_boss_hand_open_ = obj_m_->IsBossHandOpen();
 
 	if (!player_invincible_flag) {
 		if (boss_r_atk_flag_) {
@@ -46,9 +45,15 @@ void Collision::Update(const float deltaTime, ObjectManager* obj_m_) {
 	
 	if (player_atk_flag_) {
 		boss_dmg_flg_ = player_atk_col_.Intersects(boss_core_col_);
+		if (is_boss_hand_open_) {
+			boss_hand_r_dmg_flag_ = player_atk_col_.Intersects(boss_r_hand_col_);
+			boss_hand_l_dmg_flag_ = player_atk_col_.Intersects(boss_l_hand_col_);
+		}
 	}
 	else {
 		boss_dmg_flg_ = false;
+		boss_hand_r_dmg_flag_ = false;
+		boss_hand_l_dmg_flag_ = false;
 	}
 }
 
@@ -68,6 +73,41 @@ void Collision::Render2D() {
 			SimpleMath::Vector2(0.0f, 0.0f),
 			DX9::Colors::Red,
 			L"ìñÇΩÇ¡ÇƒÇ»Ç¢"
+		);
+	}
+
+	if (boss_hand_r_dmg_flag_ ||
+		boss_hand_l_dmg_flag_) {
+		DX9::SpriteBatch->DrawString(
+			font.Get(),
+			SimpleMath::Vector2(0.0f, 90.0f),
+			DX9::Colors::Red,
+			L"éËÇ…çUåÇìñÇΩÇ¡ÇƒÇÈ"
+		);
+	}
+	else {
+		DX9::SpriteBatch->DrawString(
+			font.Get(),
+			SimpleMath::Vector2(0.0f, 90.0f),
+			DX9::Colors::Red,
+			L"éËÇ…çUåÇìñÇΩÇ¡ÇƒÇ»Ç¢"
+		);
+	}
+
+	if (is_boss_hand_open_) {
+		DX9::SpriteBatch->DrawString(
+			font.Get(),
+			SimpleMath::Vector2(0.0f, 120.0f),
+			DX9::Colors::Red,
+			L"ÉpÅ["
+		);
+	}
+	else {
+		DX9::SpriteBatch->DrawString(
+			font.Get(),
+			SimpleMath::Vector2(0.0f, 120.0f),
+			DX9::Colors::Red,
+			L"ÉOÅ["
 		);
 	}
 }

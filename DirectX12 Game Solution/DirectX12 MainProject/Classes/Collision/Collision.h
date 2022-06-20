@@ -9,7 +9,15 @@ class ObjectManager;
 
 class Collision {
 public:
-	Collision();
+	Collision() {
+		player_dmg_flag_r_ = false;
+		player_dmg_flag_l_ = false;
+		boss_dmg_flg_	   = false;
+		boss_hand_r_dmg_flag_ = false;
+		boss_hand_l_dmg_flag_ = false;
+		is_boss_hand_open_	  = false;
+	}
+
 	~Collision() {};
 
 	void Initialize();
@@ -25,5 +33,8 @@ private:
 	bool player_dmg_flag_r_; 
 	bool player_dmg_flag_l_;
 	bool boss_dmg_flg_;
+	bool boss_hand_r_dmg_flag_;
+	bool boss_hand_l_dmg_flag_;
+	bool is_boss_hand_open_;
 	DX9::SPRITEFONT font;
 };
