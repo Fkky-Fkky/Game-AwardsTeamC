@@ -27,10 +27,11 @@ enum class PLAYER_STATE {
 };
 
 enum class PLAYER_MOTION {
-	MOVE,
-	ATTACK,
+	AVOID,
+	WAIT,
 	KNOCK_BACK,
-	WAIT
+	ATTACK,
+	MOVE
 };
 
 class Player {
@@ -81,7 +82,7 @@ private:
 	SimpleMath::Vector3 pos_;
 	SimpleMath::Vector3 rot_;
 
-	const int MOTION_MAX_ = 4;
+	const int MOTION_MAX_ = 5;
 	const float RIGHT_WARD_ = -90.0f;
 
 	PlayerRightMove      player_right_move_;

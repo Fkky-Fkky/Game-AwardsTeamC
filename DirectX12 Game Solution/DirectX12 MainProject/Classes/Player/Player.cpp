@@ -24,6 +24,7 @@ void Player::LoadAssets() {
 
     DX12Effect.Create(L"Effect/Eff_Sword/Eff_sword.efk", "swaord");
     DX12Effect.Create(L"Effect/Eff_Jump_001/Eff_jump_001.efk", "jump");
+    DX12Effect.Create(L"Effect/Eff_kaihi/Eff_kaihi.efk", "avoid");
 
     avoid_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Avoidance.wav");
     jump_se_  = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Jump.wav");
@@ -34,11 +35,12 @@ void Player::LoadAssets() {
 }
 
 void Player::Update(const float deltaTime, ObjectManager* obj_m) {
-    player_state_->Update(deltaTime, *this);
-
+    
     if (obj_m->GetPlayerDmgFlag()) {
         SwitchState(PLAYER_STATE::DAMAGE);
     }
+
+    player_state_->Update(deltaTime, *this);
 
     player_attack_colision_.Update(deltaTime, model_.get(), this);
 
