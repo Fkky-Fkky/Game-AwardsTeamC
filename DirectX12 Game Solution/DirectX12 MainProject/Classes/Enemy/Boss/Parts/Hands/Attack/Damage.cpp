@@ -25,6 +25,8 @@ void Damage::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 }
 
 void Damage::HandDamage(ObjectManager* obj_m) {	//Žè‚Éƒ_ƒ[ƒW‚ð—^‚¦‚é
+	boss_handR_->SetAttackFlag(false);
+	boss_handL_->SetAttackFlag(false);
 	if (obj_m->IsBossHandRDmg()) {
 		boss_handR_->HandDamageProcess();
 	}
