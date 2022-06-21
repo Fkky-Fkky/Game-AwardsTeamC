@@ -1,11 +1,6 @@
 #include "Classes/Enemy/Boss/Parts/Hands/BossHand.h"
 #include <Bezier.h>
 
-BossHand::BossHand() {
-	bezier_t = 0.0f;
-	attack_flag = false;
-}
-
 void BossHand::Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote) {
 	BossParts::Initialize(pos, rote);
 	bezier_t = 0.0f;
@@ -44,6 +39,10 @@ void BossHand::Render(){
 	collision_model->SetPosition(collision.Center);
 	collision_model->SetRotationQuaternion(collision.Orientation);
 	collision_model->Draw();
+}
+
+void BossHand::HandDamageProcess() {
+	hand_hp_--;
 }
 
 //void BossAttack::SusiZanmai() {
