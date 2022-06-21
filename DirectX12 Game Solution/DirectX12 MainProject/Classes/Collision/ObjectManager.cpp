@@ -39,10 +39,6 @@ int ObjectManager::GetBossHP() {
 	return boss_->GetBossHP();
 }
 
-bool ObjectManager::IsBossHandOpen() {
-	return boss_->GetHnadState();
-}
-
 float ObjectManager::GetPlayerHP() {
 	return player_->GetPlayerHP();
 }
@@ -75,6 +71,18 @@ bool ObjectManager::GetBossLAttackFlag() {
 
 bool ObjectManager::GetBossDmgFlag() {
 	return collision_->GetBossDmgFlag();
+}
+
+bool ObjectManager::IsBossHandOpen() {
+	return boss_->GetHnadState();
+}
+
+bool ObjectManager::IsBossHandRDmg() {
+	return collision_->IsBossHandRDmg();
+}
+
+bool ObjectManager::IsBossHandLDmg() {
+	return collision_->IsBossHandLDmg();
 }
 
 SimpleMath::Vector3 ObjectManager::GetPlayerPos() {
