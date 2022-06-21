@@ -27,6 +27,8 @@ void BossHand::LoadAssets(LPCWSTR file_name){
 	D3DMATERIAL9 material{};
 	material.Diffuse = DX9::Colors::Value(0.0f, 1.0f, 0.0f, 0.75f);
 	collision_model->SetMaterial(material);
+
+	font_ = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 }
 
 void BossHand::Update(const float deltaTime) {
@@ -44,6 +46,16 @@ void BossHand::Render(){
 void BossHand::HandDamageProcess() {
 	hand_hp_--;
 }
+
+void BossHand::Render2D(float pos_x) {
+	DX9::SpriteBatch->DrawString(
+		font_.Get(),
+		SimpleMath::Vector2(pos_x, 150.0f),
+		DX9::Colors::Red,
+		L"%i", hand_hp_
+	);
+}
+
 
 //void BossAttack::SusiZanmai() {
 //	r_hand_pos = Bezier::CubicInterpolate(

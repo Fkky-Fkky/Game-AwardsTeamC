@@ -19,6 +19,7 @@ public:
 	virtual void LoadAssets(LPCWSTR file_name);
 	virtual void Update(const float deltaTime);
 	virtual void Render();
+	void Render2D(float pos_x);
 
 	int GetHandHp() { return hand_hp_; }
 	bool GetAttackFlag() { return attack_flag_; }
@@ -42,7 +43,7 @@ protected:
 
 	BoundingOrientedBox collision;
 	DX9::MODEL collision_model;
-
+	DX9::SPRITEFONT font_;
 	int hand_hp_;
 
 	const float INITIAL_POS_Y = 10.0f;

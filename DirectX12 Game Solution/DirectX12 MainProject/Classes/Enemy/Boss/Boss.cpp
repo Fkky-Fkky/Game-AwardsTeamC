@@ -57,6 +57,9 @@ void Boss::Render() {
 
 void Boss::Render2D() {
 	core.Render2D();
+	hand_r.Render2D(1000.0f);
+	hand_l.Render2D(0.0f);
+
 }
 
 void Boss::RandomAttackState() {	//ƒ{ƒX‚ÌHP‚É”ä—á‚µ‚ÄUŒ‚‚Ìí—Ş•Ï‰»

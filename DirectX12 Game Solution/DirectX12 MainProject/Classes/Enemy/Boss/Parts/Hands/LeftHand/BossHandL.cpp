@@ -8,6 +8,7 @@ void BossHandL::Initialize() {
 }
 
 void BossHandL::LoadAssets() {
+	BossHand::LoadAssets(L"Boss/boss_hand_L.X");
 	hand_l_ = DX9::SkinnedModel::CreateFromFile(DXTK->Device9, L"Boss/boss_hand_L.X");
 	
 	collision = hand_l_->GetBoundingOrientedBox();
