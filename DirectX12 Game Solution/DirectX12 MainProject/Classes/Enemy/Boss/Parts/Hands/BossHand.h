@@ -27,7 +27,7 @@ public:
 	SimpleMath::Vector3 GetRotation() { return rotation; }
 	void SetHandPos(SimpleMath::Vector3 position_) { position = position_; }
 	void SetHandRote(SimpleMath::Vector3 rotation_) { rotation = rotation_; }
-	void SetAttackFlag(bool attack_flag_) { attack_flag_ = attack_flag_; }
+	void SetAttackFlag(bool attack_flag) { attack_flag_ = attack_flag; }
 	void HandDamageProcess();
 
 private:
