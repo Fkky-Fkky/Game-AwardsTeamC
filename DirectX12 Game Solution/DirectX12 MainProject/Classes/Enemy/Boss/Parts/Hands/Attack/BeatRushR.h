@@ -15,7 +15,7 @@ public:
 		r_hand_up_flag_ = false;
 		l_hand_up_flag_ = false;
 	}
-	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss);
+	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss);
 
 private:
 	void Ready();

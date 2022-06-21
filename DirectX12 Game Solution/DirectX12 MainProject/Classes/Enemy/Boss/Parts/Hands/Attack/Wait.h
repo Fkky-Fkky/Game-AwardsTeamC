@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Base/pch.h"
-#include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
 
 class Wait : public BossAttack {
@@ -10,7 +8,7 @@ public:
 		wait_time_ = 0.0f;
 		max_wait_time_ = 0.1f;
 	}
-	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss);
+	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss);
 
 private:
 	float wait_time_;

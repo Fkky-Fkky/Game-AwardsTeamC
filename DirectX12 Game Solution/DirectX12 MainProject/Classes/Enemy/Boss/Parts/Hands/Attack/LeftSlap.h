@@ -14,7 +14,7 @@ public:
 		pos_  = SimpleMath::Vector3::Zero;
 		rote_ = SimpleMath::Vector3::Zero;
 	}
-	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss);
+	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss);
 
 private:
 	void Ready();

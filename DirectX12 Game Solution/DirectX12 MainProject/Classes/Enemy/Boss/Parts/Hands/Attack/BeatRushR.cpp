@@ -1,7 +1,8 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRushR.h"
 #include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/Collision/ObjectManager.h"
 
-void BeatRushR::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss){
+void BeatRushR::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss){
 	pos_r_  = boss_handR_->GetHandPos();
 	rote_r_ = boss_handR_->GetRotation();
 	pos_l_  = boss_handL_->GetHandPos();

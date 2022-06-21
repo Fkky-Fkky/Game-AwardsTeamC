@@ -1,7 +1,8 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/LeftBeat.h"
 #include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/Collision/ObjectManager.h"
 
-void LeftBeat::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss) {
+void LeftBeat::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 	pos_  = boss_handL_->GetHandPos();
 	rote_ = boss_handL_->GetRotation();
 
@@ -9,7 +10,7 @@ void LeftBeat::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Bos
 
 	switch (boss_action_state_)
 	{
-	case READY:		Ready(player_pos);		break;
+	case READY:		Ready(obj_m);		break;
 	case ATTACK:	LeftBeatAttack(boss);	break;
 	case RETURN:	HandReturn();			break;
 	case ACTION_END:
@@ -22,9 +23,9 @@ void LeftBeat::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Bos
 	boss_handL_->SetHandRote(rote_);
 }
 
-void LeftBeat::Ready(SimpleMath::Vector3 player_pos) { //UŒ‚‚É•K—p‚È•Ï”‚ÌÝ’è
+void LeftBeat::Ready(ObjectManager* obj_m) { //UŒ‚‚É•K—p‚È•Ï”‚ÌÝ’è
 	if (!player_pos_get_flag_) {
-		move_dest_ = player_pos;
+		move_dest_ = obj_m->GetPlayerPos();
 		player_pos_get_flag_ = true;
 	}
 

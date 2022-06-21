@@ -1,7 +1,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightSlap.h"
 #include "Classes/Enemy/Boss/Boss.h"
 
-void RightSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss) {
+void RightSlap::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 	pos_  = boss_handR_->GetHandPos();
 	rote_ = boss_handR_->GetRotation();
 	

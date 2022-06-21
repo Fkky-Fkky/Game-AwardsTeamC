@@ -1,7 +1,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
 #include "Classes/Enemy/Boss/Boss.h"
 
-void DoubleSlap::Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss)	{
+void DoubleSlap::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss)	{
 	r_pos_  = boss_handR_->GetHandPos();
 	r_rote_ = boss_handR_->GetRotation();
 	l_pos_  = boss_handL_->GetHandPos();

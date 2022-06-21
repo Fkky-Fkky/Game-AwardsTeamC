@@ -11,10 +11,10 @@ public:
 		player_pos_get_flag_ = false;
 		boss_action_state_ = 0;
 	}
-	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss);
+	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss);
 
 private:
-	void Ready(SimpleMath::Vector3 player_pos);
+	void Ready(ObjectManager* obj_m);
 	void RightBeatAttack(Boss* boss);
 	void HandReturn();
 

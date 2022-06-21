@@ -6,6 +6,7 @@
 #include "Base/DX12Effekseer.h"
 
 class Boss;
+class ObjectManager;
 
 using namespace DirectX;
 
@@ -15,7 +16,7 @@ public:
 		boss_handL_ = boss_handL;
 		boss_handR_ = bosshandR;
 	};
-	virtual void Update(const float deltaTime, SimpleMath::Vector3 player_pos, Boss* boss) = 0;
+	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) = 0;
 
 protected:
 	BossHand* boss_handL_;
