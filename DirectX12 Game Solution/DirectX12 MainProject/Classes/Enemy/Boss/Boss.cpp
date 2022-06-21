@@ -25,6 +25,7 @@ void Boss::Initialize() {
 	old_hand_state_ = ROCK;
 	slap_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Slap.wav");
 	beat_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Beat.wav");
+	hand_dmg_flag_ = false;
 }
 
 void Boss::LoadAseets() {
@@ -41,6 +42,10 @@ void Boss::Update(const float deltaTime, ObjectManager* obj_m) {
 	hand_r.Update(deltaTime);
 	attack->Update(deltaTime, obj_m, this);
 	SwitchStateWait();
+	if (obj_m->IsBossHandLDmg() ||
+		obj_m->IsBossHandRDmg()) {
+		SwitchStateDamage();
+	}
 }
 
 void Boss::Render() {
@@ -113,6 +118,7 @@ void Boss::SwitchStateAttack() {
 
 void Boss::ActionEnd() {
 	action_end_flag_ = true;
+	hand_dmg_flag_   = false;
 }
 
 void Boss::SwitchStateWait() {
@@ -125,9 +131,12 @@ void Boss::SwitchStateWait() {
 }
 
 void Boss::SwitchStateDamage() {
-	delete attack;
-	attack = new Damage;
-	attack->Initialize(&hand_l, &hand_r);
+	if (!hand_dmg_flag_) {
+		delete attack;
+		attack = new Damage;
+		attack->Initialize(&hand_l, &hand_r);
+		hand_dmg_flag_ = true;
+	}
 }
 
 void Boss::PlaySlapSE() {

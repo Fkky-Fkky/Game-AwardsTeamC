@@ -23,6 +23,7 @@ public:
 		hand_state_ = false;
 		old_hand_state_ = false;
 		same_state_flag_ = false;
+		hand_dmg_flag_ = false;
 	}
 
 	~Boss() {};
@@ -86,6 +87,8 @@ private:
 	bool same_state_flag_;
 	XAudio::SOUNDEFFECT slap_se_;
 	XAudio::SOUNDEFFECT	beat_se_;
+
+	bool hand_dmg_flag_;
 
 	const float HP_NORMAL_MAX_ = 30.0f;
 	const float HP_NORMAL_MIN_ = 20.0f;
