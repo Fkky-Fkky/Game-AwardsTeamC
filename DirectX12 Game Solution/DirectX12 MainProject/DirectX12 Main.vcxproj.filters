@@ -216,6 +216,9 @@
     <ClInclude Include="Classes\My_Light\My_Light.h">
       <Filter>Classes\My_Light</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Damage.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -340,6 +343,9 @@
     </ClCompile>
     <ClCompile Include="Classes\My_Light\My_Light.cpp">
       <Filter>Classes\My_Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Damage.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
