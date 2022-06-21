@@ -7,6 +7,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/LeftBeat.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRushR.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/Damage.h"
 
 void Boss::Initialize() {
 	body.Initialize();
@@ -38,7 +39,7 @@ void Boss::Update(const float deltaTime, ObjectManager* obj_m) {
 	core.Update(deltaTime, obj_m->GetBossDmgFlag());
 	hand_l.Update(deltaTime);
 	hand_r.Update(deltaTime);
-	attack->Update(deltaTime, obj_m->GetPlayerPos(), this);
+	attack->Update(deltaTime, obj_m, this);
 	SwitchStateWait();
 }
 
@@ -121,6 +122,12 @@ void Boss::SwitchStateWait() {
 		attack->Initialize(&hand_l, &hand_r);
 		action_end_flag_ = false;
 	}
+}
+
+void Boss::SwitchStateDamage() {
+	delete attack;
+	attack = new Damage;
+	attack->Initialize(&hand_l, &hand_r);
 }
 
 void Boss::PlaySlapSE() {

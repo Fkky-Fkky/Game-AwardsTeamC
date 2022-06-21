@@ -49,6 +49,7 @@ public:
 private:
 	void SwitchStateAttack();
 	void SwitchStateWait();
+	void SwitchStateDamage();
 	void RandomHandState();
 
 	BossBody body;
