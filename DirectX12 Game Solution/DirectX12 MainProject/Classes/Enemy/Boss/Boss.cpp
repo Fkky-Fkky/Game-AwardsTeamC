@@ -68,23 +68,30 @@ void Boss::RandomAttackState() {	//ボスのHPに比例して攻撃の種類変化
 	int boss_hp_ = GetBossHP();
 	bool normal_time_ = boss_hp_ <= HP_NORMAL_MAX_ && boss_hp_ > HP_NORMAL_MIN_;
 	bool hard_time_   = boss_hp_ <= HP_NORMAL_MIN_ && boss_hp_ > HP_HARD_MIN_;
-	int max_random_num_;
+	int random_state_min_ = ATTACK_STATE_MIN_;
+	int random_state_max_ = ATTACK_STATE_MAX_;
 	int old_atk_state_ = attack_state_;
 
-	if (normal_time_) {	//HP3/3
-		max_random_num_ = NORMAL_MODE_MAX_;
+	if (normal_time_) {	//ボスHP3/3
+		random_state_max_ = NORMAL_MODE_MAX_;
+		if (hand_l.GetHandHp() <= 0) {	//左手のHPが0だった場合右手の攻撃のみ行う
+			random_state_min_ = RIGHT_BEAT;
+			random_state_max_ = RIGHT_SLAP;
+		}
+		if (hand_r.GetHandHp() <= 0) {	//右手のHPが0だった場合左手の攻撃のみ行う
+			random_state_min_ = LEFT_BEAT;
+			random_state_max_ = LEFT_SLAP;
+		}
 	}
-	else if (hard_time_) {	//HP2/3
-		max_random_num_ = HARD_MODE_MAX_;
+	else if (hard_time_) {	//ボスHP2/3
+		random_state_max_ = HARD_MODE_MAX_;
 	}
-	else {	//HP1/3
-		max_random_num_ = VERY_HARD_MODE_MAX_;
-	}
+
+	random_atk_dist_ = std::uniform_int_distribution<>(random_state_min_, random_state_max_);
 
 	while (true) {
 		attack_state_ = random_atk_dist_(random_engine_);
-		if (attack_state_ <= max_random_num_ && 
-			attack_state_ != old_atk_state_) {
+		if (attack_state_ != old_atk_state_) {
 			break;
 		}
 	}
@@ -111,9 +118,9 @@ void Boss::RandomHandState() {	//手の状態を変更する(グー・パー)
 void Boss::SwitchStateAttack() {
 	delete attack;
 	switch (attack_state_) {
-	case RIGHT_BEAT:	attack = new RightBeat;		break;
 	case LEFT_BEAT:		attack = new LeftBeat;		break;
 	case LEFT_SLAP:		attack = new LeftSlap;		break;
+	case RIGHT_BEAT:	attack = new RightBeat;		break;
 	case RIGHT_SLAP:	attack = new RightSlap;		break;
 	case DOUBLE_SLAP:	attack = new DoubleSlap;	break;
 	case BEAT_RUSH_R:	attack = new BeatRushR;		break;

@@ -78,9 +78,9 @@ private:
 
 	enum BOSS_STATE {
 		WAIT,
-		RIGHT_BEAT,
 		LEFT_BEAT,
 		LEFT_SLAP,
+		RIGHT_BEAT,
 		RIGHT_SLAP,
 		DOUBLE_SLAP,
 		BEAT_RUSH_R
@@ -91,9 +91,8 @@ private:
 		PAPER
 	};
 
-	const int NORMAL_MODE_MAX_	  = 3;
+	const int NORMAL_MODE_MAX_	  = 4;
 	const int HARD_MODE_MAX_	  = 5;
-	const int VERY_HARD_MODE_MAX_ = 6;
 	const int ATTACK_STATE_MIN_ = 1;
 	const int ATTACK_STATE_MAX_ = 6;
 	const float HP_NORMAL_MAX_ = 30.0f;
