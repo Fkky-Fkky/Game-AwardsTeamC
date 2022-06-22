@@ -16,14 +16,14 @@ class ObjectManager;
 class Boss {
 public:
 	Boss() {
-		attack = nullptr;
-		attack_state_ = WAIT;
-		action_end_flag_ = false;
+		attack		 = nullptr;
 		beat_effect_ = nullptr;
-		hand_state_ = false;
-		old_hand_state_ = false;
-		same_state_flag_ = false;
-		hand_dmg_flag_ = false;
+		attack_state_	= WAIT;
+		hand_state_		= ROCK;
+		old_hand_state_ = PAPER;
+		action_end_flag_	 = false;
+		same_handstate_flag_ = false;
+		hand_dmg_flag_		 = false;
 	}
 
 	~Boss() {};
@@ -57,13 +57,25 @@ private:
 	BossCore core;
 	BossHandL hand_l;
 	BossHandR hand_r;
-
 	BossAttack* attack;
+
 	std::mt19937 random_engine_;
-	std::uniform_int_distribution<int> randomDist;
+	std::uniform_int_distribution<int> random_atk_dist_;
+	std::uniform_int_distribution<int> random_hand_dist_;
+
+	EFFECT beat_effect_;
+
+	XAudio::SOUNDEFFECT slap_se_;
+	XAudio::SOUNDEFFECT	beat_se_;
+
 	int attack_state_;
+	bool hand_state_;
+	bool old_hand_state_;
 
 	bool action_end_flag_;
+	bool same_handstate_flag_;
+	bool hand_dmg_flag_;
+
 	enum BOSS_STATE {
 		WAIT,
 		RIGHT_BEAT,
@@ -74,26 +86,17 @@ private:
 		BEAT_RUSH_R
 	};
 
-	EFFECT beat_effect_;
-
-	bool hand_state_;
-	bool old_hand_state_;
-
 	enum HAND_STATE {
 		ROCK,
 		PAPER
 	};
-	std::uniform_int_distribution<int> random_hand_dist_;
-	bool same_state_flag_;
-	XAudio::SOUNDEFFECT slap_se_;
-	XAudio::SOUNDEFFECT	beat_se_;
 
-	bool hand_dmg_flag_;
-
+	const int NORMAL_MODE_MAX_	  = 3;
+	const int HARD_MODE_MAX_	  = 5;
+	const int VERY_HARD_MODE_MAX_ = 6;
+	const int ATTACK_STATE_MIN_ = 1;
+	const int ATTACK_STATE_MAX_ = 6;
 	const float HP_NORMAL_MAX_ = 30.0f;
 	const float HP_NORMAL_MIN_ = 20.0f;
-	const float HP_HARD_MIN_ = 10.0f;
-	const float NORMAL_MODE_MAX_	= 3;
-	const float HARD_MODE_MAX_		= 5;
-	const float VERY_HARD_MODE_MAX_ = 6;
+	const float HP_HARD_MIN_   = 10.0f;
 };

@@ -14,18 +14,21 @@ void Boss::Initialize() {
 	core.Initialize();
 	hand_l.Initialize();
 	hand_r.Initialize();
-	std::random_device seed;
-	random_engine_ = std::mt19937(seed());
-	randomDist = std::uniform_int_distribution<>(1, 6);
-	random_hand_dist_ = std::uniform_int_distribution<>(ROCK, PAPER);
 	attack = new Wait;
 	attack->Initialize(&hand_l, &hand_r);
-	action_end_flag_ = false;
-	hand_state_ = ROCK;
-	old_hand_state_ = ROCK;
+	std::random_device seed;
+	random_engine_	  = std::mt19937(seed());
+	random_atk_dist_  = std::uniform_int_distribution<>(ATTACK_STATE_MIN_, ATTACK_STATE_MAX_);
+	random_hand_dist_ = std::uniform_int_distribution<>(ROCK, PAPER);
 	slap_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Slap.wav");
 	beat_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Beat.wav");
-	hand_dmg_flag_ = false;
+
+	attack_state_	= WAIT;
+	hand_state_		= ROCK;
+	old_hand_state_ = PAPER;
+	action_end_flag_	 = false;
+	same_handstate_flag_ = false;
+	hand_dmg_flag_		 = false;
 }
 
 void Boss::LoadAseets() {
@@ -59,7 +62,6 @@ void Boss::Render2D() {
 	core.Render2D();
 	hand_r.Render2D(1000.0f);
 	hand_l.Render2D(0.0f);
-
 }
 
 void Boss::RandomAttackState() {	//ボスのHPに比例して攻撃の種類変化
@@ -67,21 +69,22 @@ void Boss::RandomAttackState() {	//ボスのHPに比例して攻撃の種類変化
 	bool normal_time_ = boss_hp_ <= HP_NORMAL_MAX_ && boss_hp_ > HP_NORMAL_MIN_;
 	bool hard_time_   = boss_hp_ <= HP_NORMAL_MIN_ && boss_hp_ > HP_HARD_MIN_;
 	int max_random_num_;
-	int old_state_ = attack_state_;
+	int old_atk_state_ = attack_state_;
 
-	if (normal_time_) {
+	if (normal_time_) {	//HP3/3
 		max_random_num_ = NORMAL_MODE_MAX_;
 	}
-	else if (hard_time_) {
+	else if (hard_time_) {	//HP2/3
 		max_random_num_ = HARD_MODE_MAX_;
 	}
-	else {
+	else {	//HP1/3
 		max_random_num_ = VERY_HARD_MODE_MAX_;
 	}
 
 	while (true) {
-		attack_state_ = randomDist(random_engine_);
-		if (attack_state_ <= max_random_num_ && attack_state_ != old_state_) {
+		attack_state_ = random_atk_dist_(random_engine_);
+		if (attack_state_ <= max_random_num_ && 
+			attack_state_ != old_atk_state_) {
 			break;
 		}
 	}
@@ -89,17 +92,17 @@ void Boss::RandomAttackState() {	//ボスのHPに比例して攻撃の種類変化
 	SwitchStateAttack();
 }
 
-void Boss::RandomHandState() {
-	if (same_state_flag_) {	//2連続同じ状態だった場合もう片方の状態にする
+void Boss::RandomHandState() {	//手の状態を変更する(グー・パー)
+	if (same_handstate_flag_) {	//2連続同じ状態だった場合もう片方の状態にする
 		hand_state_ = (old_hand_state_ == ROCK) ? PAPER : ROCK;
-		same_state_flag_ = false;
+		same_handstate_flag_ = false;
 	}
 	else {
 		hand_state_ = random_hand_dist_(random_engine_);
 	}
 
 	if (hand_state_ == old_hand_state_) {
-		same_state_flag_ = true;
+		same_handstate_flag_ = true;
 	}
 
 	old_hand_state_ = hand_state_;
