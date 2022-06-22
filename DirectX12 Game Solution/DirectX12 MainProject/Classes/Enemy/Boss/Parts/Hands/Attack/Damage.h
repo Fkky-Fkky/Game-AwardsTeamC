@@ -8,6 +8,8 @@ public:
 		damage_state_ = DAMAGE;
 		time_delta_ = 0.0f;
 		wait_time_  = 0.0f;
+		is_handmove_end_r_ = false;
+		is_handmove_end_l_ = false;
 		pos_r_ = SimpleMath::Vector3::Zero;
 		pos_l_ = SimpleMath::Vector3::Zero;
 		rot_r_ = SimpleMath::Vector3::Zero;
@@ -25,8 +27,12 @@ private:
 	void InitialPosMove();
 
 	int damage_state_;
+
 	float time_delta_;
 	float wait_time_;
+
+	bool is_handmove_end_r_;
+	bool is_handmove_end_l_;
 
 	SimpleMath::Vector3 pos_r_;
 	SimpleMath::Vector3 pos_l_;

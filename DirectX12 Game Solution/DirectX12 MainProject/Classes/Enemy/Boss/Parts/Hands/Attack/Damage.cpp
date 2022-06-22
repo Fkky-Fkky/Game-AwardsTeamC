@@ -33,6 +33,15 @@ void Damage::HandDamage(ObjectManager* obj_m) {	//手にダメージを与える
 	if (obj_m->IsBossHandLDmg()) {
 		boss_handL_->HandDamageProcess();
 	}
+
+	if (boss_handR_->GetHandHp() <= 0) {
+		is_handmove_end_r_ = true;
+	}
+	if (boss_handL_->GetHandHp() <= 0) {
+		is_handmove_end_l_ = true;
+	}
+
+
 	damage_state_ = WAIT;
 }
 
@@ -64,10 +73,21 @@ void Damage::Reset() {	//X座標以外を初期位置にする
 }
 
 void Damage::InitialPosMove() {	//手を初期位置へ移動
-	pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
-	pos_l_.x = std::max(pos_l_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
-	if (pos_r_.x >= HAND_R_INITIAL_POS_X_ &&
-		pos_l_.x <= HAND_L_INITIAL_POS_X_) {
+	if (!is_handmove_end_r_) {
+		pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
+		if (pos_r_.x >= HAND_R_INITIAL_POS_X_) {
+			is_handmove_end_r_ = true;
+		}
+	}
+	if (!is_handmove_end_l_) {
+		pos_l_.x = std::max(pos_l_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
+		if (pos_l_.x <= HAND_L_INITIAL_POS_X_) {
+			is_handmove_end_l_ = true;
+		}
+	}
+
+	if (is_handmove_end_r_ &&
+		is_handmove_end_l_) {
 		damage_state_ = ACTION_END;
 	}
 }
