@@ -4,6 +4,7 @@
 void BossHand::Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote) {
 	BossParts::Initialize(pos, rote);
 	bezier_t = 0.0f;
+	hand_hp_ = HAND_HP_MAX_;
 }
 
 void BossHand::LoadAssets(LPCWSTR file_name){
@@ -45,6 +46,10 @@ void BossHand::Render(){
 
 void BossHand::HandDamageProcess() {
 	hand_hp_--;
+}
+
+void BossHand::HandHPHeal() {
+	hand_hp_ = HAND_HP_MAX_;
 }
 
 void BossHand::Render2D(float pos_x) {

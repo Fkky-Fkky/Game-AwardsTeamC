@@ -30,6 +30,7 @@ public:
 	void SetHandRote(SimpleMath::Vector3 rotation_) { rotation = rotation_; }
 	void SetAttackFlag(bool attack_flag) { attack_flag_ = attack_flag; }
 	void HandDamageProcess();
+	void HandHPHeal();
 
 private:
 
@@ -46,6 +47,7 @@ protected:
 	DX9::SPRITEFONT font_;
 	int hand_hp_;
 
+	const int HAND_HP_MAX_ = 3;
 	const float INITIAL_POS_Y = 10.0f;
 	const float INITIAL_POS_Z = 3.0f;
 };
