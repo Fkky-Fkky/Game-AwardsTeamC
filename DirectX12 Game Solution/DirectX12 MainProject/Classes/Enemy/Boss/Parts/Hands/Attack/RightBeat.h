@@ -5,11 +5,14 @@
 class RightBeat : public BossAttack {
 public:
 	RightBeat() {
+		boss_action_state_ = READY;
 		time_delta_ = 0.0f;
-		beat_time_ = 0.0f;
-		wait_time_ = 0.0f;
+		beat_time_  = 0.0f;
+		wait_time_  = 0.0f;
 		player_pos_get_flag_ = false;
-		boss_action_state_ = 0;
+		pos_	   = SimpleMath::Vector3::Zero;
+		rote_	   = SimpleMath::Vector3::Zero;
+		move_dest_ = SimpleMath::Vector3::Zero;
 	}
 	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss);
 

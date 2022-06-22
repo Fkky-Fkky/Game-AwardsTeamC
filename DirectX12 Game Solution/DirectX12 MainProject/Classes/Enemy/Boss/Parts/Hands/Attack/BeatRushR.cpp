@@ -1,6 +1,5 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRushR.h"
 #include "Classes/Enemy/Boss/Boss.h"
-#include "Classes/Collision/ObjectManager.h"
 
 void BeatRushR::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss){
 	pos_r_  = boss_handR_->GetHandPos();
@@ -10,13 +9,11 @@ void BeatRushR::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss){
 
 	time_delta_ = deltaTime;
 	switch (action_state_) {
-	case READY:		Ready();		break;
-	case ATTACK:	Attack(boss);	break;
-	case RESET:		Reset();		break;
-	case RETURN:	HandReturn();	break;
-	case ACTION_END:
-		action_state_ = READY;
-		boss->ActionEnd();			break;
+	case READY:			Ready();			break;
+	case ATTACK:		Attack(boss);		break;
+	case RESET:			Reset();			break;
+	case RETURN:		HandReturn();		break;
+	case ACTION_END:	boss->ActionEnd();	break;
 	}
 
 	boss_handR_->SetHandPos(pos_r_);
@@ -115,7 +112,6 @@ void BeatRushR::Reset() {	//âÊñ äOÇ…ç¿ïWå≈íË
 	pos_l_.y  = HAND_INITIAL_POS_Y_;
 	rote_r_.x = XM_PIDIV4;
 	rote_l_.x = XM_PIDIV4;
-	wait_time_ = 0.0f;
 	action_state_ = RETURN;
 }
 

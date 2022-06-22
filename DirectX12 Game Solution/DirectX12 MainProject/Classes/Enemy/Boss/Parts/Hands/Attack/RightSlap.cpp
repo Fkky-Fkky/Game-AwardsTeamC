@@ -24,8 +24,8 @@ void RightSlap::Ready() {	//ó\îıìÆçÏ
 	slap_time_y_ += time_delta_;
 	float slap_y_ = SLAP_SPEED_Y_ * slap_time_y_ - HALF_ * SLAP_GRAVITY_Y_ * slap_time_y_ * slap_time_y_;
 	pos_.y += slap_y_;
-	pos_.z  = std::max(pos_.z - MOVE_SPEED_Z_ * time_delta_, 0.0f);
-	rote_.x = std::min(rote_.x + ROTE_SPEED_ * time_delta_, XM_PIDIV2);
+	pos_.z  = std::max(pos_.z  - MOVE_SPEED_Z_ * time_delta_, 0.0f);
+	rote_.x = std::min(rote_.x + ROTE_SPEED_   * time_delta_, XM_PIDIV2);
 
 	if (pos_.y <= SLAP_POS_Y_) {
 		pos_.y  = SLAP_POS_Y_;
@@ -60,7 +60,6 @@ void RightSlap::Reset() {	//éËÇâÊñ ÇÃîΩëŒë§Ç…à⁄ìÆ
 	pos_.y  = HAND_INITIAL_POS_Y_;
 	pos_.z  = HAND_INITIAL_POS_Z_;
 	rote_.x = XM_PIDIV4;
-	is_se_play_	  = false;
 	action_state_ = RETURN;
 }
 

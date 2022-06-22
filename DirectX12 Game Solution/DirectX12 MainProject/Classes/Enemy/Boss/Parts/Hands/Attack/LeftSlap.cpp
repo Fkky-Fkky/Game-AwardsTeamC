@@ -60,7 +60,6 @@ void LeftSlap::Reset() {	//Žè‚ð‰æ–Ê‚Ì”½‘Î‘¤‚ÉˆÚ“®
 	pos_.y  = HAND_INITIAL_POS_Y_;
 	pos_.z  = HAND_INITIAL_POS_Z_;
 	rote_.x = XM_PIDIV4;
-	is_se_play_ = false;
 	action_state_ = RETURN;
 }
 

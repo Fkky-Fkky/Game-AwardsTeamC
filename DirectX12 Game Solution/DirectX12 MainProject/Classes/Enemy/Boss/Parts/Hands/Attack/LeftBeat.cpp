@@ -8,15 +8,11 @@ void LeftBeat::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 
 	time_delta_ = deltaTime;
 
-	switch (boss_action_state_)
-	{
-	case READY:		Ready(obj_m);		break;
-	case ATTACK:	LeftBeatAttack(boss);	break;
-	case RETURN:	HandReturn();			break;
-	case ACTION_END:
-		boss_action_state_ = READY;
-		boss->ActionEnd();
-		break;
+	switch (boss_action_state_) {
+	case READY:			Ready(obj_m);			break;
+	case ATTACK:		LeftBeatAttack(boss);	break;
+	case RETURN:		HandReturn();			break;
+	case ACTION_END:	boss->ActionEnd();		break;
 	}
 
 	boss_handL_->SetHandPos(pos_);
@@ -31,13 +27,16 @@ void LeftBeat::Ready(ObjectManager* obj_m) { //UŒ‚‚É•K—p‚È•Ï”‚Ìİ’è
 
 	pos_.z = std::max(pos_.z - MOVE_SPEED_Z_ * time_delta_, 0.0f);
 
-	if (pos_.x < move_dest_.x)
+	if (pos_.x < move_dest_.x) {
 		pos_.x = std::min(pos_.x + MOVE_SPEED_X_ * time_delta_, move_dest_.x);
-	else
+	}
+	else {
 		pos_.x = std::max(pos_.x - MOVE_SPEED_X_ * time_delta_, move_dest_.x);
+	}
 
-	if (pos_.x == move_dest_.x)
+	if (pos_.x == move_dest_.x) {
 		boss_action_state_ = ATTACK;
+	}
 }
 
 void LeftBeat::LeftBeatAttack(Boss* boss) { //’@‚«‚Â‚¯UŒ‚
@@ -48,7 +47,7 @@ void LeftBeat::LeftBeatAttack(Boss* boss) { //’@‚«‚Â‚¯UŒ‚
 	rote_.x = std::max(rote_.x - ROTE_SPEED_ * time_delta_, -XM_1DIV2PI);
 
 	if (pos_.y <= 0.0f) {
-		pos_.y = 0.0f;
+		pos_.y  = 0.0f;
 		boss->PlayBeatSE();
 		boss->PlayBeatEffect(pos_);
 		boss_handL_->SetAttackFlag(false);
@@ -60,20 +59,19 @@ void LeftBeat::HandReturn() { //è‚ğ‰ŠúˆÊ’u‚ÖˆÚ“®
 	wait_time_ += time_delta_;
 
 	if (wait_time_ >= WAIT_TIME_MAX_) {
-		if (pos_.x < HAND_L_INITIAL_POS_X_)
+		if (pos_.x < HAND_L_INITIAL_POS_X_) {
 			pos_.x = std::min(pos_.x + MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
-		else
+		}
+		else {
 			pos_.x = std::max(pos_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
-
+		}
 		pos_.y  = std::min(pos_.y + MOVE_SPEED_Y_ * time_delta_, HAND_INITIAL_POS_Y_);
 		pos_.z  = std::min(pos_.z + MOVE_SPEED_Z_ * time_delta_, HAND_INITIAL_POS_Z_);
 		rote_.x = std::min(rote_.x + ROTE_SPEED_ * time_delta_, XM_PIDIV4);
 	}
 
-	if (pos_.y >= HAND_INITIAL_POS_Y_ && pos_.x == HAND_L_INITIAL_POS_X_) {
-		wait_time_ = 0.0f;
-		beat_time_ = 0.0f;
-		player_pos_get_flag_ = false;
+	if (pos_.y >= HAND_INITIAL_POS_Y_ &&
+		pos_.x == HAND_L_INITIAL_POS_X_) {
 		boss_action_state_ = ACTION_END;
 	}
 }

@@ -1,6 +1,5 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Wait.h"
 #include "Classes/Enemy/Boss/Boss.h"
-#include "Classes/Collision/ObjectManager.h"
 
 void Wait::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 	float boss_hp_ = boss->GetBossHP();
@@ -18,11 +17,8 @@ void Wait::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 		max_wait_time_ = MAX_WAIT_TIME_VERY_HARD_;
 	}
 
-	if (wait_time_ < max_wait_time_) {
-		wait_time_ += deltaTime;
-	}
-	else {
-		wait_time_ = 0.0f;
+	wait_time_ = std::min(wait_time_ + deltaTime, max_wait_time_);
+	if (wait_time_ >= max_wait_time_) {
 		boss->RandomAttackState();
 	}
 }
