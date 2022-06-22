@@ -41,4 +41,6 @@ private:
 		INITIAL_POS_MOVE,
 		ACTION_END
 	};
+
+	const float MAX_WAIT_TIME_ = 0.5f;
 };

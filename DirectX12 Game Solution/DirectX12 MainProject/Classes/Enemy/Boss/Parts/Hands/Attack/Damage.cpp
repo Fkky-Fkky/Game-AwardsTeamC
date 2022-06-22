@@ -38,7 +38,7 @@ void Damage::HandDamage(ObjectManager* obj_m) {	//Žè‚Éƒ_ƒ[ƒW‚ð—^‚¦‚é
 
 void Damage::Wait() {
 	wait_time_ += time_delta_;
-	if (wait_time_ > 0.5f) {
+	if (wait_time_ > MAX_WAIT_TIME_) {
 		damage_state_ = OFF_SCREEN_MOVE;
 	}
 }
