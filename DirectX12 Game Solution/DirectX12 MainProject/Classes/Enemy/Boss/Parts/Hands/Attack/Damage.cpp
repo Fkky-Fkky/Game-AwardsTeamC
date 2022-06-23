@@ -10,12 +10,13 @@ void Damage::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 
 	time_delta_ = deltaTime;
 	switch (damage_state_) {
-	case DAMAGE:			HandDamage(obj_m);	break;
-	case WAIT:				Wait();				break;
-	case OFF_SCREEN_MOVE:	OffScreenMove();	break;
-	case RESET:				Reset();			break;
-	case INITIAL_POS_MOVE:  InitialPosMove();	break;
-	case ACTION_END:		boss->ActionEnd();	break;
+	case DAMAGE:			HandDamage(obj_m);		break;
+	case WAIT:				Wait();					break;
+	case OFF_SCREEN_MOVE:	OffScreenMove();		break;
+	case RESET:				Reset();				break;
+	case INITIAL_POS_MOVE:  InitialPosMove();		break;
+	case ACTION_END:		boss->ActionEnd();		break;
+	case CHANGE_WEAK_STATE:	boss->WeakStateStart();	break;
 	}
 
 	boss_handR_->SetHandPos(pos_r_);
@@ -34,13 +35,11 @@ void Damage::HandDamage(ObjectManager* obj_m) {	//手にダメージを与える
 		boss_handL_->HandDamageProcess();
 	}
 
-	if (boss_handR_->GetHandHp() <= 0) {
-		is_handmove_end_r_ = true;
-	}
-	if (boss_handL_->GetHandHp() <= 0) {
-		is_handmove_end_l_ = true;
-	}
+	is_r_hand_break_ = boss_handR_->GetHandHp() <= 0;
+	is_l_hand_break_ = boss_handL_->GetHandHp() <= 0;
 
+	is_double_hand_break_ = is_r_hand_break_ && is_l_hand_break_;
+	
 
 	damage_state_ = WAIT;
 }
@@ -73,21 +72,22 @@ void Damage::Reset() {	//X座標以外を初期位置にする
 }
 
 void Damage::InitialPosMove() {	//手を初期位置へ移動
-	if (!is_handmove_end_r_) {
-		pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
-		if (pos_r_.x >= HAND_R_INITIAL_POS_X_) {
-			is_handmove_end_r_ = true;
-		}
+	if (is_double_hand_break_) {
+		damage_state_ = CHANGE_WEAK_STATE;
+		return;
 	}
-	if (!is_handmove_end_l_) {
+	
+	if (!is_r_hand_break_) {
+		pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
+	}
+	if (!is_l_hand_break_) {
 		pos_l_.x = std::max(pos_l_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
-		if (pos_l_.x <= HAND_L_INITIAL_POS_X_) {
-			is_handmove_end_l_ = true;
-		}
 	}
 
-	if (is_handmove_end_r_ &&
-		is_handmove_end_l_) {
+	const bool is_r_hand_init_pos_ = pos_r_.x >= HAND_R_INITIAL_POS_X_;
+	const bool is_l_hand_init_pos_ = pos_l_.x <= HAND_L_INITIAL_POS_X_;
+	if (is_r_hand_init_pos_ &&
+		is_l_hand_init_pos_) {
 		damage_state_ = ACTION_END;
 	}
 }

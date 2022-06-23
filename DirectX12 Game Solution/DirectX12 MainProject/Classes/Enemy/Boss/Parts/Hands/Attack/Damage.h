@@ -8,8 +8,9 @@ public:
 		damage_state_ = DAMAGE;
 		time_delta_ = 0.0f;
 		wait_time_  = 0.0f;
-		is_handmove_end_r_ = false;
-		is_handmove_end_l_ = false;
+		is_r_hand_break_ = false;
+		is_l_hand_break_ = false;
+		is_double_hand_break_ = false;
 		pos_r_ = SimpleMath::Vector3::Zero;
 		pos_l_ = SimpleMath::Vector3::Zero;
 		rot_r_ = SimpleMath::Vector3::Zero;
@@ -31,8 +32,9 @@ private:
 	float time_delta_;
 	float wait_time_;
 
-	bool is_handmove_end_r_;
-	bool is_handmove_end_l_;
+	bool is_r_hand_break_;
+	bool is_l_hand_break_;
+	bool is_double_hand_break_;
 
 	SimpleMath::Vector3 pos_r_;
 	SimpleMath::Vector3 pos_l_;
@@ -45,7 +47,8 @@ private:
 		OFF_SCREEN_MOVE,
 		RESET,
 		INITIAL_POS_MOVE,
-		ACTION_END
+		ACTION_END,
+		CHANGE_WEAK_STATE,
 	};
 
 	const float MAX_WAIT_TIME_ = 0.5f;
