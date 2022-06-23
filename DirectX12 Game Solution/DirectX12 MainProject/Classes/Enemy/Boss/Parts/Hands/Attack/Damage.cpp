@@ -40,6 +40,8 @@ void Damage::HandDamage(ObjectManager* obj_m) {	//手にダメージを与える
 
 	is_double_hand_break_ = is_r_hand_break_ && is_l_hand_break_;
 	
+	is_r_hand_move_end_ = is_r_hand_break_;
+	is_l_hand_move_end_ = is_l_hand_break_;
 
 	damage_state_ = WAIT;
 }
@@ -76,18 +78,24 @@ void Damage::InitialPosMove() {	//手を初期位置へ移動
 		damage_state_ = CHANGE_WEAK_STATE;
 		return;
 	}
-	
-	if (!is_r_hand_break_) {
-		pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
-	}
-	if (!is_l_hand_break_) {
-		pos_l_.x = std::max(pos_l_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
-	}
-
 	const bool is_r_hand_init_pos_ = pos_r_.x >= HAND_R_INITIAL_POS_X_;
 	const bool is_l_hand_init_pos_ = pos_l_.x <= HAND_L_INITIAL_POS_X_;
-	if (is_r_hand_init_pos_ &&
-		is_l_hand_init_pos_) {
+
+	if (!is_r_hand_move_end_) {
+		pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
+		if (is_r_hand_init_pos_) {
+			is_r_hand_move_end_ = true;
+		}
+	}
+	if (!is_l_hand_move_end_) {
+		pos_l_.x = std::max(pos_l_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
+		if (is_l_hand_init_pos_) {
+			is_l_hand_move_end_ = true;
+		}
+	}
+
+	if (is_r_hand_move_end_ &&
+		is_l_hand_move_end_) {
 		damage_state_ = ACTION_END;
 	}
 }

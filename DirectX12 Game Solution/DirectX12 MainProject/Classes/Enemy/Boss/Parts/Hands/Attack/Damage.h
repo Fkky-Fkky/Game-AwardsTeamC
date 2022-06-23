@@ -8,9 +8,11 @@ public:
 		damage_state_ = DAMAGE;
 		time_delta_ = 0.0f;
 		wait_time_  = 0.0f;
-		is_r_hand_break_ = false;
-		is_l_hand_break_ = false;
+		is_r_hand_break_	  = false;
+		is_l_hand_break_	  = false;
 		is_double_hand_break_ = false;
+		is_r_hand_move_end_   = false;
+		is_l_hand_move_end_   = false;
 		pos_r_ = SimpleMath::Vector3::Zero;
 		pos_l_ = SimpleMath::Vector3::Zero;
 		rot_r_ = SimpleMath::Vector3::Zero;
@@ -35,6 +37,8 @@ private:
 	bool is_r_hand_break_;
 	bool is_l_hand_break_;
 	bool is_double_hand_break_;
+	bool is_r_hand_move_end_;
+	bool is_l_hand_move_end_;
 
 	SimpleMath::Vector3 pos_r_;
 	SimpleMath::Vector3 pos_l_;
