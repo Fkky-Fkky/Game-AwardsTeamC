@@ -34,5 +34,5 @@ private:
 		ACTION_END
 	};
 
-	const float WEAK_TIME_MAX_ = 3.0f;
+	const float WEAK_TIME_MAX_ = 6.0f;
 };
