@@ -206,6 +206,7 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\RightBeat.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\RightSlap.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Wait.h" />
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Weak.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\BossHand.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\LeftHand\BossHandL.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\RightHand\BossHandR.h" />
@@ -264,6 +265,7 @@
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\RightBeat.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\RightSlap.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Wait.cpp" />
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Weak.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\BossHand.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\LeftHand\BossHandL.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\RightHand\BossHandR.cpp" />
