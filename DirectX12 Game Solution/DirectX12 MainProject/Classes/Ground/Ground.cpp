@@ -12,7 +12,8 @@ void Ground::LoadAssets() {
     building_block->SetPosition(SimpleMath::Vector3::Zero);
     building_block->SetTrackEnable(0, true);
 
-    castle = DX9::Model::CreateFromFile(DXTK->Device9, L"Ground/Stage/Bet/castle.X");
+    castle = DX9::Model::CreateFromFile(DXTK->Device9, L"Ground/Stage/Castle/castle.X");
+    //castle->SetPosition(SimpleMath::Vector3(0.0f, CASTLE_POS_Y_, BED_POS_Z_));
     //castle->SetScale(0.7f);
 
     bgm_main_ = DX9::MediaRenderer::CreateFromFile(DXTK->Device9, L"BGM/game_main.mp3");
@@ -31,8 +32,6 @@ void Ground::Render() {
     stage_bed_->Draw();
     stage_flooring_->Draw();
     building_block->Draw();
-
-    //castle->SetPosition(SimpleMath::Vector3(0.0f, CASTLE_POS_Y_, BED_POS_Z_));
     //castle->Draw();
 }
 
