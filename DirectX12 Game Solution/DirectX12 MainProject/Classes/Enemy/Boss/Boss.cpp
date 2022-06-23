@@ -42,7 +42,7 @@ void Boss::LoadAseets() {
 }
 
 void Boss::Update(const float deltaTime, ObjectManager* obj_m) {
-	core.Update(deltaTime, obj_m->GetBossDmgFlag());
+	core.Update(deltaTime, obj_m->GetBossDmgFlag(), this);
 	hand_l.Update(deltaTime);
 	hand_r.Update(deltaTime);
 	attack->Update(deltaTime, obj_m, this);
@@ -51,6 +51,7 @@ void Boss::Update(const float deltaTime, ObjectManager* obj_m) {
 		obj_m->IsBossHandRDmg()) {
 		SwitchStateDamage();
 	}
+	SwitchStateWeak();
 }
 
 void Boss::Render() {
