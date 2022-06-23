@@ -21,9 +21,11 @@ public:
 		attack_state_	= WAIT;
 		hand_state_		= ROCK;
 		old_hand_state_ = PAPER;
-		action_end_flag_	 = false;
-		same_handstate_flag_ = false;
-		hand_dmg_flag_		 = false;
+		action_end_flag_	   = false;
+		same_handstate_flag_   = false;
+		hand_dmg_flag_		   = false;
+		weak_state_start_flag_ = false;
+		weak_state_			   = false;
 	}
 
 	~Boss() {};
@@ -35,11 +37,14 @@ public:
 	void Render2D();
 
 	void ActionEnd();
+	void WeakStateStart();
 	void RandomAttackState();
+	void SetWeakState(bool select);
 	void PlaySlapSE();
 	void PlayBeatSE();
 	void PlayBeatEffect(SimpleMath::Vector3 effect_pos);
 	int GetBossHP() { return core.GetBossHP(); }
+	bool IsBossWeak() { return weak_state_; }
 	bool GetHnadState() { return hand_state_; }
 	bool GetLHandAttackFlag() { return hand_l.GetAttackFlag(); }
 	bool GetRHandAttackFlag() { return hand_r.GetAttackFlag(); }
@@ -51,6 +56,7 @@ private:
 	void SwitchStateAttack();
 	void SwitchStateWait();
 	void SwitchStateDamage();
+	void SwitchStateWeak();
 	void RandomHandState();
 
 	BossBody body;
@@ -75,6 +81,8 @@ private:
 	bool action_end_flag_;
 	bool same_handstate_flag_;
 	bool hand_dmg_flag_;
+	bool weak_state_start_flag_;
+	bool weak_state_;
 
 	enum BOSS_STATE {
 		WAIT,

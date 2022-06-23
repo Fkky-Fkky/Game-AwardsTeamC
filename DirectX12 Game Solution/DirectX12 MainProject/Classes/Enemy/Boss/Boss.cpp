@@ -8,6 +8,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRushR.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Damage.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/Weak.h"
 
 void Boss::Initialize() {
 	body.Initialize();
@@ -29,6 +30,7 @@ void Boss::Initialize() {
 	action_end_flag_	 = false;
 	same_handstate_flag_ = false;
 	hand_dmg_flag_		 = false;
+	weak_state_start_flag_	 = false;
 }
 
 void Boss::LoadAseets() {
@@ -134,6 +136,10 @@ void Boss::ActionEnd() {
 	hand_dmg_flag_   = false;
 }
 
+void Boss::WeakStateStart() {
+	weak_state_start_flag_ = true;
+}
+
 void Boss::SwitchStateWait() {
 	if (action_end_flag_) {
 		delete attack;
@@ -152,6 +158,15 @@ void Boss::SwitchStateDamage() {
 	}
 }
 
+void Boss::SwitchStateWeak() {
+	if (weak_state_start_flag_) {
+		delete attack;
+		attack = new Weak;
+		attack->Initialize(&hand_l, &hand_r);
+		weak_state_start_flag_ = false;
+	}
+}
+
 void Boss::PlaySlapSE() {
 	slap_se_->Play();
 }
@@ -162,4 +177,8 @@ void Boss::PlayBeatSE() {
 
 void Boss::PlayBeatEffect(SimpleMath::Vector3 effect_pos) {
 	DX12Effect.Play(beat_effect_, effect_pos); 
+}
+
+void Boss::SetWeakState(bool select) {
+	weak_state_ = select;
 }
