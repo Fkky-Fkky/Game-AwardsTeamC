@@ -9,10 +9,9 @@ void BossHand::Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote) {
 
 void BossHand::LoadAssets(LPCWSTR file_name){
 	BossParts::LoadAssets(file_name);
-
 	//model->SetScale(1.0f);
 
-	collision = model->GetBoundingOrientedBox();
+	collision = model_->GetBoundingOrientedBox();
 	collision.Extents = SimpleMath::Vector3(
 		collision.Extents.x * 0.5f,
 		collision.Extents.y * 0.3f,
@@ -30,15 +29,21 @@ void BossHand::LoadAssets(LPCWSTR file_name){
 	collision_model->SetMaterial(material);
 
 	font_ = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
+	for (int i = 0; i < 5; ++i) {
+		model_->SetTrackEnable(i, false);
+	}
+	model_->SetTrackEnable(WAIT, true);
 }
 
 void BossHand::Update(const float deltaTime) {
-	collision.Center = model->GetPosition();
-	collision.Orientation = model->GetRotationQuaternion();
+	BossParts::Update(deltaTime);
+	collision.Center = model_->GetPosition();
+	collision.Orientation = model_->GetRotationQuaternion();
 }
 
 void BossHand::Render(){
 	BossParts::Render();
+
 	collision_model->SetPosition(collision.Center);
 	collision_model->SetRotationQuaternion(collision.Orientation);
 	collision_model->Draw();

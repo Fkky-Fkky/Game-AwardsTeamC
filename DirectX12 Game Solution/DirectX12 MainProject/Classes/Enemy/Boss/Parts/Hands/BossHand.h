@@ -34,6 +34,14 @@ public:
 
 private:
 
+	enum HAND_MOTION {
+		ROCK_BACK,
+		ROCK,
+		PAPER_BACK,
+		PAPER,
+		WAIT
+	};
+
 	void SusiZanmai();
 
 	float bezier_t;
