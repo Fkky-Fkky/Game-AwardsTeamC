@@ -12,9 +12,9 @@ void BossCore::Initialize() {
 }
 
 void BossCore::LoadAssets() {
-	BossParts::LoadAssets(L"Boss/boss_Core.X");
+	core_ = DX9::Model::CreateFromFile(DXTK->Device9, L"Boss/boss_Core.X");
 	
-	collision_ = model->GetBoundingOrientedBox();
+	collision_ = core_->GetBoundingOrientedBox();
 	collision_.Extents = SimpleMath::Vector3(
 		collision_.Extents.x * 0.5f,
 		collision_.Extents.y * 0.5f,
@@ -39,14 +39,17 @@ void BossCore::LoadAssets() {
 
 void BossCore::Update(const float deltaTime, bool core_hit_flag, Boss* boss) {
 	time_delta_ = deltaTime;
-	collision_.Center	   = model->GetPosition();
-	collision_.Orientation = model->GetRotationQuaternion();
+	collision_.Center	   = core_->GetPosition();
+	collision_.Orientation = core_->GetRotationQuaternion();
 	CoreMove(boss->IsBossWeak());
 	HitPlayerAttack(core_hit_flag);
 }
 
 void BossCore::Render() {
-	BossParts::Render();
+	core_->SetPosition(position);
+	core_->SetRotation(rotation);
+	core_->Draw();
+
 	collision_model_->SetPosition(collision_.Center);
 	collision_model_->SetRotationQuaternion(collision_.Orientation);
 	collision_model_->Draw();

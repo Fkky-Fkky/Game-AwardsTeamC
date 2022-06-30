@@ -31,6 +31,7 @@ private:
 
 	BoundingOrientedBox collision_;
 	DX9::MODEL collision_model_;
+	DX9::MODEL core_;
 	DX9::SPRITEFONT font;
 	EFFECT hit_efc_;
 
