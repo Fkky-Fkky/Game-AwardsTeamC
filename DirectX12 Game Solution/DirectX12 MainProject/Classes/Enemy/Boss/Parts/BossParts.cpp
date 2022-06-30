@@ -6,11 +6,15 @@ void BossParts::Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote) {
 }
 
 void BossParts::LoadAssets(LPCWSTR file_name) {
-	model = DX9::Model::CreateFromFile(DXTK->Device9, file_name);
+	model_ = DX9::SkinnedModel::CreateFromFile(DXTK->Device9, file_name);
+}
+
+void BossParts::Update(const float deltaTime) {
+	model_->AdvanceTime(deltaTime);
 }
 
 void BossParts::Render() {
-	model->SetPosition(position);
-	model->SetRotation(rotation);
-	model->Draw();
+	model_->SetPosition(position);
+	model_->SetRotation(rotation);
+	model_->Draw();
 }
