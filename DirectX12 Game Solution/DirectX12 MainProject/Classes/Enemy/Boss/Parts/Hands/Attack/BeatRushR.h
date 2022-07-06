@@ -5,19 +5,25 @@
 class BeatRushR : public BossAttack {
 public:
 	BeatRushR() {
-		action_state_ = READY;
+		action_state_ = HAND_CHECK;
 		r_beat_time_ = 0.0f;
 		l_beat_time_ = 0.0f;
 		r_add_pos_	 = 0.0f;
 		l_add_pos_	 = 0.0f;
 		time_delta_	 = 0.0f;
 		wait_time_	 = 0.0f;
+		r_ready_end_ = false;
+		l_ready_end_ = false;
 		r_hand_up_flag_ = false;
 		l_hand_up_flag_ = false;
+		is_r_hand_broke_ = false;
+		is_l_hand_broke_ = false;
+		hand_state_		 = false;
 	}
 	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss);
 
 private:
+	void HandCheck(Boss* boss);
 	void Ready();
 	void Attack(Boss* boss);
 	void BeatR(Boss* boss);
@@ -36,6 +42,11 @@ private:
 
 	bool r_hand_up_flag_;
 	bool l_hand_up_flag_;
+	bool r_ready_end_;
+	bool l_ready_end_;
+	bool is_r_hand_broke_;
+	bool is_l_hand_broke_;
+	bool hand_state_;
 
 	SimpleMath::Vector3 pos_r_;
 	SimpleMath::Vector3 rote_r_;

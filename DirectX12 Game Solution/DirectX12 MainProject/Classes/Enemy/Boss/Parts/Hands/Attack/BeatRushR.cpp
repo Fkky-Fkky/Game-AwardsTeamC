@@ -9,6 +9,7 @@ void BeatRushR::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss){
 
 	time_delta_ = deltaTime;
 	switch (action_state_) {
+	case HAND_CHECK:	HandCheck(boss);	break;
 	case READY:			Ready();			break;
 	case ATTACK:		Attack(boss);		break;
 	case RESET:			Reset();			break;
@@ -22,12 +23,37 @@ void BeatRushR::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss){
 	boss_handL_->SetHandRote(rote_l_);
 }
 
+void BeatRushR::HandCheck(Boss* boss) {	//手の状態を確認
+	is_r_hand_broke_ = boss_handR_->GetHandHp() <= 0;
+	is_l_hand_broke_ = boss_handL_->GetHandHp() <= 0;
+	hand_state_ = boss->GetHnadState();
+	action_state_ = READY;
+}
+
 void BeatRushR::Ready() {	//両手を(ボスから見て)右側に構える
-	pos_r_.x  = std::max(pos_r_.x - MOVE_SPEED_X_ * time_delta_, R_START_POS_X_);
-	pos_l_.x  = std::max(pos_l_.x - MOVE_SPEED_X_ * time_delta_, L_START_POS_X_);
-	rote_r_.x = std::max(rote_r_.x - ROTATION_SPEED_ * time_delta_, -XM_1DIV2PI);
-	rote_l_.x = std::max(rote_l_.x - ROTATION_SPEED_ * time_delta_, -XM_1DIV2PI);
-	if (pos_l_.x == L_START_POS_X_) {
+	if (is_r_hand_broke_) {
+		r_ready_end_ = true;
+	}
+	else {
+		bool is_r_hand_start_pos_ = pos_r_.x  <= R_START_POS_X_;
+		bool is_r_hand_start_rot_ = rote_r_.x <= -XM_1DIV2PI;
+		pos_r_.x  = std::max(pos_r_.x - MOVE_SPEED_X_ * time_delta_, R_START_POS_X_);
+		rote_r_.x = std::max(rote_r_.x - ROTATION_SPEED_ * time_delta_, -XM_1DIV2PI);
+		r_ready_end_ = is_r_hand_start_pos_ && is_r_hand_start_rot_;
+	}
+
+	if (is_l_hand_broke_) {
+		l_ready_end_ = true;
+	}
+	else {
+		bool is_l_hand_start_pos_ = pos_l_.x  <= L_START_POS_X_;
+		bool is_l_hand_start_rot_ = rote_l_.x <= -XM_1DIV2PI;
+		pos_l_.x = std::max(pos_l_.x - MOVE_SPEED_X_ * time_delta_, L_START_POS_X_);
+		rote_l_.x = std::max(rote_l_.x - ROTATION_SPEED_ * time_delta_, -XM_1DIV2PI);
+		l_ready_end_ = is_l_hand_start_pos_ && is_l_hand_start_rot_;
+	}
+
+	if (r_ready_end_ && l_ready_end_) {
 		action_state_ = ATTACK;
 	}
 }
@@ -67,7 +93,7 @@ void BeatRushR::BeatR(Boss* boss) {	//右手叩きつけ攻撃
 		r_add_pos_ += ADD_POS_NUM_;
 	}
 
-	if (pos_r_.y == HAND_INITIAL_POS_Y_ && 
+	if (pos_r_.y == HAND_INITIAL_POS_Y_ &&
 		pos_r_.x == MOVE_DEST_) {
 		r_hand_up_flag_ = false;
 		r_beat_time_ = 0.0f;
