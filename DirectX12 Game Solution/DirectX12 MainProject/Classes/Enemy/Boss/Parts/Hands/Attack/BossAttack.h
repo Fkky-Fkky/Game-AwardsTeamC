@@ -49,6 +49,7 @@ protected:
 	const float HALF_ = 0.5f;
 
 	enum ACTION_STATE {
+		HAND_CHECK,
 		READY,
 		WAIT,
 		ATTACK,
