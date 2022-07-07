@@ -5,7 +5,7 @@
 class Weak : public BossAttack {
 public:
 	Weak() {
-		weak_state_ = READY;
+		weak_state_ = WEAK;
 		time_delta_ = 0.0f;
 		weak_time_	= 0.0f;
 		pos_r_ = SimpleMath::Vector3::Zero;
