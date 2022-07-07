@@ -59,21 +59,23 @@ void BeatRushR::Ready() {	//—¼Žè‚ð(ƒ{ƒX‚©‚çŒ©‚Ä)‰E‘¤‚É\‚¦‚é
 }
 
 void BeatRushR::Attack(Boss* boss) {	//UŒ‚ŠÖ”ŒÄ‚Ño‚µ
-	BeatR(boss);
-
 	wait_time_ = std::min(wait_time_ + time_delta_, WAIT_TIME_MAX_);
+
+	BeatR(boss);
 	if (wait_time_ >= WAIT_TIME_MAX_) {
 		BeatL(boss);
 	}
 
-	if (pos_l_.x >= LIMIT_POS_X_) {
+	if (is_r_attack_end_ && is_l_attack_end_) {
 		action_state_ = RESET;
 	}
 }
 
 void BeatRushR::BeatR(Boss* boss) {	//‰EŽè’@‚«‚Â‚¯UŒ‚
-	const float MOVE_DEST_ = r_add_pos_ + R_START_POS_X_;
-
+	if (is_r_hand_broke_) {
+		is_r_attack_end_ = true;
+		return;
+	}
 	if (!r_hand_up_flag_) {
 		boss_handR_->SetAttackFlag(true);
 		r_beat_time_ += time_delta_;
@@ -82,7 +84,7 @@ void BeatRushR::BeatR(Boss* boss) {	//‰EŽè’@‚«‚Â‚¯UŒ‚
 	else {
 		boss_handR_->SetAttackFlag(false);
 		pos_r_.y = std::min(pos_r_.y + MOVE_SPEED_X_ * time_delta_, HAND_INITIAL_POS_Y_);
-		pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, MOVE_DEST_);
+		pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, r_move_dest_x_);
 	}
 
 	if (pos_r_.y <= LIMIT_POS_Y_) {
@@ -90,19 +92,22 @@ void BeatRushR::BeatR(Boss* boss) {	//‰EŽè’@‚«‚Â‚¯UŒ‚
 		boss->PlayBeatSE();
 		boss->PlayBeatEffect(pos_r_);
 		r_hand_up_flag_ = true;
-		r_add_pos_ += ADD_POS_NUM_;
+		r_move_dest_x_ = std::min(pos_r_.x + ADD_DISTANCE_, HAND_RETURN_POS_X_);
 	}
 
 	if (pos_r_.y == HAND_INITIAL_POS_Y_ &&
-		pos_r_.x == MOVE_DEST_) {
+		pos_r_.x >= r_move_dest_x_) {	//Žè‚ªã‚Éã‚ª‚Á‚½Žž
 		r_hand_up_flag_ = false;
 		r_beat_time_ = 0.0f;
 	}
+	is_r_attack_end_ = pos_r_.x >= HAND_RETURN_POS_X_;
 }
 
 void BeatRushR::BeatL(Boss* boss) {	//¶Žè’@‚«‚Â‚¯UŒ‚
-	const float MOVE_DEST_ = l_add_pos_ + L_START_POS_X_;
-
+	if (is_l_hand_broke_) {
+		is_l_attack_end_ = true;
+		return;
+	}
 	if (!l_hand_up_flag_) {
 		boss_handL_->SetAttackFlag(true);
 		l_beat_time_ += time_delta_;
@@ -111,7 +116,7 @@ void BeatRushR::BeatL(Boss* boss) {	//¶Žè’@‚«‚Â‚¯UŒ‚
 	else {
 		boss_handL_->SetAttackFlag(false);
 		pos_l_.y = std::min(pos_l_.y + MOVE_SPEED_X_ * time_delta_, HAND_INITIAL_POS_Y_);
-		pos_l_.x = std::min(pos_l_.x + MOVE_SPEED_X_ * time_delta_, MOVE_DEST_);
+		pos_l_.x = std::min(pos_l_.x + MOVE_SPEED_X_ * time_delta_, l_move_dest_x_);
 	}
 
 	if (pos_l_.y <= LIMIT_POS_Y_) {
@@ -119,34 +124,48 @@ void BeatRushR::BeatL(Boss* boss) {	//¶Žè’@‚«‚Â‚¯UŒ‚
 		boss->PlayBeatSE();
 		boss->PlayBeatEffect(pos_l_);
 		l_hand_up_flag_ = true;
-		l_add_pos_ += ADD_POS_NUM_;
+		l_move_dest_x_ = std::min(pos_l_.x + ADD_DISTANCE_, HAND_RETURN_POS_X_);
 	}
 
 	if (pos_l_.y == HAND_INITIAL_POS_Y_ && 
-		pos_l_.x == MOVE_DEST_) {
+		pos_l_.x >= l_move_dest_x_) {
 		l_hand_up_flag_ = false;
 		l_beat_time_ = 0.0f;
 	}
+	is_l_attack_end_ = pos_l_.x >= HAND_RETURN_POS_X_;
 }
 
-void BeatRushR::Reset() {	//‰æ–ÊŠO‚ÉÀ•WŒÅ’è
+void BeatRushR::Reset() {	//Žè‚ð‰æ–ÊŠO‚ÖˆÚ“®
 	boss_handR_->SetAttackFlag(false);
-	boss_handL_->SetAttackFlag(false);
 	pos_r_.x  = -HAND_RETURN_POS_X_;
-	pos_l_.x  = HAND_RETURN_POS_X_;
 	pos_r_.y  = HAND_INITIAL_POS_Y_;
-	pos_l_.y  = HAND_INITIAL_POS_Y_;
 	rote_r_.x = XM_PIDIV4;
+	
+	boss_handL_->SetAttackFlag(false);
+	pos_l_.x  = HAND_RETURN_POS_X_;
+	pos_l_.y  = HAND_INITIAL_POS_Y_;
 	rote_l_.x = XM_PIDIV4;
 	action_state_ = RETURN;
 }
 
 void BeatRushR::HandReturn() {	//‰æ–ÊŠO‚©‚ç‰ŠúˆÊ’u‚ÖˆÚ“®
-	pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
-	pos_l_.x = std::max(pos_l_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
+	if (is_r_hand_broke_) {
+		is_r_return_end_ = true;
+	}
+	else {
+		pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
+		is_r_return_end_ = pos_r_.x >= HAND_R_INITIAL_POS_X_;
+	}
 
-	if (pos_r_.x == HAND_R_INITIAL_POS_X_ &&
-		pos_l_.x == HAND_L_INITIAL_POS_X_) {
+	if (is_l_hand_broke_) {
+		is_l_return_end_ = true;
+	}
+	else {
+		pos_l_.x = std::max(pos_l_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
+		is_l_return_end_ = pos_l_.x <= HAND_L_INITIAL_POS_X_;
+	}
+	
+	if (is_r_return_end_ && is_l_return_end_) {
 		action_state_ = ACTION_END;
 	}
 }
