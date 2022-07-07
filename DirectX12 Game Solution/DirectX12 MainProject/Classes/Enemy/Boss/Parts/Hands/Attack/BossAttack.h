@@ -57,4 +57,12 @@ protected:
 		RETURN,
 		ACTION_END
 	};
+
+	enum HAND_MOTION {
+		ROCK_BACK,
+		ROCK,
+		PAPER_BACK,
+		PAPER,
+		WAIT_MOTION
+	};
 };

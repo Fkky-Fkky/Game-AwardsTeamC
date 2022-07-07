@@ -17,9 +17,10 @@ void Wait::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 		max_wait_time_ = MAX_WAIT_TIME_VERY_HARD_;
 	}
 
-	if (boss_handL_->GetHandHp() <= 0 &&
-		boss_handR_->GetHandHp() <= 0) {
-		max_wait_time_ = 5.0f;
+	if (!first_processed_flag_) {
+		boss_handL_->SetHandMotion(HAND_MOTION::WAIT_MOTION);
+		boss_handR_->SetHandMotion(HAND_MOTION::WAIT_MOTION);
+		first_processed_flag_ = true;
 	}
 
 	wait_time_ = std::min(wait_time_ + deltaTime, max_wait_time_);
