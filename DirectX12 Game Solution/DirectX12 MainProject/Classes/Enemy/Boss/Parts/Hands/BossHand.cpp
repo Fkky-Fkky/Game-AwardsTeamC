@@ -29,7 +29,7 @@ void BossHand::LoadAssets(LPCWSTR file_name){
 	collision_model->SetMaterial(material);
 
 	font_ = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
-	for (int i = 0; i < 5; ++i) {
+	for (int i = 0; i < MOTION_MAX_; ++i) {
 		model_->SetTrackEnable(i, false);
 	}
 	model_->SetTrackEnable(WAIT, true);
@@ -37,8 +37,10 @@ void BossHand::LoadAssets(LPCWSTR file_name){
 
 void BossHand::Update(const float deltaTime) {
 	BossParts::Update(deltaTime);
+	timde_delta_ = deltaTime;
 	collision.Center = model_->GetPosition();
 	collision.Orientation = model_->GetRotationQuaternion();
+	PlayMotion();
 }
 
 void BossHand::Render(){
@@ -55,6 +57,58 @@ void BossHand::HandDamageProcess() {
 
 void BossHand::HandHPHeal() {
 	hand_hp_ = HAND_HP_MAX_;
+}
+
+void BossHand::SetHandMotion(int hand_motion) {
+	MotionStart();
+	hand_state_ = hand_motion;
+}
+
+void BossHand::PlayMotion() {
+	if (!motion_flag_) {
+		return;
+	}
+	switch (hand_state_) {
+	case ROCK_BACK:		motion_time_max_ = ROCK_BACK_MOTION_TIME_;	break;
+	case ROCK:			motion_time_max_ = ROCK_MOTION_TIME_;		break;
+	case PAPER_BACK:	motion_time_max_ = ROCK_BACK_MOTION_TIME_;	break;
+	case PAPER:			motion_time_max_ = ROCK_MOTION_TIME_;		break;
+	case WAIT:			motion_time_max_ = 0.0f;					break;
+	}
+
+	if (hand_state_ != WAIT) {
+		Rock();
+	}
+	else {
+		HandMotionWait();
+	}	
+}
+
+void BossHand::Rock() {
+	motion_time_ += timde_delta_;
+	if (motion_time_ >= motion_time_max_) {
+		model_->SetTrackEnable(hand_state_, false);
+	}
+	else {
+		model_->SetTrackEnable(hand_state_, true);
+	}
+}
+
+void BossHand::MotionReset() {
+	for (int i = 0; i < MOTION_MAX_; ++i) {
+		model_->SetTrackEnable(i, false);
+		model_->SetTrackPosition(i, 0.0f);
+	}
+	motion_time_ = 0.0f;
+}
+
+void BossHand::HandMotionWait() {
+	model_->SetTrackEnable(hand_state_, true);
+}
+
+void BossHand::MotionStart() {
+	MotionReset();
+	motion_flag_ = true;
 }
 
 void BossHand::Render2D(float pos_x) {

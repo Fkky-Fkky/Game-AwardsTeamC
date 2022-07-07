@@ -10,7 +10,12 @@ class BossHand : public BossParts{
 public:
 	BossHand() {
 		hand_hp_ = 0;
+		hand_state_ = 0;
+		timde_delta_ = 0.0f;
+		motion_time_ = 0.0f;
+		motion_time_max_ = 0.0f;
 		bezier_t = 0.0f;
+		motion_flag_ = false;
 		attack_flag_ = false;
 	}
 
@@ -31,8 +36,13 @@ public:
 	void SetAttackFlag(bool attack_flag) { attack_flag_ = attack_flag; }
 	void HandDamageProcess();
 	void HandHPHeal();
-
+	void SetHandMotion(int hand_motion);
 private:
+	void MotionStart();
+	void MotionReset();
+	void PlayMotion();
+	void Rock();
+	void HandMotionWait();
 
 	enum HAND_MOTION {
 		ROCK_BACK,
@@ -44,8 +54,12 @@ private:
 
 	void SusiZanmai();
 
+	float motion_time_;
+	float motion_time_max_;
+	float timde_delta_;
 	float bezier_t;
-
+	bool motion_flag_;
+	int hand_state_;
 	bool attack_flag_;
 
 protected:
@@ -56,6 +70,9 @@ protected:
 	int hand_hp_;
 
 	const int HAND_HP_MAX_ = 3;
+	const int MOTION_MAX_ = 5;
 	const float INITIAL_POS_Y = 10.0f;
 	const float INITIAL_POS_Z = 3.0f;
+	const float ROCK_BACK_MOTION_TIME_ = 0.4f;
+	const float ROCK_MOTION_TIME_ = 0.41f;
 };
