@@ -51,66 +51,6 @@ void BossHand::Render(){
 	collision_model->Draw();
 }
 
-void BossHand::HandDamageProcess() {
-	hand_hp_--;
-}
-
-void BossHand::HandHPHeal() {
-	hand_hp_ = HAND_HP_MAX_;
-}
-
-void BossHand::SetHandMotion(int hand_motion) {
-	MotionStart();
-	hand_state_ = hand_motion;
-}
-
-void BossHand::PlayMotion() {
-	if (!motion_flag_) {
-		return;
-	}
-	switch (hand_state_) {
-	case ROCK_BACK:		motion_time_max_ = ROCK_BACK_MOTION_TIME_;	break;
-	case ROCK:			motion_time_max_ = ROCK_MOTION_TIME_;		break;
-	case PAPER_BACK:	motion_time_max_ = ROCK_BACK_MOTION_TIME_;	break;
-	case PAPER:			motion_time_max_ = ROCK_MOTION_TIME_;		break;
-	case WAIT:			motion_time_max_ = 0.0f;					break;
-	}
-
-	if (hand_state_ != WAIT) {
-		Rock();
-	}
-	else {
-		HandMotionWait();
-	}	
-}
-
-void BossHand::Rock() {
-	motion_time_ += timde_delta_;
-	if (motion_time_ >= motion_time_max_) {
-		model_->SetTrackEnable(hand_state_, false);
-	}
-	else {
-		model_->SetTrackEnable(hand_state_, true);
-	}
-}
-
-void BossHand::MotionReset() {
-	for (int i = 0; i < MOTION_MAX_; ++i) {
-		model_->SetTrackEnable(i, false);
-		model_->SetTrackPosition(i, 0.0f);
-	}
-	motion_time_ = 0.0f;
-}
-
-void BossHand::HandMotionWait() {
-	model_->SetTrackEnable(hand_state_, true);
-}
-
-void BossHand::MotionStart() {
-	MotionReset();
-	motion_flag_ = true;
-}
-
 void BossHand::Render2D(float pos_x) {
 	DX9::SpriteBatch->DrawString(
 		font_.Get(),
@@ -120,6 +60,72 @@ void BossHand::Render2D(float pos_x) {
 	);
 }
 
+void BossHand::HandDamageProcess() {	//手にダメージを与える
+	hand_hp_--;
+}
+
+void BossHand::HandHPHeal() {	//手のHPを全回復する
+	hand_hp_ = HAND_HP_MAX_;
+}
+
+void BossHand::SetHandMotion(int hand_motion) {	//モーションをセットする
+	MotionStart();
+	hand_state_ = hand_motion;
+}
+
+void BossHand::MotionStart() {	//モーションを再生させる
+	MotionReset();
+	motion_flag_ = true;
+}
+
+void BossHand::MotionReset() {	//モーションをリセットする
+	for (int i = 0; i < MOTION_MAX_; ++i) {
+		model_->SetTrackEnable(i, false);
+		model_->SetTrackPosition(i, 0.0f);
+	}
+	motion_time_ = 0.0f;
+}
+
+void BossHand::PlayMotion() {	//モーション再生
+	if (!motion_flag_) {
+		return;
+	}
+	switch (hand_state_) {
+	case ROCK_BACK:
+	case PAPER_BACK:
+		motion_time_max_ = BACK_MOTION_TIME_;
+		break;
+	case ROCK:
+	case PAPER:
+		motion_time_max_ = ATK_MOTION_TIME_;
+		break;
+	case WAIT:
+		motion_time_max_ = 0.0f;
+		break;
+	}
+
+	if (hand_state_ != WAIT) {
+		HandMotionAttack();
+	}
+	else {
+		HandMotionWait();
+	}	
+}
+
+void BossHand::HandMotionAttack() {	//攻撃モーション
+	motion_time_ += timde_delta_;
+	if (motion_time_ >= motion_time_max_) {
+		model_->SetTrackEnable(hand_state_, false);
+		motion_flag_ = false;
+	}
+	else {
+		model_->SetTrackEnable(hand_state_, true);
+	}
+}
+
+void BossHand::HandMotionWait() {	//待機モーション
+	model_->SetTrackEnable(hand_state_, true);
+}
 
 //void BossAttack::SusiZanmai() {
 //	r_hand_pos = Bezier::CubicInterpolate(

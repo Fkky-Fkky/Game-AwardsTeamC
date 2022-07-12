@@ -4,8 +4,6 @@
 #include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/BossParts.h"
 
-using namespace DirectX;
-
 class BossHand : public BossParts{
 public:
 	BossHand() {
@@ -26,22 +24,23 @@ public:
 	virtual void Render();
 	void Render2D(float pos_x);
 
-	int GetHandHp() { return hand_hp_; }
+	void HandDamageProcess();
+	void HandHPHeal();
+	void SetHandPos(SimpleMath::Vector3 position_) { position = position_; }
+	void SetHandRote(SimpleMath::Vector3 rotation_) { rotation = rotation_; }
+	void SetAttackFlag(bool attack_flag) { attack_flag_ = attack_flag; }
+	void SetHandMotion(int hand_motion);
+	int  GetHandHp() { return hand_hp_; }
 	bool GetAttackFlag() { return attack_flag_; }
 	BoundingOrientedBox GetHandCollision() { return collision; }
 	SimpleMath::Vector3 GetHandPos() { return position; }
 	SimpleMath::Vector3 GetRotation() { return rotation; }
-	void SetHandPos(SimpleMath::Vector3 position_) { position = position_; }
-	void SetHandRote(SimpleMath::Vector3 rotation_) { rotation = rotation_; }
-	void SetAttackFlag(bool attack_flag) { attack_flag_ = attack_flag; }
-	void HandDamageProcess();
-	void HandHPHeal();
-	void SetHandMotion(int hand_motion);
+
 private:
 	void MotionStart();
 	void MotionReset();
 	void PlayMotion();
-	void Rock();
+	void HandMotionAttack();
 	void HandMotionWait();
 
 	enum HAND_MOTION {
@@ -54,25 +53,25 @@ private:
 
 	void SusiZanmai();
 
+	int hand_hp_;
+	int hand_state_;
 	float motion_time_;
 	float motion_time_max_;
 	float timde_delta_;
 	float bezier_t;
 	bool motion_flag_;
-	int hand_state_;
 	bool attack_flag_;
 
+	const int HAND_HP_MAX_ = 3;
+	const int MOTION_MAX_  = 5;
+	const float BACK_MOTION_TIME_ = 0.4f;
+	const float ATK_MOTION_TIME_  = 0.41f;
 protected:
 
 	BoundingOrientedBox collision;
 	DX9::MODEL collision_model;
 	DX9::SPRITEFONT font_;
-	int hand_hp_;
 
-	const int HAND_HP_MAX_ = 3;
-	const int MOTION_MAX_ = 5;
 	const float INITIAL_POS_Y = 10.0f;
 	const float INITIAL_POS_Z = 3.0f;
-	const float ROCK_BACK_MOTION_TIME_ = 0.4f;
-	const float ROCK_MOTION_TIME_ = 0.41f;
 };
