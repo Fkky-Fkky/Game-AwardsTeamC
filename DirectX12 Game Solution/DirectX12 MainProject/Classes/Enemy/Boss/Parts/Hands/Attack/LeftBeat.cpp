@@ -9,6 +9,7 @@ void LeftBeat::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 	time_delta_ = deltaTime;
 
 	switch (boss_action_state_) {
+	case HAND_CHECK:	HandCheck(boss);		break;
 	case READY:			Ready(obj_m);			break;
 	case ATTACK:		LeftBeatAttack(boss);	break;
 	case RETURN:		HandReturn();			break;
@@ -17,6 +18,12 @@ void LeftBeat::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 
 	boss_handL_->SetHandPos(pos_);
 	boss_handL_->SetHandRote(rote_);
+}
+
+void LeftBeat::HandCheck(Boss* boss) {	//Žè‚Ìó‘Ô‚ðŠm”F
+	hand_state_ = boss->GetHandState();
+	(!hand_state_) ? boss_handL_->SetHandMotion(HAND_MOTION::ROCK) : boss_handL_->SetHandMotion(HAND_MOTION::PAPER);		
+	boss_action_state_ = READY;
 }
 
 void LeftBeat::Ready(ObjectManager* obj_m) { //UŒ‚‚É•K—p‚È•Ï”‚ÌÝ’è
@@ -51,6 +58,7 @@ void LeftBeat::LeftBeatAttack(Boss* boss) { //’@‚«‚Â‚¯UŒ‚
 		boss->PlayBeatSE();
 		boss->PlayBeatEffect(pos_);
 		boss_handL_->SetAttackFlag(false);
+		(!hand_state_) ? boss_handL_->SetHandMotion(HAND_MOTION::ROCK_BACK) : boss_handL_->SetHandMotion(HAND_MOTION::PAPER_BACK);
 		boss_action_state_ = RETURN;
 	}
 }

@@ -5,10 +5,11 @@
 class LeftBeat : public BossAttack {
 public:
 	LeftBeat() {
-		boss_action_state_ = READY;
+		boss_action_state_ = HAND_CHECK;
 		time_delta_ = 0.0f;
 		beat_time_  = 0.0f;
 		wait_time_  = 0.0f;
+		hand_state_			 = false;
 		player_pos_get_flag_ = false;
 		pos_	   = SimpleMath::Vector3::Zero;
 		rote_	   = SimpleMath::Vector3::Zero;
@@ -17,6 +18,7 @@ public:
 	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss);
 
 private:
+	void HandCheck(Boss* boss);
 	void Ready(ObjectManager* obj_m);
 	void LeftBeatAttack(Boss* boss);
 	void HandReturn();
@@ -27,6 +29,7 @@ private:
 	float beat_time_;
 	float wait_time_;
 
+	bool hand_state_;
 	bool player_pos_get_flag_;
 
 	SimpleMath::Vector3 pos_;
