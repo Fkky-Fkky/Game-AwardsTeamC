@@ -8,7 +8,7 @@ class BossHand : public BossParts{
 public:
 	BossHand() {
 		hand_hp_ = 0;
-		hand_state_ = 0;
+		motion_track_ = 0;
 		timde_delta_ = 0.0f;
 		motion_time_ = 0.0f;
 		motion_time_max_ = 0.0f;
@@ -30,6 +30,7 @@ public:
 	void SetHandRote(SimpleMath::Vector3 rotation_) { rotation = rotation_; }
 	void SetAttackFlag(bool attack_flag) { attack_flag_ = attack_flag; }
 	void SetHandMotion(int hand_motion);
+	void PlayHandMotionWait();
 	int  GetHandHp() { return hand_hp_; }
 	bool GetAttackFlag() { return attack_flag_; }
 	BoundingOrientedBox GetHandCollision() { return collision; }
@@ -41,7 +42,7 @@ private:
 	void MotionReset();
 	void PlayMotion();
 	void HandMotionAttack();
-	void HandMotionWait();
+	
 
 	enum HAND_MOTION {
 		ROCK_BACK,
@@ -54,7 +55,7 @@ private:
 	void SusiZanmai();
 
 	int hand_hp_;
-	int hand_state_;
+	int motion_track_;
 	float motion_time_;
 	float motion_time_max_;
 	float timde_delta_;
@@ -64,7 +65,7 @@ private:
 
 	const int HAND_HP_MAX_ = 3;
 	const int MOTION_MAX_  = 5;
-	const float BACK_MOTION_TIME_ = 0.4f;
+	const float BACK_MOTION_TIME_ = 0.39f;
 	const float ATK_MOTION_TIME_  = 0.41f;
 protected:
 

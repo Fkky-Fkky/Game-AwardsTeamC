@@ -32,7 +32,7 @@ void BossHand::LoadAssets(LPCWSTR file_name){
 	for (int i = 0; i < MOTION_MAX_; ++i) {
 		model_->SetTrackEnable(i, false);
 	}
-	model_->SetTrackEnable(WAIT, true);
+	//model_->SetTrackEnable(WAIT, true);
 }
 
 void BossHand::Update(const float deltaTime) {
@@ -69,8 +69,18 @@ void BossHand::HandHPHeal() {	//手のHPを全回復する
 }
 
 void BossHand::SetHandMotion(int hand_motion) {	//モーションをセットする
+	motion_track_ = hand_motion;
+	switch (motion_track_) {
+	case ROCK_BACK:
+	case PAPER_BACK:
+		motion_time_max_ = BACK_MOTION_TIME_;
+		break;
+	case ROCK:
+	case PAPER:
+		motion_time_max_ = ATK_MOTION_TIME_;
+		break;
+	}
 	MotionStart();
-	hand_state_ = hand_motion;
 }
 
 void BossHand::MotionStart() {	//モーションを再生させる
@@ -90,41 +100,22 @@ void BossHand::PlayMotion() {	//モーション再生
 	if (!motion_flag_) {
 		return;
 	}
-	switch (hand_state_) {
-	case ROCK_BACK:
-	case PAPER_BACK:
-		motion_time_max_ = BACK_MOTION_TIME_;
-		break;
-	case ROCK:
-	case PAPER:
-		motion_time_max_ = ATK_MOTION_TIME_;
-		break;
-	case WAIT:
-		motion_time_max_ = 0.0f;
-		break;
-	}
-
-	if (hand_state_ != WAIT) {
-		HandMotionAttack();
-	}
-	else {
-		HandMotionWait();
-	}	
+	HandMotionAttack();
 }
 
 void BossHand::HandMotionAttack() {	//攻撃モーション
-	motion_time_ += timde_delta_;
+	motion_time_ = std::min(motion_time_ + timde_delta_, motion_time_max_);
 	if (motion_time_ >= motion_time_max_) {
-		model_->SetTrackEnable(hand_state_, false);
+		model_->SetTrackEnable(motion_track_, false);
 		motion_flag_ = false;
 	}
 	else {
-		model_->SetTrackEnable(hand_state_, true);
+		model_->SetTrackEnable(motion_track_, true);
 	}
 }
 
-void BossHand::HandMotionWait() {	//待機モーション
-	model_->SetTrackEnable(hand_state_, true);
+void BossHand::PlayHandMotionWait() {	//待機モーション
+	model_->SetTrackEnable(WAIT, true);
 }
 
 //void BossAttack::SusiZanmai() {
