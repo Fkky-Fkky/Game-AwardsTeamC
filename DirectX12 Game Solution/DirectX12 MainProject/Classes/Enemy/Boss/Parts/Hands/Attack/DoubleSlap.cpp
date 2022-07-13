@@ -27,7 +27,7 @@ void DoubleSlap::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss)
 void DoubleSlap::HandCheck(Boss* boss) {	//Žè‚Ìó‘Ô‚ðŠm”F
 	is_r_hand_broke_ = boss_handR_->GetHandHp() <= 0;
 	is_l_hand_broke_ = boss_handL_->GetHandHp() <= 0;
-	hand_state_ = boss->GetHnadState();
+	hand_state_ = boss->GetHandState();
 	action_state_ = READY;
 }
 

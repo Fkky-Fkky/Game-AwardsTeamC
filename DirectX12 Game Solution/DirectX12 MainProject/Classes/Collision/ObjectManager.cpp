@@ -74,7 +74,7 @@ bool ObjectManager::GetBossDmgFlag() {
 }
 
 bool ObjectManager::IsBossHandOpen() {
-	return boss_->GetHnadState();
+	return boss_->GetHandState();
 }
 
 bool ObjectManager::IsBossHandRDmg() {
