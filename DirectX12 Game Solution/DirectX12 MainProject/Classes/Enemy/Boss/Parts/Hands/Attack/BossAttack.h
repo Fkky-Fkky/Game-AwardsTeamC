@@ -38,10 +38,10 @@ protected:
 
 	const float WAIT_TIME_MAX_ = 0.7f;
 
-	const float BEAT_SPEED_ = 1.5f;
+	const float BEAT_SPEED_ = 3.5f;
 	const float BEAT_GRAVITY_ = 15.0f;
 
-	const float MOVE_SPEED_X_ = 30.0f;
+	const float MOVE_SPEED_X_ = 10.0f;
 	const float MOVE_SPEED_Y_ = 10.0f;
 	const float MOVE_SPEED_Z_ = 10.0f;
 	const float ROTE_SPEED_ = 1.0f;
