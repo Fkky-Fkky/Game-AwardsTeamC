@@ -31,10 +31,10 @@ protected:
 	const float HAND_RETURN_POS_X_ = 30.0f;
 
 	const float SLAP_POS_Y_ = 2.0f;
-	const float SLAP_SPEED_X_ = 1.0f;
-	const float SLAP_SPEED_Y_ = 1.5f;
-	const float SLAP_GRAVITY_X_ = 5.0f;
-	const float SLAP_GRAVITY_Y_ = 9.0f;
+	const float SLAP_SPEED_X_ = 0.5f;
+	const float SLAP_SPEED_Y_ = 2.0f;
+	const float SLAP_GRAVITY_X_ = 1.3f;
+	const float SLAP_GRAVITY_Y_ = 5.0f;
 
 	const float WAIT_TIME_MAX_ = 0.7f;
 
