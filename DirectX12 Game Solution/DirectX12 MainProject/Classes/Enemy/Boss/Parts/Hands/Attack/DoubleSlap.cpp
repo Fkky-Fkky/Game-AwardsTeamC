@@ -27,7 +27,7 @@ void DoubleSlap::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss)
 void DoubleSlap::HandCheck(Boss* boss) {	//手の状態を確認
 	is_r_hand_broke_ = boss_handR_->GetHandHp() <= 0;
 	is_l_hand_broke_ = boss_handL_->GetHandHp() <= 0;
-	hand_state_ = boss->GetHandState();
+	hand_state_	  = boss->GetHandState();
 	action_state_ = READY;
 }
 
@@ -52,6 +52,7 @@ void DoubleSlap::ReadyR() {	//右手構え
 	r_rote_.x = std::min(r_rote_.x + ROTE_SPEED_ * time_delta_, XM_PIDIV2);
 	if (r_pos_.y <= R_HAND_DEST_Y_) {
 		r_pos_.y  = R_HAND_DEST_Y_;
+		(!hand_state_) ? boss_handR_->SetHandMotion(HAND_MOTION::ROCK) : boss_handR_->SetHandMotion(HAND_MOTION::PAPER);
 		ready_flag_r_ = true;
 	}
 }
@@ -68,6 +69,7 @@ void DoubleSlap::ReadyL() {	//左手構え
 	l_rote_.x = std::min(l_rote_.x + ROTE_SPEED_ * time_delta_, XM_PIDIV2);
 	if (l_pos_.y <= L_HAND_DEST_Y_) {
 		l_pos_.y  = L_HAND_DEST_Y_;
+		(!hand_state_) ? boss_handL_->SetHandMotion(HAND_MOTION::ROCK) : boss_handL_->SetHandMotion(HAND_MOTION::PAPER);
 		ready_flag_l_ = true;
 	}
 }
@@ -122,12 +124,14 @@ void DoubleSlap::Reset() {	//それぞれの手を画面の反対へ移動
 	r_pos_.z  = HAND_INITIAL_POS_Z_;
 	r_rote_.x = XM_PIDIV4;
 	boss_handR_->SetAttackFlag(false);
+	(!hand_state_) ? boss_handR_->SetHandMotion(HAND_MOTION::ROCK_BACK) : boss_handR_->SetHandMotion(HAND_MOTION::PAPER_BACK);
 
 	l_pos_.x  = HAND_RETURN_POS_X_;
 	l_pos_.y  = HAND_INITIAL_POS_Y_;
 	l_pos_.z  = HAND_INITIAL_POS_Z_;
 	l_rote_.x = XM_PIDIV4;
 	boss_handL_->SetAttackFlag(false);
+	(!hand_state_) ? boss_handL_->SetHandMotion(HAND_MOTION::ROCK_BACK) : boss_handL_->SetHandMotion(HAND_MOTION::PAPER_BACK);
 
 	action_state_ = RETURN;
 }

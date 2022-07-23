@@ -67,6 +67,6 @@ private:
 
 	const float R_HAND_DEST_Y_  = 2.0f;
 	const float L_HAND_DEST_Y_  = 8.0f;
-	const float ATTACK_START_TIME_R_ = 0.5f;
-	const float WAIT_TIME_MAX_		 = 1.0f;
+	const float ATTACK_START_TIME_R_ = 1.0f;
+	const float WAIT_TIME_MAX_		 = 1.5f;
 };
