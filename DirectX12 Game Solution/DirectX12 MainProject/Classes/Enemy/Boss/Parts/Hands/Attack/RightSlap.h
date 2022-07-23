@@ -5,11 +5,12 @@
 class RightSlap : public BossAttack {
 public:
 	RightSlap() {
-		action_state_ = READY;
+		action_state_ = HAND_CHECK;
 		time_delta_	  = 0.0f;
 		slap_time_x_  = 0.0f;
 		slap_time_y_  = 0.0f;
 		wait_time_	  = 0.0f;
+		hand_state_	  = false;
 		is_se_play_   = false;
 		pos_  = SimpleMath::Vector3::Zero;
 		rote_ = SimpleMath::Vector3::Zero;
@@ -17,6 +18,7 @@ public:
 	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss);
 
 private:
+	void HandCheck(Boss* boss);
 	void Ready();
 	void Wait();
 	void RightSlapAttack(Boss* boss);
@@ -30,6 +32,7 @@ private:
 	float slap_time_y_;
 	float wait_time_;
 
+	bool hand_state_;
 	bool is_se_play_;
 
 	SimpleMath::Vector3 pos_;

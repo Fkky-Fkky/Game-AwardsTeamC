@@ -8,6 +8,7 @@ void RightSlap::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) 
 	time_delta_ = deltaTime;
 
 	switch (action_state_) {
+	case HAND_CHECK:	HandCheck(boss);		break;
 	case READY:			Ready();				break;
 	case WAIT:			Wait();					break;
 	case ATTACK:		RightSlapAttack(boss);	break;
@@ -18,6 +19,12 @@ void RightSlap::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) 
 
 	boss_handR_->SetHandPos(pos_);
 	boss_handR_->SetHandRote(rote_);
+}
+
+void RightSlap::HandCheck(Boss* boss) {	//Žè‚Ìó‘Ô‚ðŠm”F
+	hand_state_ = boss->GetHandState();
+	(!hand_state_) ? boss_handR_->SetHandMotion(HAND_MOTION::ROCK) : boss_handR_->SetHandMotion(HAND_MOTION::PAPER);
+	action_state_ = READY;
 }
 
 void RightSlap::Ready() {	//—\”õ“®ì
@@ -56,6 +63,7 @@ void RightSlap::RightSlapAttack(Boss* boss) {	//‰EŽè“ã‚¬•¥‚¢UŒ‚
 
 void RightSlap::Reset() {	//Žè‚ð‰æ–Ê‚Ì”½‘Î‘¤‚ÉˆÚ“®
 	boss_handR_->SetAttackFlag(false);
+	(!hand_state_) ? boss_handR_->SetHandMotion(HAND_MOTION::ROCK_BACK) : boss_handR_->SetHandMotion(HAND_MOTION::PAPER_BACK);
 	pos_.x  = -HAND_RETURN_POS_X_;
 	pos_.y  = HAND_INITIAL_POS_Y_;
 	pos_.z  = HAND_INITIAL_POS_Z_;
