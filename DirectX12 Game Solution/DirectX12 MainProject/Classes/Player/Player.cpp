@@ -17,6 +17,9 @@ void Player::LoadAssets() {
 	model_ = DX9::SkinnedModel::CreateFromFile(DXTK->Device9, L"Player/chara_anim_model.x");
     model_->SetScale(1.0f);
 
+    model_ = DX9::SkinnedModel::CreateFromFile(DXTK->Device9, L"Player/warrior/warrior.x");
+    model_->SetScale(0.02f);
+
     player_colision_.LoadAssets(model_.get());
     player_attack_colision_.LoadAssets(model_.get());
 
