@@ -9,7 +9,9 @@ class Player;
 class PlayerAttackColision {
 public:
 	PlayerAttackColision() {
+		attack_start_flag_ = false;
 		attack_flg_ = false;
+		is_effect_play_ = false;
 		attack_time_ = 0.0f;
 	}
 	~PlayerAttackColision() {};
@@ -25,14 +27,16 @@ private:
 	BoundingOrientedBox collision_;
 	DX9::MODEL          collision_model_;
 	float attack_time_;
+	bool attack_start_flag_;
 	bool attack_flg_;
+	bool is_effect_play_;
 
 	const float RIGHT_ = -90.0f;
-	const float RIGHT_ANGLE_ = 90.0f;
-	const float LEFT_ANGLE_ = 270.0f;
+	const float RIGHT_ANGLE_ = 0.0f;
+	const float LEFT_ANGLE_ = 200.0f;
 	const float ADD_POS_X_  = 3.0f;
 	const float ADD_POS_Y_  = 2.0f;
-	const float MAX_ATTACK_TIME_ = 0.44f;
+	const float MAX_ATTACK_TIME_ = 3.3f;
 	const float ATTACK_DISTANCE_X_ = 1.5f;
 	const float ATTACK_DISTANCE_Y_ = 1.5f;
 	const float COLLISION_SIZE_MULTIPLY_X_ = 0.5f;
