@@ -27,18 +27,19 @@ enum class PLAYER_STATE {
 };
 
 enum class PLAYER_MOTION {
-	AVOID,
 	WAIT,
-	KNOCK_BACK,
 	ATTACK,
-	MOVE
+	MOVE,
+	JUMP
 };
 
 class Player {
 public:
 	Player() {
 		player_state_ = nullptr;
+		jump_motion_time_ = 0.0f;
 		initialize_stop_flag_ = false;
+		is_jump_motion_play_ = false;
 		pos_ = SimpleMath::Vector3::Zero;
 		rot_ = SimpleMath::Vector3::Zero;
 	}
@@ -53,7 +54,7 @@ public:
 	void SwitchState(PLAYER_STATE state);
 	void SetPlayerPosition(SimpleMath::Vector3 position) { pos_ = position; }
 	void SetPlayerRotation(SimpleMath::Vector3 rotation) { rot_ = rotation; }
-	void SetMotion(PLAYER_MOTION motion_track);
+	void SetMotion(PLAYER_MOTION player_motion);
 	void SetStopInitializeFlag(bool enable) { initialize_stop_flag_ = enable; }
 	void PlayAvoidSE();
 	void PlayJumpSE();
@@ -68,6 +69,8 @@ public:
 	PLAYER_STATE GetPlayerState() { return player_action_state_; }
 
 private:
+	void ResetPlayerMotion();
+	PLAYER_MOTION ConvertToMotion(PLAYER_STATE player_state);
 
 	DX9::SKINNEDMODEL model_;
 	DX9::SPRITEFONT font;
@@ -77,12 +80,15 @@ private:
 
 	PLAYER_STATE player_action_state_;
 
+	float jump_motion_time_;
+
 	bool initialize_stop_flag_;
+	bool is_jump_motion_play_;
 
 	SimpleMath::Vector3 pos_;
 	SimpleMath::Vector3 rot_;
 
-	const int MOTION_MAX_ = 5;
+	const int MOTION_MAX_ = 4;
 	const float RIGHT_WARD_ = -90.0f;
 
 	PlayerRightMove      player_right_move_;

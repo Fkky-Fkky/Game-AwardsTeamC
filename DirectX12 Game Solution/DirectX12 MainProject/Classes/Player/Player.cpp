@@ -8,15 +8,12 @@ void Player::Initialize() {
 	pos_ = SimpleMath::Vector3::Zero;
 	rot_ = SimpleMath::Vector3(0.0f, RIGHT_WARD_,0.0f);
 
-    SwitchState(PLAYER_STATE::WAIT);
+    player_state_ = &player_wait_;
     player_state_->Initialize();
     player_attack_colision_.Initialize();
 }
 
 void Player::LoadAssets() {
-	model_ = DX9::SkinnedModel::CreateFromFile(DXTK->Device9, L"Player/chara_anim_model.x");
-    model_->SetScale(1.0f);
-
     model_ = DX9::SkinnedModel::CreateFromFile(DXTK->Device9, L"Player/warrior/warrior.x");
     model_->SetScale(0.02f);
 
@@ -25,7 +22,7 @@ void Player::LoadAssets() {
 
     font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 
-    DX12Effect.Create(L"Effect/Eff_Sword/Eff_sword.efk", "swaord");
+    DX12Effect.Create(L"Effect/upper_attack/upper_attack.efk", "swaord");
     DX12Effect.Create(L"Effect/Eff_Jump_001/Eff_jump_001.efk", "jump");
     DX12Effect.Create(L"Effect/Eff_kaihi/Eff_kaihi.efk", "avoid");
 
@@ -33,8 +30,9 @@ void Player::LoadAssets() {
     jump_se_  = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Jump.wav");
 
     for (int i = 0; i < MOTION_MAX_; ++i) {
-        model_->SetTrackEnable(i, FALSE);
+        model_->SetTrackEnable(i, false);
     }
+    model_->SetTrackEnable((int)PLAYER_MOTION::WAIT, true);
 }
 
 void Player::Update(const float deltaTime, ObjectManager* obj_m) {
@@ -48,6 +46,13 @@ void Player::Update(const float deltaTime, ObjectManager* obj_m) {
     player_attack_colision_.Update(deltaTime, model_.get(), this);
 
     model_->AdvanceTime(deltaTime);
+    if (is_jump_motion_play_) {
+        const float JUMP_TIME_MAX_ = 1.0f;
+        jump_motion_time_ = std::min(jump_motion_time_ + deltaTime, JUMP_TIME_MAX_);
+        if (jump_motion_time_ >= JUMP_TIME_MAX_) {
+            model_->SetTrackEnable((int)PLAYER_MOTION::JUMP, false);
+        }
+    }
 
     player_colision_.Update(deltaTime, model_.get());
 }
@@ -72,12 +77,19 @@ void Player::Render2D() {
     );
 }
 
-void Player::SetMotion(PLAYER_MOTION motion_track) {
-    for (int i = 0; i < MOTION_MAX_; ++i) {
-        model_->SetTrackEnable(i, FALSE);
+void Player::SetMotion(PLAYER_MOTION player_motion) {
+    PLAYER_MOTION motion_track_ = player_motion;
+
+    ResetPlayerMotion();
+
+    if (motion_track_ == PLAYER_MOTION::JUMP) {
+        is_jump_motion_play_ = true;
     }
-    int motion_track_ = (int)motion_track;
-    model_->SetTrackEnable(motion_track_, true);
+    else {
+        is_jump_motion_play_ = false;
+        jump_motion_time_ = 0.0f;
+    }
+    model_->SetTrackEnable((int)motion_track_, true);
 }
 
 void Player::PlayAvoidSE() {
@@ -86,6 +98,26 @@ void Player::PlayAvoidSE() {
 
 void Player::PlayJumpSE() {
     jump_se_->Play();
+}
+
+void Player::ResetPlayerMotion() {
+    for (int i = 0; i < MOTION_MAX_; ++i) {
+        model_->SetTrackEnable(i, false);
+        model_->SetTrackPosition(i, 0.0f);
+    }
+}
+
+PLAYER_MOTION Player::ConvertToMotion(PLAYER_STATE player_state) {  //プレイヤーの状態をモーショントラックに変換
+    PLAYER_MOTION motion_track_;
+    switch (player_state) {
+    case    PLAYER_STATE::WAIT:         motion_track_ = PLAYER_MOTION::WAIT;    break;
+    case    PLAYER_STATE::RIGHT_MOVE:
+    case    PLAYER_STATE::LEFT_MOVE:    motion_track_ = PLAYER_MOTION::MOVE;    break;
+    case    PLAYER_STATE::JUMP:         motion_track_ = PLAYER_MOTION::JUMP;    break;
+    default:                            motion_track_ = PLAYER_MOTION::WAIT;    break;
+    }
+
+    return motion_track_;
 }
 
 void Player::SwitchState(PLAYER_STATE state) {
@@ -98,6 +130,7 @@ void Player::SwitchState(PLAYER_STATE state) {
     case PLAYER_STATE::AVOID:       player_state_ = &player_avoid_;         break;
     case PLAYER_STATE::DAMAGE:      player_state_ = &player_dmg_;           break;
     }
+    SetMotion(ConvertToMotion(player_action_state_));
     if (!initialize_stop_flag_) {
         player_state_->Initialize();
     }
