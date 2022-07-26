@@ -27,7 +27,7 @@ void PlayerAvoid::Update(const float deltaTime, Player& player) {
 	case AVOID:			Avoid();		break;
 	case COOL_TIME:		CoolTime();		break;
 	}
-	player.SetMotion(PLAYER_MOTION::AVOID);
+	//player.SetMotion(PLAYER_MOTION::AVOID);
 
 	player.SetPlayerPosition(pos_);
 	player.SetPlayerRotation(rot_);

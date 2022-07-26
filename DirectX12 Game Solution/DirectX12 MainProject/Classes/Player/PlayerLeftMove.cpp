@@ -8,7 +8,6 @@ void PlayerLeftMove::Update(const float deltaTime, Player& player) {
     if (DXTK->KeyState->A) {
         pos_.x -= PLAYER_MOVE_SPEED_ * deltaTime;
         rot_.y = PLAYER_ROTATION_ANGLE_;
-        player.SetMotion(PLAYER_MOTION::MOVE);
     }
     else {
         player.SwitchState(PLAYER_STATE::WAIT);
