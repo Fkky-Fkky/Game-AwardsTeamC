@@ -44,7 +44,7 @@ float ObjectManager::GetPlayerHP() {
 }
 
 bool ObjectManager::GetPlayerAttackFlag() {
-	return player_->AttackFlag();
+	return player_->IsPlayerAttack();
 }
 
 bool ObjectManager::GetPlayerDmgFlag() {
