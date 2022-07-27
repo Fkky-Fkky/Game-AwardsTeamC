@@ -43,8 +43,6 @@ void Player::Update(const float deltaTime, ObjectManager* obj_m) {
 
     player_state_->Update(deltaTime, *this);
 
-    player_attack_colision_.Update(deltaTime, model_.get(), this);
-
     model_->AdvanceTime(deltaTime);
     if (is_jump_motion_play_) {
         const float JUMP_TIME_MAX_ = 1.0f;
@@ -53,7 +51,7 @@ void Player::Update(const float deltaTime, ObjectManager* obj_m) {
             model_->SetTrackEnable((int)PLAYER_MOTION::JUMP, false);
         }
     }
-
+    player_attack_colision_.Update(deltaTime, model_.get(), this);
     player_colision_.Update(deltaTime, model_.get());
 }
 
@@ -114,6 +112,7 @@ PLAYER_MOTION Player::ConvertToMotion(PLAYER_STATE player_state) {  //プレイヤー
     case    PLAYER_STATE::RIGHT_MOVE:
     case    PLAYER_STATE::LEFT_MOVE:    motion_track_ = PLAYER_MOTION::MOVE;    break;
     case    PLAYER_STATE::JUMP:         motion_track_ = PLAYER_MOTION::JUMP;    break;
+    case    PLAYER_STATE::ATTACK:       motion_track_ = PLAYER_MOTION::ATTACK;  break;
     default:                            motion_track_ = PLAYER_MOTION::WAIT;    break;
     }
 
@@ -121,12 +120,17 @@ PLAYER_MOTION Player::ConvertToMotion(PLAYER_STATE player_state) {  //プレイヤー
 }
 
 void Player::SwitchState(PLAYER_STATE state) {
+    if (player_action_state_ == PLAYER_STATE::ATTACK) {
+        player_state_->Initialize();
+    }
     player_action_state_ = state;
+    
     switch (player_action_state_) {
     case PLAYER_STATE::WAIT:        player_state_ = &player_wait_;          break;
     case PLAYER_STATE::RIGHT_MOVE:  player_state_ = &player_right_move_;    break;
     case PLAYER_STATE::LEFT_MOVE :  player_state_ = &player_left_move_;     break;
     case PLAYER_STATE::JUMP:        player_state_ = &player_jump_;          break;
+    case PLAYER_STATE::ATTACK:      player_state_ = &player_attack_;        break;
     case PLAYER_STATE::AVOID:       player_state_ = &player_avoid_;         break;
     case PLAYER_STATE::DAMAGE:      player_state_ = &player_dmg_;           break;
     }

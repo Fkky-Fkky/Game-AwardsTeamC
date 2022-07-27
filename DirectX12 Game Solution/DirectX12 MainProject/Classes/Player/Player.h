@@ -6,6 +6,7 @@
 #include "Classes/Player/PlayerRightMove.h"
 #include "Classes/Player/PlayerLeftMove.h"
 #include "Classes/Player/PlayerJump.h"
+#include "Classes/Player/PlayerAttack.h"
 #include "Classes/Player/PlayerColision.h"
 #include "Classes/Player/PlayerAttackColision.h"
 #include "Classes/Player/PlayerAvoid.h"
@@ -22,6 +23,7 @@ enum class PLAYER_STATE {
 	RIGHT_MOVE,
 	LEFT_MOVE,
 	JUMP,
+	ATTACK,
 	AVOID,
 	DAMAGE
 };
@@ -59,7 +61,8 @@ public:
 	void PlayAvoidSE();
 	void PlayJumpSE();
 	float GetPlayerHP() { return player_dmg_.GetPlayerHP(); }
-	bool AttackFlag() { return player_attack_colision_.GeatAttackFlag(); }
+	bool IsPlayerAttackStart() { return player_attack_.IsPlayerAttackStart(); }
+	bool IsPlayerAttack() { return player_attack_colision_.IsPlayerAttack(); }
 	bool IsPlayerInvincible() { return player_avoid_.IsInvincible(); }
 	SimpleMath::Vector3 GetPlayerPosition() { return pos_; }
 	SimpleMath::Vector3 GetPlayerRotation() { return rot_; }
@@ -94,6 +97,7 @@ private:
 	PlayerRightMove      player_right_move_;
 	PlayerLeftMove		 player_left_move_;
 	PlayerJump           player_jump_;
+	PlayerAttack		 player_attack_;
 	PlayerColision       player_colision_;
 	PlayerAttackColision player_attack_colision_;
 	PlayerAvoid			 player_avoid_;
