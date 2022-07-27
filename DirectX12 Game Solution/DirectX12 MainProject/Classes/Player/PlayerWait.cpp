@@ -17,4 +17,8 @@ void PlayerWait::Update(const float deltaTime, Player& player) {
 	if (DXTK->KeyState->A) {
 		player.SwitchState(PLAYER_STATE::LEFT_MOVE);
 	}
+
+	if (DXTK->KeyEvent->pressed.Space) {
+		player.SwitchState(PLAYER_STATE::ATTACK);
+	}
 }

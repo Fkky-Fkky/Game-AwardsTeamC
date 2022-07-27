@@ -23,6 +23,10 @@ void PlayerRightMove::Update(const float deltaTime, Player& player) {
         player.SwitchState(PLAYER_STATE::JUMP);
     }
 
+    if (DXTK->KeyEvent->pressed.Space) {
+        player.SwitchState(PLAYER_STATE::ATTACK);
+    }
+
     player.SetPlayerPosition(pos_);
     player.SetPlayerRotation(rot_);
 }
