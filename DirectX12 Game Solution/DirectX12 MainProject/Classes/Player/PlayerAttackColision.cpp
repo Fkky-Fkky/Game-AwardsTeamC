@@ -3,8 +3,9 @@
 #include "Classes/Player/Player.h"
 
 void PlayerAttackColision::Initialize() {
-    attack_flg_ = false;
     attack_time_ = 0.0f;
+    is_player_attack_ = false;
+    is_effect_play_   = false;
 }
 
 void PlayerAttackColision::LoadAssets(DX9::SkinnedModel* model_) {
@@ -30,43 +31,32 @@ void PlayerAttackColision::LoadAssets(DX9::SkinnedModel* model_) {
 }
 
 void PlayerAttackColision::Update(const float deltaTime, DX9::SkinnedModel* model_, Player* player) {
-    if (player->GetPlayerState() == PLAYER_STATE::DAMAGE) {
-        Initialize();
-        model_->SetTrackPosition((int)PLAYER_MOTION::ATTACK, 0);
-        return;
-    }
+    float player_angle_             = player->GetPlayerRotation().y;
+    bool  is_player_attack_start_   = player->IsPlayerAttackStart();
+    bool  is_player_right_ward_     = player_angle_ == RIGHT_;
+    float effect_angle_             = (is_player_right_ward_) ? RIGHT_ANGLE_ : LEFT_ANGLE_;
     SimpleMath::Vector3 player_pos_ = player->GetPlayerPosition();
-    float player_angle_ = player->GetPlayerRotation().y;
-    bool is_player_right_ward_ = player_angle_ == RIGHT_;
+ 
+    if (is_player_attack_start_) {
+        attack_time_ = std::min(attack_time_ + deltaTime, MAX_ATTACK_TIME_);
 
-    float effect_pos_x_ = (is_player_right_ward_) ? ADD_POS_X_ : -ADD_POS_X_;
-    float effect_angle_ = (is_player_right_ward_) ? RIGHT_ANGLE_ : LEFT_ANGLE_;
-
-    if (!attack_start_flag_ && DXTK->KeyEvent->pressed.Space) {
-        attack_start_flag_ = true;
-        player->SetMotion(PLAYER_MOTION::ATTACK);
-    }
-
-    if (attack_start_flag_) {
-        attack_time_ += deltaTime;
-
-        if (attack_time_ >= 0.65f && !is_effect_play_) {
-            DX12Effect.PlayOneShot("swaord", player_pos_);
+        if (attack_time_ >= EFFECT_PLAY_TIME_ && !is_effect_play_) {
             is_effect_play_ = true;
+            DX12Effect.PlayOneShot("swaord", player_pos_);
             DX12Effect.SetRotation("swaord", SimpleMath::Vector3(0.0f, XMConvertToRadians(effect_angle_), 0.0f));
         }
 
-        if (attack_time_ >= 1.3f) {
-            attack_flg_ = true;
+        if(attack_time_ >= 1.3f) {
+            is_player_attack_ = true;
         }
-
-        if (attack_time_ > MAX_ATTACK_TIME_) {
-            attack_time_ = 0.0f;
-            attack_start_flag_ = false;
-            attack_flg_  = false;
+    }
+    else
+    {
+        attack_time_      = 0.0f;
+        is_player_attack_ = false;
+        if (is_effect_play_) {
             is_effect_play_ = false;
-            player->SwitchState(PLAYER_STATE::WAIT);
-            //player->SetMotion(PLAYER_MOTION::WAIT);
+            DX12Effect.Stop("swaord");
         }
     }
     float attack_x_ = (is_player_right_ward_) ? ATTACK_DISTANCE_X_ : -ATTACK_DISTANCE_X_;
@@ -75,7 +65,7 @@ void PlayerAttackColision::Update(const float deltaTime, DX9::SkinnedModel* mode
 }
 
 void PlayerAttackColision::Render() {
-    if (attack_flg_) {
+    if (is_player_attack_) {
         collision_model_->SetPosition(collision_.Center);
         collision_model_->SetRotationQuaternion(collision_.Orientation);
         collision_model_->Draw();
