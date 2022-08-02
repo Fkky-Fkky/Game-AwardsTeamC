@@ -1,17 +1,21 @@
 #pragma once
 
-#include "Base/pch.h"
-#include "Base/dxtk.h"
+#include "Classes/Player/PlayerState.h"
 
-using namespace DirectX;
-
-class PlayerAttack {
+class PlayerAttack : public PlayerState {
 public:
-	PlayerAttack() {};
+	PlayerAttack() {
+		attack_time_ = 0.0f;
+		attack_flg_  = false;
+	};
 	~PlayerAttack() {};
 
-	void Update(const float deltaTime);
+	virtual void Initialize();
+	virtual void Update(const float deltaTime, Player& player);
+	bool IsPlayerAttackStart() { return attack_flg_; }
 
 private:
-	
+	float attack_time_;
+	bool attack_flg_;
+	const float MAX_ATTACK_TIME_ = 3.3f;
 };

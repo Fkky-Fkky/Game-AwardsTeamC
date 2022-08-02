@@ -44,7 +44,6 @@ void PlayerJump::Ready(Player& player) {  //ジャンプに必要な変数の処理
     action_state_   = JUMP;
 }
 
-
 void PlayerJump::Jump() {   //ジャンプ
     if (player_up_flag_) {  //プレイヤージャンプ処理(上昇)
         jump_time_ += time_delta_ * DOWN_SPEED_;
@@ -55,7 +54,7 @@ void PlayerJump::Jump() {   //ジャンプ
         }
     }
     else {  //プレイヤージャンプ処理(下降)
-        jump_time_ += time_delta_;
+        jump_time_ += time_delta_ * DOWN_SPEED_;
         pos_.y = -HALF_ * GRAVITY_ * jump_time_ * jump_time_ + V0_ * jump_time_ + GROUND_Y_;
     }
 

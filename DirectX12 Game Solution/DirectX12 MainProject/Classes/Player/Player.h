@@ -6,6 +6,7 @@
 #include "Classes/Player/PlayerRightMove.h"
 #include "Classes/Player/PlayerLeftMove.h"
 #include "Classes/Player/PlayerJump.h"
+#include "Classes/Player/PlayerAttack.h"
 #include "Classes/Player/PlayerColision.h"
 #include "Classes/Player/PlayerAttackColision.h"
 #include "Classes/Player/PlayerAvoid.h"
@@ -22,23 +23,25 @@ enum class PLAYER_STATE {
 	RIGHT_MOVE,
 	LEFT_MOVE,
 	JUMP,
+	ATTACK,
 	AVOID,
 	DAMAGE
 };
 
 enum class PLAYER_MOTION {
-	AVOID,
 	WAIT,
-	KNOCK_BACK,
 	ATTACK,
-	MOVE
+	MOVE,
+	JUMP
 };
 
 class Player {
 public:
 	Player() {
 		player_state_ = nullptr;
+		jump_motion_time_ = 0.0f;
 		initialize_stop_flag_ = false;
+		is_jump_motion_play_ = false;
 		pos_ = SimpleMath::Vector3::Zero;
 		rot_ = SimpleMath::Vector3::Zero;
 	}
@@ -53,12 +56,13 @@ public:
 	void SwitchState(PLAYER_STATE state);
 	void SetPlayerPosition(SimpleMath::Vector3 position) { pos_ = position; }
 	void SetPlayerRotation(SimpleMath::Vector3 rotation) { rot_ = rotation; }
-	void SetMotion(PLAYER_MOTION motion_track);
+	void SetMotion(PLAYER_MOTION player_motion);
 	void SetStopInitializeFlag(bool enable) { initialize_stop_flag_ = enable; }
 	void PlayAvoidSE();
 	void PlayJumpSE();
 	float GetPlayerHP() { return player_dmg_.GetPlayerHP(); }
-	bool AttackFlag() { return player_attack_colision_.GeatAttackFlag(); }
+	bool IsPlayerAttackStart() { return player_attack_.IsPlayerAttackStart(); }
+	bool IsPlayerAttack() { return player_attack_colision_.IsPlayerAttack(); }
 	bool IsPlayerInvincible() { return player_avoid_.IsInvincible(); }
 	SimpleMath::Vector3 GetPlayerPosition() { return pos_; }
 	SimpleMath::Vector3 GetPlayerRotation() { return rot_; }
@@ -68,6 +72,8 @@ public:
 	PLAYER_STATE GetPlayerState() { return player_action_state_; }
 
 private:
+	void ResetPlayerMotion();
+	PLAYER_MOTION ConvertToMotion(PLAYER_STATE player_state);
 
 	DX9::SKINNEDMODEL model_;
 	DX9::SPRITEFONT font;
@@ -77,17 +83,21 @@ private:
 
 	PLAYER_STATE player_action_state_;
 
+	float jump_motion_time_;
+
 	bool initialize_stop_flag_;
+	bool is_jump_motion_play_;
 
 	SimpleMath::Vector3 pos_;
 	SimpleMath::Vector3 rot_;
 
-	const int MOTION_MAX_ = 5;
+	const int MOTION_MAX_ = 4;
 	const float RIGHT_WARD_ = -90.0f;
 
 	PlayerRightMove      player_right_move_;
 	PlayerLeftMove		 player_left_move_;
 	PlayerJump           player_jump_;
+	PlayerAttack		 player_attack_;
 	PlayerColision       player_colision_;
 	PlayerAttackColision player_attack_colision_;
 	PlayerAvoid			 player_avoid_;
