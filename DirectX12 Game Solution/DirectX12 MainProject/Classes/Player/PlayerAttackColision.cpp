@@ -36,11 +36,11 @@ void PlayerAttackColision::Update(const float deltaTime, DX9::SkinnedModel* mode
     bool  is_player_right_ward_     = player_angle_ == RIGHT_;
     float effect_angle_             = (is_player_right_ward_) ? RIGHT_ANGLE_ : LEFT_ANGLE_;
     SimpleMath::Vector3 player_pos_ = player->GetPlayerPosition();
- 
+
     if (is_player_attack_start_) {
         attack_time_ = std::min(attack_time_ + deltaTime, MAX_ATTACK_TIME_);
 
-        if (attack_time_ >= EFFECT_PLAY_TIME_ && !is_effect_play_) {
+        if (!is_effect_play_) {
             is_effect_play_ = true;
             DX12Effect.PlayOneShot("swaord", player_pos_);
             DX12Effect.SetRotation("swaord", SimpleMath::Vector3(0.0f, XMConvertToRadians(effect_angle_), 0.0f));
