@@ -42,7 +42,6 @@ void Boss::LoadAseets() {
 }
 
 void Boss::Update(const float deltaTime, ObjectManager* obj_m) {
-	body.Update(deltaTime);
 	core.Update(deltaTime, obj_m->GetBossDmgFlag(), this);
 	hand_l.Update(deltaTime);
 	hand_r.Update(deltaTime);
