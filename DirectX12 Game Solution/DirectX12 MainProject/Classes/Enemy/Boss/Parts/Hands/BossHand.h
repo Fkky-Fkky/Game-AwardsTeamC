@@ -45,11 +45,11 @@ private:
 	
 
 	enum HAND_MOTION {
-		ROCK_BACK,
-		ROCK,
-		PAPER_BACK,
+		WAIT,
 		PAPER,
-		WAIT
+		PAPER_BACK,
+		ROCK,
+		ROCK_BACK
 	};
 
 	void SusiZanmai();
@@ -65,8 +65,8 @@ private:
 
 	const int HAND_HP_MAX_ = 3;
 	const int MOTION_MAX_  = 5;
-	const float BACK_MOTION_TIME_ = 0.39f;
-	const float ATK_MOTION_TIME_  = 0.41f;
+	const float BACK_MOTION_TIME_ = 0.96f;
+	const float ATK_MOTION_TIME_  = 0.96f;
 protected:
 
 	BoundingOrientedBox collision;

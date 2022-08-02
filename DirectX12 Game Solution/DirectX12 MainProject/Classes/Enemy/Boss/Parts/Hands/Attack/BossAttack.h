@@ -44,7 +44,7 @@ protected:
 	const float MOVE_SPEED_X_ = 10.0f;
 	const float MOVE_SPEED_Y_ = 10.0f;
 	const float MOVE_SPEED_Z_ = 10.0f;
-	const float ROTE_SPEED_ = 1.0f;
+	const float ROTE_SPEED_ = 100.0f;
 
 	const float HALF_ = 0.5f;
 
@@ -59,10 +59,10 @@ protected:
 	};
 
 	enum HAND_MOTION {
-		ROCK_BACK,
-		ROCK,
-		PAPER_BACK,
+		WAIT_MOTION,
 		PAPER,
-		WAIT_MOTION
+		PAPER_BACK,
+		ROCK,
+		ROCK_BACK
 	};
 };

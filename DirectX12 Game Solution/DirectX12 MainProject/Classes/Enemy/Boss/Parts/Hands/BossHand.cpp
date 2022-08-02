@@ -9,13 +9,13 @@ void BossHand::Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote) {
 
 void BossHand::LoadAssets(LPCWSTR file_name){
 	BossParts::LoadAssets(file_name);
-	//model->SetScale(1.0f);
+	model_->SetScale(0.1f);
 
 	collision = model_->GetBoundingOrientedBox();
 	collision.Extents = SimpleMath::Vector3(
-		collision.Extents.x * 0.5f,
-		collision.Extents.y * 0.3f,
-		collision.Extents.z * 0.5f
+		collision.Extents.x /** 0.5f*/,
+		collision.Extents.y /** 0.3f*/,
+		collision.Extents.z /** 0.5f*/
 	);
 
 	collision_model = DX9::Model::CreateBox(
