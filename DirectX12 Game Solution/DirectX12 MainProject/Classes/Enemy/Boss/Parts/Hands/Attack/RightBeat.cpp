@@ -41,7 +41,7 @@ void RightBeat::Ready(ObjectManager* obj_m) {	//プレイヤーの座標に手を移動させる
 	}
 
 	pos_.z  = std::max(pos_.z -  MOVE_SPEED_Z_ * time_delta_, 0.0f);
-	rote_.x = std::max(rote_.x - ROTE_SPEED_   * time_delta_, -XM_1DIV2PI);
+	rote_.y = std::max(rote_.y - ROTE_SPEED_   * time_delta_, -90.0f);
 
 	if (ready_time_ >= READY_TIME_MAX_) {
 		boss_action_state_ = ATTACK;
@@ -80,7 +80,7 @@ void RightBeat::HandReturn() {	//手を初期位置へ移動
 	}
 	pos_.y  = std::min(pos_.y  + MOVE_SPEED_Y_ * time_delta_, HAND_INITIAL_POS_Y_);
 	pos_.z  = std::min(pos_.z  + MOVE_SPEED_Z_ * time_delta_, HAND_INITIAL_POS_Z_);
-	rote_.x = std::min(rote_.x + ROTE_SPEED_   * time_delta_, XM_PIDIV4);
+	rote_.y = std::min(rote_.y + ROTE_SPEED_   * time_delta_, 0.0f);
 
 	if (pos_.y >= HAND_INITIAL_POS_Y_ &&
 		pos_.x == HAND_R_INITIAL_POS_X_) {
