@@ -10,6 +10,7 @@ public:
 		beat_time_  = 0.0f;
 		wait_time_  = 0.0f;
 		ready_time_ = 0.0f;
+		limit_pos_y_ = 0.0f;
 		hand_state_ = false;
 		pos_  = SimpleMath::Vector3::Zero;
 		rote_ = SimpleMath::Vector3::Zero;
@@ -29,6 +30,7 @@ private:
 	float beat_time_;
 	float wait_time_;
 	float ready_time_;
+	float limit_pos_y_;
 
 	bool hand_state_;
 	
