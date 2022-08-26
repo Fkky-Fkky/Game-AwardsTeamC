@@ -49,7 +49,7 @@ void DoubleSlap::ReadyR() {	//âEéËç\Ç¶
 	float r_slap_y_ = SLAP_SPEED_Y_ * r_slap_time_y_ - HALF_ * SLAP_GRAVITY_Y_ * r_slap_time_y_ * r_slap_time_y_;
 	r_pos_.y += r_slap_y_;
 	r_pos_.z  = std::max(r_pos_.z - MOVE_SPEED_Z_ * time_delta_, 0.0f);
-	r_rote_.x = std::min(r_rote_.x + ROTE_SPEED_ * time_delta_, XM_PIDIV2);
+	r_rote_.x = std::min(r_rote_.x + ROTE_SPEED_ * time_delta_, SLAP_ROT_X_);
 	if (r_pos_.y <= R_HAND_DEST_Y_) {
 		r_pos_.y  = R_HAND_DEST_Y_;
 		(!hand_state_) ? boss_handR_->SetHandMotion(HAND_MOTION::ROCK) : boss_handR_->SetHandMotion(HAND_MOTION::PAPER);
@@ -66,7 +66,7 @@ void DoubleSlap::ReadyL() {	//ç∂éËç\Ç¶
 	float l_slap_y_ = SLAP_SPEED_Y_ * l_slap_time_y_ - HALF_ * SLAP_GRAVITY_Y_ * l_slap_time_y_ * l_slap_time_y_;
 	l_pos_.y += l_slap_y_;
 	l_pos_.z  = std::max(l_pos_.z - MOVE_SPEED_Z_ * time_delta_, 0.0f);
-	l_rote_.x = std::min(l_rote_.x + ROTE_SPEED_ * time_delta_, XM_PIDIV2);
+	l_rote_.x = std::min(l_rote_.x + ROTE_SPEED_ * time_delta_, SLAP_ROT_X_);
 	if (l_pos_.y <= L_HAND_DEST_Y_) {
 		l_pos_.y  = L_HAND_DEST_Y_;
 		(!hand_state_) ? boss_handL_->SetHandMotion(HAND_MOTION::ROCK) : boss_handL_->SetHandMotion(HAND_MOTION::PAPER);
@@ -122,14 +122,14 @@ void DoubleSlap::Reset() {	//ÇªÇÍÇºÇÍÇÃéËÇâÊñ ÇÃîΩëŒÇ÷à⁄ìÆ
 	r_pos_.x  = -HAND_RETURN_POS_X_;
 	r_pos_.y  = HAND_INITIAL_POS_Y_;
 	r_pos_.z  = HAND_INITIAL_POS_Z_;
-	r_rote_.x = XM_PIDIV4;
+	r_rote_.x = HAND_INITIAL_ROT_X_;
 	boss_handR_->SetAttackFlag(false);
 	(!hand_state_) ? boss_handR_->SetHandMotion(HAND_MOTION::ROCK_BACK) : boss_handR_->SetHandMotion(HAND_MOTION::PAPER_BACK);
 
 	l_pos_.x  = HAND_RETURN_POS_X_;
 	l_pos_.y  = HAND_INITIAL_POS_Y_;
 	l_pos_.z  = HAND_INITIAL_POS_Z_;
-	l_rote_.x = XM_PIDIV4;
+	l_rote_.x = HAND_INITIAL_ROT_X_;
 	boss_handL_->SetAttackFlag(false);
 	(!hand_state_) ? boss_handL_->SetHandMotion(HAND_MOTION::ROCK_BACK) : boss_handL_->SetHandMotion(HAND_MOTION::PAPER_BACK);
 
