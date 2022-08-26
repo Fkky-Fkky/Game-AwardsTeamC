@@ -73,6 +73,8 @@ protected:
 	DX9::MODEL collision_model;
 	DX9::SPRITEFONT font_;
 
-	const float INITIAL_POS_Y = 10.0f;
-	const float INITIAL_POS_Z = 3.0f;
+	const float INITIAL_POS_Y_ = 13.0f;
+	const float INITIAL_POS_Z_ = 10.0f;
+	const float INITIAL_ROT_X_ = 30.0f;
+	const float INITIAL_ROT_Y_ = 90.0f;
 };

@@ -8,5 +8,5 @@ public:
 	void LoadAssets();
 
 private:
-	const float INITIAL_POS_X = -13.0f;
+	const float INITIAL_POS_X_ = -13.0f;
 };
