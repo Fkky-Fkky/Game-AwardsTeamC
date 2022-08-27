@@ -42,7 +42,6 @@ void Boss::LoadAseets() {
 }
 
 void Boss::Update(const float deltaTime, ObjectManager* obj_m) {
-	body.Update(deltaTime);
 	core.Update(deltaTime, obj_m->GetBossDmgFlag(), this);
 	hand_l.Update(deltaTime);
 	hand_r.Update(deltaTime);
@@ -121,6 +120,10 @@ void Boss::RandomHandState() {	//手の状態を変更する(グー・パー)
 		hand_state_ = random_hand_dist_(random_engine_);
 	}
 
+	if (attack_state_ == BEAT_RUSH_R) {	//連続叩きつけ攻撃のみグーに固定する
+		hand_state_ = ROCK;
+	}
+
 	if (hand_state_ == old_hand_state_) {
 		same_handstate_flag_ = true;
 	}
@@ -128,7 +131,7 @@ void Boss::RandomHandState() {	//手の状態を変更する(グー・パー)
 	old_hand_state_ = hand_state_;
 }
 
-void Boss::SwitchStateAttack() {
+void Boss::SwitchStateAttack() {	//ボスの攻撃変更
 	delete attack;
 	switch (attack_state_) {
 	case LEFT_BEAT:		attack = new LeftBeat;		break;
@@ -151,7 +154,7 @@ void Boss::WeakStateStart() {
 	weak_state_start_flag_ = true;
 }
 
-void Boss::SwitchStateWait() {
+void Boss::SwitchStateWait() {	//待機状態に切り替え
 	if (action_end_flag_) {
 		delete attack;
 		attack = new Wait;
@@ -160,7 +163,7 @@ void Boss::SwitchStateWait() {
 	}
 }
 
-void Boss::SwitchStateDamage() {
+void Boss::SwitchStateDamage() {	//ダメージ状態に切り替え
 	if (!hand_dmg_flag_) {
 		delete attack;
 		attack = new Damage;
@@ -169,7 +172,7 @@ void Boss::SwitchStateDamage() {
 	}
 }
 
-void Boss::SwitchStateWeak() {
+void Boss::SwitchStateWeak() {	//ウィーク状態に切り替え
 	if (weak_state_start_flag_) {
 		delete attack;
 		attack = new Weak;

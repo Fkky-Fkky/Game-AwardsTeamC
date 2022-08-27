@@ -9,13 +9,13 @@ void BossHand::Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote) {
 
 void BossHand::LoadAssets(LPCWSTR file_name){
 	BossParts::LoadAssets(file_name);
-	//model->SetScale(1.0f);
+	model_->SetScale(0.8f);
 
 	collision = model_->GetBoundingOrientedBox();
 	collision.Extents = SimpleMath::Vector3(
-		collision.Extents.x * 0.5f,
-		collision.Extents.y * 0.3f,
-		collision.Extents.z * 0.5f
+		collision.Extents.x /** 0.5f*/,
+		collision.Extents.y /** 0.3f*/,
+		collision.Extents.z /** 0.5f*/
 	);
 
 	collision_model = DX9::Model::CreateBox(
@@ -81,6 +81,10 @@ void BossHand::SetHandMotion(int hand_motion) {	//モーションをセットする
 		break;
 	}
 	MotionStart();
+	if (motion_track_ == WAIT) {
+		HandMotionWait();
+		motion_flag_ = false;
+	}
 }
 
 void BossHand::MotionStart() {	//モーションを再生させる
@@ -88,8 +92,11 @@ void BossHand::MotionStart() {	//モーションを再生させる
 	motion_flag_ = true;
 }
 
-void BossHand::MotionReset() {	//モーションをリセットする
+void BossHand::MotionReset() {	//指定モーション以外をリセットする
 	for (int i = 0; i < MOTION_MAX_; ++i) {
+		if (i == motion_track_) {
+			continue;
+		}
 		model_->SetTrackEnable(i, false);
 		model_->SetTrackPosition(i, 0.0f);
 	}
@@ -114,7 +121,7 @@ void BossHand::HandMotionAttack() {	//攻撃モーション
 	}
 }
 
-void BossHand::PlayHandMotionWait() {	//待機モーション
+void BossHand::HandMotionWait() {	//待機モーション
 	model_->SetTrackEnable(WAIT, true);
 }
 

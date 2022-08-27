@@ -9,7 +9,7 @@ void Weak::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 	switch (weak_state_) {
 	case WEAK:			   BossWeak(boss);	  break;
 	case HAND_HEAL:		   HandHeal();		  break;
-	case INITIAL_POS_MOVE: InitilaPosMove();  break;
+	case INITIAL_POS_MOVE: InitialPosMove();  break;
 	case ACTION_END:	   boss->ActionEnd(); break;
 	}
 
@@ -32,7 +32,7 @@ void Weak::HandHeal() {	//è‚ÌHP‚ğ‰ñ•œ
 	weak_state_ = INITIAL_POS_MOVE;
 }
 
-void Weak::InitilaPosMove() {//è‚ğ‰ŠúÀ•W‚ÉˆÚ“®
+void Weak::InitialPosMove() {//è‚ğ‰ŠúÀ•W‚ÉˆÚ“®
 	pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
 	pos_l_.x = std::max(pos_l_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
 

@@ -23,7 +23,14 @@ void LeftBeat::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 
 void LeftBeat::HandCheck(Boss* boss) {	//手の状態を確認
 	hand_state_ = boss->GetHandState();
-	(!hand_state_) ? boss_handL_->SetHandMotion(HAND_MOTION::ROCK) : boss_handL_->SetHandMotion(HAND_MOTION::PAPER);		
+	if (!hand_state_) {
+		boss_handL_->SetHandMotion(HAND_MOTION::ROCK);
+		limit_pos_y_ = HAND_ROCK_LIMIT_POS_Y_;
+	}
+	else {
+		boss_handL_->SetHandMotion(HAND_MOTION::PAPER);
+	}
+	
 	boss_action_state_ = READY;
 }
 
@@ -40,7 +47,12 @@ void LeftBeat::Ready(ObjectManager* obj_m) { //プレイヤーの座標に手を移動させる
 		}
 	}
 	pos_.z  = std::max(pos_.z  - MOVE_SPEED_Z_ * time_delta_, 0.0f);
-	rote_.x = std::max(rote_.x - ROTE_SPEED_   * time_delta_, -XM_1DIV2PI);
+	if (!hand_state_) {
+		rote_.x = std::min(rote_.x + ROTE_SPEED_ * time_delta_, BEAT_HAND_ROCK_ROT_X_);
+	}
+	else {
+		rote_.x = std::max(rote_.x - ROTE_SPEED_ * time_delta_, 0.0f);
+	}
 
 	if (ready_time_ >= READY_TIME_MAX_) {
 		boss_action_state_ = ATTACK;
@@ -53,10 +65,10 @@ void LeftBeat::LeftBeatAttack(Boss* boss) { //叩きつけ攻撃
 	float beat_ = BEAT_SPEED_ * beat_time_ - HALF_ * BEAT_GRAVITY_ * beat_time_ * beat_time_;
 	pos_.y += beat_;
 
-	if (pos_.y <= 0.0f) {
-		pos_.y  = 0.0f;
+	if (pos_.y <= limit_pos_y_) {
+		pos_.y  = limit_pos_y_;
 		boss->PlayBeatSE();
-		boss->PlayBeatEffect(pos_);
+		boss->PlayBeatEffect(SimpleMath::Vector3(pos_.x, pos_.y - limit_pos_y_, pos_.z));
 		boss_handL_->SetAttackFlag(false);
 		boss_action_state_ = WAIT;
 	}
@@ -79,7 +91,13 @@ void LeftBeat::HandReturn() { //手を初期位置へ移動
 	}
 	pos_.y  = std::min(pos_.y + MOVE_SPEED_Y_ * time_delta_, HAND_INITIAL_POS_Y_);
 	pos_.z  = std::min(pos_.z + MOVE_SPEED_Z_ * time_delta_, HAND_INITIAL_POS_Z_);
-	rote_.x = std::min(rote_.x + ROTE_SPEED_  * time_delta_, XM_PIDIV4);
+	
+	if (!hand_state_) {
+		rote_.x = std::max(rote_.x - ROTE_SPEED_ * time_delta_, HAND_INITIAL_ROT_X_);
+	}
+	else {
+		rote_.x = std::min(rote_.x + ROTE_SPEED_ * time_delta_, HAND_INITIAL_ROT_X_);
+	}
 
 	if (pos_.y >= HAND_INITIAL_POS_Y_ &&
 		pos_.x == HAND_L_INITIAL_POS_X_) {

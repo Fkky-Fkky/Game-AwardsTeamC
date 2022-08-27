@@ -24,13 +24,19 @@ protected:
 
 	const float HAND_R_INITIAL_POS_X_ = -13.0f;
 	const float HAND_L_INITIAL_POS_X_ = 13.0f;
-	const float HAND_INITIAL_POS_Y_ = 10.0f;
-	const float HAND_INITIAL_POS_Z_ = 3.0f;
+	const float HAND_INITIAL_POS_Y_ = 13.0f;
+	const float HAND_INITIAL_POS_Z_ = 10.0f;
+
+	const float HAND_INITIAL_ROT_X_ = 30.0f;
+	const float HAND_R_INITIAL_ROT_Y_ = -90.0f;
+	const float HAND_L_INITIAL_ROT_Y_ = 90.0f;
 
 	const float HAND_LIMIT_POS_X_ = 70.0f;
+	const float HAND_ROCK_LIMIT_POS_Y_ = 3.0f;
 	const float HAND_RETURN_POS_X_ = 30.0f;
 
-	const float SLAP_POS_Y_ = 2.0f;
+	const float SLAP_POS_Y_ = 2.5f;
+	const float SLAP_ROT_X_ = 80.0f;
 	const float SLAP_SPEED_X_ = 0.5f;
 	const float SLAP_SPEED_Y_ = 2.0f;
 	const float SLAP_GRAVITY_X_ = 1.3f;
@@ -40,11 +46,12 @@ protected:
 
 	const float BEAT_SPEED_ = 3.5f;
 	const float BEAT_GRAVITY_ = 15.0f;
+	const float BEAT_HAND_ROCK_ROT_X_ = 90.0f;
 
 	const float MOVE_SPEED_X_ = 10.0f;
 	const float MOVE_SPEED_Y_ = 10.0f;
 	const float MOVE_SPEED_Z_ = 10.0f;
-	const float ROTE_SPEED_ = 1.0f;
+	const float ROTE_SPEED_ = 100.0f;
 
 	const float HALF_ = 0.5f;
 
@@ -59,10 +66,10 @@ protected:
 	};
 
 	enum HAND_MOTION {
-		ROCK_BACK,
-		ROCK,
-		PAPER_BACK,
+		WAIT_MOTION,
 		PAPER,
-		WAIT_MOTION
+		PAPER_BACK,
+		ROCK,
+		ROCK_BACK
 	};
 };

@@ -68,8 +68,8 @@ void Damage::Reset() {	//Xç¿ïWà»äOÇèâä˙à íuÇ…Ç∑ÇÈ
 	pos_r_.z = HAND_INITIAL_POS_Z_;
 	pos_l_.y = HAND_INITIAL_POS_Y_;
 	pos_l_.z = HAND_INITIAL_POS_Z_;
-	rot_r_.x = XM_PIDIV4;
-	rot_l_.x = XM_PIDIV4;
+	rot_r_.x = HAND_INITIAL_ROT_X_;
+	rot_l_.x = HAND_INITIAL_ROT_X_;
 	damage_state_ = INITIAL_POS_MOVE;
 }
 

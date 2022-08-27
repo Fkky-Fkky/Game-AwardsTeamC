@@ -30,7 +30,6 @@ public:
 	void SetHandRote(SimpleMath::Vector3 rotation_) { rotation = rotation_; }
 	void SetAttackFlag(bool attack_flag) { attack_flag_ = attack_flag; }
 	void SetHandMotion(int hand_motion);
-	void PlayHandMotionWait();
 	int  GetHandHp() { return hand_hp_; }
 	bool GetAttackFlag() { return attack_flag_; }
 	BoundingOrientedBox GetHandCollision() { return collision; }
@@ -42,14 +41,14 @@ private:
 	void MotionReset();
 	void PlayMotion();
 	void HandMotionAttack();
-	
+	void HandMotionWait();
 
 	enum HAND_MOTION {
-		ROCK_BACK,
-		ROCK,
-		PAPER_BACK,
+		WAIT,
 		PAPER,
-		WAIT
+		PAPER_BACK,
+		ROCK,
+		ROCK_BACK
 	};
 
 	void SusiZanmai();
@@ -65,14 +64,16 @@ private:
 
 	const int HAND_HP_MAX_ = 3;
 	const int MOTION_MAX_  = 5;
-	const float BACK_MOTION_TIME_ = 0.39f;
-	const float ATK_MOTION_TIME_  = 0.41f;
+	const float BACK_MOTION_TIME_ = 0.96f;
+	const float ATK_MOTION_TIME_  = 0.96f;
 protected:
 
 	BoundingOrientedBox collision;
 	DX9::MODEL collision_model;
 	DX9::SPRITEFONT font_;
 
-	const float INITIAL_POS_Y = 10.0f;
-	const float INITIAL_POS_Z = 3.0f;
+	const float INITIAL_POS_Y_ = 13.0f;
+	const float INITIAL_POS_Z_ = 10.0f;
+	const float INITIAL_ROT_X_ = 30.0f;
+	const float INITIAL_ROT_Y_ = 90.0f;
 };

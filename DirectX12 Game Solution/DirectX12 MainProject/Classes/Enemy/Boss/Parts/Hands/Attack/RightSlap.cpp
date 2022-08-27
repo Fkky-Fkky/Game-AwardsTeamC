@@ -32,7 +32,7 @@ void RightSlap::Ready() {	//ó\îıìÆçÏ
 	float slap_y_ = SLAP_SPEED_Y_ * slap_time_y_ - HALF_ * SLAP_GRAVITY_Y_ * slap_time_y_ * slap_time_y_;
 	pos_.y += slap_y_;
 	pos_.z  = std::max(pos_.z  - MOVE_SPEED_Z_ * time_delta_, 0.0f);
-	rote_.x = std::min(rote_.x + ROTE_SPEED_   * time_delta_, XM_PIDIV2);
+	rote_.x = std::min(rote_.x + ROTE_SPEED_   * time_delta_, SLAP_ROT_X_);
 
 	if (pos_.y <= SLAP_POS_Y_) {
 		pos_.y  = SLAP_POS_Y_;
@@ -63,11 +63,11 @@ void RightSlap::RightSlapAttack(Boss* boss) {	//âEéËì„Ç¨ï•Ç¢çUåÇ
 
 void RightSlap::Reset() {	//éËÇâÊñ ÇÃîΩëŒë§Ç…à⁄ìÆ
 	boss_handR_->SetAttackFlag(false);
-	(!hand_state_) ? boss_handR_->SetHandMotion(HAND_MOTION::ROCK_BACK) : boss_handR_->SetHandMotion(HAND_MOTION::PAPER_BACK);
+	boss_handR_->SetHandMotion(HAND_MOTION::WAIT_MOTION);
 	pos_.x  = -HAND_RETURN_POS_X_;
 	pos_.y  = HAND_INITIAL_POS_Y_;
 	pos_.z  = HAND_INITIAL_POS_Z_;
-	rote_.x = XM_PIDIV4;
+	rote_.x = HAND_INITIAL_ROT_X_;
 	action_state_ = RETURN;
 }
 

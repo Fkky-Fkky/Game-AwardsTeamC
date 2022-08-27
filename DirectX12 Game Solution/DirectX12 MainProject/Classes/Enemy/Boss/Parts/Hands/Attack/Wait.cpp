@@ -18,8 +18,8 @@ void Wait::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 	}
 
 	if (!first_processed_flag_) {
-		boss_handL_->PlayHandMotionWait();
-		boss_handR_->PlayHandMotionWait();
+		boss_handL_->SetHandMotion(HAND_MOTION::WAIT_MOTION);
+		boss_handR_->SetHandMotion(HAND_MOTION::WAIT_MOTION);
 		first_processed_flag_ = true;
 	}
 

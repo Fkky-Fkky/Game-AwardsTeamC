@@ -15,6 +15,10 @@ void BossParts::Update(const float deltaTime) {
 
 void BossParts::Render() {
 	model_->SetPosition(position);
-	model_->SetRotation(rotation);
+	model_->SetRotation(
+		XMConvertToRadians(rotation.x),
+		XMConvertToRadians(rotation.y),
+		XMConvertToRadians(rotation.z)
+	);
 	model_->Draw();
 }

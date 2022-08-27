@@ -17,7 +17,7 @@ public:
 private:
 	void BossWeak(Boss* boss);
 	void HandHeal();
-	void InitilaPosMove();
+	void InitialPosMove();
 
 	int weak_state_;
 

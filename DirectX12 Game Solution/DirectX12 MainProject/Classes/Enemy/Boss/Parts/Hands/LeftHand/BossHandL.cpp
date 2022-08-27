@@ -2,8 +2,8 @@
 
 void BossHandL::Initialize() {
 	BossHand::Initialize(
-		SimpleMath::Vector3(INITIAL_POS_X, INITIAL_POS_Y, INITIAL_POS_Z),
-		SimpleMath::Vector3(XM_PIDIV4, -5.0f, 0.0f)
+		SimpleMath::Vector3(INITIAL_POS_X_, INITIAL_POS_Y_, INITIAL_POS_Z_),
+		SimpleMath::Vector3(INITIAL_ROT_X_, INITIAL_ROT_Y_, 0.0f)
 	);
 }
 
