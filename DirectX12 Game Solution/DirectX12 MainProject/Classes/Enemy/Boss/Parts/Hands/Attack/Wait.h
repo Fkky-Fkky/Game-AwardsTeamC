@@ -18,7 +18,7 @@ private:
 	const float HP_NORMAL_MAX_ = 30.0f;
 	const float HP_NORMAL_MIN_ = 20.0f;
 	const float HP_HARD_MIN_   = 10.0f;
-	const float MAX_WAIT_TIME_NORMAL_	 = 0.5f;
-	const float MAX_WAIT_TIME_HARD_		 = 0.3f; 
-	const float MAX_WAIT_TIME_VERY_HARD_ = 0.1f;
+	const float MAX_WAIT_TIME_NORMAL_	 = 1.5f;
+	const float MAX_WAIT_TIME_HARD_		 = 1.3f; 
+	const float MAX_WAIT_TIME_VERY_HARD_ = 1.1f;
 };

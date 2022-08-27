@@ -30,7 +30,6 @@ public:
 	void SetHandRote(SimpleMath::Vector3 rotation_) { rotation = rotation_; }
 	void SetAttackFlag(bool attack_flag) { attack_flag_ = attack_flag; }
 	void SetHandMotion(int hand_motion);
-	void PlayHandMotionWait();
 	int  GetHandHp() { return hand_hp_; }
 	bool GetAttackFlag() { return attack_flag_; }
 	BoundingOrientedBox GetHandCollision() { return collision; }
@@ -42,7 +41,7 @@ private:
 	void MotionReset();
 	void PlayMotion();
 	void HandMotionAttack();
-	
+	void HandMotionWait();
 
 	enum HAND_MOTION {
 		WAIT,
