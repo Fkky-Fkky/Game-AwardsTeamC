@@ -68,7 +68,7 @@ void LeftBeat::LeftBeatAttack(Boss* boss) { //’@‚«‚Â‚¯UŒ‚
 	if (pos_.y <= limit_pos_y_) {
 		pos_.y  = limit_pos_y_;
 		boss->PlayBeatSE();
-		boss->PlayBeatEffect(pos_);
+		boss->PlayBeatEffect(SimpleMath::Vector3(pos_.x, pos_.y - limit_pos_y_, pos_.z));
 		boss_handL_->SetAttackFlag(false);
 		boss_action_state_ = WAIT;
 	}
