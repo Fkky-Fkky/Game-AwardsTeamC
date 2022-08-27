@@ -2,7 +2,7 @@
 
 void BossBody::Initialize() {
 	BossParts::Initialize(
-		SimpleMath::Vector3(0.0f, BODY_INIT_POS_Y_, 0.0f),
+		SimpleMath::Vector3(0.0f, BODY_INIT_POS_Y_, BODY_INIT_POS_Z_),
 		SimpleMath::Vector3::Zero
 	);
 }
@@ -27,5 +27,7 @@ void BossBody::Render() {
 	boss_body_->SetRotation(XMConvertToRadians(rotation.x), XMConvertToRadians(rotation.y), XMConvertToRadians(rotation.z));
 	boss_body_->Draw();
 
+	cube_->SetPosition(position);
+	cube_->SetRotation(rotation);
 	cube_->Draw();
 }

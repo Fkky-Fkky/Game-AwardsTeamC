@@ -12,5 +12,6 @@ private:
 	BoundingBox cube_coll_;
 	DX9::MODEL cube_;
 	const float BODY_INIT_POS_Y_ = 5.0f;
-	const float BODY_SCALE_ = 0.2f;
+	const float BODY_INIT_POS_Z_ = 15.0f;
+	const float BODY_SCALE_ = 0.3f;
 };
