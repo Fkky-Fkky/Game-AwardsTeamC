@@ -29,7 +29,8 @@ void LeftSlap::HandCheck(Boss* boss) {	//Žè‚Ìó‘Ô‚ðŠm”F
 
 void LeftSlap::Ready() {	//—\”õ“®ì
 	slap_time_y_ += time_delta_;
-	pos_.y += SLAP_SPEED_Y_ * slap_time_y_ - HALF_ * SLAP_GRAVITY_Y_ * slap_time_y_ * slap_time_y_;
+	float slap_y_ = SLAP_SPEED_Y_ * slap_time_y_ - HALF_ * SLAP_GRAVITY_Y_ * slap_time_y_ * slap_time_y_;
+	pos_.y += slap_y_;
 	pos_.z  = std::max(pos_.z - MOVE_SPEED_Z_ * time_delta_, 0.0f);
 	rote_.x = std::min(rote_.x + ROTE_SPEED_ * time_delta_, SLAP_ROT_X_);
 
@@ -63,7 +64,7 @@ void LeftSlap::LeftSlapAttack(Boss* boss) {	//¶Žè“ã‚¬•¥‚¢UŒ‚
 
 void LeftSlap::Reset() {	//Žè‚ð‰æ–Ê‚Ì”½‘Î‘¤‚ÉˆÚ“®
 	boss_handL_->SetAttackFlag(false);
-	(!hand_state_) ? boss_handL_->SetHandMotion(HAND_MOTION::ROCK_BACK) : boss_handL_->SetHandMotion(HAND_MOTION::PAPER_BACK);
+	boss_handL_->SetHandMotion(HAND_MOTION::WAIT_MOTION);
 	pos_.x  = HAND_RETURN_POS_X_;
 	pos_.y  = HAND_INITIAL_POS_Y_;
 	pos_.z  = HAND_INITIAL_POS_Z_;

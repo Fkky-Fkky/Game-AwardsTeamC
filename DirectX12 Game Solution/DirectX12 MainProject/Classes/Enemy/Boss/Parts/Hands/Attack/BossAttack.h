@@ -35,7 +35,7 @@ protected:
 	const float HAND_ROCK_LIMIT_POS_Y_ = 3.0f;
 	const float HAND_RETURN_POS_X_ = 30.0f;
 
-	const float SLAP_POS_Y_ = 2.0f;
+	const float SLAP_POS_Y_ = 2.5f;
 	const float SLAP_ROT_X_ = 80.0f;
 	const float SLAP_SPEED_X_ = 0.5f;
 	const float SLAP_SPEED_Y_ = 2.0f;

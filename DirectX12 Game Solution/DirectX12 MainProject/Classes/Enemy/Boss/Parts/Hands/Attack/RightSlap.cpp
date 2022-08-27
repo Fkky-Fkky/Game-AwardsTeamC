@@ -63,7 +63,7 @@ void RightSlap::RightSlapAttack(Boss* boss) {	//‰EŽè“ã‚¬•¥‚¢UŒ‚
 
 void RightSlap::Reset() {	//Žè‚ð‰æ–Ê‚Ì”½‘Î‘¤‚ÉˆÚ“®
 	boss_handR_->SetAttackFlag(false);
-	(!hand_state_) ? boss_handR_->SetHandMotion(HAND_MOTION::ROCK_BACK) : boss_handR_->SetHandMotion(HAND_MOTION::PAPER_BACK);
+	boss_handR_->SetHandMotion(HAND_MOTION::WAIT_MOTION);
 	pos_.x  = -HAND_RETURN_POS_X_;
 	pos_.y  = HAND_INITIAL_POS_Y_;
 	pos_.z  = HAND_INITIAL_POS_Z_;
