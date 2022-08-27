@@ -26,7 +26,8 @@ void BeatRushR::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss){
 void BeatRushR::HandCheck(Boss* boss) {	//éËÇÃèÛë‘ÇämîF
 	is_r_hand_broke_ = boss_handR_->GetHandHp() <= 0;
 	is_l_hand_broke_ = boss_handL_->GetHandHp() <= 0;
-	hand_state_ = boss->GetHandState();
+	boss_handR_->SetHandMotion(HAND_MOTION::ROCK);
+	boss_handL_->SetHandMotion(HAND_MOTION::ROCK);
 	action_state_ = READY;
 }
 
@@ -35,22 +36,26 @@ void BeatRushR::Ready() {	//óºéËÇ(É{ÉXÇ©ÇÁå©Çƒ)âEë§Ç…ç\Ç¶ÇÈ
 		r_ready_end_ = true;
 	}
 	else {
-		bool is_r_hand_start_pos_ = pos_r_.x  <= R_START_POS_X_;
-		bool is_r_hand_start_rot_ = rote_r_.x <= -XM_1DIV2PI;
-		pos_r_.x  = std::max(pos_r_.x - MOVE_SPEED_X_ * time_delta_, R_START_POS_X_);
-		rote_r_.x = std::max(rote_r_.x - ROTATION_SPEED_ * time_delta_, -XM_1DIV2PI);
-		r_ready_end_ = is_r_hand_start_pos_ && is_r_hand_start_rot_;
+		bool is_r_hand_start_pos_x_ = pos_r_.x  <= R_START_POS_X_;
+		bool is_r_hand_start_pos_z_ = pos_r_.z  <= 0.0f;
+		bool is_r_hand_start_rot_	= rote_r_.x >= BEAT_HAND_ROCK_ROT_X_;
+		pos_r_.x  = std::max(pos_r_.x  - MOVE_SPEED_X_ * time_delta_, R_START_POS_X_);
+		pos_r_.z  = std::max(pos_r_.z  - MOVE_SPEED_Z_ * time_delta_, 0.0f);
+		rote_r_.x = std::min(rote_r_.x + ROTE_SPEED_   * time_delta_, BEAT_HAND_ROCK_ROT_X_);
+		r_ready_end_ = is_r_hand_start_pos_x_ && is_r_hand_start_pos_z_ && is_r_hand_start_rot_;
 	}
 
 	if (is_l_hand_broke_) {
 		l_ready_end_ = true;
 	}
 	else {
-		bool is_l_hand_start_pos_ = pos_l_.x  <= L_START_POS_X_;
-		bool is_l_hand_start_rot_ = rote_l_.x <= -XM_1DIV2PI;
-		pos_l_.x = std::max(pos_l_.x - MOVE_SPEED_X_ * time_delta_, L_START_POS_X_);
-		rote_l_.x = std::max(rote_l_.x - ROTATION_SPEED_ * time_delta_, -XM_1DIV2PI);
-		l_ready_end_ = is_l_hand_start_pos_ && is_l_hand_start_rot_;
+		bool is_l_hand_start_pos_x_ = pos_l_.x  <= L_START_POS_X_;
+		bool is_l_hand_start_pos_z_ = pos_r_.z	<= 0.0f;
+		bool is_l_hand_start_rot_	= rote_l_.x <= BEAT_HAND_ROCK_ROT_X_;
+		pos_l_.x  = std::max(pos_l_.x  - MOVE_SPEED_X_ * time_delta_, L_START_POS_X_);
+		pos_l_.z  = std::max(pos_l_.z  - MOVE_SPEED_Z_ * time_delta_, 0.0f);
+		rote_l_.x = std::min(rote_l_.x + ROTE_SPEED_   * time_delta_, BEAT_HAND_ROCK_ROT_X_);
+		l_ready_end_ = is_l_hand_start_pos_x_ && is_l_hand_start_pos_z_ && is_l_hand_start_rot_;
 	}
 
 	if (r_ready_end_ && l_ready_end_) {
@@ -87,10 +92,10 @@ void BeatRushR::BeatR(Boss* boss) {	//âEéËí@Ç´Ç¬ÇØçUåÇ
 		pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, r_move_dest_x_);
 	}
 
-	if (pos_r_.y <= LIMIT_POS_Y_) {
-		pos_r_.y  = LIMIT_POS_Y_;
+	if (pos_r_.y <= HAND_ROCK_LIMIT_POS_Y_) {
+		pos_r_.y  = HAND_ROCK_LIMIT_POS_Y_;
 		boss->PlayBeatSE();
-		boss->PlayBeatEffect(pos_r_);
+		boss->PlayBeatEffect(SimpleMath::Vector3(pos_r_.x, pos_r_.y - HAND_ROCK_LIMIT_POS_Y_, pos_r_.z));
 		r_hand_up_flag_ = true;
 		r_move_dest_x_ = std::min(pos_r_.x + ADD_DISTANCE_, HAND_RETURN_POS_X_);
 	}
@@ -119,10 +124,10 @@ void BeatRushR::BeatL(Boss* boss) {	//ç∂éËí@Ç´Ç¬ÇØçUåÇ
 		pos_l_.x = std::min(pos_l_.x + MOVE_SPEED_X_ * time_delta_, l_move_dest_x_);
 	}
 
-	if (pos_l_.y <= LIMIT_POS_Y_) {
-		pos_l_.y  = LIMIT_POS_Y_;
+	if (pos_l_.y <= HAND_ROCK_LIMIT_POS_Y_) {
+		pos_l_.y  = HAND_ROCK_LIMIT_POS_Y_;
 		boss->PlayBeatSE();
-		boss->PlayBeatEffect(pos_l_);
+		boss->PlayBeatEffect(SimpleMath::Vector3(pos_l_.x, pos_l_.y - HAND_ROCK_LIMIT_POS_Y_, pos_l_.z));
 		l_hand_up_flag_ = true;
 		l_move_dest_x_ = std::min(pos_l_.x + ADD_DISTANCE_, HAND_RETURN_POS_X_);
 	}
@@ -137,14 +142,18 @@ void BeatRushR::BeatL(Boss* boss) {	//ç∂éËí@Ç´Ç¬ÇØçUåÇ
 
 void BeatRushR::Reset() {	//éËÇâÊñ äOÇ÷à⁄ìÆ
 	boss_handR_->SetAttackFlag(false);
+	boss_handR_->SetHandMotion(HAND_MOTION::WAIT_MOTION);
 	pos_r_.x  = -HAND_RETURN_POS_X_;
 	pos_r_.y  = HAND_INITIAL_POS_Y_;
-	rote_r_.x = XM_PIDIV4;
+	pos_r_.z  = HAND_INITIAL_POS_Z_;
+	rote_r_.x = HAND_INITIAL_ROT_X_;
 	
 	boss_handL_->SetAttackFlag(false);
+	boss_handL_->SetHandMotion(HAND_MOTION::WAIT_MOTION);
 	pos_l_.x  = HAND_RETURN_POS_X_;
 	pos_l_.y  = HAND_INITIAL_POS_Y_;
-	rote_l_.x = XM_PIDIV4;
+	pos_l_.z  = HAND_INITIAL_POS_Z_;
+	rote_l_.x = HAND_INITIAL_ROT_X_;
 	action_state_ = RETURN;
 }
 

@@ -22,7 +22,6 @@ public:
 		is_l_attack_end_ = false;
 		is_r_return_end_ = false;
 		is_l_return_end_ = false;
-		hand_state_		 = false;
 	}
 	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss);
 
@@ -54,7 +53,6 @@ private:
 	bool is_l_attack_end_;
 	bool is_r_return_end_;
 	bool is_l_return_end_;
-	bool hand_state_;
 
 	SimpleMath::Vector3 pos_r_;
 	SimpleMath::Vector3 rote_r_;
@@ -63,9 +61,7 @@ private:
 
 	const float R_START_POS_X_ = -15.0f;
 	const float L_START_POS_X_ = -10.0f;
-	const float LIMIT_POS_Y_   = -1.0f;
 
-	const float ROTATION_SPEED_ = 10.0f;
 	const float WAIT_TIME_MAX_  = 0.5f;
 	const float BEAT_L_START_TIME_ = 0.5f;
 	const float ADD_DISTANCE_ = 13.0f;
