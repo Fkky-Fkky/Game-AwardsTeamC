@@ -108,7 +108,7 @@ NextScene BossTestScene::Update(const float deltaTime)
 void BossTestScene::Render()
 {
 	// TODO: Add your rendering code here.
-    DXTK->Direct3D9->Clear(static_cast<D3DCOLOR>(DX9::Colors::RGBA(157, 204, 220, 255)));
+    DXTK->Direct3D9->Clear(DX9::Colors::RGBA(50, 0, 0, 155));
 
     DXTK->Direct3D9->BeginScene();
 
