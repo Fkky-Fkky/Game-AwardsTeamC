@@ -18,13 +18,7 @@ public:
 	void Render2D();
 
 private:
-	DX9::MODEL stage_flooring_;
-	DX9::MODEL stage_bed_;
-	DX9::MODEL castle;
-	DX9::SKINNEDMODEL building_block;
+	DX9::MODEL stage_;
 	DX9::MEDIARENDERER bgm_main_;
-
-	const float BED_POS_Y_ = -4.5f;
-	const float BED_POS_Z_ = 12.0f;
-	const float CASTLE_POS_Y_ = -6.19f;
+	const float STAGE_SCALE_ = 2.0f;
 };
