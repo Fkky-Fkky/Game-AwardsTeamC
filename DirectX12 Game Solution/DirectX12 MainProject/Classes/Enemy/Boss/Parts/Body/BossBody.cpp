@@ -8,9 +8,9 @@ void BossBody::Initialize() {
 }
 
 void BossBody::LoadAssets() {
-	boss_body_ = DX9::Model::CreateFromFile(DXTK->Device9, L"Boss/boss_head.x");
-	boss_body_->SetScale(BODY_SCALE_);
-	cube_coll_ = boss_body_->GetBoundingBox();
+	BossParts::LoadAssets(L"Boss/boss_head.x");
+	model_->SetScale(BODY_SCALE_);
+	cube_coll_ = model_->GetBoundingBox();
 	cube_ = DX9::Model::CreateBox(
 		DXTK->Device9,
 		cube_coll_.Extents.x,
@@ -20,14 +20,13 @@ void BossBody::LoadAssets() {
 	D3DMATERIAL9 material{};
 	material.Diffuse = DX9::Colors::Value(1.0f, 0.0f, 0.0f, 0.75f);
 	cube_->SetMaterial(material);
+
+	model_->SetTrackEnable(0, true);
 }
 
 void BossBody::Render() {
-	boss_body_->SetPosition(position);
-	boss_body_->SetRotation(XMConvertToRadians(rotation.x), XMConvertToRadians(rotation.y), XMConvertToRadians(rotation.z));
-	boss_body_->Draw();
-
+	BossParts::Render();
 	cube_->SetPosition(position);
 	cube_->SetRotation(rotation);
-	cube_->Draw();
+	//cube_->Draw();
 }
