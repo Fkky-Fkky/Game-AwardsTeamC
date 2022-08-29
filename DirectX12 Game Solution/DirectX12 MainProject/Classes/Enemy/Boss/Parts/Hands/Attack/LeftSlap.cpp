@@ -36,11 +36,13 @@ void LeftSlap::Ready() {	//—\”õ“®ì
 
 	if (pos_.y <= SLAP_POS_Y_) {
 		pos_.y  = SLAP_POS_Y_;
+		boss_handL_->SetShakeFlag(true);
 		action_state_ = WAIT;
 	}
 }
 
 void LeftSlap::Wait() {	//‘Ò‹@
+	boss_handL_->SetShakeFlag(false);
 	wait_time_ = std::min(wait_time_ + time_delta_, WAIT_TIME_MAX_);
 	if (wait_time_ >= WAIT_TIME_MAX_) {
 		action_state_ = ATTACK;

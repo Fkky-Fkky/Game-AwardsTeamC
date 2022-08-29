@@ -13,9 +13,9 @@ void BossHand::LoadAssets(LPCWSTR file_name){
 
 	collision = model_->GetBoundingOrientedBox();
 	collision.Extents = SimpleMath::Vector3(
-		collision.Extents.x /** 0.5f*/,
-		collision.Extents.y /** 0.3f*/,
-		collision.Extents.z /** 0.5f*/
+		collision.Extents.x * 1.7f,
+		collision.Extents.y * 0.8f,
+		collision.Extents.z * 2.0f
 	);
 
 	collision_model = DX9::Model::CreateBox(
@@ -38,7 +38,7 @@ void BossHand::LoadAssets(LPCWSTR file_name){
 void BossHand::Update(const float deltaTime) {
 	BossParts::Update(deltaTime);
 	timde_delta_ = deltaTime;
-	collision.Center = model_->GetPosition();
+	collision.Center = model_->GetPosition() + SimpleMath::Vector3(-1.5f, 0.0f, 0.0f);
 	collision.Orientation = model_->GetRotationQuaternion();
 	PlayMotion();
 }
@@ -123,6 +123,10 @@ void BossHand::HandMotionAttack() {	//攻撃モーション
 
 void BossHand::HandMotionWait() {	//待機モーション
 	model_->SetTrackEnable(WAIT, true);
+}
+
+void BossHand::SetShakeFlag(bool shake_flag) {
+	is_shake_ = shake_flag;
 }
 
 //void BossAttack::SusiZanmai() {

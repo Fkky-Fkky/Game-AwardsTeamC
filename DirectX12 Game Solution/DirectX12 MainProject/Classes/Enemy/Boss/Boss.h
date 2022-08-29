@@ -45,6 +45,7 @@ public:
 	void PlayBeatEffect(SimpleMath::Vector3 effect_pos);
 	int GetBossHP() { return core.GetBossHP(); }
 	bool IsBossWeak() { return weak_state_; }
+	bool IsShake() { if (hand_l.IsShake() || hand_r.IsShake()) { return true; } else { return false; } }
 	bool GetHandState() { return hand_state_; }
 	bool GetLHandAttackFlag() { return hand_l.GetAttackFlag(); }
 	bool GetRHandAttackFlag() { return hand_r.GetAttackFlag(); }
