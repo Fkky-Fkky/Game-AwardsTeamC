@@ -9,13 +9,15 @@
 // Initialize member variables.
 TitleScene::TitleScene()
 {
-
+    black_alpha_ = 0.0f;
+    start_flag_ = false;
 }
 
 // Initialize a variable and audio resources.
 void TitleScene::Initialize()
 {
-
+    black_alpha_ = 0.0f;
+    start_flag_ = false;
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -43,7 +45,7 @@ void TitleScene::LoadAssets()
     // グラフィックリソースの初期化処理
 
     title_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Scene/Title.png");
-
+    black_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Scene/Black.png");
 }
 
 // Releasing resources required for termination.
@@ -76,8 +78,17 @@ NextScene TitleScene::Update(const float deltaTime)
 
 	// TODO: Add your game logic here.
 
-    if (DXTK->KeyEvent->pressed.Enter)
-        return NextScene::BossTestScene;
+    if (DXTK->KeyEvent->pressed.Enter) {
+        start_flag_ = true;
+    }
+
+    if (start_flag_) {
+        black_alpha_ = std::min(black_alpha_ + ALPHA_SPEED_ * deltaTime, ALPHA_MAX_);
+    }
+
+    if (black_alpha_ >= ALPHA_MAX_) {
+        return NextScene::MainScene;
+    }
 
 	return NextScene::Continue;
 }
@@ -94,6 +105,13 @@ void TitleScene::Render()
     DX9::SpriteBatch->DrawSimple(
         title_.Get(),
         SimpleMath::Vector3::Zero
+    );
+
+    DX9::SpriteBatch->DrawSimple(
+        black_.Get(),
+        SimpleMath::Vector3::Zero,
+        RectWH(0, 0, WIDTH_MAX_, HIGHT_MAX_),
+        DX9::Colors::RGBA(ALPHA_MAX_, ALPHA_MAX_, ALPHA_MAX_, (int)black_alpha_)
     );
 
     DX9::SpriteBatch->End();
