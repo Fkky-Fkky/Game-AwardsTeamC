@@ -6,7 +6,7 @@ UI::UI() {
 }
 
 void UI::Initialize() {
-	player_hp_width_ = 0.0f;
+	player_hp_width_ = PLAYER_HP_MAX_WIDTH_;
 }
 
 void UI::LoadAssets() {
