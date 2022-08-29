@@ -21,6 +21,8 @@ void MainScene::Initialize()
     camera_.Initialize();
     player_.Initialize();
     collision_.Initialize();
+    scene_change_.Initialize();
+    ui.Initialize();
     object_.SetPlayer(&player_);
     object_.SetBoss(&boss_);
     object_.SetCollision(&collision_);
@@ -54,6 +56,7 @@ void MainScene::LoadAssets()
     player_.LoadAssets();
     ground_.LoadAssets();
     collision_.LoadAssets();
+    scene_change_.LoadAssets();
     ui.LoadAssets();
     light_.LoadAssets();
 }
@@ -88,15 +91,18 @@ NextScene MainScene::Update(const float deltaTime)
 
     // TODO: Add your game logic here.
 
-    player_.Update(deltaTime, &object_);
-    boss_.Update(deltaTime, &object_);
-    camera_.Update(deltaTime, &object_);
-    DX12Effect.Update(deltaTime);
-    ground_.Update(deltaTime, &object_);
-    collision_.Update(deltaTime, &object_);
-    scene_change_.Update(&object_);
-    ui.Update(deltaTime, &object_);
+    scene_change_.Update(deltaTime, &object_);
 
+    if (scene_change_.IsGameStart()) {
+        player_.Update(deltaTime, &object_);
+        boss_.Update(deltaTime, &object_);
+        camera_.Update(deltaTime, &object_);
+        DX12Effect.Update(deltaTime);
+        ground_.Update(deltaTime, &object_);
+        collision_.Update(deltaTime, &object_);
+        ui.Update(deltaTime, &object_);
+    }
+    
     if (scene_change_.GetSceneChangeFlag()) {
         return NextScene::ResultScene;
     }
@@ -108,7 +114,7 @@ NextScene MainScene::Update(const float deltaTime)
 void MainScene::Render()
 {
     // TODO: Add your rendering code here.
-    DXTK->Direct3D9->Clear(DX9::Colors::RGBA(50, 0, 0, 155));
+    DXTK->Direct3D9->Clear(DX9::Colors::RGBA(100, 0, 0, 155));
 
     DXTK->Direct3D9->BeginScene();
 
@@ -120,6 +126,7 @@ void MainScene::Render()
 
     ground_.Render2D();
     collision_.Render2D();
+    scene_change_.Render2D();
     player_.Render2D();
     boss_.Render2D();
     ui.Render();
