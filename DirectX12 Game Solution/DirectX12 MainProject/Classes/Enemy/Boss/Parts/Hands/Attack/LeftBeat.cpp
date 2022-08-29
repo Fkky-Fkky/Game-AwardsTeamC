@@ -69,12 +69,14 @@ void LeftBeat::LeftBeatAttack(Boss* boss) { //’@‚«‚Â‚¯UŒ‚
 		pos_.y  = limit_pos_y_;
 		boss->PlayBeatSE();
 		boss->PlayBeatEffect(SimpleMath::Vector3(pos_.x, pos_.y - limit_pos_y_, pos_.z));
+		boss_handL_->SetShakeFlag(true);
 		boss_handL_->SetAttackFlag(false);
 		boss_action_state_ = WAIT;
 	}
 }
 
 void LeftBeat::Wait() {	//d’¼
+	boss_handL_->SetShakeFlag(false);
 	wait_time_ += time_delta_;
 	if (wait_time_ >= WAIT_TIME_MAX_) {
 		(!hand_state_) ? boss_handL_->SetHandMotion(HAND_MOTION::ROCK_BACK) : boss_handL_->SetHandMotion(HAND_MOTION::PAPER_BACK);
