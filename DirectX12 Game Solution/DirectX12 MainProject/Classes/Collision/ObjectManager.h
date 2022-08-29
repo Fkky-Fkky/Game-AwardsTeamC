@@ -30,6 +30,7 @@ public:
 	bool IsBossHandOpen();
 	bool IsBossHandRDmg();
 	bool IsBossHandLDmg();
+	bool IsGroundShake();
 	SimpleMath::Vector3 GetPlayerPos();
 
 private:
