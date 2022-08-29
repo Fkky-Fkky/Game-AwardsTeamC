@@ -15,6 +15,7 @@ public:
 		bezier_t = 0.0f;
 		motion_flag_ = false;
 		attack_flag_ = false;
+		is_shake_	 = false;
 	}
 
 	~BossHand() {};
@@ -30,8 +31,10 @@ public:
 	void SetHandRote(SimpleMath::Vector3 rotation_) { rotation = rotation_; }
 	void SetAttackFlag(bool attack_flag) { attack_flag_ = attack_flag; }
 	void SetHandMotion(int hand_motion);
+	void SetShakeFlag(bool shake_flag);
 	int  GetHandHp() { return hand_hp_; }
 	bool GetAttackFlag() { return attack_flag_; }
+	bool IsShake() { return is_shake_; }
 	BoundingOrientedBox GetHandCollision() { return collision; }
 	SimpleMath::Vector3 GetHandPos() { return position; }
 	SimpleMath::Vector3 GetRotation() { return rotation; }
@@ -61,6 +64,7 @@ private:
 	float bezier_t;
 	bool motion_flag_;
 	bool attack_flag_;
+	bool is_shake_;
 
 	const int HAND_HP_MAX_ = 3;
 	const int MOTION_MAX_  = 5;
