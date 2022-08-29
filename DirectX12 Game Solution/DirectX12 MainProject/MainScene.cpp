@@ -5,6 +5,7 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 #include "SceneFactory.h"
+#include <Base/DX12Effekseer.h>
 
 // Initialize member variables.
 MainScene::MainScene() : dx9GpuDescriptor{}
@@ -15,11 +16,14 @@ MainScene::MainScene() : dx9GpuDescriptor{}
 // Initialize a variable and audio resources.
 void MainScene::Initialize()
 {
-    //camera.Initialize();
-    player_camera.Initialize();
-    player.Initialize();
-    boss.Initialize();
-    collision.Initialize();
+    DX12Effect.Initialize();
+    boss_.Initialize();
+    camera_.Initialize();
+    player_.Initialize();
+    collision_.Initialize();
+    object_.SetPlayer(&player_);
+    object_.SetBoss(&boss_);
+    object_.SetCollision(&collision_);
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -46,19 +50,12 @@ void MainScene::LoadAssets()
 
 
     // グラフィックリソースの初期化処理
-    D3DLIGHT9 light{};
-    light.Type = D3DLIGHT_DIRECTIONAL;
-    light.Ambient = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
-    light.Specular = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
-    light.Diffuse = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
-
-    light.Direction = DX9::VectorSet(0.0f, -10.0f, 5.0f);
-    DXTK->Direct3D9->SetLight(0, light);
-
-    player.LoadAssets();
-    ground.LoadAssets();
-    boss.LoadAseets();
-    collision.LoadAssets();
+    boss_.LoadAseets();
+    player_.LoadAssets();
+    ground_.LoadAssets();
+    collision_.LoadAssets();
+    ui.LoadAssets();
+    light_.LoadAssets();
 }
 
 // Releasing resources required for termination.
@@ -91,11 +88,18 @@ NextScene MainScene::Update(const float deltaTime)
 
     // TODO: Add your game logic here.
 
-    player.Update(deltaTime, &object);
-    boss.Update(deltaTime, &object);
-    //smallEnemy.HitPlayerAttack(collision.GetHitAttackFlag());
-    //smallEnemy.Update(deltaTime);
-    collision.Update(deltaTime, &object);
+    player_.Update(deltaTime, &object_);
+    boss_.Update(deltaTime, &object_);
+    camera_.Update(deltaTime, &object_);
+    DX12Effect.Update(deltaTime);
+    ground_.Update(deltaTime, &object_);
+    collision_.Update(deltaTime, &object_);
+    scene_change_.Update(&object_);
+    ui.Update(deltaTime, &object_);
+
+    if (scene_change_.GetSceneChangeFlag()) {
+        return NextScene::ResultScene;
+    }
 
     return NextScene::Continue;
 }
@@ -104,20 +108,21 @@ NextScene MainScene::Update(const float deltaTime)
 void MainScene::Render()
 {
     // TODO: Add your rendering code here.
-    DXTK->Direct3D9->Clear(DX9::Colors::RGBA(157, 204, 220, 255));
+    DXTK->Direct3D9->Clear(DX9::Colors::RGBA(50, 0, 0, 155));
 
     DXTK->Direct3D9->BeginScene();
 
-    player.Render();
-    ground.Render();
-    boss.Render();
+    player_.Render();
+    boss_.Render();
+    ground_.Render();
 
     DX9::SpriteBatch->Begin();
 
-    collision.Render2D();
-    player.Render2D();
-
-
+    ground_.Render2D();
+    collision_.Render2D();
+    player_.Render2D();
+    boss_.Render2D();
+    ui.Render();
 
     DX9::SpriteBatch->End();
     DXTK->Direct3D9->EndScene();
@@ -133,10 +138,12 @@ void MainScene::Render()
     spriteBatch->Begin(DXTK->CommandList);
     spriteBatch->Draw(
         dx9GpuDescriptor,
-        XMUINT2(1280, 720),
+        XMUINT2(static_cast<int>(screen::width), static_cast<int>(screen::height)),
         SimpleMath::Vector2(0.0f, 0.0f)
     );
     spriteBatch->End();
+
+    DX12Effect.Renderer();
 
     DXTK->Direct3D9->WaitUpdate();
     DXTK->ExecuteCommandList();

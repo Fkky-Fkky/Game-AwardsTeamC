@@ -11,7 +11,7 @@ enum class NextScene : int {
 	MainScene,
 	PlayerTestScene,
 	ResultScene,
-	StartScene = BossTestScene
+	StartScene = MainScene
 };
 
 class Scene {

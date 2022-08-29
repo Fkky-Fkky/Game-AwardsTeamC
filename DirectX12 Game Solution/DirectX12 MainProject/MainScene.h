@@ -5,13 +5,16 @@
 #pragma once
 
 #include "Scene.h"
-#include "Classes/My_Camera/My_Camera.h"
+#include "Classes/Enemy/Boss/Boss.h"
 #include "Classes/PlayerTestCamera/PlayerTestCamera.h"
 #include "Classes/Player/Player.h"
 #include "Classes/Ground/Ground.h"
-#include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/My_Camera/My_Camera.h"
 #include "Classes/Collision/Collision.h"
 #include "Classes/Collision/ObjectManager.h"
+#include "Classes/GameScene/SceneChange.h"
+#include "Classes/UI/UI.h"
+#include "Classes/My_Light/My_Light.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -46,11 +49,14 @@ private:
 	DX12::SPRITEBATCH    spriteBatch;
 	DX12::HGPUDESCRIPTOR dx9GpuDescriptor;
 
-	My_Camera camera;
-	PlayerTestCamera player_camera;
-	Player player;
-	Ground ground;
-	Boss boss;
-	Collision collision;
-	ObjectManager object;
+private:
+	Boss boss_;
+	PlayerTestCamera camera_;
+	Player player_;
+	Ground ground_;
+	Collision collision_;
+	ObjectManager object_;
+	SceneChange scene_change_;
+	UI ui;
+	My_Light light_;
 };
