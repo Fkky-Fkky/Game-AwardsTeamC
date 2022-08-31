@@ -102,9 +102,6 @@
     <ClInclude Include="Classes\My_Camera\My_Camera.h">
       <Filter>Classes\My_Camera</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerTestScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Player\Player.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
@@ -119,9 +116,6 @@
     </ClInclude>
     <ClInclude Include="Classes\Collision\Collision.h">
       <Filter>Classes\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="BossTestScene.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\BossParts.h">
       <Filter>Classes\Enemy\Boss\Parts</Filter>
@@ -239,9 +233,6 @@
     <ClCompile Include="Classes\My_Camera\My_Camera.cpp">
       <Filter>Classes\My_Camera</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerTestScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Player\Player.cpp">
       <Filter>Classes\Player</Filter>
     </ClCompile>
@@ -256,9 +247,6 @@
     </ClCompile>
     <ClCompile Include="Classes\Collision\Collision.cpp">
       <Filter>Classes\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="BossTestScene.cpp">
-      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\BossParts.cpp">
       <Filter>Classes\Enemy\Boss\Parts</Filter>

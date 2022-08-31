@@ -41,4 +41,12 @@ private:
 
 private:
 	DX9::SPRITE title_;
+	DX9::SPRITE black_;
+	float black_alpha_;
+	bool start_flag_;
+
+	const int WIDTH_MAX_ = 1280;
+	const int HIGHT_MAX_ = 720;
+	const float ALPHA_SPEED_ = 180.0f;
+	const float ALPHA_MAX_ = 255.0f;
 };
