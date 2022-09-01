@@ -1,9 +1,10 @@
 #include "Classes/Enemy/Boss/Parts/Body/BossBody.h"
+#include "Classes/Collision/ObjectManager.h"
 
 void BossBody::Initialize() {
 	BossParts::Initialize(
 		SimpleMath::Vector3(0.0f, BODY_INIT_POS_Y_, BODY_INIT_POS_Z_),
-		SimpleMath::Vector3::Zero
+		SimpleMath::Vector3(BODY_INIT_ROT_X_, 0.0f, 0.0f)
 	);
 }
 
@@ -22,6 +23,12 @@ void BossBody::LoadAssets() {
 	cube_->SetMaterial(material);
 
 	model_->SetTrackEnable(0, true);
+}
+
+void BossBody::Update(const float deltaTime, ObjectManager* obj_m_) {
+	BossParts::Update(deltaTime);
+	SimpleMath::Vector3 player_pos_ = obj_m_->GetPlayerPos();
+	rotation.y = player_pos_.x * -1;
 }
 
 void BossBody::Render() {
