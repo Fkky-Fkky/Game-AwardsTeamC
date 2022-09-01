@@ -11,16 +11,21 @@ void BossBody::Initialize() {
 void BossBody::LoadAssets() {
 	BossParts::LoadAssets(L"Boss/boss_head.x");
 	model_->SetScale(BODY_SCALE_);
-	cube_coll_ = model_->GetBoundingBox();
-	cube_ = DX9::Model::CreateBox(
+	body_coll_ = model_->GetBoundingOrientedBox();
+	body_coll_.Extents = SimpleMath::Vector3(
+		body_coll_.Extents.x,
+		body_coll_.Extents.y,
+		body_coll_.Extents.z
+	);
+	coll_model_ = DX9::Model::CreateBox(
 		DXTK->Device9,
-		cube_coll_.Extents.x,
-		cube_coll_.Extents.y,
-		cube_coll_.Extents.z
+		body_coll_.Extents.x,
+		body_coll_.Extents.y,
+		body_coll_.Extents.z
 	);
 	D3DMATERIAL9 material{};
 	material.Diffuse = DX9::Colors::Value(1.0f, 0.0f, 0.0f, 0.75f);
-	cube_->SetMaterial(material);
+	coll_model_->SetMaterial(material);
 
 	model_->SetTrackEnable(0, true);
 }
@@ -29,11 +34,13 @@ void BossBody::Update(const float deltaTime, ObjectManager* obj_m_) {
 	BossParts::Update(deltaTime);
 	SimpleMath::Vector3 player_pos_ = obj_m_->GetPlayerPos();
 	rotation.y = player_pos_.x * -1;
+	body_coll_.Center = model_->GetPosition();
+	body_coll_.Orientation = model_->GetRotationQuaternion();
 }
 
 void BossBody::Render() {
 	BossParts::Render();
-	cube_->SetPosition(position);
-	cube_->SetRotation(rotation);
-	//cube_->Draw();
+	coll_model_->SetPosition(body_coll_.Center);
+	coll_model_->SetRotationQuaternion(body_coll_.Orientation);
+	//coll_model_->Draw();
 }
