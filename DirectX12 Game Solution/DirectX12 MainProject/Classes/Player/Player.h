@@ -32,12 +32,14 @@ enum class PLAYER_MOTION {
 	WAIT,
 	ATTACK,
 	MOVE,
-	JUMP
+	JUMP,
+	DAMAGE
 };
 
 class Player {
 public:
 	Player() {
+		player_action_state_ = PLAYER_STATE::WAIT;
 		player_motion_track_ = 0;
 		player_state_ = nullptr;
 		jump_motion_time_ = 0.0f;
@@ -70,7 +72,6 @@ public:
 	BoundingOrientedBox GetPlayerCollision() { return player_colision_.GetColision(); }
 	BoundingOrientedBox GetPlayerAttackCollision() { return player_attack_colision_.GetAttackCollision(); }
 	PlayerColision* GetColision() { return &player_colision_; }
-	PLAYER_STATE GetPlayerState() { return player_action_state_; }
 
 private:
 	void ResetPlayerMotion();
@@ -93,7 +94,7 @@ private:
 	SimpleMath::Vector3 pos_;
 	SimpleMath::Vector3 rot_;
 
-	const int MOTION_MAX_ = 4;
+	const int MOTION_MAX_ = 5;
 	const float RIGHT_WARD_ = -90.0f;
 
 	PlayerRightMove      player_right_move_;

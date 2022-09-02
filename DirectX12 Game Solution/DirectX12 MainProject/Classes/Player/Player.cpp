@@ -36,8 +36,7 @@ void Player::LoadAssets() {
     model_->SetTrackEnable(player_motion_track_, true);
 }
 
-void Player::Update(const float deltaTime, ObjectManager* obj_m) {
-    
+void Player::Update(const float deltaTime, ObjectManager* obj_m) { 
     if (obj_m->GetPlayerDmgFlag()) {
         SwitchState(PLAYER_STATE::DAMAGE);
     }
@@ -51,14 +50,16 @@ void Player::Update(const float deltaTime, ObjectManager* obj_m) {
     player_colision_.Update(deltaTime, model_.get());
 }
 
-void Player::Render() {
-    
+void Player::Render() { 
     model_->SetPosition(pos_);
-    model_->SetRotation(rot_);
+    model_->SetRotation(
+        XMConvertToRadians(rot_.x),
+        XMConvertToRadians(rot_.y),
+        XMConvertToRadians(rot_.z)
+    );
 	model_->Draw();
 
     player_colision_.Render();
-
     player_attack_colision_.Render();
 }
 
@@ -71,7 +72,7 @@ void Player::Render2D() {
     );
 }
 
-void Player::SetMotion(PLAYER_MOTION player_motion) {
+void Player::SetMotion(PLAYER_MOTION player_motion) {   //モーションの再生処理
     player_motion_track_ = (int)player_motion;
 
     ResetPlayerMotion();
@@ -87,15 +88,7 @@ void Player::SetMotion(PLAYER_MOTION player_motion) {
     model_->SetTrackEnable(player_motion_track_, true);
 }
 
-void Player::PlayAvoidSE() {
-    avoid_se_->Play();
-}
-
-void Player::PlayJumpSE() {
-    jump_se_->Play();
-}
-
-void Player::ResetPlayerMotion() {
+void Player::ResetPlayerMotion() {  //モーションのトラックをリセット
     for (int i = 0; i < MOTION_MAX_; ++i) {
         if (player_motion_track_ == i) {
             continue;
@@ -105,7 +98,7 @@ void Player::ResetPlayerMotion() {
     }
 }
 
-void Player::JumpMotion(const float deltaTime) {    //ジャンプモーション時処理
+void Player::JumpMotion(const float deltaTime) {    //ジャンプモーション処理
     const float JUMP_UP_TIME_MAX_ = 0.36f;
     jump_motion_time_ = std::min(jump_motion_time_ + deltaTime, JUMP_UP_TIME_MAX_);
     if (jump_motion_time_ >= JUMP_UP_TIME_MAX_) {
@@ -121,6 +114,7 @@ PLAYER_MOTION Player::ConvertToMotion(PLAYER_STATE player_state) {  //プレイヤー
     case    PLAYER_STATE::LEFT_MOVE:    motion_track_ = PLAYER_MOTION::MOVE;    break;
     case    PLAYER_STATE::JUMP:         motion_track_ = PLAYER_MOTION::JUMP;    break;
     case    PLAYER_STATE::ATTACK:       motion_track_ = PLAYER_MOTION::ATTACK;  break;
+    case    PLAYER_STATE::DAMAGE:       motion_track_ = PLAYER_MOTION::DAMAGE;  break;
     default:                            motion_track_ = PLAYER_MOTION::WAIT;    break;
     }
 
@@ -146,4 +140,12 @@ void Player::SwitchState(PLAYER_STATE state) {
     if (!initialize_stop_flag_) {
         player_state_->Initialize();
     }
+}
+
+void Player::PlayAvoidSE() {
+    avoid_se_->Play();
+}
+
+void Player::PlayJumpSE() {
+    jump_se_->Play();
 }

@@ -28,5 +28,5 @@ private:
 
 	const float PLAYER_HP_MAX_ = 30.0f;
 	const float FALL_SPEED_	   = 15.0f;
-	const float DMG_TIME_MAX_  = 0.64f;
+	const float DMG_TIME_MAX_  = 0.6f;
 };

@@ -10,7 +10,6 @@ void PlayerDamage::Update(const float deltaTime, Player& player) {
 	pos_ = player.GetPlayerPosition();
 	rot_ = player.GetPlayerRotation();
 
-	//player.SetMotion(PLAYER_MOTION::KNOCK_BACK);
 	dmg_time = std::min(dmg_time + deltaTime, DMG_TIME_MAX_);
 	if (dmg_time >= DMG_TIME_MAX_) {
 		dmg_time = 0.0f;
