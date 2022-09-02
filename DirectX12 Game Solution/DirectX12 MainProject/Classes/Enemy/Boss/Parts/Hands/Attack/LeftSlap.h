@@ -10,6 +10,7 @@ public:
 		slap_time_x_  = 0.0f;
 		slap_time_y_  = 0.0f;
 		wait_time_    = 0.0f;
+		slap_speed_ = 0.0f;
 		hand_state_	  = false;
 		is_se_play_   = false;
 		pos_  = SimpleMath::Vector3::Zero;
@@ -31,7 +32,7 @@ private:
 	float slap_time_x_;
 	float slap_time_y_;
 	float wait_time_;
-
+	float slap_speed_;
 	bool hand_state_;
 	bool is_se_play_;
 
