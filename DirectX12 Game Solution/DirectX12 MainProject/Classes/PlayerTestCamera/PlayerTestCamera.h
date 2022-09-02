@@ -9,10 +9,13 @@ class ObjectManager;
 class PlayerTestCamera {
 public:
 	PlayerTestCamera() {
-		shake_state_ = Down;
+		vertical_shake_state_ = Down;
+		side_shake_state_ = Right;
 		time_delta_ = 0.0f;
 		shake_time_ = 0.0f;
+		side_shake_power_ = 0.0f;
 		shake_flag_ = false;
+		side_shake_flag_ = false;
 		camera_pos_ = SimpleMath::Vector3::Zero;
 	}
 	~PlayerTestCamera() {};
@@ -20,19 +23,25 @@ public:
 	void Initialize();
 	void Update(const float deltaTime, ObjectManager* obj_m_);
 private:
-	void CameraShake();
+	void VerticalShake();
+	void SideShake();
 
 	DX9::CAMERA camera;
 	
-	int shake_state_;
+	int vertical_shake_state_;
+	int side_shake_state_;
 	float time_delta_;
 	float shake_time_;
+	float side_shake_power_;
 	bool shake_flag_;
+	bool side_shake_flag_;
 	SimpleMath::Vector3 camera_pos_;
 
 	enum SHAKE_STATE_ {
 		Up,
-		Down
+		Down,
+		Right,
+		Left
 	};
 
 	const float CAMERA_POS_Y_ = 2.0f;
@@ -46,4 +55,7 @@ private:
 	const float SHAKE_POS_MIN_ = 0.5f;
 	const float SHAKE_POWER_ = 50.0f;
 	const float SHAKE_TIME_MAX_ = 0.1f;
+	const float SHAKE_POS_X_MIN_ = -0.3f;
+	const float SHAKE_POS_X_MAX_ = 0.3f;
+	
 };

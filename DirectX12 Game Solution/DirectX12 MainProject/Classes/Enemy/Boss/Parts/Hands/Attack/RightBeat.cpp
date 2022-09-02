@@ -69,14 +69,14 @@ void RightBeat::RightBeatAttack(Boss* boss) {	//’@‚«‚Â‚¯UŒ‚
 		pos_.y  = limit_pos_y_;
 		boss->PlayBeatSE();
 		boss->PlayBeatEffect(SimpleMath::Vector3(pos_.x, pos_.y - limit_pos_y_, pos_.z));
-		boss_handR_->SetShakeFlag(true);
+		boss_handR_->SetVerticalShakeFlag(true);
 		boss_handR_->SetAttackFlag(false);
 		boss_action_state_ = WAIT;
 	}
 }
 
 void RightBeat::Wait() {	//d’¼
-	boss_handR_->SetShakeFlag(false);
+	boss_handR_->SetVerticalShakeFlag(false);
 	wait_time_ += time_delta_;
 	if (wait_time_ >= WAIT_TIME_MAX_) {
 		(!hand_state_) ? boss_handR_->SetHandMotion(HAND_MOTION::ROCK_BACK) : boss_handR_->SetHandMotion(HAND_MOTION::PAPER_BACK);

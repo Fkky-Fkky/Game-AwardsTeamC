@@ -87,7 +87,7 @@ void BeatRushR::BeatR(Boss* boss) {	//‰Eè’@‚«‚Â‚¯UŒ‚
 		pos_r_.y += BEAT_SPEED_ * r_beat_time_ - HALF_ * BEAT_GRAVITY_ * r_beat_time_ * r_beat_time_;
 	}
 	else {
-		boss_handR_->SetShakeFlag(false);
+		boss_handR_->SetVerticalShakeFlag(false);
 		boss_handR_->SetAttackFlag(false);
 		pos_r_.y = std::min(pos_r_.y + MOVE_SPEED_X_ * time_delta_, HAND_INITIAL_POS_Y_);
 		pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, r_move_dest_x_);
@@ -95,7 +95,7 @@ void BeatRushR::BeatR(Boss* boss) {	//‰Eè’@‚«‚Â‚¯UŒ‚
 
 	if (pos_r_.y <= HAND_ROCK_LIMIT_POS_Y_) {
 		pos_r_.y  = HAND_ROCK_LIMIT_POS_Y_;
-		boss_handR_->SetShakeFlag(true);
+		boss_handR_->SetVerticalShakeFlag(true);
 		boss->PlayBeatSE();
 		boss->PlayBeatEffect(SimpleMath::Vector3(pos_r_.x, pos_r_.y - HAND_ROCK_LIMIT_POS_Y_, pos_r_.z));
 		r_hand_up_flag_ = true;
@@ -121,7 +121,7 @@ void BeatRushR::BeatL(Boss* boss) {	//¶è’@‚«‚Â‚¯UŒ‚
 		pos_l_.y += BEAT_SPEED_ * l_beat_time_ - HALF_ * BEAT_GRAVITY_ * l_beat_time_ * l_beat_time_;
 	}
 	else {
-		boss_handL_->SetShakeFlag(false);
+		boss_handL_->SetVerticalShakeFlag(false);
 		boss_handL_->SetAttackFlag(false);
 		pos_l_.y = std::min(pos_l_.y + MOVE_SPEED_X_ * time_delta_, HAND_INITIAL_POS_Y_);
 		pos_l_.x = std::min(pos_l_.x + MOVE_SPEED_X_ * time_delta_, l_move_dest_x_);
@@ -129,7 +129,7 @@ void BeatRushR::BeatL(Boss* boss) {	//¶è’@‚«‚Â‚¯UŒ‚
 
 	if (pos_l_.y <= HAND_ROCK_LIMIT_POS_Y_) {
 		pos_l_.y  = HAND_ROCK_LIMIT_POS_Y_;
-		boss_handL_->SetShakeFlag(true);
+		boss_handL_->SetVerticalShakeFlag(true);
 		boss->PlayBeatSE();
 		boss->PlayBeatEffect(SimpleMath::Vector3(pos_l_.x, pos_l_.y - HAND_ROCK_LIMIT_POS_Y_, pos_l_.z));
 		l_hand_up_flag_ = true;

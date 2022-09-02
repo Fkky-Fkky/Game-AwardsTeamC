@@ -48,7 +48,7 @@ void BossHand::Render(){
 
 	collision_model->SetPosition(collision.Center);
 	collision_model->SetRotationQuaternion(collision.Orientation);
-	collision_model->Draw();
+	//collision_model->Draw();
 }
 
 void BossHand::Render2D(float pos_x) {
@@ -124,39 +124,3 @@ void BossHand::HandMotionAttack() {	//攻撃モーション
 void BossHand::HandMotionWait() {	//待機モーション
 	model_->SetTrackEnable(WAIT, true);
 }
-
-void BossHand::SetShakeFlag(bool shake_flag) {
-	is_shake_ = shake_flag;
-}
-
-//void BossAttack::SusiZanmai() {
-//	r_hand_pos = Bezier::CubicInterpolate(
-//		SimpleMath::Vector3(-80.0f, 30.0f, 80.0f),
-//		SimpleMath::Vector3(100.0f, 30.0f, 80.0f),
-//		SimpleMath::Vector3(-50.0f, 30.0f, 80.0f),
-//		SimpleMath::Vector3(-100.0f, -40.0f, 80.0f),
-//		bezier_t
-//	);
-//	l_hand_pos = Bezier::CubicInterpolate(
-//		SimpleMath::Vector3(80.0f, 30.0f, 80.0f),
-//		SimpleMath::Vector3(-100.0f, 30.0f, 80.0f),
-//		SimpleMath::Vector3(50.0f, 30.0f, 80.0f),
-//		SimpleMath::Vector3(100.0f, -40.0f, 80.0f),
-//		bezier_t
-//	);
-//	r_hand_rote.x += 1.0f * time_delta;
-//	if (r_hand_rote.x >= -28.0f) {
-//		r_hand_rote.x = -28.0f;
-//	}
-//
-//	l_hand_rote.x += 1.0f * time_delta;
-//	if (l_hand_rote.x >= -28.0f) {
-//		l_hand_rote.x = -28.0f;
-//	}
-//
-//	bezier_t += 1.0f / 1.5f * time_delta;//1.5秒かけてゴールに向かう
-//	if (r_hand_pos.y <= -40.0f) {
-//		bezier_t = 0.0f;
-//		boss_state = WAIT;
-//	}
-//}

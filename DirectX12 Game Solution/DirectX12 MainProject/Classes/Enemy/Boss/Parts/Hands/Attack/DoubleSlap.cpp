@@ -45,7 +45,7 @@ void DoubleSlap::Ready() {	//—\”õ“®ì
 	ReadyL();
 
 	if (ready_flag_r_ && ready_flag_l_) {
-		boss_handR_->SetShakeFlag(true);
+		boss_handR_->SetVerticalShakeFlag(true);
 		action_state_ = ATTACK;
 	}
 }
@@ -84,7 +84,7 @@ void DoubleSlap::ReadyL() {	//¶Žè\‚¦
 
 void DoubleSlap::Attack() {	//“ã‚¬•¥‚¢UŒ‚
 	wait_time_ = std::min(wait_time_ + time_delta_, WAIT_TIME_MAX_);
-	boss_handR_->SetShakeFlag(false);
+	boss_handR_->SetVerticalShakeFlag(false);
 
 	if (wait_time_ >= ATTACK_START_TIME_R_) {
 		SlapR();

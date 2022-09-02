@@ -31,18 +31,18 @@ void LeftSlap::Ready() {	//ó\îıìÆçÏ
 	slap_time_y_ += time_delta_;
 	float slap_y_ = SLAP_SPEED_Y_ * slap_time_y_ - HALF_ * SLAP_GRAVITY_Y_ * slap_time_y_ * slap_time_y_;
 	pos_.y += slap_y_;
-	pos_.z  = std::max(pos_.z - MOVE_SPEED_Z_ * time_delta_, 0.0f);
+	pos_.z  = std::max(pos_.z - MOVE_SPEED_Z_ * time_delta_, SLAP_POS_Z_);
 	rote_.x = std::min(rote_.x + ROTE_SPEED_ * time_delta_, SLAP_ROT_X_);
 
 	if (pos_.y <= SLAP_POS_Y_) {
 		pos_.y  = SLAP_POS_Y_;
-		boss_handL_->SetShakeFlag(true);
+		boss_handL_->SetVerticalShakeFlag(true);
 		action_state_ = WAIT;
 	}
 }
 
 void LeftSlap::Wait() {	//ë“ã@
-	boss_handL_->SetShakeFlag(false);
+	boss_handL_->SetVerticalShakeFlag(false);
 	wait_time_ = std::min(wait_time_ + time_delta_, WAIT_TIME_MAX_);
 	if (wait_time_ >= WAIT_TIME_MAX_) {
 		action_state_ = ATTACK;
@@ -51,15 +51,22 @@ void LeftSlap::Wait() {	//ë“ã@
 
 void LeftSlap::LeftSlapAttack(Boss* boss) {	//ç∂éËì„Ç¨ï•Ç¢çUåÇ
 	boss_handL_->SetAttackFlag(true);
-	slap_time_x_ += time_delta_;
-	float slap_x_ = SLAP_SPEED_X_ * slap_time_x_ - HALF_ * SLAP_GRAVITY_X_ * slap_time_x_ * slap_time_x_;
-	pos_.x += slap_x_;
+	boss_handL_->SetSideShakeFlag(true);
+	//slap_time_x_ += time_delta_*1.5f;
+	//float slap_x_ = SLAP_SPEED_X_ * slap_time_x_ - HALF_ * SLAP_GRAVITY_X_ * slap_time_x_ * slap_time_x_;
+	//pos_.x += slap_x_;
+
+	const float MAX_SPEED_ = 80.0f;
+	const float ADD_SPEED_ = 40.0f;
+	slap_speed_ = std::min(slap_speed_ + ADD_SPEED_ * time_delta_, MAX_SPEED_);
+	pos_.x = std::max(pos_.x - slap_speed_ * time_delta_, -HAND_LIMIT_POS_X_);
 	
 	if (!is_se_play_) {
 		boss->PlaySlapSE();
 		is_se_play_ = true;
 	}
 	if (pos_.x <= -HAND_LIMIT_POS_X_) {
+		boss_handL_->SetSideShakeFlag(false);
 		action_state_ = RESET;
 	}
 }
