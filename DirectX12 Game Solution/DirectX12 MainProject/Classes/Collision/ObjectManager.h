@@ -19,7 +19,7 @@ public:
 	BoundingOrientedBox GetBossCoreCollision();
 	BoundingOrientedBox GetBossRHandCollision();
 	BoundingOrientedBox GetBossLHandCollision();
-	int GetBossHP();
+	float GetBossHP();
 	float GetPlayerHP();
 	bool GetPlayerAttackFlag();
 	bool GetPlayerDmgFlag();

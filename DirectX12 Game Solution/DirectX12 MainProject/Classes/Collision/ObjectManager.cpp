@@ -35,7 +35,7 @@ BoundingOrientedBox ObjectManager::GetBossLHandCollision() {
 	return boss_->GetLHandCollision();
 }
 
-int ObjectManager::GetBossHP() {
+float ObjectManager::GetBossHP() {
 	return boss_->GetBossHP();
 }
 
