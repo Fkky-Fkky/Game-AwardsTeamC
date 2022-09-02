@@ -85,8 +85,12 @@ bool ObjectManager::IsBossHandLDmg() {
 	return collision_->IsBossHandLDmg();
 }
 
-bool ObjectManager::IsGroundShake() {
-	return boss_->IsShake();
+bool ObjectManager::IsGroundVerticalShake() {
+	return boss_->IsVerticalShake();
+}
+
+bool ObjectManager::IsGroundSideShake() {
+	return boss_->IsSideShake();
 }
 
 SimpleMath::Vector3 ObjectManager::GetPlayerPos() {
