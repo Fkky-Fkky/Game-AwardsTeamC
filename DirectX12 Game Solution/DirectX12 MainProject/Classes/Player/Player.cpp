@@ -3,6 +3,7 @@
 #include "Classes/Collision/ObjectManager.h"
 
 void Player::Initialize() {
+    player_motion_track_ = 0;
     initialize_stop_flag_ = false;
 
 	pos_ = SimpleMath::Vector3::Zero;
@@ -32,7 +33,7 @@ void Player::LoadAssets() {
     for (int i = 0; i < MOTION_MAX_; ++i) {
         model_->SetTrackEnable(i, false);
     }
-    model_->SetTrackEnable((int)PLAYER_MOTION::WAIT, true);
+    model_->SetTrackEnable(player_motion_track_, true);
 }
 
 void Player::Update(const float deltaTime, ObjectManager* obj_m) {
@@ -42,15 +43,10 @@ void Player::Update(const float deltaTime, ObjectManager* obj_m) {
     }
 
     player_state_->Update(deltaTime, *this);
-
-    model_->AdvanceTime(deltaTime);
     if (is_jump_motion_play_) {
-        const float JUMP_TIME_MAX_ = 1.0f;
-        jump_motion_time_ = std::min(jump_motion_time_ + deltaTime, JUMP_TIME_MAX_);
-        if (jump_motion_time_ >= JUMP_TIME_MAX_) {
-            model_->SetTrackEnable((int)PLAYER_MOTION::JUMP, false);
-        }
+        JumpMotion(deltaTime);
     }
+    model_->AdvanceTime(deltaTime);
     player_attack_colision_.Update(deltaTime, model_.get(), this);
     player_colision_.Update(deltaTime, model_.get());
 }
@@ -76,18 +72,19 @@ void Player::Render2D() {
 }
 
 void Player::SetMotion(PLAYER_MOTION player_motion) {
-    PLAYER_MOTION motion_track_ = player_motion;
+    player_motion_track_ = (int)player_motion;
 
     ResetPlayerMotion();
 
-    if (motion_track_ == PLAYER_MOTION::JUMP) {
+    if (player_motion_track_ == (int)PLAYER_MOTION::JUMP &&
+        !is_jump_motion_play_) {
         is_jump_motion_play_ = true;
     }
     else {
         is_jump_motion_play_ = false;
         jump_motion_time_ = 0.0f;
     }
-    model_->SetTrackEnable((int)motion_track_, true);
+    model_->SetTrackEnable(player_motion_track_, true);
 }
 
 void Player::PlayAvoidSE() {
@@ -100,8 +97,19 @@ void Player::PlayJumpSE() {
 
 void Player::ResetPlayerMotion() {
     for (int i = 0; i < MOTION_MAX_; ++i) {
+        if (player_motion_track_ == i) {
+            continue;
+        }
         model_->SetTrackEnable(i, false);
         model_->SetTrackPosition(i, 0.0f);
+    }
+}
+
+void Player::JumpMotion(const float deltaTime) {    //ジャンプモーション時処理
+    const float JUMP_UP_TIME_MAX_ = 0.36f;
+    jump_motion_time_ = std::min(jump_motion_time_ + deltaTime, JUMP_UP_TIME_MAX_);
+    if (jump_motion_time_ >= JUMP_UP_TIME_MAX_) {
+        model_->SetTrackEnable((int)PLAYER_MOTION::JUMP, false);
     }
 }
 

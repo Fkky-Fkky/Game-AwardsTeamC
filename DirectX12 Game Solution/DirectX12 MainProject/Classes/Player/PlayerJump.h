@@ -21,7 +21,7 @@ public:
 
 private:
 	void Ready(Player& player);
-	void Jump();
+	void Jump(Player& player);
 	void CoolTime();
 	void JumpingMove();
 
@@ -49,7 +49,7 @@ private:
 	const float HALF_ = 0.5f;
 	const float DOWN_SPEED_ = 2.0f;
 	const float GROUND_Y_ = 0.0f;
-	const float COOL_TIME_MAX_ = 0.2f;
+	const float COOL_TIME_MAX_ = 0.6f;
 	const float JUMPING_MOVE_SPEED_ = 5.0f;
 	const float JUMPING_MOVE_SPEED_REVERSE = 2.5f;
 };

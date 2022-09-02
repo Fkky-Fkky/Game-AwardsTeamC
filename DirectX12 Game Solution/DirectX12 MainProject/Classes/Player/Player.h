@@ -38,6 +38,7 @@ enum class PLAYER_MOTION {
 class Player {
 public:
 	Player() {
+		player_motion_track_ = 0;
 		player_state_ = nullptr;
 		jump_motion_time_ = 0.0f;
 		initialize_stop_flag_ = false;
@@ -73,6 +74,7 @@ public:
 
 private:
 	void ResetPlayerMotion();
+	void JumpMotion(const float deltaTime);
 	PLAYER_MOTION ConvertToMotion(PLAYER_STATE player_state);
 
 	DX9::SKINNEDMODEL model_;
@@ -82,7 +84,7 @@ private:
 	XAudio::SOUNDEFFECT jump_se_;
 
 	PLAYER_STATE player_action_state_;
-
+	int player_motion_track_;
 	float jump_motion_time_;
 
 	bool initialize_stop_flag_;
