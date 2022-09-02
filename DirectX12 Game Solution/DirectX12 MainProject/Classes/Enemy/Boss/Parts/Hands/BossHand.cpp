@@ -48,7 +48,7 @@ void BossHand::Render(){
 
 	collision_model->SetPosition(collision.Center);
 	collision_model->SetRotationQuaternion(collision.Orientation);
-	collision_model->Draw();
+	//collision_model->Draw();
 }
 
 void BossHand::Render2D(float pos_x) {
@@ -123,10 +123,6 @@ void BossHand::HandMotionAttack() {	//攻撃モーション
 
 void BossHand::HandMotionWait() {	//待機モーション
 	model_->SetTrackEnable(WAIT, true);
-}
-
-void BossHand::SetShakeFlag(bool shake_flag) {
-	is_shake_ = shake_flag;
 }
 
 //void BossAttack::SusiZanmai() {
