@@ -6,9 +6,9 @@ void PlayerWait::Update(const float deltaTime, Player& player) {
 		player.SwitchState(PLAYER_STATE::JUMP);
 	}
 
-	if (DXTK->KeyEvent->pressed.Back) {
-		player.SwitchState(PLAYER_STATE::AVOID);
-	}
+	//if (DXTK->KeyEvent->pressed.Back) {
+	//	player.SwitchState(PLAYER_STATE::AVOID);
+	//}
 
 	if (DXTK->KeyState->D) {
 		player.SwitchState(PLAYER_STATE::RIGHT_MOVE);
