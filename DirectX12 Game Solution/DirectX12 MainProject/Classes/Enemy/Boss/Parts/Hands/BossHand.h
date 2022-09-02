@@ -57,8 +57,6 @@ private:
 		ROCK_BACK
 	};
 
-	void SusiZanmai();
-
 	int hand_hp_;
 	int motion_track_;
 	float motion_time_;
