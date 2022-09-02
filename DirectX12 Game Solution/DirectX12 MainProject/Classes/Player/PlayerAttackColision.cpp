@@ -71,6 +71,6 @@ void PlayerAttackColision::Render() {
     if (is_player_attack_) {
         collision_model_->SetPosition(collision_.Center);
         collision_model_->SetRotationQuaternion(collision_.Orientation);
-        //collision_model_->Draw();
+        collision_model_->Draw();
     }
 }

@@ -48,7 +48,7 @@ void BossHand::Render(){
 
 	collision_model->SetPosition(collision.Center);
 	collision_model->SetRotationQuaternion(collision.Orientation);
-	//collision_model->Draw();
+	collision_model->Draw();
 }
 
 void BossHand::Render2D(float pos_x) {
