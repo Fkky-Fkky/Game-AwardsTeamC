@@ -49,6 +49,9 @@ void PlayerAttackColision::Update(const float deltaTime, DX9::SkinnedModel* mode
         if(attack_time_ >= 1.3f) {
             is_player_attack_ = true;
         }
+        if (attack_time_ >= 1.7f) {
+            is_player_attack_ = false;
+        }
     }
     else
     {
@@ -68,6 +71,6 @@ void PlayerAttackColision::Render() {
     if (is_player_attack_) {
         collision_model_->SetPosition(collision_.Center);
         collision_model_->SetRotationQuaternion(collision_.Orientation);
-        collision_model_->Draw();
+        //collision_model_->Draw();
     }
 }
