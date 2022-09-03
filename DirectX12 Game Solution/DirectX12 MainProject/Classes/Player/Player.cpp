@@ -72,7 +72,7 @@ void Player::Render2D() {
     );
 }
 
-void Player::SetMotion(PLAYER_MOTION player_motion) {   //モーションの再生処理
+void Player::SetMotion(const PLAYER_MOTION player_motion) {   //モーションの再生処理
     player_motion_track_ = (int)player_motion;
 
     ResetPlayerMotion();
@@ -106,7 +106,7 @@ void Player::JumpMotion(const float deltaTime) {    //ジャンプモーション処理
     }
 }
 
-PLAYER_MOTION Player::ConvertToMotion(PLAYER_STATE player_state) {  //プレイヤーの状態をモーショントラックに変換
+PLAYER_MOTION Player::ConvertToMotion(const PLAYER_STATE player_state) {  //プレイヤーの状態をモーショントラックに変換
     PLAYER_MOTION motion_track_;
     switch (player_state) {
     case    PLAYER_STATE::WAIT:         motion_track_ = PLAYER_MOTION::WAIT;    break;
@@ -121,7 +121,7 @@ PLAYER_MOTION Player::ConvertToMotion(PLAYER_STATE player_state) {  //プレイヤー
     return motion_track_;
 }
 
-void Player::SwitchState(PLAYER_STATE state) {
+void Player::SwitchState(const PLAYER_STATE state) {
     if (player_action_state_ == PLAYER_STATE::ATTACK) {
         player_state_->Initialize();
     }

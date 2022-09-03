@@ -14,7 +14,7 @@ public:
 	virtual void Initialize();
 	virtual void Update(const float deltaTime, Player& player);
 
-	float GetPlayerHP() { return player_hp_; }
+	float GetPlayerHP() const { return player_hp_; }
 
 private:
 	void HitProcessing();

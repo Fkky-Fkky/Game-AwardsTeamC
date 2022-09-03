@@ -28,19 +28,19 @@ public:
 
 	void HandDamageProcess();
 	void HandHPHeal();
-	void SetHandPos(SimpleMath::Vector3 position_) { position = position_; }
-	void SetHandRote(SimpleMath::Vector3 rotation_) { rotation = rotation_; }
-	void SetAttackFlag(bool attack_flag) { attack_flag_ = attack_flag; }
-	void SetHandMotion(int hand_motion);
-	void SetVerticalShakeFlag(bool enable) { is_vertical_shake_ = enable; }
-	void SetSideShakeFlag(bool enable) { is_side_shake_ = enable; }
-	int  GetHandHp() { return hand_hp_; }
-	bool GetAttackFlag() { return attack_flag_; }
-	bool IsVerticalShake() { return is_vertical_shake_; }
-	bool IsSideShake() { return is_side_shake_; }
-	BoundingOrientedBox GetHandCollision() { return collision; }
-	SimpleMath::Vector3 GetHandPos() { return position; }
-	SimpleMath::Vector3 GetRotation() { return rotation; }
+	void SetHandPos(const SimpleMath::Vector3 position_) { position = position_; }
+	void SetHandRote(const SimpleMath::Vector3 rotation_) { rotation = rotation_; }
+	void SetAttackFlag(const bool attack_flag) { attack_flag_ = attack_flag; }
+	void SetHandMotion(const int hand_motion);
+	void SetVerticalShakeFlag(const bool enable) { is_vertical_shake_ = enable; }
+	void SetSideShakeFlag(const bool enable) { is_side_shake_ = enable; }
+	int  GetHandHp() const { return hand_hp_; }
+	bool GetAttackFlag() const { return attack_flag_; }
+	bool IsVerticalShake() const { return is_vertical_shake_; }
+	bool IsSideShake() const { return is_side_shake_; }
+	BoundingOrientedBox GetHandCollision() const { return collision; }
+	SimpleMath::Vector3 GetHandPos() const { return position; }
+	SimpleMath::Vector3 GetRotation() const { return rotation; }
 
 private:
 	void MotionStart();

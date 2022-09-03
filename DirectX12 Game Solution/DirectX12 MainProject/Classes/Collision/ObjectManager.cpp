@@ -15,39 +15,39 @@ void ObjectManager::SetCollision(Collision* col_) {
 	collision_ = col_;
 }
 
-BoundingOrientedBox ObjectManager::GetPlayerCollision() {
+BoundingOrientedBox ObjectManager::GetPlayerCollision() const {
 	return player_->GetPlayerCollision();
 }
 
-BoundingOrientedBox ObjectManager::GetPlayerAttackCollision() {
+BoundingOrientedBox ObjectManager::GetPlayerAttackCollision() const {
 	return player_->GetPlayerAttackCollision();
 }
 
-BoundingOrientedBox ObjectManager::GetBossCoreCollision() {
+BoundingOrientedBox ObjectManager::GetBossCoreCollision() const {
 	return boss_->GetCoreCollision();
 }
 
-BoundingOrientedBox ObjectManager::GetBossRHandCollision() {
+BoundingOrientedBox ObjectManager::GetBossRHandCollision() const {
 	return boss_->GetRHandCollision();
 }
 
-BoundingOrientedBox ObjectManager::GetBossLHandCollision() {
+BoundingOrientedBox ObjectManager::GetBossLHandCollision() const {
 	return boss_->GetLHandCollision();
 }
 
-float ObjectManager::GetBossHP() {
+float ObjectManager::GetBossHP() const {
 	return boss_->GetBossHP();
 }
 
-float ObjectManager::GetPlayerHP() {
+float ObjectManager::GetPlayerHP() const {
 	return player_->GetPlayerHP();
 }
 
-bool ObjectManager::GetPlayerAttackFlag() {
+bool ObjectManager::GetPlayerAttackFlag() const {
 	return player_->IsPlayerAttack();
 }
 
-bool ObjectManager::GetPlayerDmgFlag() {
+bool ObjectManager::GetPlayerDmgFlag() const {
 	if (collision_->GetPlayerDmgFlagR() ||
 		collision_->GetPlayerDmgFlagL()) {
 		return true;
@@ -57,42 +57,42 @@ bool ObjectManager::GetPlayerDmgFlag() {
 	}
 }
 
-bool ObjectManager::IsPlayerInvincible() {
+bool ObjectManager::IsPlayerInvincible() const {
 	return player_->IsPlayerInvincible();
 }
 
-bool ObjectManager::GetBossRAttackFlag() {
+bool ObjectManager::GetBossRAttackFlag() const {
 	return boss_->GetRHandAttackFlag();
 }
 
-bool ObjectManager::GetBossLAttackFlag() {
+bool ObjectManager::GetBossLAttackFlag() const {
 	return boss_->GetLHandAttackFlag();
 }
 
-bool ObjectManager::GetBossDmgFlag() {
+bool ObjectManager::GetBossDmgFlag() const {
 	return collision_->GetBossDmgFlag();
 }
 
-bool ObjectManager::IsBossHandOpen() {
+bool ObjectManager::IsBossHandOpen() const {
 	return boss_->GetHandState();
 }
 
-bool ObjectManager::IsBossHandRDmg() {
+bool ObjectManager::IsBossHandRDmg() const {
 	return collision_->IsBossHandRDmg();
 }
 
-bool ObjectManager::IsBossHandLDmg() {
+bool ObjectManager::IsBossHandLDmg() const {
 	return collision_->IsBossHandLDmg();
 }
 
-bool ObjectManager::IsGroundVerticalShake() {
+bool ObjectManager::IsGroundVerticalShake() const {
 	return boss_->IsVerticalShake();
 }
 
-bool ObjectManager::IsGroundSideShake() {
+bool ObjectManager::IsGroundSideShake() const {
 	return boss_->IsSideShake();
 }
 
-SimpleMath::Vector3 ObjectManager::GetPlayerPos() {
+SimpleMath::Vector3 ObjectManager::GetPlayerPos() const {
 	return player_->GetPlayerPosition();
 }

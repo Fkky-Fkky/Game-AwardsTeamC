@@ -13,7 +13,7 @@ public:
 	void LoadAssets(DX9::SkinnedModel* model_);
 	void Update(const float deltaTime, DX9::SkinnedModel* model_);
 	void Render();
-	BoundingOrientedBox GetColision() { return collision_; }
+	BoundingOrientedBox GetColision() const { return collision_; }
 
 private:
 	BoundingOrientedBox collision_;

@@ -12,7 +12,7 @@ public:
 
 	virtual void Initialize();
 	virtual void Update(const float deltaTime, Player& player);
-	bool IsPlayerAttackStart() { return attack_flg_; }
+	bool IsPlayerAttackStart() const { return attack_flg_; }
 
 private:
 	float attack_time_;

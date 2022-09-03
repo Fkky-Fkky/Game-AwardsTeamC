@@ -20,8 +20,8 @@ public:
 	void Update(const float deltaTime, DX9::SkinnedModel* model_, Player* player);
 	void Render();
 
-	bool IsPlayerAttack() { return is_player_attack_; }
-	BoundingOrientedBox GetAttackCollision() { return collision_; }
+	bool IsPlayerAttack() const { return is_player_attack_; }
+	BoundingOrientedBox GetAttackCollision() const{ return collision_; }
 private:
 	BoundingOrientedBox collision_;
 	DX9::MODEL          collision_model_;

@@ -56,27 +56,26 @@ public:
 	void Render();
 	void Render2D();
 
-	void SwitchState(PLAYER_STATE state);
-	void SetPlayerPosition(SimpleMath::Vector3 position) { pos_ = position; }
-	void SetPlayerRotation(SimpleMath::Vector3 rotation) { rot_ = rotation; }
-	void SetMotion(PLAYER_MOTION player_motion);
-	void SetStopInitializeFlag(bool enable) { initialize_stop_flag_ = enable; }
+	void SwitchState(const PLAYER_STATE state);
+	void SetPlayerPosition(const SimpleMath::Vector3 position) { pos_ = position; }
+	void SetPlayerRotation(const SimpleMath::Vector3 rotation) { rot_ = rotation; }
+	void SetMotion(const PLAYER_MOTION player_motion);
+	void SetStopInitializeFlag(const bool enable) { initialize_stop_flag_ = enable; }
 	void PlayAvoidSE();
 	void PlayJumpSE();
-	float GetPlayerHP() { return player_dmg_.GetPlayerHP(); }
-	bool IsPlayerAttackStart() { return player_attack_.IsPlayerAttackStart(); }
-	bool IsPlayerAttack() { return player_attack_colision_.IsPlayerAttack(); }
-	bool IsPlayerInvincible() { return player_avoid_.IsInvincible(); }
-	SimpleMath::Vector3 GetPlayerPosition() { return pos_; }
-	SimpleMath::Vector3 GetPlayerRotation() { return rot_; }
-	BoundingOrientedBox GetPlayerCollision() { return player_colision_.GetColision(); }
-	BoundingOrientedBox GetPlayerAttackCollision() { return player_attack_colision_.GetAttackCollision(); }
-	PlayerColision* GetColision() { return &player_colision_; }
+	float GetPlayerHP() const { return player_dmg_.GetPlayerHP(); }
+	bool IsPlayerAttackStart() const { return player_attack_.IsPlayerAttackStart(); }
+	bool IsPlayerAttack() const { return player_attack_colision_.IsPlayerAttack(); }
+	bool IsPlayerInvincible() const { return player_avoid_.IsInvincible(); }
+	SimpleMath::Vector3 GetPlayerPosition() const { return pos_; }
+	SimpleMath::Vector3 GetPlayerRotation()const { return rot_; }
+	BoundingOrientedBox GetPlayerCollision() const{ return player_colision_.GetColision(); }
+	BoundingOrientedBox GetPlayerAttackCollision() const{ return player_attack_colision_.GetAttackCollision(); }
 
 private:
 	void ResetPlayerMotion();
 	void JumpMotion(const float deltaTime);
-	PLAYER_MOTION ConvertToMotion(PLAYER_STATE player_state);
+	PLAYER_MOTION ConvertToMotion(const PLAYER_STATE player_state);
 
 	DX9::SKINNEDMODEL model_;
 	DX9::SPRITEFONT font;

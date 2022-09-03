@@ -22,8 +22,8 @@ public:
 	virtual void Render();
 	void Render2D();
 
-	float GetBossHP() { return core_hp_; }
-	BoundingOrientedBox GetCoreCollision() { return collision_; }
+	float GetBossHP() const { return core_hp_; }
+	BoundingOrientedBox GetCoreCollision() const { return collision_; }
 private:
 	void CoreMove(bool weak_state);
 	void HitPlayerAttack(bool core_hit_flag);
