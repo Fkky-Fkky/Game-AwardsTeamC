@@ -22,8 +22,8 @@ public:
 	virtual void Render();
 	void Render2D();
 
-	int GetBossHP() { return core_hp_; }
-	BoundingOrientedBox GetCoreCollision() { return collision_; }
+	float GetBossHP() const { return core_hp_; }
+	BoundingOrientedBox GetCoreCollision() const { return collision_; }
 private:
 	void CoreMove(bool weak_state);
 	void HitPlayerAttack(bool core_hit_flag);
@@ -35,13 +35,13 @@ private:
 	DX9::SPRITEFONT font;
 	EFFECT hit_efc_;
 
-	int core_hp_;
+	float core_hp_;
 	float time_delta_;
 	float core_weak_time_;
 	bool hit_flag_;
 	SimpleMath::Vector3 core_pos_;
 
-	const int BOSS_MAX_HP_ = 30;
+	const float BOSS_MAX_HP_ = 30.0f;
 	const float CORE_INTIAL_POS_Y_ = -2.0f;
 	const float CORE_INTIAL_POS_Z_ = 1.0f;
 	const float CORE_MOVE_SPEED_Y_ = 10.0f;

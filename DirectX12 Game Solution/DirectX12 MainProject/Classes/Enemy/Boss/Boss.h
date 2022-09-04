@@ -39,20 +39,20 @@ public:
 	void ActionEnd();
 	void WeakStateStart();
 	void RandomAttackState();
-	void SetWeakState(bool select);
+	void SetWeakState(const bool select);
 	void PlaySlapSE();
 	void PlayBeatSE();
-	void PlayBeatEffect(SimpleMath::Vector3 effect_pos);
-	int GetBossHP() { return core.GetBossHP(); }
-	bool IsBossWeak() { return weak_state_; }
-	bool IsVerticalShake() { if (hand_l.IsVerticalShake() || hand_r.IsVerticalShake()) { return true; } else { return false; } }
-	bool IsSideShake() { if (hand_l.IsSideShake() || hand_r.IsSideShake()) { return true; } else { return false; } }
-	bool GetHandState() { return hand_state_; }
-	bool GetLHandAttackFlag() { return hand_l.GetAttackFlag(); }
-	bool GetRHandAttackFlag() { return hand_r.GetAttackFlag(); }
-	BoundingOrientedBox GetLHandCollision() { return hand_l.GetHandCollision(); }
-	BoundingOrientedBox GetRHandCollision() { return hand_r.GetHandCollision(); }
-	BoundingOrientedBox GetCoreCollision() { return core.GetCoreCollision(); }
+	void PlayBeatEffect(const SimpleMath::Vector3 effect_pos);
+	int GetBossHP() const { return core.GetBossHP(); }
+	bool IsBossWeak() const { return weak_state_; }
+	bool IsVerticalShake() const { if (hand_l.IsVerticalShake() || hand_r.IsVerticalShake()) { return true; } else { return false; } }
+	bool IsSideShake() const { if (hand_l.IsSideShake() || hand_r.IsSideShake()) { return true; } else { return false; } }
+	bool GetHandState() const { return hand_state_; }
+	bool GetLHandAttackFlag() const { return hand_l.GetAttackFlag(); }
+	bool GetRHandAttackFlag() const { return hand_r.GetAttackFlag(); }
+	BoundingOrientedBox GetLHandCollision() const { return hand_l.GetHandCollision(); }
+	BoundingOrientedBox GetRHandCollision() const { return hand_r.GetHandCollision(); }
+	BoundingOrientedBox GetCoreCollision() const { return core.GetCoreCollision(); }
 
 private:
 	void SwitchStateAttack();

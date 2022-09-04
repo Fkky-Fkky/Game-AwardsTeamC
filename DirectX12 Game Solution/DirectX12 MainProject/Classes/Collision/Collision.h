@@ -25,11 +25,11 @@ public:
 	void Update(const float deltaTime, ObjectManager* obj_m_);
 	void Render2D();
 
-	bool GetPlayerDmgFlagR() { return player_dmg_flag_r_; }
-	bool GetPlayerDmgFlagL() { return player_dmg_flag_l_; }
-	bool GetBossDmgFlag() { return boss_core_dmg_flg_; }
-	bool IsBossHandRDmg() { return boss_hand_r_dmg_flag_; }
-	bool IsBossHandLDmg() { return boss_hand_l_dmg_flag_; }
+	bool GetPlayerDmgFlagR() const { return player_dmg_flag_r_; }
+	bool GetPlayerDmgFlagL() const { return player_dmg_flag_l_; }
+	bool GetBossDmgFlag() const { return boss_core_dmg_flg_; }
+	bool IsBossHandRDmg() const { return boss_hand_r_dmg_flag_; }
+	bool IsBossHandLDmg() const { return boss_hand_l_dmg_flag_; }
 
 private:
 	DX9::SPRITEFONT font;

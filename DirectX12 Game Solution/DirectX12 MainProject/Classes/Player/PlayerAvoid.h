@@ -23,7 +23,7 @@ public:
 	virtual void Initialize();
 	virtual void Update(const float deltaTime, Player& player);
 
-	bool IsInvincible() { return invincible_flag_; }
+	bool IsInvincible() const { return invincible_flag_; }
 private:
 	void Ready(Player& player);
 	void Avoid();

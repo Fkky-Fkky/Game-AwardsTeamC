@@ -48,7 +48,7 @@ void BossHand::Render(){
 
 	collision_model->SetPosition(collision.Center);
 	collision_model->SetRotationQuaternion(collision.Orientation);
-	//collision_model->Draw();
+	collision_model->Draw();
 }
 
 void BossHand::Render2D(float pos_x) {
@@ -68,7 +68,7 @@ void BossHand::HandHPHeal() {	//手のHPを全回復する
 	hand_hp_ = HAND_HP_MAX_;
 }
 
-void BossHand::SetHandMotion(int hand_motion) {	//モーションをセットする
+void BossHand::SetHandMotion(const int hand_motion) {	//モーションをセットする
 	motion_track_ = hand_motion;
 	switch (motion_track_) {
 	case ROCK_BACK:

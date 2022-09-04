@@ -15,9 +15,9 @@ void PlayerRightMove::Update(const float deltaTime, Player& player) {
 
     pos_.x = std::clamp(pos_.x, PLAYER_LIMIT_MIN_POS_X_, PLAYER_LIMIT_MAX_POS_X_);
 
-    if (DXTK->KeyEvent->pressed.Back) {
-        player.SwitchState(PLAYER_STATE::AVOID);
-    }
+    //if (DXTK->KeyEvent->pressed.Back) {
+    //    player.SwitchState(PLAYER_STATE::AVOID);
+    //}
 
     if (DXTK->KeyEvent->pressed.W) {
         player.SwitchState(PLAYER_STATE::JUMP);

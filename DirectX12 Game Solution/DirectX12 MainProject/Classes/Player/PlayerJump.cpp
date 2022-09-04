@@ -22,7 +22,7 @@ void PlayerJump::Update(const float deltaTime, Player& player) {
     switch (action_state_) {
     case READY: Ready(player);  break;
     case JUMP:
-        Jump();
+        Jump(player);
         JumpingMove();          break;
     case COOL_TIME: CoolTime(); break;
     }
@@ -44,7 +44,7 @@ void PlayerJump::Ready(Player& player) {  //ジャンプに必要な変数の処理
     action_state_   = JUMP;
 }
 
-void PlayerJump::Jump() {   //ジャンプ
+void PlayerJump::Jump(Player& player) {   //ジャンプ
     if (player_up_flag_) {  //プレイヤージャンプ処理(上昇)
         jump_time_ += time_delta_ * DOWN_SPEED_;
         old_player_pos_ = pos_;
@@ -60,13 +60,13 @@ void PlayerJump::Jump() {   //ジャンプ
 
     if (pos_.y <= GROUND_Y_) {
         pos_.y  = GROUND_Y_;
+        player.SetMotion(PLAYER_MOTION::JUMP);
         action_state_ = COOL_TIME;
     }
 }
 
 void PlayerJump::CoolTime() {   //クールタイム
-    cool_time_ += time_delta_;
-
+    cool_time_ = std::min(cool_time_ += time_delta_, COOL_TIME_MAX_);
     if (cool_time_ >= COOL_TIME_MAX_) {
         cool_time_ = 0.0f;
         action_state_ = ACTION_END;

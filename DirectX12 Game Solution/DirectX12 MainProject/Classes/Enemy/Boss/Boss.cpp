@@ -190,10 +190,10 @@ void Boss::PlayBeatSE() {
 	beat_se_->Play(); 
 }
 
-void Boss::PlayBeatEffect(SimpleMath::Vector3 effect_pos) {
+void Boss::PlayBeatEffect(const SimpleMath::Vector3 effect_pos) {
 	DX12Effect.Play(beat_effect_, effect_pos); 
 }
 
-void Boss::SetWeakState(bool select) {
+void Boss::SetWeakState(const bool select) {
 	weak_state_ = select;
 }

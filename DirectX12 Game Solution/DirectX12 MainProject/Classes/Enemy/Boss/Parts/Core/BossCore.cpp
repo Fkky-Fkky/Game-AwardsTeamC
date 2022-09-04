@@ -60,7 +60,7 @@ void BossCore::Render2D() {
 		font.Get(),
 		SimpleMath::Vector2(0.0f, 60.0f),
 		DX9::Colors::Red,
-		L"ボス:%i", core_hp_
+		L"ボス:%f", core_hp_
 	);
 }
 
