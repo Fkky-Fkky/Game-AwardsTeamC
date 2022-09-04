@@ -22,5 +22,5 @@ private:
 	const float COLLISION_SIZE_MULTIPLY_X_ = 0.5f;
 	const float COLLISION_SIZE_MULTIPLY_Y_ = 2.5f;
 	const float COLLISION_SIZE_MULTIPLY_Z_ = 0.5f;
-	const float CENTER_PLUS_Y_VALUE_       = 1.0f;
+	const float CENTER_PLUS_Y_VALUE_       = 2.0f;
 };

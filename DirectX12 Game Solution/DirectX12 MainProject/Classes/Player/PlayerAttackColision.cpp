@@ -46,10 +46,10 @@ void PlayerAttackColision::Update(const float deltaTime, DX9::SkinnedModel* mode
             DX12Effect.SetRotation("swaord", SimpleMath::Vector3(0.0f, XMConvertToRadians(effect_angle_), 0.0f));
         }
 
-        if(attack_time_ >= 1.3f) {
+        if(attack_time_ >= ATTACK_START_TIME_) {
             is_player_attack_ = true;
         }
-        if (attack_time_ >= 1.7f) {
+        if (attack_time_ >= ATTACK_END_TIME_) {
             is_player_attack_ = false;
         }
     }
