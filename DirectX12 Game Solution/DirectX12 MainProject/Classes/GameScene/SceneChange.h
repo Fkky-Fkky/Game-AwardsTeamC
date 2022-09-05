@@ -14,6 +14,7 @@ public:
 		white_alpha_ = 0.0f;
 		scene_change_flag_ = false;
 		is_game_start_ = false;
+		is_game_clear_ = false;
 	};
 
 	~SceneChange() {};
@@ -23,8 +24,9 @@ public:
 	void Update(const float deltaTime, ObjectManager* obj_m);
 	void Render2D();
 
-	bool GetSceneChangeFlag() { return scene_change_flag_; }
-	bool IsGameStart() { return is_game_start_; }
+	bool GetSceneChangeFlag() const { return scene_change_flag_; }
+	bool IsGameClear() const { return is_game_clear_; }
+	bool IsGameStart() const { return is_game_start_; }
 private:
 	DX9::SPRITE black_;
 	DX9::SPRITE white_;
@@ -33,6 +35,7 @@ private:
 	float white_alpha_;
 	bool scene_change_flag_;
 	bool is_game_start_;
+	bool is_game_clear_;
 
 	const int WIDTH_MAX_ = 1280;
 	const int HIGHT_MAX_ = 720;
