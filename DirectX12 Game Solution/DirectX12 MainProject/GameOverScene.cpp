@@ -1,5 +1,5 @@
 //
-// ResultScene.cpp
+// GameOverScene.cpp
 //
 
 #include "Base/pch.h"
@@ -7,19 +7,19 @@
 #include "SceneFactory.h"
 
 // Initialize member variables.
-ResultScene::ResultScene()
+GameOverScene::GameOverScene()
 {
 
 }
 
 // Initialize a variable and audio resources.
-void ResultScene::Initialize()
+void GameOverScene::Initialize()
 {
 
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
-void ResultScene::LoadAssets()
+void GameOverScene::LoadAssets()
 {
     descriptorHeap = DX12::CreateDescriptorHeap(DXTK->Device, 1);
 
@@ -41,13 +41,11 @@ void ResultScene::LoadAssets()
     uploadResourcesFinished.wait();
 
     // グラフィックリソースの初期化処理
-
-    result_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Scene/Result.png");
-
+    game_over_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Scene/GameOver.png");
 }
 
 // Releasing resources required for termination.
-void ResultScene::Terminate()
+void GameOverScene::Terminate()
 {
 	DXTK->ResetAudioEngine();
 	DXTK->WaitForGpu();
@@ -57,19 +55,19 @@ void ResultScene::Terminate()
 }
 
 // Direct3D resource cleanup.
-void ResultScene::OnDeviceLost()
+void GameOverScene::OnDeviceLost()
 {
 
 }
 
 // Restart any looped sounds here
-void ResultScene::OnRestartSound()
+void GameOverScene::OnRestartSound()
 {
 
 }
 
 // Updates the scene.
-NextScene ResultScene::Update(const float deltaTime)
+NextScene GameOverScene::Update(const float deltaTime)
 {
 	// If you use 'deltaTime', remove it.
 	UNREFERENCED_PARAMETER(deltaTime);
@@ -83,7 +81,7 @@ NextScene ResultScene::Update(const float deltaTime)
 }
 
 // Draws the scene.
-void ResultScene::Render()
+void GameOverScene::Render()
 {
 	// TODO: Add your rendering code here.
     DXTK->Direct3D9->Clear(static_cast<D3DCOLOR>(DX9::Colors::RGBA(0, 0, 0, 255)));
@@ -92,7 +90,7 @@ void ResultScene::Render()
     DX9::SpriteBatch->Begin();
 
     DX9::SpriteBatch->DrawSimple(
-        result_.Get(),
+        game_over_.Get(),
         SimpleMath::Vector3::Zero
     );
 

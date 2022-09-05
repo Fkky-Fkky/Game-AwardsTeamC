@@ -105,7 +105,13 @@ NextScene MainScene::Update(const float deltaTime)
     }
     
     if (scene_change_.GetSceneChangeFlag()) {
-        return NextScene::ResultScene;
+        if (scene_change_.IsGameClear()) {
+            return NextScene::ClearScene;
+        }
+        else
+        {
+            return NextScene::GameOverScene;
+        }
     }
 
     return NextScene::Continue;
