@@ -226,7 +226,9 @@
     <ClInclude Include="Classes\Player\PlayerState.h" />
     <ClInclude Include="Classes\Player\PlayerWait.h" />
     <ClInclude Include="Classes\UI\UI.h" />
+    <ClInclude Include="ClearScene.h" />
     <ClInclude Include="DontDestroyOnLoad.h" />
+    <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="ResultScene.h" />
     <ClInclude Include="Scene.h" />
@@ -282,6 +284,8 @@
     <ClCompile Include="Classes\Player\PlayerRightMove.cpp" />
     <ClCompile Include="Classes\Player\PlayerWait.cpp" />
     <ClCompile Include="Classes\UI\UI.cpp" />
+    <ClCompile Include="ClearScene.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="MainScene.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
