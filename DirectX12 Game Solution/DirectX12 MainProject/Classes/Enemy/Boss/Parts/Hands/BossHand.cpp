@@ -1,13 +1,13 @@
 #include "Classes/Enemy/Boss/Parts/Hands/BossHand.h"
 #include <Bezier.h>
 
-void BossHand::Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote) {
+void BossHand::Initialize(const SimpleMath::Vector3 pos, const SimpleMath::Vector3 rote) {
 	BossParts::Initialize(pos, rote);
 	bezier_t = 0.0f;
 	hand_hp_ = HAND_HP_MAX_;
 }
 
-void BossHand::LoadAssets(LPCWSTR file_name){
+void BossHand::LoadAssets(const LPCWSTR file_name){
 	BossParts::LoadAssets(file_name);
 	model_->SetScale(0.8f);
 
@@ -43,7 +43,7 @@ void BossHand::Update(const float deltaTime) {
 	PlayMotion();
 }
 
-void BossHand::Render(){
+void BossHand::Render() const {
 	BossParts::Render();
 
 	collision_model->SetPosition(collision.Center);
@@ -51,7 +51,7 @@ void BossHand::Render(){
 	collision_model->Draw();
 }
 
-void BossHand::Render2D(float pos_x) {
+void BossHand::Render2D(const float pos_x) const {
 	DX9::SpriteBatch->DrawString(
 		font_.Get(),
 		SimpleMath::Vector2(pos_x, 150.0f),
@@ -121,6 +121,6 @@ void BossHand::HandMotionAttack() {	//攻撃モーション
 	}
 }
 
-void BossHand::HandMotionWait() {	//待機モーション
+void BossHand::HandMotionWait() const {	//待機モーション
 	model_->SetTrackEnable(WAIT, true);
 }

@@ -8,9 +8,9 @@ class BossBody : public BossParts {
 public:
 	virtual void Initialize();
 	void LoadAssets();
-	void Update(const float deltaTime, ObjectManager* obj_m_);
-	void Render();
-	BoundingOrientedBox GetBodyCollision() { return body_coll_; }
+	void Update(const float deltaTime, const ObjectManager* const obj_m_);
+	void Render()const;
+	BoundingOrientedBox GetBodyCollision() const { return body_coll_; }
 private:
 	BoundingOrientedBox body_coll_;
 	DX9::MODEL coll_model_;

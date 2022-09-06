@@ -1,7 +1,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/LeftSlap.h"
 #include "Classes/Enemy/Boss/Boss.h"
 
-void LeftSlap::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
+void LeftSlap::Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss) {
 	pos_  = boss_handL_->GetHandPos();
 	rote_ = boss_handL_->GetRotation();
 
@@ -21,7 +21,7 @@ void LeftSlap::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 	boss_handL_->SetHandRote(rote_);
 }
 
-void LeftSlap::HandCheck(Boss* boss) {	//手の状態を確認
+void LeftSlap::HandCheck(const Boss* const boss) {	//手の状態を確認
 	hand_state_ = boss->GetHandState();
 	(!hand_state_) ? boss_handL_->SetHandMotion(HAND_MOTION::ROCK) : boss_handL_->SetHandMotion(HAND_MOTION::PAPER);
 	action_state_ = READY;
@@ -49,7 +49,7 @@ void LeftSlap::Wait() {	//待機
 	}
 }
 
-void LeftSlap::LeftSlapAttack(Boss* boss) {	//左手薙ぎ払い攻撃
+void LeftSlap::LeftSlapAttack(const Boss* const boss) {	//左手薙ぎ払い攻撃
 	boss_handL_->SetAttackFlag(true);
 	boss_handL_->SetSideShakeFlag(true);
 	//slap_time_x_ += time_delta_*1.5f;

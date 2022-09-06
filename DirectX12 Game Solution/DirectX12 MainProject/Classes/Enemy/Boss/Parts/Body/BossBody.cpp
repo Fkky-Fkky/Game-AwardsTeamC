@@ -30,7 +30,7 @@ void BossBody::LoadAssets() {
 	model_->SetTrackEnable(0, true);
 }
 
-void BossBody::Update(const float deltaTime, ObjectManager* obj_m_) {
+void BossBody::Update(const float deltaTime, const ObjectManager* const obj_m_) {
 	BossParts::Update(deltaTime);
 	SimpleMath::Vector3 player_pos_ = obj_m_->GetPlayerPos();
 	rotation.y = player_pos_.x * -1;
@@ -38,7 +38,7 @@ void BossBody::Update(const float deltaTime, ObjectManager* obj_m_) {
 	body_coll_.Orientation = model_->GetRotationQuaternion();
 }
 
-void BossBody::Render() {
+void BossBody::Render() const {
 	BossParts::Render();
 	coll_model_->SetPosition(body_coll_.Center);
 	coll_model_->SetRotationQuaternion(body_coll_.Orientation);

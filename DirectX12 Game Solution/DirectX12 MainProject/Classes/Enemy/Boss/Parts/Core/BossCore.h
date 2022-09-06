@@ -18,9 +18,9 @@ public:
 
 	virtual void Initialize();
 	virtual void LoadAssets();
-	virtual void Update(const float deltaTime, bool core_hit_flag, Boss* boss);
-	virtual void Render();
-	void Render2D();
+	virtual void Update(const float deltaTime, const bool core_hit_flag, const Boss* const boss);
+	virtual void Render()const;
+	void Render2D()const;
 
 	float GetBossHP() const { return core_hp_; }
 	BoundingOrientedBox GetCoreCollision() const { return collision_; }

@@ -2,7 +2,7 @@
 #include "Classes/Enemy/Boss/Boss.h"
 #include "Classes/Collision/ObjectManager.h"
 
-void LeftBeat::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
+void LeftBeat::Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss) {
 	pos_  = boss_handL_->GetHandPos();
 	rote_ = boss_handL_->GetRotation();
 
@@ -21,7 +21,7 @@ void LeftBeat::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 	boss_handL_->SetHandRote(rote_);
 }
 
-void LeftBeat::HandCheck(Boss* boss) {	//手の状態を確認
+void LeftBeat::HandCheck(const Boss* const boss) {	//手の状態を確認
 	hand_state_ = boss->GetHandState();
 	if (!hand_state_) {
 		boss_handL_->SetHandMotion(HAND_MOTION::ROCK);
@@ -34,7 +34,7 @@ void LeftBeat::HandCheck(Boss* boss) {	//手の状態を確認
 	boss_action_state_ = READY;
 }
 
-void LeftBeat::Ready(ObjectManager* obj_m) { //プレイヤーの座標に手を移動させる
+void LeftBeat::Ready(const ObjectManager* const obj_m) { //プレイヤーの座標に手を移動させる
 	SimpleMath::Vector3 move_dest_ = obj_m->GetPlayerPos();
 
 	ready_time_ = std::min(ready_time_ + time_delta_, READY_TIME_MAX_);
@@ -59,7 +59,7 @@ void LeftBeat::Ready(ObjectManager* obj_m) { //プレイヤーの座標に手を移動させる
 	}
 }
 
-void LeftBeat::LeftBeatAttack(Boss* boss) { //叩きつけ攻撃
+void LeftBeat::LeftBeatAttack(const Boss* const boss) { //叩きつけ攻撃
 	boss_handL_->SetAttackFlag(true);
 	beat_time_ += time_delta_;
 	float beat_ = BEAT_SPEED_ * beat_time_ - HALF_ * BEAT_GRAVITY_ * beat_time_ * beat_time_;

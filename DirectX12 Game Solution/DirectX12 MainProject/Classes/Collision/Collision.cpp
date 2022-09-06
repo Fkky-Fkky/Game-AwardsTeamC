@@ -55,7 +55,7 @@ void Collision::Update(const float deltaTime, ObjectManager* obj_m_) {
 		if (player_atk_flag_) {
 			boss_hand_r_dmg_flag_ = player_atk_col_.Intersects(boss_r_hand_col_);
 			boss_hand_l_dmg_flag_ = player_atk_col_.Intersects(boss_l_hand_col_);
-			hand_dmg_flag_reset_time_ = 1.0f;
+			hand_dmg_flag_reset_time_ = 0.1f;
 		}
 	}
 	hand_dmg_flag_reset_time_ = std::max(hand_dmg_flag_reset_time_ - deltaTime, 0.0f);

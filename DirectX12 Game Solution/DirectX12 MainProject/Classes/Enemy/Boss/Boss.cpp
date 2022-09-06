@@ -31,6 +31,7 @@ void Boss::Initialize() {
 	same_handstate_flag_ = false;
 	hand_dmg_flag_		 = false;
 	weak_state_start_flag_	 = false;
+	hand_damage_num_ = 0;
 }
 
 void Boss::LoadAseets() {
@@ -41,28 +42,30 @@ void Boss::LoadAseets() {
 	beat_effect_ = DX12Effect.Create(L"Effect/Eff_shock/Eff_shock.efk");
 }
 
-void Boss::Update(const float deltaTime, ObjectManager* obj_m) {
+void Boss::Update(const float deltaTime, const ObjectManager* const obj_m) {
+	time_delta_ = deltaTime;
 	body.Update(deltaTime, obj_m);
 	core.Update(deltaTime, obj_m->GetBossDmgFlag(), this);
 	hand_l.Update(deltaTime);
 	hand_r.Update(deltaTime);
 	attack->Update(deltaTime, obj_m, this);
 	SwitchStateWait();
-	if (obj_m->IsBossHandLDmg() ||
-		obj_m->IsBossHandRDmg()) {
-		SwitchStateDamage();
-	}
+	//if (obj_m->IsBossHandLDmg() ||
+	//	obj_m->IsBossHandRDmg()) {
+	//	SwitchStateDamage();
+	//}
+	HandDamage(obj_m);
 	SwitchStateWeak();
 }
 
-void Boss::Render() {
+void Boss::Render() const {
 	body.Render();
 	core.Render();
 	hand_l.Render();
 	hand_r.Render();
 }
 
-void Boss::Render2D() {
+void Boss::Render2D() const {
 	core.Render2D();
 	hand_r.Render2D(0.0f);
 	hand_l.Render2D(1000.0f);
@@ -132,6 +135,28 @@ void Boss::RandomHandState() {	//手の状態を変更する(グー・パー)
 	old_hand_state_ = hand_state_;
 }
 
+void Boss::HandDamage(const ObjectManager* const obj_m) {
+	if (obj_m->IsBossHandLDmg() || obj_m->IsBossHandRDmg()) {
+		if (!is_invincible_) {
+			hand_damage_num_++;
+			is_invincible_ = true;
+			boss_invincible_time_ = 1.0f;
+		}
+	}
+
+	boss_invincible_time_ = std::max(boss_invincible_time_ - time_delta_, 0.0f);
+
+	if (boss_invincible_time_ <= 0.0f) {
+		is_invincible_ = false;
+	}
+
+	if (hand_damage_num_ >= 3) {
+		WeakStateStart();
+		hand_damage_num_ = 0;
+	}
+
+}
+
 void Boss::SwitchStateAttack() {	//ボスの攻撃変更
 	delete attack;
 	switch (attack_state_) {
@@ -182,15 +207,15 @@ void Boss::SwitchStateWeak() {	//ウィーク状態に切り替え
 	}
 }
 
-void Boss::PlaySlapSE() {
+void Boss::PlaySlapSE() const {
 	slap_se_->Play();
 }
 
-void Boss::PlayBeatSE() {
+void Boss::PlayBeatSE() const {
 	beat_se_->Play(); 
 }
 
-void Boss::PlayBeatEffect(const SimpleMath::Vector3 effect_pos) {
+void Boss::PlayBeatEffect(const SimpleMath::Vector3 effect_pos) const {
 	DX12Effect.Play(beat_effect_, effect_pos); 
 }
 

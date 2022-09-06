@@ -21,6 +21,9 @@ public:
 		attack_state_	= WAIT;
 		hand_state_		= ROCK;
 		old_hand_state_ = PAPER;
+		boss_invincible_time_ = 0.0f;
+		time_delta_ = 0.0f;
+		is_invincible_ = false;
 		action_end_flag_	   = false;
 		same_handstate_flag_   = false;
 		hand_dmg_flag_		   = false;
@@ -32,17 +35,17 @@ public:
 
 	void Initialize();
 	void LoadAseets();
-	void Update(const float deltaTime, ObjectManager* obj_m);
-	void Render();
-	void Render2D();
+	void Update(const float deltaTime, const ObjectManager* const obj_m);
+	void Render()const;
+	void Render2D()const;
 
 	void ActionEnd();
 	void WeakStateStart();
 	void RandomAttackState();
 	void SetWeakState(const bool select);
-	void PlaySlapSE();
-	void PlayBeatSE();
-	void PlayBeatEffect(const SimpleMath::Vector3 effect_pos);
+	void PlaySlapSE()const;
+	void PlayBeatSE()const;
+	void PlayBeatEffect(const SimpleMath::Vector3 effect_pos)const;
 	int GetBossHP() const { return core.GetBossHP(); }
 	bool IsBossWeak() const { return weak_state_; }
 	bool IsVerticalShake() const { if (hand_l.IsVerticalShake() || hand_r.IsVerticalShake()) { return true; } else { return false; } }
@@ -61,6 +64,8 @@ private:
 	void SwitchStateWeak();
 	void RandomHandState();
 
+	void HandDamage(const ObjectManager* const obj_m);
+
 	BossBody body;
 	BossCore core;
 	BossHandL hand_l;
@@ -77,6 +82,10 @@ private:
 	XAudio::SOUNDEFFECT	beat_se_;
 
 	int attack_state_;
+	int hand_damage_num_;
+	float boss_invincible_time_;
+	float time_delta_ = 0.0f;
+	bool is_invincible_;
 	bool hand_state_;
 	bool old_hand_state_;
 

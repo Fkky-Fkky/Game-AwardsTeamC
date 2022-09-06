@@ -1,7 +1,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
 #include "Classes/Enemy/Boss/Boss.h"
 
-void DoubleSlap::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss)	{
+void DoubleSlap::Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss)	{
 	r_pos_  = boss_handR_->GetHandPos();
 	r_rote_ = boss_handR_->GetRotation();
 	l_pos_  = boss_handL_->GetHandPos();
@@ -24,7 +24,7 @@ void DoubleSlap::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss)
 	boss_handL_->SetHandRote(l_rote_);
 }
 
-void DoubleSlap::HandCheck(Boss* boss) {	//手の状態を確認
+void DoubleSlap::HandCheck(const Boss* const boss) {	//手の状態を確認
 	is_r_hand_broke_ = boss_handR_->GetHandHp() <= 0;
 	is_l_hand_broke_ = boss_handL_->GetHandHp() <= 0;
 	hand_state_	  = boss->GetHandState();

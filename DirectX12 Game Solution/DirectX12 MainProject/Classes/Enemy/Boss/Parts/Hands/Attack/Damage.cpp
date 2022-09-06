@@ -2,7 +2,7 @@
 #include "Classes/Collision/ObjectManager.h"
 #include "Classes/Enemy/Boss/Boss.h"
 
-void Damage::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
+void Damage::Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss) {
 	pos_r_ = boss_handR_->GetHandPos();
 	rot_r_ = boss_handR_->GetRotation();
 	pos_l_ = boss_handL_->GetHandPos();
@@ -25,7 +25,7 @@ void Damage::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 	boss_handL_->SetHandRote(rot_l_);
 }
 
-void Damage::HandDamage(ObjectManager* obj_m) {	//手にダメージを与える
+void Damage::HandDamage(const ObjectManager* obj_m) {	//手にダメージを与える
 	boss_handR_->SetAttackFlag(false);
 	boss_handL_->SetAttackFlag(false);
 	if (obj_m->IsBossHandRDmg()) {

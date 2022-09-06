@@ -1,7 +1,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Wait.h"
 #include "Classes/Enemy/Boss/Boss.h"
 
-void Wait::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
+void Wait::Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const  boss) {
 	float boss_hp_ = boss->GetBossHP();
 
 	bool normal_time_ = boss_hp_ <= HP_NORMAL_MAX_ && boss_hp_ > HP_NORMAL_MIN_;

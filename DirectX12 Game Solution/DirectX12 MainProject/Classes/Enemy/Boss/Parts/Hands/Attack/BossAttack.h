@@ -12,11 +12,11 @@ using namespace DirectX;
 
 class BossAttack {
 public:
-	virtual void Initialize(BossHand* boss_handL, BossHand* bosshandR) {
+	virtual void Initialize(BossHand* const boss_handL, BossHand* const bosshandR) {
 		boss_handL_ = boss_handL;
 		boss_handR_ = bosshandR;
 	};
-	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) = 0;
+	virtual void Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss) = 0;
 
 protected:
 	BossHand* boss_handL_;

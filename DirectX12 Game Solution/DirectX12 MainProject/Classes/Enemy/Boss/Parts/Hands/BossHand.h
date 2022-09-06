@@ -20,11 +20,11 @@ public:
 	}
 
 	~BossHand() {};
-	virtual void Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote);
-	virtual void LoadAssets(LPCWSTR file_name);
+	virtual void Initialize(const SimpleMath::Vector3 pos, const SimpleMath::Vector3 rote);
+	virtual void LoadAssets(const LPCWSTR file_name);
 	virtual void Update(const float deltaTime);
-	virtual void Render();
-	void Render2D(float pos_x);
+	virtual void Render()const;
+	void Render2D(const float pos_x)const;
 
 	void HandDamageProcess();
 	void HandHPHeal();
@@ -47,7 +47,7 @@ private:
 	void MotionReset();
 	void PlayMotion();
 	void HandMotionAttack();
-	void HandMotionWait();
+	void HandMotionWait()const;
 
 	enum HAND_MOTION {
 		WAIT,

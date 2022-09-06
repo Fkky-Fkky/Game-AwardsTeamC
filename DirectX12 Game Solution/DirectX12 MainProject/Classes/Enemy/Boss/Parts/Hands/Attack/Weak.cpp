@@ -1,7 +1,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Weak.h"
 #include "Classes/Enemy/Boss/Boss.h"
 
-void Weak::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
+void Weak::Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss) {
 	pos_r_ = boss_handR_->GetHandPos();
 	pos_l_ = boss_handL_->GetHandPos();
 
@@ -17,7 +17,7 @@ void Weak::Update(const float deltaTime, ObjectManager* obj_m, Boss* boss) {
 	boss_handL_->SetHandPos(pos_l_);
 }
 
-void Weak::BossWeak(Boss* boss) {	//ウィーク状態維持
+void Weak::BossWeak(Boss* const boss) {	//ウィーク状態維持
 	boss->SetWeakState(true);
 	weak_time_ = std::min(weak_time_ + time_delta_, WEAK_TIME_MAX_);
 	if (weak_time_ >= WEAK_TIME_MAX_) {

@@ -23,14 +23,14 @@ public:
 		is_r_return_end_ = false;
 		is_l_return_end_ = false;
 	}
-	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss);
+	virtual void Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss);
 
 private:
-	void HandCheck(Boss* boss);
+	void HandCheck(const Boss* const boss);
 	void Ready();
-	void Attack(Boss* boss);
-	void BeatR(Boss* boss);
-	void BeatL(Boss* boss);
+	void Attack(const Boss* const boss);
+	void BeatR(const Boss* const boss);
+	void BeatL(const Boss* const boss);
 	void Reset();
 	void HandReturn();
 

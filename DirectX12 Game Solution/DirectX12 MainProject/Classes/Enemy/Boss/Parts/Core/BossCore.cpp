@@ -37,7 +37,7 @@ void BossCore::LoadAssets() {
 	hit_efc_ = DX12Effect.Create(L"Effect/Eff_BossHit/Eff_bossHit.efk");
 }
 
-void BossCore::Update(const float deltaTime, bool core_hit_flag, Boss* boss) {
+void BossCore::Update(const float deltaTime, const bool core_hit_flag, const Boss* boss) {
 	time_delta_ = deltaTime;
 	collision_.Center	   = core_->GetPosition();
 	collision_.Orientation = core_->GetRotationQuaternion();
@@ -45,7 +45,7 @@ void BossCore::Update(const float deltaTime, bool core_hit_flag, Boss* boss) {
 	HitPlayerAttack(core_hit_flag);
 }
 
-void BossCore::Render() {
+void BossCore::Render() const {
 	core_->SetPosition(position);
 	core_->SetRotation(rotation);
 	core_->Draw();
@@ -55,7 +55,7 @@ void BossCore::Render() {
 	collision_model_->Draw();
 }
 
-void BossCore::Render2D() {
+void BossCore::Render2D() const {
 	DX9::SpriteBatch->DrawString(
 		font.Get(),
 		SimpleMath::Vector2(0.0f, 60.0f),
