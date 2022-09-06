@@ -22,8 +22,8 @@ public:
 
 	void Initialize();
 	void LoadAssets();
-	void Update(const float deltaTime, ObjectManager* obj_m_);
-	void Render2D();
+	void Update(const float deltaTime, const ObjectManager* const obj_m_);
+	void Render2D()const;
 
 	bool GetPlayerDmgFlagR() const { return player_dmg_flag_r_; }
 	bool GetPlayerDmgFlagL() const { return player_dmg_flag_l_; }

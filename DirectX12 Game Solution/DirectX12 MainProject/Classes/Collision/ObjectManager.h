@@ -11,9 +11,9 @@ using namespace DirectX;
 
 class ObjectManager {
 public:
-	void SetPlayer(Player* p_);
-	void SetBoss(Boss* b_);
-	void SetCollision(Collision* col_);
+	void SetPlayer(Player* const p_);
+	void SetBoss(Boss* const b_);
+	void SetCollision(Collision* const col_);
 	BoundingOrientedBox GetPlayerCollision()const;
 	BoundingOrientedBox GetPlayerAttackCollision()const;
 	BoundingOrientedBox GetBossCoreCollision()const;

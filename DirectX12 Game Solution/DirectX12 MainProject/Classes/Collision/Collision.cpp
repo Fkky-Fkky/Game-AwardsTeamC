@@ -15,7 +15,7 @@ void Collision::LoadAssets() {
 	font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 }
 
-void Collision::Update(const float deltaTime, ObjectManager* obj_m_) {
+void Collision::Update(const float deltaTime, const ObjectManager* const obj_m_) {
 	bool boss_r_atk_flag_ = obj_m_->GetBossRAttackFlag();
 	bool boss_l_atk_flag_ = obj_m_->GetBossLAttackFlag();
 	bool player_atk_flag_ = obj_m_->GetPlayerAttackFlag();
@@ -65,7 +65,7 @@ void Collision::Update(const float deltaTime, ObjectManager* obj_m_) {
 	}
 }
 
-void Collision::Render2D() {
+void Collision::Render2D() const {
 	if (player_dmg_flag_r_ ||
 		player_dmg_flag_l_) {
 		DX9::SpriteBatch->DrawString(

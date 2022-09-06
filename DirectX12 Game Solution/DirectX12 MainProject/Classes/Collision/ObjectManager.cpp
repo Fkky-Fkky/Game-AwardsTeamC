@@ -3,15 +3,15 @@
 #include "Classes/Enemy/Boss/Boss.h"
 #include "Classes/Collision/Collision.h"
 
-void ObjectManager::SetPlayer(Player* p_) {
+void ObjectManager::SetPlayer(Player* const p_) {
 	player_ = p_;
 }
 
-void ObjectManager::SetBoss(Boss* b_) {
+void ObjectManager::SetBoss(Boss* const b_) {
 	boss_ = b_;
 }
 
-void ObjectManager::SetCollision(Collision* col_) {
+void ObjectManager::SetCollision(Collision* const col_) {
 	collision_ = col_;
 }
 
