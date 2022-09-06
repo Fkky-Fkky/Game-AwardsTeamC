@@ -1,18 +1,19 @@
 #include "Classes/UI/UI.h"
 #include "Classes/Collision/ObjectManager.h"
 
-UI::UI() {
-	player_hp_width_ = 0.0f;
-	boss_hp_width_ = 0.0f;
-	player_hp_pos_ = SimpleMath::Vector3::Zero;
-	boss_hp_pos_ = SimpleMath::Vector3::Zero;
-}
-
 void UI::Initialize() {
+	player_side_shake_	   = RIGHT;
+	player_vertical_shake_ = UP;
+
 	player_hp_width_ = PLAYER_HP_MAX_WIDTH_;
-	boss_hp_width_ = BOSS_HP_MAX_WIDTH_;
+	boss_hp_width_	 = BOSS_HP_MAX_WIDTH_;
+	old_player_hp_ = 0.0f;
+	time_delta_	   = 0.0f;
+	shake_time_	   = 0.0f;
+	is_player_damage_ = false;
+	
 	player_hp_pos_ = SimpleMath::Vector3(PLAYER_HP_POS_X_, PLAYER_HP_POS_Y_, 0.0f);
-	boss_hp_pos_ = SimpleMath::Vector3(BOSS_HP_POS_X_, BOSS_HP_POS_Y_, 0.0f);
+	boss_hp_pos_   = SimpleMath::Vector3(BOSS_HP_POS_X_,   BOSS_HP_POS_Y_,	 0.0f);
 }
 
 void UI::LoadAssets() {
@@ -22,12 +23,21 @@ void UI::LoadAssets() {
 	boss_hp_bottom_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/boss_min.png");
 }
 
-void UI::Update(const float deltaTime, ObjectManager* obj_m) {
+void UI::Update(const float deltaTime, const ObjectManager* const obj_m) {
+	time_delta_ = deltaTime;
 	player_hp_width_ = obj_m->GetPlayerHP() * PLAYER_HP_WIDTH_DIVIDE_;
-	boss_hp_width_   = obj_m->GetBossHP()	* BOSS_HP_WIDTH_DIVIDE_;
+	boss_hp_width_	 = obj_m->GetBossHP()	* BOSS_HP_WIDTH_DIVIDE_;
+
+	if (old_player_hp_ > player_hp_width_) {
+		is_player_damage_ = true;
+	}
+	if (is_player_damage_) {
+		PlayerUIShake();
+	}
+	old_player_hp_ = player_hp_width_;
 }
 
-void UI::Render() {
+void UI::Render() const{
 	DX9::SpriteBatch->DrawSimple(
 		player_hp_bottom_.Get(),
 		SimpleMath::Vector3(player_hp_pos_)
@@ -49,4 +59,49 @@ void UI::Render() {
 		SimpleMath::Vector3(boss_hp_pos_),
 		RectWH(0, 0, (int)boss_hp_width_, BOSS_HP_HIGHT_)
 	);
+}
+
+void UI::PlayerUIShake() {	//ÉvÉåÉCÉÑÅ[ÇÃHPÇóhÇÁÇ∑
+	const float SHAKE_TIME_MAX_  = 0.5f;
+	const float SHAKE_POS_MIN_X_ = 40.0f;
+	const float SHAKE_POS_MAX_X_ = 60.0f;
+	const float SHAKE_POS_MIN_Y_ = 670.0f;
+	const float SHAKE_POS_MAX_Y_ = 690.0f;
+	const float SHAKE_POWER_X_ = 300.0f;
+	const float SHAKE_POWER_Y_ = 200.0f;
+	
+	shake_time_ = std::min(shake_time_ + time_delta_, SHAKE_TIME_MAX_);
+
+	if (player_side_shake_ == LEFT) {
+		player_hp_pos_.x = std::max(player_hp_pos_.x - SHAKE_POWER_X_ * time_delta_, SHAKE_POS_MIN_X_);
+		if (player_hp_pos_.x <= SHAKE_POS_MIN_X_) {
+			player_side_shake_ = RIGHT;
+		}
+	}
+	else {
+		player_hp_pos_.x = std::min(player_hp_pos_.x + SHAKE_POWER_X_ * time_delta_, SHAKE_POS_MAX_X_);
+		if (player_hp_pos_.x >= SHAKE_POS_MAX_X_) {
+			player_side_shake_ = LEFT;
+		}
+	}
+
+	if (player_vertical_shake_ == UP) {
+		player_hp_pos_.y = std::max(player_hp_pos_.y - SHAKE_POWER_Y_ * time_delta_, SHAKE_POS_MIN_Y_);
+		if (player_hp_pos_.y <= SHAKE_POS_MIN_Y_) {
+			player_vertical_shake_ = DOWN;
+		}
+	}
+	else {
+		player_hp_pos_.y = std::min(player_hp_pos_.y + SHAKE_POWER_Y_ * time_delta_, SHAKE_POS_MAX_Y_);
+		if (player_hp_pos_.y >= SHAKE_POS_MAX_Y_) {
+			player_vertical_shake_ = UP;
+		}
+	}
+
+	if (shake_time_ >= SHAKE_TIME_MAX_) {
+		shake_time_ = 0.0f;
+		player_hp_pos_.x = PLAYER_HP_POS_X_;
+		player_hp_pos_.y = PLAYER_HP_POS_Y_;
+		is_player_damage_ = false;
+	}
 }

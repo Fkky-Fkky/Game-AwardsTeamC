@@ -9,24 +9,50 @@ class ObjectManager;
 
 class UI {
 public:
-	UI();
+	UI() {
+		player_side_shake_	   = 0;
+		player_vertical_shake_ = 0;
+		player_hp_width_ = 0.0f;
+		boss_hp_width_	 = 0.0f;
+		time_delta_		 = 0.0f;
+		old_player_hp_	 = 0.0f;
+		shake_time_		 = 0.0f;
+		is_player_damage_ = false;
+		player_hp_pos_ = SimpleMath::Vector3::Zero;
+		boss_hp_pos_   = SimpleMath::Vector3::Zero;
+	}
 	~UI() {};
 
 	void Initialize();
 	void LoadAssets();
-	void Update(const float deltaTime, ObjectManager* obj_m);
-	void Render();
+	void Update(const float deltaTime, const ObjectManager* const obj_m);
+	void Render() const;
 
 private:
+	void PlayerUIShake();
+
 	DX9::SPRITE player_hp_top_;
 	DX9::SPRITE player_hp_bottom_;
 	DX9::SPRITE boss_hp_top_;
 	DX9::SPRITE boss_hp_bottom_;
+	
+	int player_side_shake_;
+	int player_vertical_shake_;
 	float player_hp_width_;
 	float boss_hp_width_;
-
+	float time_delta_;
+	float old_player_hp_;
+	float shake_time_;
+	bool is_player_damage_;
 	SimpleMath::Vector3 player_hp_pos_;
 	SimpleMath::Vector3 boss_hp_pos_;
+
+	enum SHAKE_STATE_ {
+		UP,
+		DOWN,
+		RIGHT,
+		LEFT
+	};
 
 	const int PLAYER_HP_HIGHT_ = 30;
 	const int BOSS_HP_HIGHT_ = 30;
