@@ -1,28 +1,28 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightBeat.h"
-#include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
 #include "Classes/Collision/ObjectManager.h"
 
-void RightBeat::Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss){
+void RightBeat::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m){
 	pos_  = boss_handR_->GetHandPos();
 	rote_ = boss_handR_->GetRotation();
 
 	time_delta_ = deltaTime;
 
 	switch (boss_action_state_)	{
-	case HAND_CHECK:	HandCheck(boss);		break;
-	case READY:			Ready(obj_m);			break;
-	case ATTACK:		RightBeatAttack(boss);	break;
-	case WAIT:			Wait();					break;
-	case RETURN:		HandReturn();			break;
-	case ACTION_END:	boss->ActionEnd();		break;
+	case HAND_CHECK:	HandCheck(hand_m);			break;
+	case READY:			Ready(obj_m);				break;
+	case ATTACK:		RightBeatAttack(hand_m);	break;
+	case WAIT:			Wait();						break;
+	case RETURN:		HandReturn();				break;
+	case ACTION_END:	hand_m->ActionEnd();		break;
 	}
 
 	boss_handR_->SetHandPos(pos_);
 	boss_handR_->SetHandRote(rote_);
 }
 
-void RightBeat::HandCheck(const Boss* const boss) {	//è‚Ìó‘Ô‚ğŠm”F
-	hand_state_ = boss->GetHandState();
+void RightBeat::HandCheck(const HandManager* const hand_m) {	//è‚Ìó‘Ô‚ğŠm”F
+	hand_state_ = hand_m->GetHandState();
 	if (!hand_state_) {
 		boss_handR_->SetHandMotion(HAND_MOTION::ROCK);
 		limit_pos_y_ = HAND_ROCK_LIMIT_POS_Y_;
@@ -59,7 +59,7 @@ void RightBeat::Ready(const ObjectManager* const obj_m) {	//ƒvƒŒƒCƒ„[‚ÌÀ•W‚Éè
 	}
 }
 
-void RightBeat::RightBeatAttack(const Boss* const boss) {	//’@‚«‚Â‚¯UŒ‚
+void RightBeat::RightBeatAttack(const HandManager* const hand_m) {	//’@‚«‚Â‚¯UŒ‚
 	boss_handR_->SetAttackFlag(true);
 	beat_time_ += time_delta_;
 	float beat_ = BEAT_SPEED_ * beat_time_ - HALF_ * BEAT_GRAVITY_ * beat_time_ * beat_time_;
@@ -67,8 +67,8 @@ void RightBeat::RightBeatAttack(const Boss* const boss) {	//’@‚«‚Â‚¯UŒ‚
 
 	if (pos_.y <= limit_pos_y_) {
 		pos_.y  = limit_pos_y_;
-		boss->PlayBeatSE();
-		boss->PlayBeatEffect(SimpleMath::Vector3(pos_.x, pos_.y - limit_pos_y_, pos_.z));
+		hand_m->PlayBeatSE();
+		hand_m->PlayBeatEffect(SimpleMath::Vector3(pos_.x, pos_.y - limit_pos_y_, pos_.z));
 		boss_handR_->SetVerticalShakeFlag(true);
 		boss_handR_->SetAttackFlag(false);
 		boss_action_state_ = WAIT;

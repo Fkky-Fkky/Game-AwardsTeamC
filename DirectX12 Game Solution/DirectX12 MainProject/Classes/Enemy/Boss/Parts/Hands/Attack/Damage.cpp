@@ -1,8 +1,8 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Damage.h"
 #include "Classes/Collision/ObjectManager.h"
-#include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
 
-void Damage::Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss) {
+void Damage::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) {
 	pos_r_ = boss_handR_->GetHandPos();
 	rot_r_ = boss_handR_->GetRotation();
 	pos_l_ = boss_handL_->GetHandPos();
@@ -10,13 +10,13 @@ void Damage::Update(const float deltaTime, const ObjectManager* const obj_m, Bos
 
 	time_delta_ = deltaTime;
 	switch (damage_state_) {
-	case DAMAGE:			HandDamage(obj_m);		break;
-	case WAIT:				Wait();					break;
-	case OFF_SCREEN_MOVE:	OffScreenMove();		break;
-	case RESET:				Reset();				break;
-	case INITIAL_POS_MOVE:  InitialPosMove();		break;
-	case ACTION_END:		boss->ActionEnd();		break;
-	case CHANGE_WEAK_STATE:	boss->WeakStateStart();	break;
+	case DAMAGE:			HandDamage(obj_m);			break;
+	case WAIT:				Wait();						break;
+	case OFF_SCREEN_MOVE:	OffScreenMove();			break;
+	case RESET:				Reset();					break;
+	case INITIAL_POS_MOVE:  InitialPosMove();			break;
+	case ACTION_END:		hand_m->ActionEnd();		break;
+	case CHANGE_WEAK_STATE:	hand_m->WeakStateStart();	break;
 	}
 
 	boss_handR_->SetHandPos(pos_r_);

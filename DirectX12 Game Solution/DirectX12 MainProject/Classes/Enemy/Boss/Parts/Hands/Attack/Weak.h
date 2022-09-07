@@ -12,10 +12,10 @@ public:
 		pos_l_ = SimpleMath::Vector3::Zero;
 	}
 	~Weak() {};
-	virtual void Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss);
+	virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m);
 
 private:
-	void BossWeak(Boss* const boss);
+	void BossWeak(HandManager* const hand_m);
 	void HandHeal();
 	void InitialPosMove();
 

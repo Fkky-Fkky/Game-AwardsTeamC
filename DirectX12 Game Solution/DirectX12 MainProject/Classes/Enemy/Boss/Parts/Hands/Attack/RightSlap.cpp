@@ -1,28 +1,28 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightSlap.h"
-#include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
 
-void RightSlap::Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss) {
+void RightSlap::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) {
 	pos_  = boss_handR_->GetHandPos();
 	rote_ = boss_handR_->GetRotation();
 	
 	time_delta_ = deltaTime;
 
 	switch (action_state_) {
-	case HAND_CHECK:	HandCheck(boss);		break;
-	case READY:			Ready();				break;
-	case WAIT:			Wait();					break;
-	case ATTACK:		RightSlapAttack(boss);	break;
-	case RESET:			Reset();				break;
-	case RETURN:		HandReturn();			break;
-	case ACTION_END:	boss->ActionEnd();		break;
+	case HAND_CHECK:	HandCheck(hand_m);			break;
+	case READY:			Ready();					break;
+	case WAIT:			Wait();						break;
+	case ATTACK:		RightSlapAttack(hand_m);	break;
+	case RESET:			Reset();					break;
+	case RETURN:		HandReturn();				break;
+	case ACTION_END:	hand_m->ActionEnd();		break;
 	}
 
 	boss_handR_->SetHandPos(pos_);
 	boss_handR_->SetHandRote(rote_);
 }
 
-void RightSlap::HandCheck(const Boss* const boss) {	//手の状態を確認
-	hand_state_ = boss->GetHandState();
+void RightSlap::HandCheck(const HandManager* const hand_m) {	//手の状態を確認
+	hand_state_ = hand_m->GetHandState();
 	(!hand_state_) ? boss_handR_->SetHandMotion(HAND_MOTION::ROCK) : boss_handR_->SetHandMotion(HAND_MOTION::PAPER);
 	action_state_ = READY;
 }
@@ -49,7 +49,7 @@ void RightSlap::Wait() {	//待機
 	}
 }
 
-void RightSlap::RightSlapAttack(const Boss* const boss) {	//右手薙ぎ払い攻撃
+void RightSlap::RightSlapAttack(const HandManager* const hand_m) {	//右手薙ぎ払い攻撃
 	boss_handR_->SetAttackFlag(true);
 	boss_handR_->SetSideShakeFlag(true);
 	//slap_time_x_ += time_delta_;
@@ -62,7 +62,7 @@ void RightSlap::RightSlapAttack(const Boss* const boss) {	//右手薙ぎ払い攻撃
 	pos_.x = std::min(pos_.x + slap_speed_ * time_delta_, HAND_LIMIT_POS_X_);
 
 	if (!is_se_play_) {
-		boss->PlaySlapSE();
+		hand_m->PlaySlapSE();
 		is_se_play_ = true;
 	}
 	if (pos_.x >= HAND_LIMIT_POS_X_) {

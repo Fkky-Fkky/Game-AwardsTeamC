@@ -1,7 +1,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRushR.h"
-#include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
 
-void BeatRushR::Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss){
+void BeatRushR::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m){
 	pos_r_  = boss_handR_->GetHandPos();
 	rote_r_ = boss_handR_->GetRotation();
 	pos_l_  = boss_handL_->GetHandPos();
@@ -9,12 +9,12 @@ void BeatRushR::Update(const float deltaTime, const ObjectManager* const obj_m, 
 
 	time_delta_ = deltaTime;
 	switch (action_state_) {
-	case HAND_CHECK:	HandCheck(boss);	break;
-	case READY:			Ready();			break;
-	case ATTACK:		Attack(boss);		break;
-	case RESET:			Reset();			break;
-	case RETURN:		HandReturn();		break;
-	case ACTION_END:	boss->ActionEnd();	break;
+	case HAND_CHECK:	HandCheck(hand_m);		break;
+	case READY:			Ready();				break;
+	case ATTACK:		Attack(hand_m);			break;
+	case RESET:			Reset();				break;
+	case RETURN:		HandReturn();			break;
+	case ACTION_END:	hand_m->ActionEnd();	break;
 	}
 
 	boss_handR_->SetHandPos(pos_r_);
@@ -23,7 +23,7 @@ void BeatRushR::Update(const float deltaTime, const ObjectManager* const obj_m, 
 	boss_handL_->SetHandRote(rote_l_);
 }
 
-void BeatRushR::HandCheck(const Boss* const boss) {	//è‚Ìó‘Ô‚ğŠm”F
+void BeatRushR::HandCheck(const HandManager* const hand_m) {	//è‚Ìó‘Ô‚ğŠm”F
 	is_r_hand_broke_ = boss_handR_->GetHandHp() <= 0;
 	is_l_hand_broke_ = boss_handL_->GetHandHp() <= 0;
 	boss_handR_->SetHandMotion(HAND_MOTION::ROCK);
@@ -63,12 +63,12 @@ void BeatRushR::Ready() {	//—¼è‚ğ(ƒ{ƒX‚©‚çŒ©‚Ä)‰E‘¤‚É\‚¦‚é
 	}
 }
 
-void BeatRushR::Attack(const Boss* const boss) {	//UŒ‚ŠÖ”ŒÄ‚Ño‚µ
+void BeatRushR::Attack(const HandManager* const hand_m) {	//UŒ‚ŠÖ”ŒÄ‚Ño‚µ
 	wait_time_ = std::min(wait_time_ + time_delta_, WAIT_TIME_MAX_);
 
-	BeatR(boss);
+	BeatR(hand_m);
 	if (wait_time_ >= WAIT_TIME_MAX_) {
-		BeatL(boss);
+		BeatL(hand_m);
 	}
 
 	if (is_r_attack_end_ && is_l_attack_end_) {
@@ -76,7 +76,7 @@ void BeatRushR::Attack(const Boss* const boss) {	//UŒ‚ŠÖ”ŒÄ‚Ño‚µ
 	}
 }
 
-void BeatRushR::BeatR(const Boss* const boss) {	//‰Eè’@‚«‚Â‚¯UŒ‚
+void BeatRushR::BeatR(const HandManager* const hand_m) {	//‰Eè’@‚«‚Â‚¯UŒ‚
 	if (is_r_hand_broke_) {
 		is_r_attack_end_ = true;
 		return;
@@ -96,8 +96,8 @@ void BeatRushR::BeatR(const Boss* const boss) {	//‰Eè’@‚«‚Â‚¯UŒ‚
 	if (pos_r_.y <= HAND_ROCK_LIMIT_POS_Y_) {
 		pos_r_.y  = HAND_ROCK_LIMIT_POS_Y_;
 		boss_handR_->SetVerticalShakeFlag(true);
-		boss->PlayBeatSE();
-		boss->PlayBeatEffect(SimpleMath::Vector3(pos_r_.x, pos_r_.y - HAND_ROCK_LIMIT_POS_Y_, pos_r_.z));
+		hand_m->PlayBeatSE();
+		hand_m->PlayBeatEffect(SimpleMath::Vector3(pos_r_.x, pos_r_.y - HAND_ROCK_LIMIT_POS_Y_, pos_r_.z));
 		r_hand_up_flag_ = true;
 		r_move_dest_x_ = std::min(pos_r_.x + ADD_DISTANCE_, HAND_RETURN_POS_X_);
 	}
@@ -110,7 +110,7 @@ void BeatRushR::BeatR(const Boss* const boss) {	//‰Eè’@‚«‚Â‚¯UŒ‚
 	is_r_attack_end_ = pos_r_.x >= HAND_RETURN_POS_X_;
 }
 
-void BeatRushR::BeatL(const Boss* const boss) {	//¶è’@‚«‚Â‚¯UŒ‚
+void BeatRushR::BeatL(const HandManager* const hand_m) {	//¶è’@‚«‚Â‚¯UŒ‚
 	if (is_l_hand_broke_) {
 		is_l_attack_end_ = true;
 		return;
@@ -130,8 +130,8 @@ void BeatRushR::BeatL(const Boss* const boss) {	//¶è’@‚«‚Â‚¯UŒ‚
 	if (pos_l_.y <= HAND_ROCK_LIMIT_POS_Y_) {
 		pos_l_.y  = HAND_ROCK_LIMIT_POS_Y_;
 		boss_handL_->SetVerticalShakeFlag(true);
-		boss->PlayBeatSE();
-		boss->PlayBeatEffect(SimpleMath::Vector3(pos_l_.x, pos_l_.y - HAND_ROCK_LIMIT_POS_Y_, pos_l_.z));
+		hand_m->PlayBeatSE();
+		hand_m->PlayBeatEffect(SimpleMath::Vector3(pos_l_.x, pos_l_.y - HAND_ROCK_LIMIT_POS_Y_, pos_l_.z));
 		l_hand_up_flag_ = true;
 		l_move_dest_x_ = std::min(pos_l_.x + ADD_DISTANCE_, HAND_RETURN_POS_X_);
 	}

@@ -28,10 +28,10 @@ public:
 	}
 
 	~DoubleSlap() {};
-	virtual void Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss);
+	virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m);
 
 private:
-	void HandCheck(const Boss* const boss);
+	void HandCheck(const HandManager* const hand_m);
 	void Ready();
 	void ReadyR();
 	void ReadyL();

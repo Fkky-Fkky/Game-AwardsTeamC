@@ -5,7 +5,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/BossHand.h"
 #include "Base/DX12Effekseer.h"
 
-class Boss;
+class HandManager;
 class ObjectManager;
 
 using namespace DirectX;
@@ -16,7 +16,7 @@ public:
 		boss_handL_ = boss_handL;
 		boss_handR_ = bosshandR;
 	};
-	virtual void Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss) = 0;
+	virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) = 0;
 
 protected:
 	BossHand* boss_handL_;

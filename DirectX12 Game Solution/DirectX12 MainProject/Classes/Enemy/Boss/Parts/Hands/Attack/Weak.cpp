@@ -1,27 +1,27 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Weak.h"
-#include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
 
-void Weak::Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss) {
+void Weak::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) {
 	pos_r_ = boss_handR_->GetHandPos();
 	pos_l_ = boss_handL_->GetHandPos();
 
 	time_delta_ = deltaTime;
 	switch (weak_state_) {
-	case WEAK:			   BossWeak(boss);	  break;
-	case HAND_HEAL:		   HandHeal();		  break;
-	case INITIAL_POS_MOVE: InitialPosMove();  break;
-	case ACTION_END:	   boss->ActionEnd(); break;
+	case WEAK:			   BossWeak(hand_m);	break;
+	case HAND_HEAL:		   HandHeal();			break;
+	case INITIAL_POS_MOVE: InitialPosMove();	break;
+	case ACTION_END:	   hand_m->ActionEnd(); break;
 	}
 
 	boss_handR_->SetHandPos(pos_r_);
 	boss_handL_->SetHandPos(pos_l_);
 }
 
-void Weak::BossWeak(Boss* const boss) {	//ウィーク状態維持
-	boss->SetWeakState(true);
+void Weak::BossWeak(HandManager* const hand_m) {	//ウィーク状態維持
+	hand_m->SetWeakState(true);
 	weak_time_ = std::min(weak_time_ + time_delta_, WEAK_TIME_MAX_);
 	if (weak_time_ >= WEAK_TIME_MAX_) {
-		boss->SetWeakState(false);
+		hand_m->SetWeakState(false);
 		weak_state_ = HAND_HEAL;
 	}
 }

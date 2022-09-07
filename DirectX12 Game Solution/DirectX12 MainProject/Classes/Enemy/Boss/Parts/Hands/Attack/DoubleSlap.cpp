@@ -1,7 +1,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
-#include "Classes/Enemy/Boss/Boss.h"
+#include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
 
-void DoubleSlap::Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss)	{
+void DoubleSlap::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m)	{
 	r_pos_  = boss_handR_->GetHandPos();
 	r_rote_ = boss_handR_->GetRotation();
 	l_pos_  = boss_handL_->GetHandPos();
@@ -10,12 +10,12 @@ void DoubleSlap::Update(const float deltaTime, const ObjectManager* const obj_m,
 	time_delta_ = deltaTime;
 
 	switch (action_state_) {
-	case HAND_CHECK:	HandCheck(boss);	break;
-	case READY:			Ready();			break;
-	case ATTACK:		Attack();			break;
-	case RESET:			Reset();			break;
-	case RETURN:		HandReturn();		break;
-	case ACTION_END:	boss->ActionEnd();	break;
+	case HAND_CHECK:	HandCheck(hand_m);		break;
+	case READY:			Ready();				break;
+	case ATTACK:		Attack();				break;
+	case RESET:			Reset();				break;
+	case RETURN:		HandReturn();			break;
+	case ACTION_END:	hand_m->ActionEnd();	break;
 	}
 
 	boss_handR_->SetHandPos(r_pos_);
@@ -24,10 +24,10 @@ void DoubleSlap::Update(const float deltaTime, const ObjectManager* const obj_m,
 	boss_handL_->SetHandRote(l_rote_);
 }
 
-void DoubleSlap::HandCheck(const Boss* const boss) {	//手の状態を確認
+void DoubleSlap::HandCheck(const HandManager* const hand_m) {	//手の状態を確認
 	is_r_hand_broke_ = boss_handR_->GetHandHp() <= 0;
 	is_l_hand_broke_ = boss_handL_->GetHandHp() <= 0;
-	hand_state_	  = boss->GetHandState();
+	hand_state_	  = hand_m->GetHandState();
 	if (!hand_state_) {
 		boss_handR_->SetHandMotion(HAND_MOTION::ROCK);
 		boss_handL_->SetHandMotion(HAND_MOTION::ROCK);
