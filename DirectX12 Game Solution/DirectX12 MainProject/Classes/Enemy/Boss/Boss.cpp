@@ -2,20 +2,23 @@
 #include "Classes/Collision/ObjectManager.h"
 
 void Boss::Initialize() {
-	body.Initialize();
-	core.Initialize();
+	body_.Initialize();
+	core_.Initialize();
+	hand_.Initialize();
 	hand_damage_num_ = 0;
 }
 
 void Boss::LoadAseets() {
-	body.LoadAssets();
-	core.LoadAssets();
+	body_.LoadAssets();
+	core_.LoadAssets();
+	hand_.LoadAssets();
 }
 
 void Boss::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	time_delta_ = deltaTime;
-	body.Update(deltaTime, obj_m);
-	core.Update(deltaTime, obj_m->GetBossDmgFlag(), this);
+	body_.Update(deltaTime, obj_m);
+	core_.Update(deltaTime, obj_m->GetBossDmgFlag(), this);
+	hand_.Update(deltaTime, obj_m);
 	//if (obj_m->IsBossHandLDmg() ||
 	//	obj_m->IsBossHandRDmg()) {
 	//	SwitchStateDamage();
@@ -24,12 +27,14 @@ void Boss::Update(const float deltaTime, const ObjectManager* const obj_m) {
 }
 
 void Boss::Render() const {
-	body.Render();
-	core.Render();
+	body_.Render();
+	core_.Render();
+	hand_.Render();
 }
 
 void Boss::Render2D() const {
-	core.Render2D();
+	core_.Render2D();
+	hand_.Render2D();
 }
 
 void Boss::HandDamage(const ObjectManager* const obj_m) {

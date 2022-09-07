@@ -43,7 +43,7 @@ public:
 	void WeakStateStart();
 	void SetWeakState(const bool select);
 
-
+	bool IsBossWeak() const { return weak_state_; }
 	bool IsVerticalShake() const { if (hand_l.IsVerticalShake() || hand_r.IsVerticalShake()) { return true; } else { return false; } }
 	bool IsSideShake() const { if (hand_l.IsSideShake() || hand_r.IsSideShake()) { return true; } else { return false; } }
 	bool GetHandState() const { return hand_state_; }

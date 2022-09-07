@@ -99,7 +99,6 @@ void HandManager::RandomAttackState() {	//ボスのHPに比例して攻撃の種類変化
 	SwitchStateAttack();
 }
 
-
 void HandManager::RandomHandState() {	//手の状態を変更する(グー・パー)
 	if (same_handstate_flag_) {	//2連続同じ状態だった場合もう片方の状態にする
 		hand_state_ = (old_hand_state_ == ROCK) ? PAPER : ROCK;
@@ -181,7 +180,6 @@ void HandManager::ActionEnd() {
 void HandManager::WeakStateStart() {
 	weak_state_start_flag_ = true;
 }
-
 
 void HandManager::SetWeakState(const bool select) {
 	weak_state_ = select;
