@@ -16,19 +16,21 @@ void HandManager::Initialize() {
 	attack = new Wait;
 	attack->Initialize(&hand_l, &hand_r);
 	std::random_device seed;
-	random_engine_ = std::mt19937(seed());
-	random_atk_dist_ = std::uniform_int_distribution<>(ATTACK_STATE_MIN_, ATTACK_STATE_MAX_);
+	random_engine_	  = std::mt19937(seed());
+	random_atk_dist_  = std::uniform_int_distribution<>(ATTACK_STATE_MIN_, ATTACK_STATE_MAX_);
 	random_hand_dist_ = std::uniform_int_distribution<>(ROCK, PAPER);
+	
 	slap_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Slap.wav");
 	beat_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Beat.wav");
 
 	attack_state_ = WAIT;
-	hand_state_ = ROCK;
+	boss_hp_	  = 0.0f;
+	hand_state_		= ROCK;
 	old_hand_state_ = PAPER;
-	action_end_flag_ = false;
-	hand_dmg_flag_ = false;
+	action_end_flag_	   = false;
+	hand_dmg_flag_		   = false;
 	weak_state_start_flag_ = false;
-	same_handstate_flag_ = false;
+	same_handstate_flag_   = false;
 }
 
 void HandManager::LoadAssets() {
@@ -38,6 +40,7 @@ void HandManager::LoadAssets() {
 }
 
 void HandManager::Update(const float deltaTime, const ObjectManager* const obj_m) {
+	boss_hp_ = obj_m->GetBossHP();
 	hand_l.Update(deltaTime);
 	hand_r.Update(deltaTime);
 	attack->Update(deltaTime, obj_m, this);
@@ -56,12 +59,10 @@ void HandManager::Render2D()const {
 }
 
 void HandManager::RandomAttackState() {	//ボスのHPに比例して攻撃の種類変化
-	int boss_hp_ = GetBossHP();
 	int random_state_max_ = ATTACK_STATE_MAX_;
-	int old_atk_state_ = attack_state_;
-	bool normal_mode_ = boss_hp_ <= HP_NORMAL_MAX_ && boss_hp_ > HP_NORMAL_MIN_;
-	bool hard_mode_ = boss_hp_ <= HP_NORMAL_MIN_ && boss_hp_ > HP_HARD_MIN_;
-
+	int old_atk_state_	  = attack_state_;
+	bool normal_mode_	  = boss_hp_ <= HP_NORMAL_MAX_ && boss_hp_ > HP_NORMAL_MIN_;
+	bool hard_mode_		  = boss_hp_ <= HP_NORMAL_MIN_ && boss_hp_ > HP_HARD_MIN_;
 	bool is_r_hand_broke_ = hand_r.GetHandHp() <= 0;	//右手が壊れているか
 	bool is_l_hand_broke_ = hand_l.GetHandHp() <= 0;	//左手が壊れているか
 
@@ -82,7 +83,7 @@ void HandManager::RandomAttackState() {	//ボスのHPに比例して攻撃の種類変化
 
 	while (true) {
 		attack_state_ = random_atk_dist_(random_engine_);
-		bool is_l_hand_attack_ = attack_state_ == LEFT_BEAT || attack_state_ == LEFT_SLAP;
+		bool is_l_hand_attack_ = attack_state_ == LEFT_BEAT  || attack_state_ == LEFT_SLAP;
 		bool is_r_hand_attack_ = attack_state_ == RIGHT_BEAT || attack_state_ == RIGHT_SLAP;
 
 		if (is_l_hand_broke_ && is_l_hand_attack_) {

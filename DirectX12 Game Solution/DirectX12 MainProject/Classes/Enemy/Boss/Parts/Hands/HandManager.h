@@ -15,16 +15,17 @@ class ObjectManager;
 class HandManager {
 public:
 	HandManager() {
-		attack = nullptr;
+		attack		 = nullptr;
 		beat_effect_ = nullptr;
-		attack_state_ = WAIT;
-		hand_state_ = ROCK;
+		attack_state_	= WAIT;
+		hand_state_		= ROCK;
 		old_hand_state_ = PAPER;
-		action_end_flag_ = false;
-		same_handstate_flag_ = false;
-		hand_dmg_flag_ = false;
+		boss_hp_ = 0.0f;
+		action_end_flag_	   = false;
+		same_handstate_flag_   = false;
+		hand_dmg_flag_		   = false;
 		weak_state_start_flag_ = false;
-		weak_state_ = false;
+		weak_state_			   = false;
 	}
 	~HandManager() {};
 
@@ -37,12 +38,12 @@ public:
 	void PlaySlapSE()const;
 	void PlayBeatSE()const;
 	void PlayBeatEffect(const SimpleMath::Vector3 effect_pos)const;
-	void RandomAttackState();
 
+	void RandomAttackState();
 	void ActionEnd();
 	void WeakStateStart();
+	
 	void SetWeakState(const bool select);
-
 	bool IsBossWeak() const { return weak_state_; }
 	bool IsVerticalShake() const { if (hand_l.IsVerticalShake() || hand_r.IsVerticalShake()) { return true; } else { return false; } }
 	bool IsSideShake() const { if (hand_l.IsSideShake() || hand_r.IsSideShake()) { return true; } else { return false; } }
@@ -52,7 +53,6 @@ public:
 
 	BoundingOrientedBox GetLHandCollision() const { return hand_l.GetHandCollision(); }
 	BoundingOrientedBox GetRHandCollision() const { return hand_r.GetHandCollision(); }
-
 private:
 	void RandomHandState();
 	void SwitchStateAttack();
@@ -60,24 +60,23 @@ private:
 	void SwitchStateDamage();
 	void SwitchStateWeak();
 
-
 	BossHandL hand_l;
 	BossHandR hand_r;
 	BossAttack* attack;
+
+	EFFECT beat_effect_;
 
 	std::mt19937 random_engine_;
 	std::uniform_int_distribution<int> random_atk_dist_;
 	std::uniform_int_distribution<int> random_hand_dist_;
 
-	EFFECT beat_effect_;
-
 	XAudio::SOUNDEFFECT slap_se_;
 	XAudio::SOUNDEFFECT	beat_se_;
 
 	int attack_state_;
+	float boss_hp_;
 	bool hand_state_;
 	bool old_hand_state_;
-
 	bool weak_state_start_flag_;
 	bool weak_state_;
 	bool action_end_flag_;
@@ -86,7 +85,6 @@ private:
 
 	const int ATTACK_STATE_MIN_ = 1;
 	const int ATTACK_STATE_MAX_ = 6;
-
 	const int NORMAL_MODE_MAX_ = 4;
 	const int HARD_MODE_MAX_ = 5;
 	const float HP_NORMAL_MAX_ = 30.0f;
@@ -107,5 +105,4 @@ private:
 		ROCK,
 		PAPER
 	};
-
 };
