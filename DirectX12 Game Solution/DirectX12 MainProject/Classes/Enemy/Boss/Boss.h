@@ -3,11 +3,6 @@
 #include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/Body/BossBody.h"
 #include "Classes/Enemy/Boss/Parts/Core/BossCore.h"
-#include "Classes/Enemy/Boss/Parts/Hands/LeftHand/BossHandL.h"
-#include "Classes/Enemy/Boss/Parts/Hands/RightHand/BossHandR.h"
-#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
-#include <random>
-#include "Base/DX12Effekseer.h"
 
 using namespace DirectX;
 
@@ -39,13 +34,6 @@ public:
 	void Render()const;
 	void Render2D()const;
 
-	void ActionEnd();
-	void WeakStateStart();
-	void RandomAttackState();
-	void SetWeakState(const bool select);
-	void PlaySlapSE()const;
-	void PlayBeatSE()const;
-	void PlayBeatEffect(const SimpleMath::Vector3 effect_pos)const;
 	int GetBossHP() const { return core.GetBossHP(); }
 	bool IsBossWeak() const { return weak_state_; }
 	bool IsVerticalShake() const { if (hand_l.IsVerticalShake() || hand_r.IsVerticalShake()) { return true; } else { return false; } }
@@ -58,63 +46,15 @@ public:
 	BoundingOrientedBox GetCoreCollision() const { return core.GetCoreCollision(); }
 
 private:
-	void SwitchStateAttack();
-	void SwitchStateWait();
-	void SwitchStateDamage();
-	void SwitchStateWeak();
-	void RandomHandState();
 
 	void HandDamage(const ObjectManager* const obj_m);
 
 	BossBody body;
 	BossCore core;
-	BossHandL hand_l;
-	BossHandR hand_r;
-	BossAttack* attack;
 
-	std::mt19937 random_engine_;
-	std::uniform_int_distribution<int> random_atk_dist_;
-	std::uniform_int_distribution<int> random_hand_dist_;
-
-	EFFECT beat_effect_;
-
-	XAudio::SOUNDEFFECT slap_se_;
-	XAudio::SOUNDEFFECT	beat_se_;
-
-	int attack_state_;
-	int hand_damage_num_;
 	float boss_invincible_time_;
 	float time_delta_ = 0.0f;
 	bool is_invincible_;
-	bool hand_state_;
-	bool old_hand_state_;
 
-	bool action_end_flag_;
-	bool same_handstate_flag_;
-	bool hand_dmg_flag_;
-	bool weak_state_start_flag_;
-	bool weak_state_;
-
-	enum BOSS_STATE {
-		WAIT,
-		LEFT_BEAT,
-		LEFT_SLAP,
-		RIGHT_BEAT,
-		RIGHT_SLAP,
-		DOUBLE_SLAP,
-		BEAT_RUSH_R
-	};
-
-	enum HAND_STATE {
-		ROCK,
-		PAPER
-	};
-
-	const int NORMAL_MODE_MAX_	  = 4;
-	const int HARD_MODE_MAX_	  = 5;
-	const int ATTACK_STATE_MIN_ = 1;
-	const int ATTACK_STATE_MAX_ = 6;
-	const float HP_NORMAL_MAX_ = 30.0f;
-	const float HP_NORMAL_MIN_ = 20.0f;
-	const float HP_HARD_MIN_   = 10.0f;
+	int hand_damage_num_;
 };

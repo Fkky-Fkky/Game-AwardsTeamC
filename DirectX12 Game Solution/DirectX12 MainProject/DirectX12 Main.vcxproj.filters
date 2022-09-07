@@ -219,6 +219,9 @@
     <ClInclude Include="ClearScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\HandManager.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -346,6 +349,9 @@
     </ClCompile>
     <ClCompile Include="ClearScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\HandManager.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

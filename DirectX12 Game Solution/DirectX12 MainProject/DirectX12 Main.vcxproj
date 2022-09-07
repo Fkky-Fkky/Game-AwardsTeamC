@@ -207,6 +207,7 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Wait.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Weak.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\BossHand.h" />
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\HandManager.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\LeftHand\BossHandL.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\RightHand\BossHandR.h" />
     <ClInclude Include="Classes\GameScene\SceneChange.h" />
@@ -265,6 +266,7 @@
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Wait.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Weak.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\BossHand.cpp" />
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\HandManager.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\LeftHand\BossHandL.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\RightHand\BossHandR.cpp" />
     <ClCompile Include="Classes\GameScene\SceneChange.cpp" />
