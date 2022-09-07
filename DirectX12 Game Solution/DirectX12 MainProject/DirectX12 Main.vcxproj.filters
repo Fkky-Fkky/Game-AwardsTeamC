@@ -222,6 +222,9 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\HandManager.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Status.h">
+      <Filter>Classes\Enemy\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -352,6 +355,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\HandManager.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Status.cpp">
+      <Filter>Classes\Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
