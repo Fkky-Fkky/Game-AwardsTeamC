@@ -31,7 +31,7 @@ public:
 
 	void Initialize();
 	void LoadAssets();
-	void Update(const float deltaTime, const ObjectManager* const obg_m);
+	void Update(const float deltaTime, const ObjectManager* const obj_m);
 	void Render()const;
 	void Render2D()const;
 
