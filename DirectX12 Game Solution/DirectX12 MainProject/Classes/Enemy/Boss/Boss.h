@@ -16,6 +16,7 @@ public:
 		boss_invincible_time_ = 0.0f;
 		time_delta_ = 0.0f;
 		is_invincible_ = false;
+		is_vertical_shake_ = false;
 	}
 
 	~Boss() {};
@@ -26,9 +27,11 @@ public:
 	void Render()const;
 	void Render2D()const;
 
+	void SetVerticalShake(const bool enable) { is_vertical_shake_ = enable; }
+
 	int GetBossHP() const { return status_.GetBossHP(); }
-	bool IsBossWeak() const { return hand_.IsBossWeak(); }
-	bool IsVerticalShake() const { return hand_.IsVerticalShake(); }
+	bool IsBossWeak() const { return status_.IsWeak(); }
+	bool IsVerticalShake() const { if (hand_.IsVerticalShake() || is_vertical_shake_)  return true;  else return false; }
 	bool IsSideShake() const { return hand_.IsSideShake(); }
 	bool GetHandState() const { return hand_.GetHandState(); }
 	bool GetLHandAttackFlag() const { return hand_.GetLHandAttackFlag(); }
@@ -49,6 +52,7 @@ private:
 	float boss_invincible_time_;
 	float time_delta_ = 0.0f;
 	bool is_invincible_;
+	bool is_vertical_shake_;
 
 	int hand_damage_num_;
 };

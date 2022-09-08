@@ -30,6 +30,7 @@ public:
 	bool IsBossHandOpen()const;
 	bool IsBossHandRDmg()const;
 	bool IsBossHandLDmg()const;
+	bool IsBossWeak()const;
 	bool IsGroundVerticalShake()const;
 	bool IsGroundSideShake()const;
 	SimpleMath::Vector3 GetPlayerPos()const;

@@ -17,7 +17,7 @@ void Boss::LoadAseets() {
 
 void Boss::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	time_delta_ = deltaTime;
-	body_.Update(deltaTime, obj_m);
+	body_.Update(deltaTime, obj_m, this);
 	core_.Update(deltaTime, obj_m->IsBossBodyDmg(), this);
 	hand_.Update(deltaTime, obj_m);
 	status_.Update(deltaTime, obj_m);
@@ -37,6 +37,7 @@ void Boss::Render() const {
 void Boss::Render2D() const {
 	core_.Render2D();
 	hand_.Render2D();
+	status_.Render2D();
 }
 
 void Boss::HandDamage(const ObjectManager* const obj_m) {

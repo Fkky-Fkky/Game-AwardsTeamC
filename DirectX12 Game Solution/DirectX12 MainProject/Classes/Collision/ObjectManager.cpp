@@ -85,6 +85,10 @@ bool ObjectManager::IsBossHandLDmg() const {
 	return collision_->IsBossHandLDmg();
 }
 
+bool ObjectManager::IsBossWeak() const {
+	return boss_->IsBossWeak();
+}
+
 bool ObjectManager::IsGroundVerticalShake() const {
 	return boss_->IsVerticalShake();
 }
