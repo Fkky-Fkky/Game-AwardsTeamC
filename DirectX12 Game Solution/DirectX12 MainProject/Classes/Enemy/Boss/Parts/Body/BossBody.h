@@ -17,5 +17,8 @@ private:
 	const float BODY_INIT_POS_Y_ = 17.0f;
 	const float BODY_INIT_POS_Z_ = 15.0f;
 	const float BODY_INIT_ROT_X_ = -10.0f;
+	const float BODY_DOWN_POS_Y_ = 5.0f;
 	const float BODY_SCALE_ = 0.8f;
+	const float COLLISION_SIZE_X_ = 1.5f;
+	const float COLLISION_SIZE_Z_ = 1.5f;
 };

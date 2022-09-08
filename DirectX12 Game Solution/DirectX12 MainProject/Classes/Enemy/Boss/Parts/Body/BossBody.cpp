@@ -13,9 +13,9 @@ void BossBody::LoadAssets() {
 	model_->SetScale(BODY_SCALE_);
 	body_coll_ = model_->GetBoundingOrientedBox();
 	body_coll_.Extents = SimpleMath::Vector3(
-		body_coll_.Extents.x,
+		body_coll_.Extents.x * COLLISION_SIZE_X_,
 		body_coll_.Extents.y,
-		body_coll_.Extents.z
+		body_coll_.Extents.z * COLLISION_SIZE_Z_
 	);
 	coll_model_ = DX9::Model::CreateBox(
 		DXTK->Device9,
@@ -42,5 +42,5 @@ void BossBody::Render() const {
 	BossParts::Render();
 	coll_model_->SetPosition(body_coll_.Center);
 	coll_model_->SetRotationQuaternion(body_coll_.Orientation);
-	//coll_model_->Draw();
+	coll_model_->Draw();
 }
