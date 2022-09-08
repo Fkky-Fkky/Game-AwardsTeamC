@@ -35,14 +35,14 @@ void RightBeat::HandCheck(const HandManager* const hand_m) {	//手の状態を確認
 
 void RightBeat::Ready(const ObjectManager* const obj_m) {	//プレイヤーの座標に手を移動させる
 	SimpleMath::Vector3 move_dest_ = obj_m->GetPlayerPos();
-
+	const float DEST_SPEED_X_ = 8.0f;
 	ready_time_ = std::min(ready_time_ + time_delta_, READY_TIME_MAX_);
 	if (ready_time_ <= CHASE_PLAYER_TIME_) {
 		if (pos_.x < move_dest_.x) {
-			pos_.x = std::min(pos_.x + MOVE_SPEED_X_ * time_delta_, move_dest_.x);
+			pos_.x = std::min(pos_.x + DEST_SPEED_X_ * time_delta_, move_dest_.x);
 		}
 		else {
-			pos_.x = std::max(pos_.x - MOVE_SPEED_X_ * time_delta_, move_dest_.x);
+			pos_.x = std::max(pos_.x - DEST_SPEED_X_ * time_delta_, move_dest_.x);
 		}
 	}
 
