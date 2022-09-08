@@ -35,7 +35,7 @@ public:
 	bool GetRHandAttackFlag() const { return hand_.GetRHandAttackFlag(); }
 	BoundingOrientedBox GetLHandCollision() const { return hand_.GetLHandCollision(); }
 	BoundingOrientedBox GetRHandCollision() const { return hand_.GetRHandCollision(); }
-	BoundingOrientedBox GetCoreCollision() const { return core_.GetCoreCollision(); }
+	BoundingOrientedBox GetBodyCollision() const { return body_.GetBodyCollision(); }
 
 private:
 

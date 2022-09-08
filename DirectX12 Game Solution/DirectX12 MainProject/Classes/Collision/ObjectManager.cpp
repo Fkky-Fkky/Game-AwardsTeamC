@@ -23,8 +23,8 @@ BoundingOrientedBox ObjectManager::GetPlayerAttackCollision() const {
 	return player_->GetPlayerAttackCollision();
 }
 
-BoundingOrientedBox ObjectManager::GetBossCoreCollision() const {
-	return boss_->GetCoreCollision();
+BoundingOrientedBox ObjectManager::GetBossBodyCollision() const {
+	return boss_->GetBodyCollision();
 }
 
 BoundingOrientedBox ObjectManager::GetBossRHandCollision() const {

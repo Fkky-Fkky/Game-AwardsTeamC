@@ -21,7 +21,7 @@ void Collision::Update(const float deltaTime, const ObjectManager* const obj_m_)
 	bool player_invincible_flag = obj_m_->IsPlayerInvincible();
 	BoundingOrientedBox player_col_		 = obj_m_->GetPlayerCollision();
 	BoundingOrientedBox player_atk_col_	 = obj_m_->GetPlayerAttackCollision();
-	BoundingOrientedBox boss_core_col_	 = obj_m_->GetBossCoreCollision();
+	BoundingOrientedBox boss_body_col_	 = obj_m_->GetBossBodyCollision();
 	BoundingOrientedBox boss_r_hand_col_ = obj_m_->GetBossRHandCollision();
 	BoundingOrientedBox boss_l_hand_col_ = obj_m_->GetBossLHandCollision();
 
@@ -42,8 +42,8 @@ void Collision::Update(const float deltaTime, const ObjectManager* const obj_m_)
 		}
 	}
 	
-	if (player_atk_flag_) {	//プレイヤー攻撃:ボスコアの判定
-		boss_body_dmg_flg_ = player_atk_col_.Intersects(boss_core_col_);
+	if (player_atk_flag_) {	//プレイヤー攻撃:ボス頭の判定
+		boss_body_dmg_flg_ = player_atk_col_.Intersects(boss_body_col_);
 	}
 	else {
 		boss_body_dmg_flg_ = false;

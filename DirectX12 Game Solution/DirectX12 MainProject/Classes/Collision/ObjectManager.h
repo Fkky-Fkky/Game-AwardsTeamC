@@ -16,7 +16,7 @@ public:
 	void SetCollision(Collision* const col_);
 	BoundingOrientedBox GetPlayerCollision()const;
 	BoundingOrientedBox GetPlayerAttackCollision()const;
-	BoundingOrientedBox GetBossCoreCollision()const;
+	BoundingOrientedBox GetBossBodyCollision()const;
 	BoundingOrientedBox GetBossRHandCollision()const;
 	BoundingOrientedBox GetBossLHandCollision()const;
 	float GetBossHP()const;
