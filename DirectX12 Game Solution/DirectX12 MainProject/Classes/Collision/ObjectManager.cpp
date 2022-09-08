@@ -69,8 +69,8 @@ bool ObjectManager::GetBossLAttackFlag() const {
 	return boss_->GetLHandAttackFlag();
 }
 
-bool ObjectManager::GetBossDmgFlag() const {
-	return collision_->GetBossDmgFlag();
+bool ObjectManager::IsBossBodyDmg() const {
+	return collision_->IsBossBodyDmg();
 }
 
 bool ObjectManager::IsBossHandOpen() const {

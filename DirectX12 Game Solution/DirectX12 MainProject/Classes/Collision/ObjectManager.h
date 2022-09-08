@@ -26,7 +26,7 @@ public:
 	bool IsPlayerInvincible()const;
 	bool GetBossRAttackFlag()const;
 	bool GetBossLAttackFlag()const;
-	bool GetBossDmgFlag()const;
+	bool IsBossBodyDmg()const;
 	bool IsBossHandOpen()const;
 	bool IsBossHandRDmg()const;
 	bool IsBossHandLDmg()const;
