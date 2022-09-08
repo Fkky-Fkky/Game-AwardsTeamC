@@ -4,6 +4,7 @@
 #include "Classes/Enemy/Boss/Parts/Body/BossBody.h"
 #include "Classes/Enemy/Boss/Parts/Core/BossCore.h"
 #include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
+#include "Classes/Enemy/Boss/Status.h"
 
 using namespace DirectX;
 
@@ -25,7 +26,7 @@ public:
 	void Render()const;
 	void Render2D()const;
 
-	int GetBossHP() const { return core_.GetBossHP(); }
+	int GetBossHP() const { return status_.GetBossHP(); }
 	bool IsBossWeak() const { return hand_.IsBossWeak(); }
 	bool IsVerticalShake() const { return hand_.IsVerticalShake(); }
 	bool IsSideShake() const { return hand_.IsSideShake(); }
@@ -43,6 +44,7 @@ private:
 	BossBody body_;
 	BossCore core_;
 	HandManager hand_;
+	Status status_;
 
 	float boss_invincible_time_;
 	float time_delta_ = 0.0f;

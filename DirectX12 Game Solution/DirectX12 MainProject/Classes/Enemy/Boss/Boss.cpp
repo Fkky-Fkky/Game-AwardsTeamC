@@ -5,6 +5,7 @@ void Boss::Initialize() {
 	body_.Initialize();
 	core_.Initialize();
 	hand_.Initialize();
+	status_.Initialize();
 	hand_damage_num_ = 0;
 }
 
@@ -17,8 +18,9 @@ void Boss::LoadAseets() {
 void Boss::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	time_delta_ = deltaTime;
 	body_.Update(deltaTime, obj_m);
-	core_.Update(deltaTime, obj_m->GetBossDmgFlag(), this);
+	core_.Update(deltaTime, obj_m->IsBossBodyDmg(), this);
 	hand_.Update(deltaTime, obj_m);
+	status_.Update(deltaTime, obj_m);
 	//if (obj_m->IsBossHandLDmg() ||
 	//	obj_m->IsBossHandRDmg()) {
 	//	SwitchStateDamage();

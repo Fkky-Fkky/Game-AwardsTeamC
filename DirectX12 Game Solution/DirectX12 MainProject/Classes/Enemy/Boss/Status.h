@@ -10,8 +10,9 @@ class ObjectManager;
 class Status {
 public:
 	Status() {
+		damage_type_ = HAND;
 		hp_ = 0.0f;
-		hit_flag_ = false;
+		invincible_time_ = 0.0f;
 	};
 
 	void Initialize();
@@ -19,8 +20,18 @@ public:
 
 	float GetBossHP() const { return hp_; }
 private:
-	void HitProcessing();
+	void DamageProcess();
 
+	int damage_type_;
 	float hp_;
-	bool hit_flag_;
+	float invincible_time_;
+	const float BOSS_HP_MAX_ = 30.0f;
+	const float HAND_DAMAGE_ = 1.0f;
+	const float BODY_DAMAGE_ = 5.0f;
+	const float INVINCIBLE_TIME_MAX_ = 2.0f;
+
+	enum DAMAGE_TYPE_ {
+		HAND,
+		BODY
+	};
 };
