@@ -2,7 +2,6 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/Body/BossBody.h"
-#include "Classes/Enemy/Boss/Parts/Core/BossCore.h"
 #include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
 #include "Classes/Enemy/Boss/Status.h"
 
@@ -39,7 +38,6 @@ public:
 
 private:
 	BossBody body_;
-	BossCore core_;
 	HandManager hand_;
 	Status status_;
 
