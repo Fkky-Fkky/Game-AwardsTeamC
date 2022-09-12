@@ -64,6 +64,10 @@ private:
 	const int MOTION_MAX_  = 5;
 	const float BACK_MOTION_TIME_ = 0.96f;
 	const float ATK_MOTION_TIME_  = 0.96f;
+	const float COLLSION_SIZE_X_ = 1.7f;
+	const float COLLSION_SIZE_Y_ = 0.6f;
+	const float COLLSION_SIZE_Z_ = 2.0f;
+	const float HAND_SCALE = 0.8f;
 protected:
 
 	BoundingOrientedBox collision;

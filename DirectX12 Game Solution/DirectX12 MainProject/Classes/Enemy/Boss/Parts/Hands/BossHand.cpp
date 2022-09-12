@@ -7,13 +7,13 @@ void BossHand::Initialize(const SimpleMath::Vector3 pos, const SimpleMath::Vecto
 
 void BossHand::LoadAssets(const LPCWSTR file_name){
 	BossParts::LoadAssets(file_name);
-	model_->SetScale(0.8f);
+	model_->SetScale(HAND_SCALE);
 
 	collision = model_->GetBoundingOrientedBox();
 	collision.Extents = SimpleMath::Vector3(
-		collision.Extents.x * 1.7f,
-		collision.Extents.y * 0.8f,
-		collision.Extents.z * 2.0f
+		collision.Extents.x * COLLSION_SIZE_X_,
+		collision.Extents.y * COLLSION_SIZE_Y_,
+		collision.Extents.z * COLLSION_SIZE_Z_
 	);
 
 	collision_model = DX9::Model::CreateBox(
@@ -34,8 +34,6 @@ void BossHand::LoadAssets(const LPCWSTR file_name){
 void BossHand::Update(const float deltaTime) {
 	BossParts::Update(deltaTime);
 	timde_delta_ = deltaTime;
-	collision.Center = model_->GetPosition() + SimpleMath::Vector3(-1.5f, 0.0f, 0.0f);
-	collision.Orientation = model_->GetRotationQuaternion();
 	PlayMotion();
 }
 
