@@ -1,5 +1,4 @@
 #include "Classes/Enemy/Boss/Parts/Hands/BossHand.h"
-#include <Bezier.h>
 
 void BossHand::Initialize(const SimpleMath::Vector3 pos, const SimpleMath::Vector3 rote) {
 	BossParts::Initialize(pos, rote);
