@@ -46,7 +46,7 @@ void RightBeat::Ready(const ObjectManager* const obj_m) {	//プレイヤーの座標に手
 		}
 	}
 
-	pos_.z  = std::max(pos_.z -  MOVE_SPEED_Z_ * time_delta_, 0.0f);
+	pos_.z  = std::max(pos_.z -  MOVE_SPEED_Z_ * time_delta_, ATTACK_POS_Z_);
 	if (!hand_state_) {
 		rote_.x = std::min(rote_.x + ROTE_SPEED_ * time_delta_, BEAT_HAND_ROCK_ROT_X_);
 	}

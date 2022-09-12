@@ -31,12 +31,12 @@ protected:
 	const float HAND_R_INITIAL_ROT_Y_ = -90.0f;
 	const float HAND_L_INITIAL_ROT_Y_ = 90.0f;
 
+	const float ATTACK_POS_Z_ = -2.0f;
 	const float HAND_LIMIT_POS_X_ = 70.0f;
 	const float HAND_ROCK_LIMIT_POS_Y_ = 3.0f;
 	const float HAND_RETURN_POS_X_ = 30.0f;
 
 	const float SLAP_POS_Y_ = 0.5f;
-	const float SLAP_POS_Z_ = -2.0f;
 	const float SLAP_ROT_X_ = 30.0f;
 	const float SLAP_SPEED_X_ = 0.5f;
 	const float SLAP_SPEED_Y_ = 2.0f;

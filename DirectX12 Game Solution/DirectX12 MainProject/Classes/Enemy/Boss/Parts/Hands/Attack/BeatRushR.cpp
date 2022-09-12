@@ -31,19 +31,19 @@ void BeatRushR::HandCheck() {	//手の状態を確認
 
 void BeatRushR::Ready() {	//両手を(ボスから見て)右側に構える
 	bool is_r_hand_start_pos_x_ = pos_r_.x  <= R_START_POS_X_;
-	bool is_r_hand_start_pos_z_ = pos_r_.z  <= 0.0f;
+	bool is_r_hand_start_pos_z_ = pos_r_.z  <= ATTACK_POS_Z_;
 	bool is_r_hand_start_rot_	= rote_r_.x >= BEAT_HAND_ROCK_ROT_X_;
 	bool r_ready_end_ = is_r_hand_start_pos_x_ && is_r_hand_start_pos_z_ && is_r_hand_start_rot_; 
 	pos_r_.x  = std::max(pos_r_.x  - MOVE_SPEED_X_ * time_delta_, R_START_POS_X_);
-	pos_r_.z  = std::max(pos_r_.z  - MOVE_SPEED_Z_ * time_delta_, 0.0f);
+	pos_r_.z  = std::max(pos_r_.z  - MOVE_SPEED_Z_ * time_delta_, ATTACK_POS_Z_);
 	rote_r_.x = std::min(rote_r_.x + ROTE_SPEED_   * time_delta_, BEAT_HAND_ROCK_ROT_X_);
 	
 	bool is_l_hand_start_pos_x_ = pos_l_.x	<= L_START_POS_X_;
-	bool is_l_hand_start_pos_z_ = pos_r_.z	<= 0.0f;
+	bool is_l_hand_start_pos_z_ = pos_r_.z	<= ATTACK_POS_Z_;
 	bool is_l_hand_start_rot_	= rote_l_.x <= BEAT_HAND_ROCK_ROT_X_;
 	bool l_ready_end_ = is_l_hand_start_pos_x_ && is_l_hand_start_pos_z_ && is_l_hand_start_rot_;
 	pos_l_.x  = std::max(pos_l_.x  - MOVE_SPEED_X_ * time_delta_, L_START_POS_X_);
-	pos_l_.z  = std::max(pos_l_.z  - MOVE_SPEED_Z_ * time_delta_, 0.0f);
+	pos_l_.z  = std::max(pos_l_.z  - MOVE_SPEED_Z_ * time_delta_, ATTACK_POS_Z_);
 	rote_l_.x = std::min(rote_l_.x + ROTE_SPEED_   * time_delta_, BEAT_HAND_ROCK_ROT_X_);
 	
 

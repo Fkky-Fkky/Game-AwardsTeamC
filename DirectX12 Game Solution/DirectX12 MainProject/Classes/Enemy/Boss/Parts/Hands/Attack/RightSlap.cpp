@@ -31,7 +31,7 @@ void RightSlap::Ready() {	//ó\îıìÆçÏ
 	slap_time_y_ += time_delta_;
 	float slap_y_ = SLAP_SPEED_Y_ * slap_time_y_ - HALF_ * SLAP_GRAVITY_Y_ * slap_time_y_ * slap_time_y_;
 	pos_.y += slap_y_;
-	pos_.z  = std::max(pos_.z  - MOVE_SPEED_Z_ * time_delta_, SLAP_POS_Z_);
+	pos_.z  = std::max(pos_.z  - MOVE_SPEED_Z_ * time_delta_, ATTACK_POS_Z_);
 	rote_.x = std::min(rote_.x + ROTE_SPEED_   * time_delta_, SLAP_ROT_X_);
 
 	if (pos_.y <= SLAP_POS_Y_) {
@@ -52,9 +52,6 @@ void RightSlap::Wait() {	//ë“ã@
 void RightSlap::RightSlapAttack(const HandManager* const hand_m) {	//âEéËì„Ç¨ï•Ç¢çUåÇ
 	boss_handR_->SetAttackFlag(true);
 	boss_handR_->SetSideShakeFlag(true);
-	//slap_time_x_ += time_delta_;
-	//float slap_x_ = SLAP_SPEED_X_ * slap_time_x_ - HALF_ * SLAP_GRAVITY_X_ * slap_time_x_ * slap_time_x_;
-	//pos_.x -= slap_x_;
 
 	const float MAX_SPEED_ = 80.0f;
 	const float ADD_SPEED_ = 40.0f;

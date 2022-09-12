@@ -52,7 +52,7 @@ void DoubleSlap::ReadyR() {	//âEéËç\Ç¶
 	r_slap_time_y_ += time_delta_;
 	float r_slap_y_ = SLAP_SPEED_Y_ * r_slap_time_y_ - HALF_ * SLAP_GRAVITY_Y_ * r_slap_time_y_ * r_slap_time_y_;
 	r_pos_.y += r_slap_y_;
-	r_pos_.z  = std::max(r_pos_.z  - MOVE_SPEED_Z_ * time_delta_, 0.0f);
+	r_pos_.z  = std::max(r_pos_.z  - MOVE_SPEED_Z_ * time_delta_, ATTACK_POS_Z_);
 	r_rote_.x = std::min(r_rote_.x + ROTE_SPEED_   * time_delta_, SLAP_ROT_X_);
 	if (r_pos_.y <= SLAP_POS_Y_) {
 		r_pos_.y  = SLAP_POS_Y_;
@@ -64,7 +64,7 @@ void DoubleSlap::ReadyL() {	//ç∂éËç\Ç¶
 	l_slap_time_y_ += time_delta_;
 	float l_slap_y_ = SLAP_SPEED_Y_ * l_slap_time_y_ - HALF_ * SLAP_GRAVITY_Y_ * l_slap_time_y_ * l_slap_time_y_;
 	l_pos_.y += l_slap_y_;
-	l_pos_.z  = std::max(l_pos_.z  - MOVE_SPEED_Z_ * time_delta_, 0.0f);
+	l_pos_.z  = std::max(l_pos_.z  - MOVE_SPEED_Z_ * time_delta_, ATTACK_POS_Z_);
 	l_rote_.x = std::min(l_rote_.x + ROTE_SPEED_   * time_delta_, SLAP_ROT_X_);
 	if (l_pos_.y <= L_HAND_DEST_Y_) {
 		l_pos_.y  = L_HAND_DEST_Y_;
