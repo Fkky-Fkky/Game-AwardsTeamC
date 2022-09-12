@@ -68,18 +68,18 @@ void BossBody::WeakAction() {
 	const float BODY_DOWN_SPEED_Y_ = 40.0f;
 	if (is_weak_) {
 		const float SHAKE_TIME_MAX_ = 0.2f;
-		if (position.y > BODY_DOWN_POS_Y_) {
+		if (position.y > BODY_WEAK_POS_Y_) {
 			entyoku_time_ += time_delta_;
 			float entyoku = 10.0f * entyoku_time_ - 0.5f * 50.0f * entyoku_time_ * entyoku_time_;
 			position.y += entyoku;
 		}
 
 		//position.y = std::max(position.y - BODY_DOWN_SPEED_Y_ * time_delta_, BODY_DOWN_POS_Y_);
-		position.z = std::max(position.z - BODY_DOWN_SPEED_Y_ * time_delta_, 5.0f);
+		position.z = std::max(position.z - BODY_DOWN_SPEED_Y_ * time_delta_, BODY_WEAK_POS_Z_);
 		rotation.x = 0.0f;
 		rotation.y = 0.0f;
-		if (!shake_set_flag_ && position.y <= BODY_DOWN_POS_Y_) {
-			position.y = BODY_DOWN_POS_Y_;
+		if (!shake_set_flag_ && position.y <= BODY_WEAK_POS_Y_) {
+			position.y = BODY_WEAK_POS_Y_;
 			shake_set_flag_ = true;
 			is_shake_		= true;
 			shake_time_ = SHAKE_TIME_MAX_;
