@@ -27,7 +27,7 @@ void HandManager::Initialize() {
 	hand_state_		= ROCK;
 	old_hand_state_ = PAPER;
 	action_end_flag_	   = false;
-	weak_state_start_flag_ = false;
+	is_switch_weak_state_ = false;
 	same_handstate_flag_   = false;
 }
 
@@ -43,7 +43,10 @@ void HandManager::Update(const float deltaTime, const ObjectManager* const obj_m
 	hand_r.Update(deltaTime);
 	attack->Update(deltaTime, obj_m, this);
 	SwitchStateWait();
-	SwitchStateWeak();
+	if (obj_m->IsBossWeak() && !is_switch_weak_state_) {
+		is_switch_weak_state_ = true;
+		SwitchStateWeak();
+	}
 }
 
 void HandManager::Render()const {
@@ -98,6 +101,7 @@ void HandManager::RandomHandState() {	//手の状態を変更する(グー・パー)
 
 void HandManager::SwitchStateAttack() {	//ボスの攻撃変更
 	delete attack;
+	attack_state_ = RIGHT_BEAT;
 	switch (attack_state_) {
 	case LEFT_BEAT:		attack = new LeftBeat;		break;
 	case LEFT_SLAP:		attack = new LeftSlap;		break;
@@ -120,12 +124,9 @@ void HandManager::SwitchStateWait() {	//待機状態に切り替え
 }
 
 void HandManager::SwitchStateWeak() {	//ウィーク状態に切り替え
-	if (weak_state_start_flag_) {
-		delete attack;
-		attack = new Weak;
-		attack->Initialize(&hand_l, &hand_r);
-		weak_state_start_flag_ = false;
-	}
+	delete attack;
+	attack = new Weak;
+	attack->Initialize(&hand_l, &hand_r);
 }
 
 void HandManager::PlaySlapSE() const {
@@ -142,12 +143,5 @@ void HandManager::PlayBeatEffect(const SimpleMath::Vector3 effect_pos) const {
 
 void HandManager::ActionEnd() {
 	action_end_flag_ = true;
-}
-
-void HandManager::WeakStateStart() {
-	weak_state_start_flag_ = true;
-}
-
-void HandManager::SetWeakState(const bool select) {
-	weak_state_ = select;
+	is_switch_weak_state_ = false;
 }

@@ -23,8 +23,7 @@ public:
 		boss_hp_ = 0.0f;
 		action_end_flag_	   = false;
 		same_handstate_flag_   = false;
-		weak_state_start_flag_ = false;
-		weak_state_			   = false;
+		is_switch_weak_state_ = false;
 	}
 	~HandManager() {};
 
@@ -39,10 +38,7 @@ public:
 
 	void RandomAttackState();
 	void ActionEnd();
-	void WeakStateStart();
 	
-	void SetWeakState(const bool select);
-	bool IsBossWeak() const { return weak_state_; }
 	bool IsVerticalShake() const { if (hand_l.IsVerticalShake() || hand_r.IsVerticalShake()) { return true; } else { return false; } }
 	bool IsSideShake() const { if (hand_l.IsSideShake() || hand_r.IsSideShake()) { return true; } else { return false; } }
 	bool GetHandState() const { return hand_state_; }
@@ -74,8 +70,7 @@ private:
 	float boss_hp_;
 	bool hand_state_;
 	bool old_hand_state_;
-	bool weak_state_start_flag_;
-	bool weak_state_;
+	bool is_switch_weak_state_;
 	bool action_end_flag_;
 	bool same_handstate_flag_;
 
