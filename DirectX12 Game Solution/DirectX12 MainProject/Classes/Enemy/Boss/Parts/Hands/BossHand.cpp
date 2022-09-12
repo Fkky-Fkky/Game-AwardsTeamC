@@ -3,8 +3,6 @@
 
 void BossHand::Initialize(const SimpleMath::Vector3 pos, const SimpleMath::Vector3 rote) {
 	BossParts::Initialize(pos, rote);
-	bezier_t = 0.0f;
-	hand_hp_ = HAND_HP_MAX_;
 }
 
 void BossHand::LoadAssets(const LPCWSTR file_name){
@@ -28,11 +26,9 @@ void BossHand::LoadAssets(const LPCWSTR file_name){
 	material.Diffuse = DX9::Colors::Value(0.0f, 1.0f, 0.0f, 0.75f);
 	collision_model->SetMaterial(material);
 
-	font_ = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 	for (int i = 0; i < MOTION_MAX_; ++i) {
 		model_->SetTrackEnable(i, false);
 	}
-	//model_->SetTrackEnable(WAIT, true);
 }
 
 void BossHand::Update(const float deltaTime) {
@@ -49,23 +45,6 @@ void BossHand::Render() const {
 	collision_model->SetPosition(collision.Center);
 	collision_model->SetRotationQuaternion(collision.Orientation);
 	collision_model->Draw();
-}
-
-void BossHand::Render2D(const float pos_x) const {
-	DX9::SpriteBatch->DrawString(
-		font_.Get(),
-		SimpleMath::Vector2(pos_x, 150.0f),
-		DX9::Colors::Red,
-		L"%i", hand_hp_
-	);
-}
-
-void BossHand::HandDamageProcess() {	//手にダメージを与える
-	hand_hp_--;
-}
-
-void BossHand::HandHPHeal() {	//手のHPを全回復する
-	hand_hp_ = HAND_HP_MAX_;
 }
 
 void BossHand::SetHandMotion(const int hand_motion) {	//モーションをセットする
