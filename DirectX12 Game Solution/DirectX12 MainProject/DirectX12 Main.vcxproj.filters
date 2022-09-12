@@ -207,9 +207,6 @@
     <ClInclude Include="Classes\My_Light\My_Light.h">
       <Filter>Classes\My_Light</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Damage.h">
-      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Weak.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
@@ -340,9 +337,6 @@
     </ClCompile>
     <ClCompile Include="Classes\My_Light\My_Light.cpp">
       <Filter>Classes\My_Light</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Damage.cpp">
-      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Weak.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
