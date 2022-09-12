@@ -15,6 +15,7 @@ public:
 		hp_ = 0.0f;
 		invincible_time_ = 0.0f;
 		weak_time_ = 0.0f;
+		is_set_weak_time_ = false;
 	};
 
 	void Initialize();
@@ -33,6 +34,7 @@ private:
 	float hp_;
 	float invincible_time_;
 	float weak_time_;
+	bool is_set_weak_time_;
 	const int WEAK_COUNT_MAX_ = 1;
 	const float BOSS_HP_MAX_ = 30.0f;
 	const float HAND_DAMAGE_ = 1.0f;

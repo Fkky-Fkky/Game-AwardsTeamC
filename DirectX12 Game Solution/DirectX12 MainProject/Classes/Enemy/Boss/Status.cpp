@@ -7,6 +7,7 @@ void Status::Initialize() {
 	hp_ = BOSS_HP_MAX_;
 	invincible_time_ = 0.0f;
 	weak_time_ = 0.0f;
+	is_set_weak_time_ = false;
 	font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 }
 
@@ -16,6 +17,7 @@ void Status::Update(const float deltaTime, const ObjectManager* const obj_m) {
 		weak_time_ = std::max(weak_time_ - deltaTime, 0.0f);
 		if (weak_time_ <= 0.0f) {
 			weak_count_ = 0;
+			is_set_weak_time_ = false;
 		}
 	}
 
@@ -25,9 +27,6 @@ void Status::Update(const float deltaTime, const ObjectManager* const obj_m) {
 			damage_type_ = HAND;
 			DamageProcess();
 			weak_count_++;
-			if (IsWeak()) {
-				weak_time_ = WEAK_TIME_MAX_;
-			}
 		}
 	}
 	if (obj_m->IsBossBodyDmg()) {
@@ -35,6 +34,10 @@ void Status::Update(const float deltaTime, const ObjectManager* const obj_m) {
 			damage_type_ = BODY;
 			DamageProcess();
 		}
+	}
+	if (IsWeak() && !is_set_weak_time_) {
+		weak_time_ = WEAK_TIME_MAX_;
+		is_set_weak_time_ = true;
 	}
 }
 
