@@ -6,7 +6,6 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/LeftBeat.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRushR.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
-#include "Classes/Enemy/Boss/Parts/Hands/Attack/Damage.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Weak.h"
 #include "Classes/Collision/ObjectManager.h"
 
@@ -28,7 +27,6 @@ void HandManager::Initialize() {
 	hand_state_		= ROCK;
 	old_hand_state_ = PAPER;
 	action_end_flag_	   = false;
-	hand_dmg_flag_		   = false;
 	weak_state_start_flag_ = false;
 	same_handstate_flag_   = false;
 }
@@ -121,15 +119,6 @@ void HandManager::SwitchStateWait() {	//待機状態に切り替え
 	}
 }
 
-void HandManager::SwitchStateDamage() {	//ダメージ状態に切り替え
-	if (!hand_dmg_flag_) {
-		delete attack;
-		attack = new Damage;
-		attack->Initialize(&hand_l, &hand_r);
-		hand_dmg_flag_ = true;
-	}
-}
-
 void HandManager::SwitchStateWeak() {	//ウィーク状態に切り替え
 	if (weak_state_start_flag_) {
 		delete attack;
@@ -153,7 +142,6 @@ void HandManager::PlayBeatEffect(const SimpleMath::Vector3 effect_pos) const {
 
 void HandManager::ActionEnd() {
 	action_end_flag_ = true;
-	hand_dmg_flag_ = false;
 }
 
 void HandManager::WeakStateStart() {

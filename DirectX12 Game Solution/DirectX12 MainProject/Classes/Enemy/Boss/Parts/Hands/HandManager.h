@@ -23,7 +23,6 @@ public:
 		boss_hp_ = 0.0f;
 		action_end_flag_	   = false;
 		same_handstate_flag_   = false;
-		hand_dmg_flag_		   = false;
 		weak_state_start_flag_ = false;
 		weak_state_			   = false;
 	}
@@ -56,7 +55,6 @@ private:
 	void RandomHandState();
 	void SwitchStateAttack();
 	void SwitchStateWait();
-	void SwitchStateDamage();
 	void SwitchStateWeak();
 
 	BossHandL hand_l;
@@ -79,7 +77,6 @@ private:
 	bool weak_state_start_flag_;
 	bool weak_state_;
 	bool action_end_flag_;
-	bool hand_dmg_flag_;
 	bool same_handstate_flag_;
 
 	const int ATTACK_STATE_MIN_ = 1;
