@@ -54,8 +54,8 @@ void DoubleSlap::ReadyR() {	//âEéËç\Ç¶
 	r_pos_.y += r_slap_y_;
 	r_pos_.z  = std::max(r_pos_.z  - MOVE_SPEED_Z_ * time_delta_, 0.0f);
 	r_rote_.x = std::min(r_rote_.x + ROTE_SPEED_   * time_delta_, SLAP_ROT_X_);
-	if (r_pos_.y <= R_HAND_DEST_Y_) {
-		r_pos_.y  = R_HAND_DEST_Y_;
+	if (r_pos_.y <= SLAP_POS_Y_) {
+		r_pos_.y  = SLAP_POS_Y_;
 		ready_end_r_ = true;
 	}
 }
@@ -91,19 +91,19 @@ void DoubleSlap::Attack() {	//ì„Ç¨ï•Ç¢çUåÇ
 
 void DoubleSlap::SlapR() {	//âEéËì„Ç¨ï•Ç¢
 	boss_handR_->SetAttackFlag(true);
-	r_slap_time_x_ += time_delta_;
-	float r_slap_x_ = SLAP_SPEED_X_ * r_slap_time_x_ - HALF_ * SLAP_GRAVITY_X_ * r_slap_time_x_ * r_slap_time_x_;
-	r_pos_.x -= r_slap_x_;
+	boss_handR_->SetSideShakeFlag(true);
+	r_slap_speed_x_ = std::min(r_slap_speed_x_ + ADD_SPEED_ * time_delta_, SLAP_SPEED_MAX_);
+	r_pos_.x		= std::min(r_pos_.x + r_slap_speed_x_	* time_delta_, HAND_LIMIT_POS_X_);
 	if (r_pos_.x >= HAND_LIMIT_POS_X_) {
 		atk_end_r_ = true;
+		boss_handR_->SetSideShakeFlag(false);
 	}
 }
 
 void DoubleSlap::SlapL() {	//ç∂éËì„Ç¨ï•Ç¢
 	boss_handL_->SetAttackFlag(true);
-	l_slap_time_x_ += time_delta_;
-	float l_slap_x_ = SLAP_SPEED_X_ * l_slap_time_x_ - HALF_ * SLAP_GRAVITY_X_ * l_slap_time_x_ * l_slap_time_x_;
-	l_pos_.x += l_slap_x_;
+	l_slap_speed_x_ = std::min(l_slap_speed_x_ + ADD_SPEED_ * time_delta_, SLAP_SPEED_MAX_);
+	l_pos_.x		= std::max(l_pos_.x - l_slap_speed_x_	* time_delta_, -HAND_LIMIT_POS_X_);
 	if (l_pos_.x <= -HAND_LIMIT_POS_X_) {
 		atk_end_l_ = true;
 	}
