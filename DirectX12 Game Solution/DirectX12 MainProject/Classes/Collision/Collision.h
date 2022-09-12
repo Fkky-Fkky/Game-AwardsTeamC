@@ -27,8 +27,7 @@ public:
 	bool GetPlayerDmgFlagR() const { return player_dmg_flag_r_; }
 	bool GetPlayerDmgFlagL() const { return player_dmg_flag_l_; }
 	bool IsBossBodyDmg() const { return boss_body_dmg_flg_; }
-	bool IsBossHandRDmg() const { return boss_hand_r_dmg_flag_; }
-	bool IsBossHandLDmg() const { return boss_hand_l_dmg_flag_; }
+	bool IsBossHandDmg() const { if (boss_hand_r_dmg_flag_ || boss_hand_l_dmg_flag_)  return true; else return false; }
 
 private:
 	DX9::SPRITEFONT font;

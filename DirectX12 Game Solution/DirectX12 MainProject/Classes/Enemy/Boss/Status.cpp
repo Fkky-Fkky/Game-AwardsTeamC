@@ -20,7 +20,7 @@ void Status::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	}
 
 	bool is_invincible_ = invincible_time_ > 0.0f;
-	if (obj_m->IsBossHandLDmg() || obj_m->IsBossHandRDmg()) {
+	if (obj_m->IsBossHandDmg()) {
 		if (!is_invincible_) {
 			damage_type_ = HAND;
 			DamageProcess();

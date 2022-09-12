@@ -77,12 +77,8 @@ bool ObjectManager::IsBossHandOpen() const {
 	return boss_->GetHandState();
 }
 
-bool ObjectManager::IsBossHandRDmg() const {
-	return collision_->IsBossHandRDmg();
-}
-
-bool ObjectManager::IsBossHandLDmg() const {
-	return collision_->IsBossHandLDmg();
+bool ObjectManager::IsBossHandDmg() const {
+	return collision_->IsBossHandDmg();
 }
 
 bool ObjectManager::IsBossWeak() const {

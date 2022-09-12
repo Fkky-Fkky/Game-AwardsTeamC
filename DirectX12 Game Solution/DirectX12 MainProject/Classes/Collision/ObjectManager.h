@@ -28,8 +28,7 @@ public:
 	bool GetBossLAttackFlag()const;
 	bool IsBossBodyDmg()const;
 	bool IsBossHandOpen()const;
-	bool IsBossHandRDmg()const;
-	bool IsBossHandLDmg()const;
+	bool IsBossHandDmg()const;
 	bool IsBossWeak()const;
 	bool IsGroundVerticalShake()const;
 	bool IsGroundSideShake()const;
