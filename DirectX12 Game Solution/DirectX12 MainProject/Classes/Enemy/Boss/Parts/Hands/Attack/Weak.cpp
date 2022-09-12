@@ -8,7 +8,6 @@ void Weak::Update(const float deltaTime, const ObjectManager* const obj_m, HandM
 	time_delta_ = deltaTime;
 	switch (weak_state_) {
 	case WEAK:			   BossWeak(hand_m);	break;
-	case HAND_HEAL:		   HandHeal();			break;
 	case INITIAL_POS_MOVE: InitialPosMove();	break;
 	case ACTION_END:	   hand_m->ActionEnd(); break;
 	}
@@ -22,14 +21,8 @@ void Weak::BossWeak(HandManager* const hand_m) {	//ウィーク状態維持
 	weak_time_ = std::min(weak_time_ + time_delta_, WEAK_TIME_MAX_);
 	if (weak_time_ >= WEAK_TIME_MAX_) {
 		hand_m->SetWeakState(false);
-		weak_state_ = HAND_HEAL;
+		weak_state_ = INITIAL_POS_MOVE;
 	}
-}
-
-void Weak::HandHeal() {	//手のHPを回復
-	boss_handL_->HandHPHeal();
-	boss_handR_->HandHPHeal();
-	weak_state_ = INITIAL_POS_MOVE;
 }
 
 void Weak::InitialPosMove() {//手を初期座標に移動

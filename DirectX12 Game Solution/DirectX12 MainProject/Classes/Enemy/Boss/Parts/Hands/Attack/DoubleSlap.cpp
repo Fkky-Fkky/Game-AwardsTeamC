@@ -25,9 +25,7 @@ void DoubleSlap::Update(const float deltaTime, const ObjectManager* const obj_m,
 }
 
 void DoubleSlap::HandCheck(const HandManager* const hand_m) {	//手の状態を確認
-	is_r_hand_broke_ = boss_handR_->GetHandHp() <= 0;
-	is_l_hand_broke_ = boss_handL_->GetHandHp() <= 0;
-	hand_state_	  = hand_m->GetHandState();
+	hand_state_	= hand_m->GetHandState();
 	if (!hand_state_) {
 		boss_handR_->SetHandMotion(HAND_MOTION::ROCK);
 		boss_handL_->SetHandMotion(HAND_MOTION::ROCK);
@@ -44,17 +42,13 @@ void DoubleSlap::Ready() {	//予備動作
 	ReadyR();
 	ReadyL();
 
-	if (ready_flag_r_ && ready_flag_l_) {
+	if (ready_end_r_ && ready_end_l_) {
 		boss_handR_->SetVerticalShakeFlag(true);
 		action_state_ = ATTACK;
 	}
 }
 
 void DoubleSlap::ReadyR() {	//右手構え
-	if (is_r_hand_broke_) {
-		ready_flag_r_ = true;
-		return;
-	}
 	r_slap_time_y_ += time_delta_;
 	float r_slap_y_ = SLAP_SPEED_Y_ * r_slap_time_y_ - HALF_ * SLAP_GRAVITY_Y_ * r_slap_time_y_ * r_slap_time_y_;
 	r_pos_.y += r_slap_y_;
@@ -62,15 +56,11 @@ void DoubleSlap::ReadyR() {	//右手構え
 	r_rote_.x = std::min(r_rote_.x + ROTE_SPEED_   * time_delta_, SLAP_ROT_X_);
 	if (r_pos_.y <= R_HAND_DEST_Y_) {
 		r_pos_.y  = R_HAND_DEST_Y_;
-		ready_flag_r_ = true;
+		ready_end_r_ = true;
 	}
 }
 
 void DoubleSlap::ReadyL() {	//左手構え
-	if (is_l_hand_broke_) {
-		ready_flag_l_ = true;
-		return;
-	}
 	l_slap_time_y_ += time_delta_;
 	float l_slap_y_ = SLAP_SPEED_Y_ * l_slap_time_y_ - HALF_ * SLAP_GRAVITY_Y_ * l_slap_time_y_ * l_slap_time_y_;
 	l_pos_.y += l_slap_y_;
@@ -78,7 +68,7 @@ void DoubleSlap::ReadyL() {	//左手構え
 	l_rote_.x = std::min(l_rote_.x + ROTE_SPEED_   * time_delta_, SLAP_ROT_X_);
 	if (l_pos_.y <= L_HAND_DEST_Y_) {
 		l_pos_.y  = L_HAND_DEST_Y_;
-		ready_flag_l_ = true;
+		ready_end_l_ = true;
 	}
 }
 
@@ -100,10 +90,6 @@ void DoubleSlap::Attack() {	//薙ぎ払い攻撃
 }
 
 void DoubleSlap::SlapR() {	//右手薙ぎ払い
-	if (is_r_hand_broke_) {
-		atk_end_r_ = true;
-		return;
-	}
 	boss_handR_->SetAttackFlag(true);
 	r_slap_time_x_ += time_delta_;
 	float r_slap_x_ = SLAP_SPEED_X_ * r_slap_time_x_ - HALF_ * SLAP_GRAVITY_X_ * r_slap_time_x_ * r_slap_time_x_;
@@ -114,10 +100,6 @@ void DoubleSlap::SlapR() {	//右手薙ぎ払い
 }
 
 void DoubleSlap::SlapL() {	//左手薙ぎ払い
-	if (is_l_hand_broke_) {
-		atk_end_l_ = true;
-		return;
-	}
 	boss_handL_->SetAttackFlag(true);
 	l_slap_time_x_ += time_delta_;
 	float l_slap_x_ = SLAP_SPEED_X_ * l_slap_time_x_ - HALF_ * SLAP_GRAVITY_X_ * l_slap_time_x_ * l_slap_time_x_;
@@ -149,25 +131,15 @@ void DoubleSlap::HandReturn() {	//手を元の座標に戻す
 	const bool is_r_hand_init_pos_ = r_pos_.x >= HAND_R_INITIAL_POS_X_;
 	const bool is_l_hand_init_pos_ = l_pos_.x <= HAND_L_INITIAL_POS_X_;
 
-	if (is_r_hand_broke_) {
+	r_pos_.x = std::min(r_pos_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
+	if (is_r_hand_init_pos_) {
 		return_end_r_ = true;
 	}
-	else {
-		r_pos_.x = std::min(r_pos_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
-		if (is_r_hand_init_pos_) {
-			return_end_r_ = true;
-		}
-	}
 
-	if (is_l_hand_broke_) {
+	l_pos_.x = std::max(l_pos_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
+	if (is_l_hand_init_pos_) {
 		return_end_l_ = true;
-	}
-	else {
-		l_pos_.x = std::max(l_pos_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
-		if (is_l_hand_init_pos_) {
-			return_end_l_ = true;
-		}
-	}
+	}	
 
 	if (return_end_r_ && return_end_l_) {
 		action_state_ = ACTION_END;

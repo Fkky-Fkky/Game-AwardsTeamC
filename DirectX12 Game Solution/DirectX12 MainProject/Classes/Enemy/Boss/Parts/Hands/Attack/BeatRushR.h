@@ -12,12 +12,8 @@ public:
 		time_delta_	 = 0.0f;
 		wait_time_	 = 0.0f;
 		r_move_dest_x_ = 0.0f;
-		r_ready_end_ = false;
-		l_ready_end_ = false;
 		r_hand_up_flag_ = false;
 		l_hand_up_flag_ = false;
-		is_r_hand_broke_ = false;
-		is_l_hand_broke_ = false;
 		is_r_attack_end_ = false;
 		is_l_attack_end_ = false;
 		is_r_return_end_ = false;
@@ -26,7 +22,7 @@ public:
 	virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m);
 
 private:
-	void HandCheck(const HandManager* const hand_m);
+	void HandCheck();
 	void Ready();
 	void Attack(const HandManager* const hand_m);
 	void BeatR(const HandManager* const hand_m);
@@ -45,10 +41,6 @@ private:
 
 	bool r_hand_up_flag_;
 	bool l_hand_up_flag_;
-	bool r_ready_end_;
-	bool l_ready_end_;
-	bool is_r_hand_broke_;
-	bool is_l_hand_broke_;
 	bool is_r_attack_end_;
 	bool is_l_attack_end_;
 	bool is_r_return_end_;

@@ -12,15 +12,13 @@ public:
 		l_slap_time_x_ = 0.0f;
 		l_slap_time_y_ = 0.0f;
 		wait_time_	   = 0.0f;
-		ready_flag_r_ = false;
-		ready_flag_l_ = false;
+		ready_end_r_ = false;
+		ready_end_l_ = false;
 		atk_end_r_	  = false;
 		atk_end_l_	  = false;
 		return_end_r_ = false;
 		return_end_l_ = false;
-		is_l_hand_broke_ = false;
-		is_r_hand_broke_ = false;
-		hand_state_		 = false;
+		hand_state_	  = false;
 		r_pos_  = SimpleMath::Vector3::Zero;
 		r_rote_ = SimpleMath::Vector3::Zero;
 		l_pos_  = SimpleMath::Vector3::Zero;
@@ -50,14 +48,12 @@ private:
 	float l_slap_time_y_;
 	float wait_time_;
 
-	bool ready_flag_r_;
-	bool ready_flag_l_;
+	bool ready_end_r_;
+	bool ready_end_l_;
 	bool atk_end_r_;
 	bool atk_end_l_;
 	bool return_end_r_;
 	bool return_end_l_;
-	bool is_r_hand_broke_;
-	bool is_l_hand_broke_;
 	bool hand_state_;
 
 	SimpleMath::Vector3 r_pos_;

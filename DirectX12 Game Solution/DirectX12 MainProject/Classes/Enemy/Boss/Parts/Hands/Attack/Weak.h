@@ -16,7 +16,6 @@ public:
 
 private:
 	void BossWeak(HandManager* const hand_m);
-	void HandHeal();
 	void InitialPosMove();
 
 	int weak_state_;
@@ -29,7 +28,6 @@ private:
 
 	enum WEAK_STATE {
 		WEAK,
-		HAND_HEAL,
 		INITIAL_POS_MOVE,
 		ACTION_END
 	};

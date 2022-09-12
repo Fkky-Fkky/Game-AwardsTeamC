@@ -33,7 +33,6 @@ public:
 	void LoadAssets();
 	void Update(const float deltaTime, const ObjectManager* const obj_m);
 	void Render()const;
-	void Render2D()const;
 
 	void PlaySlapSE()const;
 	void PlayBeatSE()const;
