@@ -16,9 +16,9 @@ void PlayerAvoid::Initialize() {
 	player_rote_ = SimpleMath::Vector3::Zero;
 }
 
-void PlayerAvoid::Update(const float deltaTime, Player& player) {
-	pos_ = player.GetPlayerPosition();
-	rot_ = player.GetPlayerRotation();
+void PlayerAvoid::Update(const float deltaTime, Player* const player) {
+	pos_ = player->GetPlayerPosition();
+	rot_ = player->GetPlayerRotation();
 
 	time_delta_ = deltaTime;
 
@@ -29,21 +29,21 @@ void PlayerAvoid::Update(const float deltaTime, Player& player) {
 	}
 	//player.SetMotion(PLAYER_MOTION::AVOID);
 
-	player.SetPlayerPosition(pos_);
-	player.SetPlayerRotation(rot_);
+	player->SetPlayerPosition(pos_);
+	player->SetPlayerRotation(rot_);
 	if (action_state_ == ACTION_END) {
 		action_state_ = READY;
-		player.SwitchState(PLAYER_STATE::WAIT);
+		player->SwitchState(PLAYER_STATE::WAIT);
 	}
 }
 
-void PlayerAvoid::Ready(Player& player) {	//回避に必要な変数の準備
+void PlayerAvoid::Ready(Player* const player) {	//回避に必要な変数の準備
 	invincible_flag_ = true;
 	player_rote_   = rot_;
 	float add_pos_ = (IsPayerRightWard()) ? -ADD_POS_X_ : ADD_POS_X_;
 	player_dest_x_ = pos_.x + add_pos_;
 	player_dest_x_ = std::clamp(player_dest_x_, PLAYER_LIMIT_MIN_POS_X_, PLAYER_LIMIT_MAX_POS_X_);
-	player.PlayAvoidSE();
+	player->PlayAvoidSE();
 	DX12Effect.PlayOneShot("avoid", pos_);
 	action_state_  = AVOID;
 }

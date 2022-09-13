@@ -10,9 +10,9 @@ public:
 	PlayerColision() {};
 	~PlayerColision() {};
 
-	void LoadAssets(DX9::SkinnedModel* model_);
-	void Update(const float deltaTime, DX9::SkinnedModel* model_);
-	void Render();
+	void LoadAssets(DX9::SkinnedModel* const model);
+	void Update(const float deltaTime, const DX9::SkinnedModel* const model);
+	void Render()const;
 	BoundingOrientedBox GetColision() const { return collision_; }
 
 private:

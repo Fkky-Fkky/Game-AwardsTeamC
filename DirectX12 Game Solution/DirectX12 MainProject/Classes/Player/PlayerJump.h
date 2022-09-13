@@ -17,11 +17,11 @@ public:
 	~PlayerJump() {};
 
 	virtual void Initialize();
-	virtual void Update(const float deltaTime, Player& player);
+	virtual void Update(const float deltaTime, Player* const player);
 
 private:
-	void Ready(Player& player);
-	void Jump(Player& player);
+	void Ready(const Player* const player);
+	void Jump(Player* const player);
 	void CoolTime();
 	void JumpingMove();
 

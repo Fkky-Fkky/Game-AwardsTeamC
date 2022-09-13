@@ -36,12 +36,12 @@ void Player::LoadAssets() {
     model_->SetTrackEnable(player_motion_track_, true);
 }
 
-void Player::Update(const float deltaTime, ObjectManager* obj_m) { 
+void Player::Update(const float deltaTime, const ObjectManager* const obj_m) { 
     if (obj_m->GetPlayerDmgFlag()) {
         SwitchState(PLAYER_STATE::DAMAGE);
     }
 
-    player_state_->Update(deltaTime, *this);
+    player_state_->Update(deltaTime, this);
     if (is_jump_motion_play_) {
         JumpMotion(deltaTime);
     }
@@ -50,7 +50,7 @@ void Player::Update(const float deltaTime, ObjectManager* obj_m) {
     player_colision_.Update(deltaTime, model_.get());
 }
 
-void Player::Render() { 
+void Player::Render() const { 
     model_->SetPosition(pos_);
     model_->SetRotation(
         XMConvertToRadians(rot_.x),
@@ -63,7 +63,7 @@ void Player::Render() {
     player_attack_colision_.Render();
 }
 
-void Player::Render2D() {
+void Player::Render2D() const {
     DX9::SpriteBatch->DrawString(
         font.Get(),
         SimpleMath::Vector2(0.0f, 30.0f),
@@ -88,7 +88,7 @@ void Player::SetMotion(const PLAYER_MOTION player_motion) {   //モーションの再生
     model_->SetTrackEnable(player_motion_track_, true);
 }
 
-void Player::ResetPlayerMotion() {  //モーションのトラックをリセット
+void Player::ResetPlayerMotion() const {  //モーションのトラックをリセット
     for (int i = 0; i < MOTION_MAX_; ++i) {
         if (player_motion_track_ == i) {
             continue;
@@ -106,7 +106,7 @@ void Player::JumpMotion(const float deltaTime) {    //ジャンプモーション処理
     }
 }
 
-PLAYER_MOTION Player::ConvertToMotion(const PLAYER_STATE player_state) {  //プレイヤーの状態をモーショントラックに変換
+PLAYER_MOTION Player::ConvertToMotion(const PLAYER_STATE player_state) const {  //プレイヤーの状態をモーショントラックに変換
     PLAYER_MOTION motion_track_;
     switch (player_state) {
     case    PLAYER_STATE::WAIT:         motion_track_ = PLAYER_MOTION::WAIT;    break;
@@ -142,10 +142,10 @@ void Player::SwitchState(const PLAYER_STATE state) {
     }
 }
 
-void Player::PlayAvoidSE() {
+void Player::PlayAvoidSE() const {
     avoid_se_->Play();
 }
 
-void Player::PlayJumpSE() {
+void Player::PlayJumpSE() const {
     jump_se_->Play();
 }

@@ -8,5 +8,5 @@ public:
 	~PlayerLeftMove() {};
 
 	virtual void Initialize() {};
-	virtual void Update(const float deltaTime, Player& player);
+	virtual void Update(const float deltaTime, Player* const player);
 };

@@ -16,12 +16,12 @@ public:
 	~PlayerAttackColision() {};
 
 	void Initialize();
-	void LoadAssets(DX9::SkinnedModel* model_);
-	void Update(const float deltaTime, DX9::SkinnedModel* model_, Player* player);
-	void Render();
+	void LoadAssets(DX9::SkinnedModel* const model_);
+	void Update(const float deltaTime, const DX9::SkinnedModel* const model_, const Player* const player);
+	void Render()const;
 
 	bool IsPlayerAttack() const { return is_player_attack_; }
-	BoundingOrientedBox GetAttackCollision() const{ return collision_; }
+	BoundingOrientedBox GetAttackCollision() const { return collision_; }
 private:
 	BoundingOrientedBox collision_;
 	DX9::MODEL          collision_model_;

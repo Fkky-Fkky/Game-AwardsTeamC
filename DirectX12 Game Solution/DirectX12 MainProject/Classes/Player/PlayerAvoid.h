@@ -21,11 +21,11 @@ public:
 	~PlayerAvoid() {};
 
 	virtual void Initialize();
-	virtual void Update(const float deltaTime, Player& player);
+	virtual void Update(const float deltaTime, Player* const player);
 
 	bool IsInvincible() const { return invincible_flag_; }
 private:
-	void Ready(Player& player);
+	void Ready(Player* const player);
 	void Avoid();
 	void CoolTime();
 

@@ -14,7 +14,7 @@ public:
 	~PlayerDamage() {};
 
 	virtual void Initialize();
-	virtual void Update(const float deltaTime, Player& player);
+	virtual void Update(const float deltaTime, Player* const player);
 
 	float GetPlayerHP() const { return player_hp_; }
 

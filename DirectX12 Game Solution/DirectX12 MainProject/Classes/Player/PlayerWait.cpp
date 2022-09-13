@@ -1,24 +1,20 @@
 #include "Classes/Player/PlayerWait.h"
 #include "Classes/Player/Player.h"
 
-void PlayerWait::Update(const float deltaTime, Player& player) {
+void PlayerWait::Update(const float deltaTime, Player* const player) {
 	if (DXTK->KeyEvent->pressed.W) {
-		player.SwitchState(PLAYER_STATE::JUMP);
+		player->SwitchState(PLAYER_STATE::JUMP);
 	}
 
-	//if (DXTK->KeyEvent->pressed.Back) {
-	//	player.SwitchState(PLAYER_STATE::AVOID);
-	//}
-
 	if (DXTK->KeyState->D) {
-		player.SwitchState(PLAYER_STATE::RIGHT_MOVE);
+		player->SwitchState(PLAYER_STATE::RIGHT_MOVE);
 	}
 
 	if (DXTK->KeyState->A) {
-		player.SwitchState(PLAYER_STATE::LEFT_MOVE);
+		player->SwitchState(PLAYER_STATE::LEFT_MOVE);
 	}
 
 	if (DXTK->KeyEvent->pressed.Space) {
-		player.SwitchState(PLAYER_STATE::ATTACK);
+		player->SwitchState(PLAYER_STATE::ATTACK);
 	}
 }

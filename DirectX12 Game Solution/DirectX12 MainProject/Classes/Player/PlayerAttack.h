@@ -11,7 +11,7 @@ public:
 	~PlayerAttack() {};
 
 	virtual void Initialize();
-	virtual void Update(const float deltaTime, Player& player);
+	virtual void Update(const float deltaTime, Player* const player);
 	bool IsPlayerAttackStart() const { return attack_flg_; }
 
 private:

@@ -52,17 +52,17 @@ public:
 
 	void Initialize();
 	void LoadAssets();
-	void Update(const float deltaTime, ObjectManager* obj_m);
-	void Render();
-	void Render2D();
+	void Update(const float deltaTime, const ObjectManager* const obj_m);
+	void Render()const;
+	void Render2D()const;
 
 	void SwitchState(const PLAYER_STATE state);
 	void SetPlayerPosition(const SimpleMath::Vector3 position) { pos_ = position; }
 	void SetPlayerRotation(const SimpleMath::Vector3 rotation) { rot_ = rotation; }
 	void SetMotion(const PLAYER_MOTION player_motion);
 	void SetStopInitializeFlag(const bool enable) { initialize_stop_flag_ = enable; }
-	void PlayAvoidSE();
-	void PlayJumpSE();
+	void PlayAvoidSE()const;
+	void PlayJumpSE()const;
 	float GetPlayerHP() const { return player_dmg_.GetPlayerHP(); }
 	bool IsPlayerAttackStart() const { return player_attack_.IsPlayerAttackStart(); }
 	bool IsPlayerAttack() const { return player_attack_colision_.IsPlayerAttack(); }
@@ -73,9 +73,9 @@ public:
 	BoundingOrientedBox GetPlayerAttackCollision() const{ return player_attack_colision_.GetAttackCollision(); }
 
 private:
-	void ResetPlayerMotion();
+	void ResetPlayerMotion()const;
 	void JumpMotion(const float deltaTime);
-	PLAYER_MOTION ConvertToMotion(const PLAYER_STATE player_state);
+	PLAYER_MOTION ConvertToMotion(const PLAYER_STATE player_state)const;
 
 	DX9::SKINNEDMODEL model_;
 	DX9::SPRITEFONT font;

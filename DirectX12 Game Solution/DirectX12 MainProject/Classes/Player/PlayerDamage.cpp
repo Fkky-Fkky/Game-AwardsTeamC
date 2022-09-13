@@ -8,19 +8,19 @@ void PlayerDamage::Initialize() {
 	one_process_flag_ = false;
 }
 
-void PlayerDamage::Update(const float deltaTime, Player& player) {
-	pos_ = player.GetPlayerPosition();
-	rot_ = player.GetPlayerRotation();
+void PlayerDamage::Update(const float deltaTime, Player* const player) {
+	pos_ = player->GetPlayerPosition();
+	rot_ = player->GetPlayerRotation();
 
 	dmg_time = std::min(dmg_time + deltaTime, DMG_TIME_MAX_);
 	if (dmg_time >= DMG_TIME_MAX_) {
 		dmg_time = 0.0f;
-		player.SetStopInitializeFlag(false);
-		player.SwitchState(PLAYER_STATE::WAIT);
+		player->SetStopInitializeFlag(false);
+		player->SwitchState(PLAYER_STATE::WAIT);
 	}
 
 	if (!hit_flag_) {
-		player.SetStopInitializeFlag(true);
+		player->SetStopInitializeFlag(true);
 		HitProcessing();
 	}
 	
@@ -41,8 +41,8 @@ void PlayerDamage::Update(const float deltaTime, Player& player) {
 		pos_.y = std::max(pos_.y - FALL_SPEED_ * deltaTime, 0.0f);
 	}
 
-	player.SetPlayerPosition(pos_);
-	player.SetPlayerRotation(rot_);
+	player->SetPlayerPosition(pos_);
+	player->SetPlayerRotation(rot_);
 }
 
 void PlayerDamage::HitProcessing() {

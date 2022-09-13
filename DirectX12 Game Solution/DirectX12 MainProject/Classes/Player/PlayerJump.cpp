@@ -13,9 +13,9 @@ void PlayerJump::Initialize() {
     old_player_pos_ = SimpleMath::Vector3::Zero;
 }
 
-void PlayerJump::Update(const float deltaTime, Player& player) {
-    pos_ = player.GetPlayerPosition();
-    rot_ = player.GetPlayerRotation();
+void PlayerJump::Update(const float deltaTime, Player* const player) {
+    pos_ = player->GetPlayerPosition();
+    rot_ = player->GetPlayerRotation();
 
     time_delta_ = deltaTime;
 
@@ -28,23 +28,23 @@ void PlayerJump::Update(const float deltaTime, Player& player) {
     }
     
 
-    player.SetPlayerPosition(pos_);
-    player.SetPlayerRotation(rot_);
+    player->SetPlayerPosition(pos_);
+    player->SetPlayerRotation(rot_);
     if (action_state_ == ACTION_END) {
         action_state_ = READY;
-        player.SwitchState(PLAYER_STATE::WAIT);
+        player->SwitchState(PLAYER_STATE::WAIT);
     }
 }
 
-void PlayerJump::Ready(Player& player) {  //ジャンプに必要な変数の処理
+void PlayerJump::Ready(const Player* const player) {  //ジャンプに必要な変数の処理
     DX12Effect.PlayOneShot("jump", pos_);
     player_up_flag_ = true;
     jump_time_      = 0.0f;
-    player.PlayJumpSE();
+    player->PlayJumpSE();
     action_state_   = JUMP;
 }
 
-void PlayerJump::Jump(Player& player) {   //ジャンプ
+void PlayerJump::Jump(Player* const player) {   //ジャンプ
     if (player_up_flag_) {  //プレイヤージャンプ処理(上昇)
         jump_time_ += time_delta_ * DOWN_SPEED_;
         old_player_pos_ = pos_;
@@ -60,7 +60,7 @@ void PlayerJump::Jump(Player& player) {   //ジャンプ
 
     if (pos_.y <= GROUND_Y_) {
         pos_.y  = GROUND_Y_;
-        player.SetMotion(PLAYER_MOTION::JUMP);
+        player->SetMotion(PLAYER_MOTION::JUMP);
         action_state_ = COOL_TIME;
     }
 }
