@@ -20,9 +20,9 @@ public:
 
 private:
 	void HandCheck(const HandManager* const hand_m);
-	void Ready();
-	void Wait();
-	void LeftSlapAttack(const HandManager* const hand_m);
+	void Ready(HandManager* const hand_m);
+	void Wait(HandManager* const hand_m);
+	void LeftSlapAttack(HandManager* const hand_m);
 	void Reset();
 	void HandReturn();
 

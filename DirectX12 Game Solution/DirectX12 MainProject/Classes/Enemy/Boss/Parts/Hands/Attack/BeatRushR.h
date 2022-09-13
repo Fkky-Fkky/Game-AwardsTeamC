@@ -24,9 +24,9 @@ public:
 private:
 	void HandCheck();
 	void Ready();
-	void Attack(const HandManager* const hand_m);
-	void BeatR(const HandManager* const hand_m);
-	void BeatL(const HandManager* const hand_m);
+	void Attack(HandManager* const hand_m);
+	void BeatR(HandManager* const hand_m);
+	void BeatL(HandManager* const hand_m);
 	void Reset();
 	void HandReturn();
 

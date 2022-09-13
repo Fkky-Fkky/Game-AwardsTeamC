@@ -9,8 +9,8 @@ void RightSlap::Update(const float deltaTime, const ObjectManager* const obj_m, 
 
 	switch (action_state_) {
 	case HAND_CHECK:	HandCheck(hand_m);			break;
-	case READY:			Ready();					break;
-	case WAIT:			Wait();						break;
+	case READY:			Ready(hand_m);				break;
+	case WAIT:			Wait(hand_m);				break;
 	case ATTACK:		RightSlapAttack(hand_m);	break;
 	case RESET:			Reset();					break;
 	case RETURN:		HandReturn();				break;
@@ -27,7 +27,7 @@ void RightSlap::HandCheck(const HandManager* const hand_m) {	//è‚Ìó‘Ô‚ğŠm”F
 	action_state_ = READY;
 }
 
-void RightSlap::Ready() {	//—\”õ“®ì
+void RightSlap::Ready(HandManager* const hand_m) {	//—\”õ“®ì
 	slap_time_y_ += time_delta_;
 	float slap_y_ = SLAP_SPEED_Y_ * slap_time_y_ - HALF_ * SLAP_GRAVITY_Y_ * slap_time_y_ * slap_time_y_;
 	pos_.y += slap_y_;
@@ -36,22 +36,22 @@ void RightSlap::Ready() {	//—\”õ“®ì
 
 	if (pos_.y <= SLAP_POS_Y_) {
 		pos_.y  = SLAP_POS_Y_;
-		boss_handR_->SetVerticalShakeFlag(true);
+		hand_m->SetVerticalShake(true);
 		action_state_ = WAIT;
 	}
 }
 
-void RightSlap::Wait() {	//‘Ò‹@
-	boss_handR_->SetVerticalShakeFlag(false);
+void RightSlap::Wait(HandManager* const hand_m) {	//‘Ò‹@
+	hand_m->SetVerticalShake(false);
 	wait_time_ = std::min(wait_time_ + time_delta_, WAIT_TIME_MAX_);
 	if (wait_time_ >= WAIT_TIME_MAX_) {
 		action_state_ = ATTACK;
 	}
 }
 
-void RightSlap::RightSlapAttack(const HandManager* const hand_m) {	//‰Eè“ã‚¬•¥‚¢UŒ‚
+void RightSlap::RightSlapAttack(HandManager* const hand_m) {	//‰Eè“ã‚¬•¥‚¢UŒ‚
 	boss_handR_->SetAttackFlag(true);
-	boss_handR_->SetSideShakeFlag(true);
+	hand_m->SetSideShake(true);
 
 	const float MAX_SPEED_ = 80.0f;
 	const float ADD_SPEED_ = 40.0f;
@@ -63,7 +63,7 @@ void RightSlap::RightSlapAttack(const HandManager* const hand_m) {	//‰Eè“ã‚¬•¥‚
 		is_se_play_ = true;
 	}
 	if (pos_.x >= HAND_LIMIT_POS_X_) {
-		boss_handR_->SetSideShakeFlag(false);
+		hand_m->SetSideShake(false);
 		action_state_ = RESET;
 	}
 }

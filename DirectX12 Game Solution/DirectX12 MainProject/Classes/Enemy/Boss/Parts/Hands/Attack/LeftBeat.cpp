@@ -9,12 +9,12 @@ void LeftBeat::Update(const float deltaTime, const ObjectManager* const obj_m, H
 	time_delta_ = deltaTime;
 
 	switch (boss_action_state_) {
-	case HAND_CHECK:	HandCheck(hand_m);			break;
-	case READY:			Ready(obj_m);				break;
-	case ATTACK:		LeftBeatAttack(hand_m);		break;
-	case WAIT:			Wait();						break;
-	case RETURN:		HandReturn();				break;
-	case ACTION_END:	hand_m->ActionEnd();		break;
+	case HAND_CHECK:	HandCheck(hand_m);		break;
+	case READY:			Ready(obj_m);			break;
+	case ATTACK:		LeftBeatAttack(hand_m);	break;
+	case WAIT:			Wait(hand_m);			break;
+	case RETURN:		HandReturn();			break;
+	case ACTION_END:	hand_m->ActionEnd();	break;
 	}
 
 	boss_handL_->SetHandPos(pos_);
@@ -59,7 +59,7 @@ void LeftBeat::Ready(const ObjectManager* const obj_m) { //ƒvƒŒƒCƒ„[‚ÌÀ•W‚ÉŽè‚
 	}
 }
 
-void LeftBeat::LeftBeatAttack(const HandManager* const hand_m) { //’@‚«‚Â‚¯UŒ‚
+void LeftBeat::LeftBeatAttack(HandManager* const hand_m) { //’@‚«‚Â‚¯UŒ‚
 	boss_handL_->SetAttackFlag(true);
 	beat_time_ += time_delta_;
 	float beat_ = BEAT_SPEED_ * beat_time_ - HALF_ * BEAT_GRAVITY_ * beat_time_ * beat_time_;
@@ -69,14 +69,14 @@ void LeftBeat::LeftBeatAttack(const HandManager* const hand_m) { //’@‚«‚Â‚¯UŒ‚
 		pos_.y  = limit_pos_y_;
 		hand_m->PlayBeatSE();
 		hand_m->PlayBeatEffect(SimpleMath::Vector3(pos_.x, pos_.y - limit_pos_y_, pos_.z));
-		boss_handL_->SetVerticalShakeFlag(true);
+		hand_m->SetVerticalShake(true);
 		boss_handL_->SetAttackFlag(false);
 		boss_action_state_ = WAIT;
 	}
 }
 
-void LeftBeat::Wait() {	//d’¼
-	boss_handL_->SetVerticalShakeFlag(false);
+void LeftBeat::Wait(HandManager* const hand_m) {	//d’¼
+	hand_m->SetVerticalShake(false);
 	wait_time_ += time_delta_;
 	if (wait_time_ >= WAIT_TIME_MAX_) {
 		(!hand_state_) ? boss_handL_->SetHandMotion(HAND_MOTION::ROCK_BACK) : boss_handL_->SetHandMotion(HAND_MOTION::PAPER_BACK);

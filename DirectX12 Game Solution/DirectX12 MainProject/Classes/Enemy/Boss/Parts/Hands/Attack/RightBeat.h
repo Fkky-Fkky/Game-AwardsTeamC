@@ -20,8 +20,8 @@ public:
 private:
 	void HandCheck(const HandManager* const hand_m);
 	void Ready(const ObjectManager* const obj_m);
-	void RightBeatAttack(const HandManager* const hand_m);
-	void Wait();
+	void RightBeatAttack(HandManager* const hand_m);
+	void Wait(HandManager* const hand_m);
 	void HandReturn();
 
 	int boss_action_state_;

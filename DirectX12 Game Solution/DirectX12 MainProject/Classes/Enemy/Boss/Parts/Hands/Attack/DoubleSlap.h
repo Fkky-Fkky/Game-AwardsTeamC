@@ -30,11 +30,11 @@ public:
 
 private:
 	void HandCheck(const HandManager* const hand_m);
-	void Ready();
+	void Ready(HandManager* const hand_m);
 	void ReadyR();
 	void ReadyL();
-	void Attack();
-	void SlapR();
+	void Attack(HandManager* const hand_m);
+	void SlapR(HandManager* const had_m);
 	void SlapL();
 	void Reset();
 	void HandReturn();
