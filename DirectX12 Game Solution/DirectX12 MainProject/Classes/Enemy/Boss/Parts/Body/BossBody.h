@@ -30,6 +30,6 @@ private:
 	const float BODY_WEAK_POS_Y_ = 5.0f;
 	const float BODY_WEAK_POS_Z_ = 5.0f;
 	const float BODY_SCALE_ = 0.8f;
-	const float COLLISION_SIZE_X_ = 1.5f;
-	const float COLLISION_SIZE_Z_ = 1.5f;
+	const float COLLISION_SIZE_X_ = 0.1f;
+	const float COLLISION_SIZE_Z_ = 0.8f;
 };
