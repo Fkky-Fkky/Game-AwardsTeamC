@@ -183,9 +183,6 @@
     <ClInclude Include="Classes\UI\UI.h">
       <Filter>Classes\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerAvoid.h">
-      <Filter>Classes\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Player\PlayerState.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
@@ -313,9 +310,6 @@
     </ClCompile>
     <ClCompile Include="Classes\UI\UI.cpp">
       <Filter>Classes\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Player\PlayerAvoid.cpp">
-      <Filter>Classes\Player</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Player\PlayerWait.cpp">
       <Filter>Classes\Player</Filter>
