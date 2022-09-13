@@ -9,7 +9,7 @@ public:
 		max_wait_time_ = 0.0f;
 		first_processed_flag_ = false;
 	}
-	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss);
+	virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m);
 
 private:
 	float wait_time_;

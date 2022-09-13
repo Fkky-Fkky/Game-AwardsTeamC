@@ -1,21 +1,18 @@
 #include "Classes/Enemy/Boss/Parts/Hands/BossHand.h"
-#include <Bezier.h>
 
-void BossHand::Initialize(SimpleMath::Vector3 pos, SimpleMath::Vector3 rote) {
+void BossHand::Initialize(const SimpleMath::Vector3 pos, const SimpleMath::Vector3 rote) {
 	BossParts::Initialize(pos, rote);
-	bezier_t = 0.0f;
-	hand_hp_ = HAND_HP_MAX_;
 }
 
-void BossHand::LoadAssets(LPCWSTR file_name){
+void BossHand::LoadAssets(const LPCWSTR file_name){
 	BossParts::LoadAssets(file_name);
-	model_->SetScale(0.8f);
+	model_->SetScale(HAND_SCALE);
 
 	collision = model_->GetBoundingOrientedBox();
 	collision.Extents = SimpleMath::Vector3(
-		collision.Extents.x * 1.7f,
-		collision.Extents.y * 0.8f,
-		collision.Extents.z * 2.0f
+		collision.Extents.x * COLLSION_SIZE_X_,
+		collision.Extents.y * COLLSION_SIZE_Y_,
+		collision.Extents.z * COLLSION_SIZE_Z_
 	);
 
 	collision_model = DX9::Model::CreateBox(
@@ -28,44 +25,23 @@ void BossHand::LoadAssets(LPCWSTR file_name){
 	material.Diffuse = DX9::Colors::Value(0.0f, 1.0f, 0.0f, 0.75f);
 	collision_model->SetMaterial(material);
 
-	font_ = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 	for (int i = 0; i < MOTION_MAX_; ++i) {
 		model_->SetTrackEnable(i, false);
 	}
-	//model_->SetTrackEnable(WAIT, true);
 }
 
 void BossHand::Update(const float deltaTime) {
 	BossParts::Update(deltaTime);
 	timde_delta_ = deltaTime;
-	collision.Center = model_->GetPosition() + SimpleMath::Vector3(-1.5f, 0.0f, 0.0f);
-	collision.Orientation = model_->GetRotationQuaternion();
 	PlayMotion();
 }
 
-void BossHand::Render(){
+void BossHand::Render() const {
 	BossParts::Render();
 
 	collision_model->SetPosition(collision.Center);
 	collision_model->SetRotationQuaternion(collision.Orientation);
 	collision_model->Draw();
-}
-
-void BossHand::Render2D(float pos_x) {
-	DX9::SpriteBatch->DrawString(
-		font_.Get(),
-		SimpleMath::Vector2(pos_x, 150.0f),
-		DX9::Colors::Red,
-		L"%i", hand_hp_
-	);
-}
-
-void BossHand::HandDamageProcess() {	//手にダメージを与える
-	hand_hp_--;
-}
-
-void BossHand::HandHPHeal() {	//手のHPを全回復する
-	hand_hp_ = HAND_HP_MAX_;
 }
 
 void BossHand::SetHandMotion(const int hand_motion) {	//モーションをセットする
@@ -121,6 +97,6 @@ void BossHand::HandMotionAttack() {	//攻撃モーション
 	}
 }
 
-void BossHand::HandMotionWait() {	//待機モーション
+void BossHand::HandMotionWait() const {	//待機モーション
 	model_->SetTrackEnable(WAIT, true);
 }

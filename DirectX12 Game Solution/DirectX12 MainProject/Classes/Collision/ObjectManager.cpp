@@ -3,15 +3,15 @@
 #include "Classes/Enemy/Boss/Boss.h"
 #include "Classes/Collision/Collision.h"
 
-void ObjectManager::SetPlayer(Player* p_) {
+void ObjectManager::SetPlayer(Player* const p_) {
 	player_ = p_;
 }
 
-void ObjectManager::SetBoss(Boss* b_) {
+void ObjectManager::SetBoss(Boss* const b_) {
 	boss_ = b_;
 }
 
-void ObjectManager::SetCollision(Collision* col_) {
+void ObjectManager::SetCollision(Collision* const col_) {
 	collision_ = col_;
 }
 
@@ -23,8 +23,8 @@ BoundingOrientedBox ObjectManager::GetPlayerAttackCollision() const {
 	return player_->GetPlayerAttackCollision();
 }
 
-BoundingOrientedBox ObjectManager::GetBossCoreCollision() const {
-	return boss_->GetCoreCollision();
+BoundingOrientedBox ObjectManager::GetBossBodyCollision() const {
+	return boss_->GetBodyCollision();
 }
 
 BoundingOrientedBox ObjectManager::GetBossRHandCollision() const {
@@ -69,20 +69,20 @@ bool ObjectManager::GetBossLAttackFlag() const {
 	return boss_->GetLHandAttackFlag();
 }
 
-bool ObjectManager::GetBossDmgFlag() const {
-	return collision_->GetBossDmgFlag();
+bool ObjectManager::IsBossBodyDmg() const {
+	return collision_->IsBossBodyDmg();
 }
 
 bool ObjectManager::IsBossHandOpen() const {
 	return boss_->GetHandState();
 }
 
-bool ObjectManager::IsBossHandRDmg() const {
-	return collision_->IsBossHandRDmg();
+bool ObjectManager::IsBossHandDmg() const {
+	return collision_->IsBossHandDmg();
 }
 
-bool ObjectManager::IsBossHandLDmg() const {
-	return collision_->IsBossHandLDmg();
+bool ObjectManager::IsBossWeak() const {
+	return boss_->IsBossWeak();
 }
 
 bool ObjectManager::IsGroundVerticalShake() const {

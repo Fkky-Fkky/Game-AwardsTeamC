@@ -10,3 +10,9 @@ void BossHandR::Initialize() {
 void BossHandR::LoadAssets() {
 	BossHand::LoadAssets(L"Boss/boss_hand_R.X");
 }
+
+void BossHandR::Update(const float deltaTime) {
+	BossHand::Update(deltaTime);
+	collision.Center	  = model_->GetPosition() + SimpleMath::Vector3(ADD_COLLISION_POS_X_, 0.0f, 0.0f);
+	collision.Orientation = model_->GetRotationQuaternion();
+}

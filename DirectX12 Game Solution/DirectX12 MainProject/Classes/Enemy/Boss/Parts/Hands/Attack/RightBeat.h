@@ -15,13 +15,13 @@ public:
 		pos_  = SimpleMath::Vector3::Zero;
 		rote_ = SimpleMath::Vector3::Zero;
 	}
-	virtual void Update(const float deltaTime, ObjectManager* obj_m, Boss* boss);
+	virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m);
 
 private:
-	void HandCheck(Boss* boss);
-	void Ready(ObjectManager* obj_m);
-	void RightBeatAttack(Boss* boss);
-	void Wait();
+	void HandCheck(const HandManager* const hand_m);
+	void Ready(const ObjectManager* const obj_m);
+	void RightBeatAttack(HandManager* const hand_m);
+	void Wait(HandManager* const hand_m);
 	void HandReturn();
 
 	int boss_action_state_;

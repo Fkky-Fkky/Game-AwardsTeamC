@@ -40,9 +40,6 @@
     <Filter Include="Classes\Enemy\Boss\Parts\Body">
       <UniqueIdentifier>{a6180696-0dca-40e0-8c22-e7ad1e96b4a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Enemy\Boss\Parts\Core">
-      <UniqueIdentifier>{19b05977-def6-4d6d-8d9b-18baee45f11e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Enemy\Boss\Parts\Hands">
       <UniqueIdentifier>{7349bd19-d3a5-46e8-85cf-3203e782ec81}</UniqueIdentifier>
     </Filter>
@@ -122,9 +119,6 @@
     </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\Body\BossBody.h">
       <Filter>Classes\Enemy\Boss\Parts\Body</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Enemy\Boss\Parts\Core\BossCore.h">
-      <Filter>Classes\Enemy\Boss\Parts\Core</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\BossHand.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
@@ -207,9 +201,6 @@
     <ClInclude Include="Classes\My_Light\My_Light.h">
       <Filter>Classes\My_Light</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Damage.h">
-      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Weak.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
@@ -218,6 +209,12 @@
     </ClInclude>
     <ClInclude Include="ClearScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\HandManager.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Status.h">
+      <Filter>Classes\Enemy\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -256,9 +253,6 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Body\BossBody.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Body</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Enemy\Boss\Parts\Core\BossCore.cpp">
-      <Filter>Classes\Enemy\Boss\Parts\Core</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\BossHand.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
@@ -335,9 +329,6 @@
     <ClCompile Include="Classes\My_Light\My_Light.cpp">
       <Filter>Classes\My_Light</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Damage.cpp">
-      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Weak.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClCompile>
@@ -346,6 +337,12 @@
     </ClCompile>
     <ClCompile Include="ClearScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\HandManager.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Status.cpp">
+      <Filter>Classes\Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
