@@ -23,7 +23,9 @@ public:
 		boss_hp_ = 0.0f;
 		action_end_flag_	   = false;
 		same_handstate_flag_   = false;
-		is_switch_weak_state_ = false;
+		is_switch_weak_state_  = false;
+		is_vertical_shake_	   = false;
+		is_side_shake_		   = false;
 	}
 	~HandManager() {};
 
@@ -38,9 +40,10 @@ public:
 
 	void RandomAttackState();
 	void ActionEnd();
-	
-	bool IsVerticalShake() const { if (hand_l.IsVerticalShake() || hand_r.IsVerticalShake()) { return true; } else { return false; } }
-	bool IsSideShake() const { if (hand_l.IsSideShake() || hand_r.IsSideShake()) { return true; } else { return false; } }
+	void SetVerticalShake(const bool enable) { is_vertical_shake_ = enable; }
+	void SetSideShake(const bool enable) { is_side_shake_ = enable; }
+	bool IsVerticalShake() const { return is_vertical_shake_; }
+	bool IsSideShake() const { return is_side_shake_; }
 	bool GetHandState() const { return hand_state_; }
 	bool GetLHandAttackFlag() const { return hand_l.GetAttackFlag(); }
 	bool GetRHandAttackFlag() const { return hand_r.GetAttackFlag(); }
@@ -73,6 +76,8 @@ private:
 	bool is_switch_weak_state_;
 	bool action_end_flag_;
 	bool same_handstate_flag_;
+	bool is_vertical_shake_;
+	bool is_side_shake_;
 
 	const int ATTACK_STATE_MIN_ = 1;
 	const int ATTACK_STATE_MAX_ = 6;

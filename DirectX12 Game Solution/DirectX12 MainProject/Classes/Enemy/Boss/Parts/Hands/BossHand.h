@@ -13,8 +13,6 @@ public:
 		motion_time_max_ = 0.0f;
 		motion_flag_ = false;
 		attack_flag_ = false;
-		is_vertical_shake_ = false;
-		is_side_shake_ = false;
 	}
 
 	~BossHand() {};
@@ -27,11 +25,7 @@ public:
 	void SetHandRote(const SimpleMath::Vector3 rotation_) { rotation = rotation_; }
 	void SetAttackFlag(const bool attack_flag) { attack_flag_ = attack_flag; }
 	void SetHandMotion(const int hand_motion);
-	void SetVerticalShakeFlag(const bool enable) { is_vertical_shake_ = enable; }
-	void SetSideShakeFlag(const bool enable) { is_side_shake_ = enable; }
 	bool GetAttackFlag() const { return attack_flag_; }
-	bool IsVerticalShake() const { return is_vertical_shake_; }
-	bool IsSideShake() const { return is_side_shake_; }
 	BoundingOrientedBox GetHandCollision() const { return collision; }
 	SimpleMath::Vector3 GetHandPos() const { return position; }
 	SimpleMath::Vector3 GetRotation() const { return rotation; }
@@ -57,8 +51,6 @@ private:
 	float timde_delta_;
 	bool motion_flag_;
 	bool attack_flag_;
-	bool is_vertical_shake_;
-	bool is_side_shake_;
 
 	const int HAND_HP_MAX_ = 3;
 	const int MOTION_MAX_  = 5;
