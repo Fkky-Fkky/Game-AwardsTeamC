@@ -28,8 +28,6 @@ protected:
 	const float HAND_INITIAL_POS_Z_ = 10.0f;
 
 	const float HAND_INITIAL_ROT_X_ = 30.0f;
-	const float HAND_R_INITIAL_ROT_Y_ = -90.0f;
-	const float HAND_L_INITIAL_ROT_Y_ = 90.0f;
 
 	const float ATTACK_POS_Z_ = -2.0f;
 	const float HAND_LIMIT_POS_X_ = 70.0f;
