@@ -1,7 +1,7 @@
 #include "Classes/Player/PlayerLeftMove.h"
 #include "Classes/Player/Player.h"
 
-void PlayerLeftMove::Update(const float deltaTime, Player* const player) {
+void player::PlayerLeftMove::Update(const float deltaTime, Player* const player) {
     SimpleMath::Vector3 pos_ = player->GetPlayerPosition();
     SimpleMath::Vector3 rot_ = player->GetPlayerRotation();
 

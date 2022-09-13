@@ -93,13 +93,13 @@ private:
 	const int MOTION_MAX_ = 5;
 	const float RIGHT_WARD_ = -90.0f;
 
-	PlayerRightMove      player_right_move_;
-	PlayerLeftMove		 player_left_move_;
-	PlayerJump           player_jump_;
-	PlayerAttack		 player_attack_;
-	PlayerColision       player_colision_;
-	PlayerAttackColision player_attack_colision_;
-	PlayerWait			 player_wait_;
-	PlayerDamage		 player_dmg_;
-	PlayerState*		 player_state_;
+	player::PlayerRightMove      player_right_move_;
+	player::PlayerLeftMove		 player_left_move_;
+	player::PlayerJump           player_jump_;
+	player::PlayerAttack		 player_attack_;
+	player::PlayerColision       player_colision_;
+	player::PlayerAttackColision player_attack_colision_;
+	player::PlayerWait			 player_wait_;
+	player::PlayerDamage		 player_dmg_;
+	player::PlayerState*		 player_state_;
 };

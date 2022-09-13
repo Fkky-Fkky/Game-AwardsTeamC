@@ -1,14 +1,14 @@
 #include "Classes/Player/PlayerDamage.h"
 #include "Classes/Player/Player.h"
 
-void PlayerDamage::Initialize() {
+void player::PlayerDamage::Initialize() {
 	dmg_time = 0.0f;
 	knock_back_dest_ = 0.0f;
 	hit_flag_ = false;
 	one_process_flag_ = false;
 }
 
-void PlayerDamage::Update(const float deltaTime, Player* const player) {
+void player::PlayerDamage::Update(const float deltaTime, Player* const player) {
 	pos_ = player->GetPlayerPosition();
 	rot_ = player->GetPlayerRotation();
 
@@ -45,7 +45,7 @@ void PlayerDamage::Update(const float deltaTime, Player* const player) {
 	player->SetPlayerRotation(rot_);
 }
 
-void PlayerDamage::HitProcessing() {
+void player::PlayerDamage::HitProcessing() {
 	player_hp_--;
 	hit_flag_ = true;
 }

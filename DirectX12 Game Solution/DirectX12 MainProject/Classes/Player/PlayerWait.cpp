@@ -1,7 +1,7 @@
 #include "Classes/Player/PlayerWait.h"
 #include "Classes/Player/Player.h"
 
-void PlayerWait::Update(const float deltaTime, Player* const player) {
+void player::PlayerWait::Update(const float deltaTime, Player* const player) {
 	if (DXTK->KeyEvent->pressed.W) {
 		player->SwitchState(PLAYER_STATE::JUMP);
 	}
