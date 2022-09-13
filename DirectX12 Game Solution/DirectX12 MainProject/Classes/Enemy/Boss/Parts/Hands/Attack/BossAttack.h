@@ -49,8 +49,8 @@ protected:
 
 	const float MOVE_SPEED_X_ = 20.0f;
 	const float MOVE_SPEED_Y_ = 10.0f;
-	const float MOVE_SPEED_Z_ = 10.0f;
-	const float ROTE_SPEED_ = 100.0f;
+	const float MOVE_SPEED_Z_ = 20.0f;
+	const float ROTE_SPEED_ = 200.0f;
 
 	const float HALF_ = 0.5f;
 
