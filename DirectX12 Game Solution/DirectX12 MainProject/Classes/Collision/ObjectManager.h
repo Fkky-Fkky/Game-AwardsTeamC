@@ -23,7 +23,6 @@ public:
 	float GetPlayerHP()const;
 	bool GetPlayerAttackFlag()const;
 	bool GetPlayerDmgFlag()const;
-	bool IsPlayerInvincible()const;
 	bool GetBossRAttackFlag()const;
 	bool GetBossLAttackFlag()const;
 	bool IsBossBodyDmg()const;

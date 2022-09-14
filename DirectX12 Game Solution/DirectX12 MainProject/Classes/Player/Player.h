@@ -9,10 +9,10 @@
 #include "Classes/Player/PlayerAttack.h"
 #include "Classes/Player/PlayerColision.h"
 #include "Classes/Player/PlayerAttackColision.h"
-#include "Classes/Player/PlayerAvoid.h"
 #include "Classes/Player/PlayerWait.h"
 #include "Classes/Player/PlayerState.h"
 #include "Classes/Player/PlayerDamage.h"
+#include "Classes/Player/PlayerStatus.h"
 
 using namespace DirectX;
 
@@ -24,7 +24,6 @@ enum class PLAYER_STATE {
 	LEFT_MOVE,
 	JUMP,
 	ATTACK,
-	AVOID,
 	DAMAGE
 };
 
@@ -43,7 +42,6 @@ public:
 		player_motion_track_ = 0;
 		player_state_ = nullptr;
 		jump_motion_time_ = 0.0f;
-		initialize_stop_flag_ = false;
 		is_jump_motion_play_ = false;
 		pos_ = SimpleMath::Vector3::Zero;
 		rot_ = SimpleMath::Vector3::Zero;
@@ -52,30 +50,29 @@ public:
 
 	void Initialize();
 	void LoadAssets();
-	void Update(const float deltaTime, ObjectManager* obj_m);
-	void Render();
-	void Render2D();
+	void Update(const float deltaTime, const ObjectManager* const obj_m);
+	void Render()const;
+	void Render2D()const;
 
 	void SwitchState(const PLAYER_STATE state);
 	void SetPlayerPosition(const SimpleMath::Vector3 position) { pos_ = position; }
 	void SetPlayerRotation(const SimpleMath::Vector3 rotation) { rot_ = rotation; }
 	void SetMotion(const PLAYER_MOTION player_motion);
-	void SetStopInitializeFlag(const bool enable) { initialize_stop_flag_ = enable; }
-	void PlayAvoidSE();
-	void PlayJumpSE();
-	float GetPlayerHP() const { return player_dmg_.GetPlayerHP(); }
+	void PlayAvoidSE()const;
+	void PlayJumpSE()const;
+	float GetPlayerHP() const { return player_status_.GetPlayerHP(); }
 	bool IsPlayerAttackStart() const { return player_attack_.IsPlayerAttackStart(); }
 	bool IsPlayerAttack() const { return player_attack_colision_.IsPlayerAttack(); }
-	bool IsPlayerInvincible() const { return player_avoid_.IsInvincible(); }
+	bool IsPlayerInvincible()const { return player_dmg_.IsInvincible(); }
 	SimpleMath::Vector3 GetPlayerPosition() const { return pos_; }
 	SimpleMath::Vector3 GetPlayerRotation()const { return rot_; }
 	BoundingOrientedBox GetPlayerCollision() const{ return player_colision_.GetColision(); }
 	BoundingOrientedBox GetPlayerAttackCollision() const{ return player_attack_colision_.GetAttackCollision(); }
 
 private:
-	void ResetPlayerMotion();
+	void ResetPlayerMotion()const;
 	void JumpMotion(const float deltaTime);
-	PLAYER_MOTION ConvertToMotion(const PLAYER_STATE player_state);
+	PLAYER_MOTION ConvertToMotion(const PLAYER_STATE player_state)const;
 
 	DX9::SKINNEDMODEL model_;
 	DX9::SPRITEFONT font;
@@ -87,7 +84,6 @@ private:
 	int player_motion_track_;
 	float jump_motion_time_;
 
-	bool initialize_stop_flag_;
 	bool is_jump_motion_play_;
 
 	SimpleMath::Vector3 pos_;
@@ -96,14 +92,14 @@ private:
 	const int MOTION_MAX_ = 5;
 	const float RIGHT_WARD_ = -90.0f;
 
-	PlayerRightMove      player_right_move_;
-	PlayerLeftMove		 player_left_move_;
-	PlayerJump           player_jump_;
-	PlayerAttack		 player_attack_;
-	PlayerColision       player_colision_;
-	PlayerAttackColision player_attack_colision_;
-	PlayerAvoid			 player_avoid_;
-	PlayerWait			 player_wait_;
-	PlayerDamage		 player_dmg_;
-	PlayerState*		 player_state_;
+	player::PlayerRightMove      player_right_move_;
+	player::PlayerLeftMove		 player_left_move_;
+	player::PlayerJump           player_jump_;
+	player::PlayerAttack		 player_attack_;
+	player::PlayerColision       player_colision_;
+	player::PlayerAttackColision player_attack_colision_;
+	player::PlayerWait			 player_wait_;
+	player::PlayerDamage		 player_dmg_;
+	player::PlayerState*		 player_state_;
+	player::PlayerStatus		 player_status_;
 };

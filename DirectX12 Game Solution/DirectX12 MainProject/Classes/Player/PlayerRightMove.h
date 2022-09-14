@@ -2,11 +2,13 @@
 
 #include "Classes/Player/PlayerState.h"
 
-class PlayerRightMove : public PlayerState {
-public:
-	PlayerRightMove() {};
-	~PlayerRightMove() {};
+namespace player {
+	class PlayerRightMove : public PlayerState {
+	public:
+		PlayerRightMove() {};
+		~PlayerRightMove() {};
 
-	virtual void Initialize() {};
-	virtual void Update(const float deltaTime, Player& player);
-};
+		virtual void Initialize() {};
+		virtual void Update(const float deltaTime, Player* const player);
+	};
+}

@@ -4,7 +4,6 @@
 
 void Player::Initialize() {
     player_motion_track_ = 0;
-    initialize_stop_flag_ = false;
 
 	pos_ = SimpleMath::Vector3::Zero;
 	rot_ = SimpleMath::Vector3(0.0f, RIGHT_WARD_,0.0f);
@@ -12,6 +11,7 @@ void Player::Initialize() {
     player_state_ = &player_wait_;
     player_state_->Initialize();
     player_attack_colision_.Initialize();
+    player_status_.Initialize();
 }
 
 void Player::LoadAssets() {
@@ -36,21 +36,22 @@ void Player::LoadAssets() {
     model_->SetTrackEnable(player_motion_track_, true);
 }
 
-void Player::Update(const float deltaTime, ObjectManager* obj_m) { 
-    if (obj_m->GetPlayerDmgFlag()) {
+void Player::Update(const float deltaTime, const ObjectManager* const obj_m) { 
+    if (obj_m->GetPlayerDmgFlag() && !IsPlayerInvincible()) {
         SwitchState(PLAYER_STATE::DAMAGE);
     }
 
-    player_state_->Update(deltaTime, *this);
+    player_state_->Update(deltaTime, this);
     if (is_jump_motion_play_) {
         JumpMotion(deltaTime);
     }
+    player_status_.Update(deltaTime, obj_m);
     model_->AdvanceTime(deltaTime);
     player_attack_colision_.Update(deltaTime, model_.get(), this);
     player_colision_.Update(deltaTime, model_.get());
 }
 
-void Player::Render() { 
+void Player::Render() const { 
     model_->SetPosition(pos_);
     model_->SetRotation(
         XMConvertToRadians(rot_.x),
@@ -63,12 +64,12 @@ void Player::Render() {
     player_attack_colision_.Render();
 }
 
-void Player::Render2D() {
+void Player::Render2D() const {
     DX9::SpriteBatch->DrawString(
         font.Get(),
         SimpleMath::Vector2(0.0f, 30.0f),
         DX9::Colors::Red,
-        L"プレイヤー:%f", player_dmg_.GetPlayerHP()
+        L"プレイヤー:%f", player_status_.GetPlayerHP()
     );
 }
 
@@ -88,7 +89,7 @@ void Player::SetMotion(const PLAYER_MOTION player_motion) {   //モーションの再生
     model_->SetTrackEnable(player_motion_track_, true);
 }
 
-void Player::ResetPlayerMotion() {  //モーションのトラックをリセット
+void Player::ResetPlayerMotion() const {  //モーションのトラックをリセット
     for (int i = 0; i < MOTION_MAX_; ++i) {
         if (player_motion_track_ == i) {
             continue;
@@ -106,7 +107,7 @@ void Player::JumpMotion(const float deltaTime) {    //ジャンプモーション処理
     }
 }
 
-PLAYER_MOTION Player::ConvertToMotion(const PLAYER_STATE player_state) {  //プレイヤーの状態をモーショントラックに変換
+PLAYER_MOTION Player::ConvertToMotion(const PLAYER_STATE player_state) const {  //プレイヤーの状態をモーショントラックに変換
     PLAYER_MOTION motion_track_;
     switch (player_state) {
     case    PLAYER_STATE::WAIT:         motion_track_ = PLAYER_MOTION::WAIT;    break;
@@ -133,19 +134,16 @@ void Player::SwitchState(const PLAYER_STATE state) {
     case PLAYER_STATE::LEFT_MOVE :  player_state_ = &player_left_move_;     break;
     case PLAYER_STATE::JUMP:        player_state_ = &player_jump_;          break;
     case PLAYER_STATE::ATTACK:      player_state_ = &player_attack_;        break;
-    case PLAYER_STATE::AVOID:       player_state_ = &player_avoid_;         break;
     case PLAYER_STATE::DAMAGE:      player_state_ = &player_dmg_;           break;
     }
     SetMotion(ConvertToMotion(player_action_state_));
-    if (!initialize_stop_flag_) {
-        player_state_->Initialize();
-    }
+    player_state_->Initialize();
 }
 
-void Player::PlayAvoidSE() {
+void Player::PlayAvoidSE() const {
     avoid_se_->Play();
 }
 
-void Player::PlayJumpSE() {
+void Player::PlayJumpSE() const {
     jump_se_->Play();
 }

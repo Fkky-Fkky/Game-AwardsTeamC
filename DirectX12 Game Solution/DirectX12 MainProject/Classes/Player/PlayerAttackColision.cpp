@@ -2,13 +2,13 @@
 #include <Base/DX12Effekseer.h>
 #include "Classes/Player/Player.h"
 
-void PlayerAttackColision::Initialize() {
+void player::PlayerAttackColision::Initialize() {
     attack_time_ = 0.0f;
     is_player_attack_ = false;
     is_effect_play_   = false;
 }
 
-void PlayerAttackColision::LoadAssets(DX9::SkinnedModel* model_) {
+void player::PlayerAttackColision::LoadAssets(DX9::SkinnedModel* const model_) {
     collision_ = model_->GetBoundingOrientedBox();
 
     collision_.Extents = SimpleMath::Vector3(   //“–‚½‚è”»’è‚ÌƒTƒCƒY’²®
@@ -30,7 +30,7 @@ void PlayerAttackColision::LoadAssets(DX9::SkinnedModel* model_) {
     collision_model_->SetMaterial(material_);
 }
 
-void PlayerAttackColision::Update(const float deltaTime, DX9::SkinnedModel* model_, Player* player) {
+void player::PlayerAttackColision::Update(const float deltaTime, const DX9::SkinnedModel* const model_, const Player* const player) {
     float player_angle_             = player->GetPlayerRotation().y;
     bool  is_player_attack_start_   = player->IsPlayerAttackStart();
     bool  is_player_right_ward_     = player_angle_ == RIGHT_;
@@ -65,12 +65,12 @@ void PlayerAttackColision::Update(const float deltaTime, DX9::SkinnedModel* mode
     float attack_x_ = (is_player_right_ward_) ? ATTACK_DISTANCE_X_ : -ATTACK_DISTANCE_X_;
     collision_.Center = player_pos_ + SimpleMath::Vector3(attack_x_, ATTACK_DISTANCE_Y_, 0.0f);
     collision_.Orientation = model_->GetRotationQuaternion();
+    collision_model_->SetPosition(collision_.Center);
+    collision_model_->SetRotationQuaternion(collision_.Orientation);
 }
 
-void PlayerAttackColision::Render() {
+void player::PlayerAttackColision::Render() const {
     if (is_player_attack_) {
-        collision_model_->SetPosition(collision_.Center);
-        collision_model_->SetRotationQuaternion(collision_.Orientation);
         collision_model_->Draw();
     }
 }

@@ -183,9 +183,6 @@
     <ClInclude Include="Classes\UI\UI.h">
       <Filter>Classes\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerAvoid.h">
-      <Filter>Classes\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Player\PlayerState.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
@@ -215,6 +212,9 @@
     </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Status.h">
       <Filter>Classes\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\PlayerStatus.h">
+      <Filter>Classes\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -314,9 +314,6 @@
     <ClCompile Include="Classes\UI\UI.cpp">
       <Filter>Classes\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Player\PlayerAvoid.cpp">
-      <Filter>Classes\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Player\PlayerWait.cpp">
       <Filter>Classes\Player</Filter>
     </ClCompile>
@@ -343,6 +340,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Status.cpp">
       <Filter>Classes\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\PlayerStatus.cpp">
+      <Filter>Classes\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
