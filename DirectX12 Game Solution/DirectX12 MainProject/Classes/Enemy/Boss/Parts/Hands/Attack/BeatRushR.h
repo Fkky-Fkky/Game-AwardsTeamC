@@ -47,10 +47,10 @@ namespace boss {
 		bool is_r_return_end_;
 		bool is_l_return_end_;
 
-		SimpleMath::Vector3 pos_r_;
-		SimpleMath::Vector3 rote_r_;
-		SimpleMath::Vector3 pos_l_;
-		SimpleMath::Vector3 rote_l_;
+		SimpleMath::Vector3 r_pos_;
+		SimpleMath::Vector3 r_rote_;
+		SimpleMath::Vector3 l_pos_;
+		SimpleMath::Vector3 l_rote_;
 
 		const float R_START_POS_X_ = -15.0f;
 		const float L_START_POS_X_ = -10.0f;
