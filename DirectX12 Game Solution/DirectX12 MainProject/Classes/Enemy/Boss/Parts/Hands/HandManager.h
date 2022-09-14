@@ -26,6 +26,8 @@ public:
 		is_switch_weak_state_  = false;
 		is_vertical_shake_	   = false;
 		is_side_shake_		   = false;
+		is_switch_state_death_ = false;
+		is_hand_death_		   = false;
 	}
 	~HandManager() {};
 
@@ -40,10 +42,12 @@ public:
 
 	void RandomAttackState();
 	void ActionEnd();
+	void DeathActionEnd() { is_hand_death_ = true; };
 	void SetVerticalShake(const bool enable) { is_vertical_shake_ = enable; }
 	void SetSideShake(const bool enable) { is_side_shake_ = enable; }
 	bool IsVerticalShake() const { return is_vertical_shake_; }
 	bool IsSideShake() const { return is_side_shake_; }
+	bool IsHandDeath() const { return is_hand_death_; }
 	bool GetHandState() const { return hand_state_; }
 	bool GetLHandAttackFlag() const { return hand_l.GetAttackFlag(); }
 	bool GetRHandAttackFlag() const { return hand_r.GetAttackFlag(); }
@@ -55,6 +59,7 @@ private:
 	void SwitchStateAttack();
 	void SwitchStateWait();
 	void SwitchStateWeak();
+	void SwitchStateDeath();
 
 	boss::BossHandL hand_l;
 	boss::BossHandR hand_r;
@@ -78,6 +83,8 @@ private:
 	bool same_handstate_flag_;
 	bool is_vertical_shake_;
 	bool is_side_shake_;
+	bool is_switch_state_death_;
+	bool is_hand_death_;
 
 	const int ATTACK_STATE_MIN_ = 1;
 	const int ATTACK_STATE_MAX_ = 6;

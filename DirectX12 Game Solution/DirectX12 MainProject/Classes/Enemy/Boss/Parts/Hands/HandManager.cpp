@@ -7,6 +7,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRushR.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Weak.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/Death.h"
 #include "Classes/Collision/ObjectManager.h"
 
 void HandManager::Initialize() {
@@ -46,6 +47,10 @@ void HandManager::Update(const float deltaTime, const ObjectManager* const obj_m
 	if (obj_m->IsBossWeak() && !is_switch_weak_state_) {
 		is_switch_weak_state_ = true;
 		SwitchStateWeak();
+	}
+
+	if (boss_hp_ <= 0.0f) {
+		SwitchStateDeath();
 	}
 }
 
@@ -127,6 +132,15 @@ void HandManager::SwitchStateWeak() {	//ウィーク状態に切り替え
 	delete attack;
 	attack = new boss::Weak;
 	attack->Initialize(&hand_l, &hand_r);
+}
+
+void HandManager::SwitchStateDeath() {
+	if (!is_switch_state_death_) {
+		is_switch_state_death_ = true;
+		delete attack;
+		attack = new boss::Death;
+		attack->Initialize(&hand_l, &hand_r);
+	}
 }
 
 void HandManager::PlaySlapSE() const {
