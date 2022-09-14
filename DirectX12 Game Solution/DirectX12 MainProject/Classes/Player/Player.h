@@ -42,7 +42,6 @@ public:
 		player_motion_track_ = 0;
 		player_state_ = nullptr;
 		jump_motion_time_ = 0.0f;
-		initialize_stop_flag_ = false;
 		is_jump_motion_play_ = false;
 		pos_ = SimpleMath::Vector3::Zero;
 		rot_ = SimpleMath::Vector3::Zero;
@@ -59,12 +58,12 @@ public:
 	void SetPlayerPosition(const SimpleMath::Vector3 position) { pos_ = position; }
 	void SetPlayerRotation(const SimpleMath::Vector3 rotation) { rot_ = rotation; }
 	void SetMotion(const PLAYER_MOTION player_motion);
-	void SetStopInitializeFlag(const bool enable) { initialize_stop_flag_ = enable; }
 	void PlayAvoidSE()const;
 	void PlayJumpSE()const;
 	float GetPlayerHP() const { return player_status_.GetPlayerHP(); }
 	bool IsPlayerAttackStart() const { return player_attack_.IsPlayerAttackStart(); }
 	bool IsPlayerAttack() const { return player_attack_colision_.IsPlayerAttack(); }
+	bool IsPlayerInvincible()const { return player_dmg_.IsInvincible(); }
 	SimpleMath::Vector3 GetPlayerPosition() const { return pos_; }
 	SimpleMath::Vector3 GetPlayerRotation()const { return rot_; }
 	BoundingOrientedBox GetPlayerCollision() const{ return player_colision_.GetColision(); }
@@ -85,7 +84,6 @@ private:
 	int player_motion_track_;
 	float jump_motion_time_;
 
-	bool initialize_stop_flag_;
 	bool is_jump_motion_play_;
 
 	SimpleMath::Vector3 pos_;

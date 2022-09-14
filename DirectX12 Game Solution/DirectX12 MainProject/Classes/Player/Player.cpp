@@ -4,7 +4,6 @@
 
 void Player::Initialize() {
     player_motion_track_ = 0;
-    initialize_stop_flag_ = false;
 
 	pos_ = SimpleMath::Vector3::Zero;
 	rot_ = SimpleMath::Vector3(0.0f, RIGHT_WARD_,0.0f);
@@ -38,7 +37,7 @@ void Player::LoadAssets() {
 }
 
 void Player::Update(const float deltaTime, const ObjectManager* const obj_m) { 
-    if (obj_m->GetPlayerDmgFlag()) {
+    if (obj_m->GetPlayerDmgFlag() && !IsPlayerInvincible()) {
         SwitchState(PLAYER_STATE::DAMAGE);
     }
 
@@ -70,7 +69,7 @@ void Player::Render2D() const {
         font.Get(),
         SimpleMath::Vector2(0.0f, 30.0f),
         DX9::Colors::Red,
-        L"プレイヤー:%f", player_dmg_.GetPlayerHP()
+        L"プレイヤー:%f", player_status_.GetPlayerHP()
     );
 }
 
@@ -138,9 +137,7 @@ void Player::SwitchState(const PLAYER_STATE state) {
     case PLAYER_STATE::DAMAGE:      player_state_ = &player_dmg_;           break;
     }
     SetMotion(ConvertToMotion(player_action_state_));
-    if (!initialize_stop_flag_) {
-        player_state_->Initialize();
-    }
+    player_state_->Initialize();
 }
 
 void Player::PlayAvoidSE() const {
