@@ -8,6 +8,8 @@ namespace boss {
 		Death() {
 			death_state_ = ATK_CANCEL;
 			time_delta_ = 0.0f;
+			death_time_y_ = 0.0f;
+			death_y_ = 0.0f;
 			l_pos_ = SimpleMath::Vector3::Zero;
 			r_pos_ = SimpleMath::Vector3::Zero;
 			l_rot_ = SimpleMath::Vector3::Zero;
@@ -30,9 +32,6 @@ namespace boss {
 		SimpleMath::Vector3 l_rot_;
 		SimpleMath::Vector3 r_rot_;
 
-		const float DEATH_ROT_X_ = 150.0f;
-		const float DEATH_POS_X_ = 18.0f;
-		const float DEATH_POS_Y_ = 3.0f;
 
 		enum DEATH_STATE_ {
 			ATK_CANCEL,
