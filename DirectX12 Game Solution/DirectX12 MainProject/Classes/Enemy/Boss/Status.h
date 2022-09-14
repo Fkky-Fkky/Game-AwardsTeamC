@@ -23,8 +23,8 @@ namespace boss {
 		void Update(const float deltaTime, const ObjectManager* const obj_m);
 		void Render2D()const;
 
-		bool IsWeak() const { return weak_count_ >= WEAK_COUNT_MAX_; }
 		float GetBossHP() const { return hp_; }
+		bool IsWeak() const { return weak_count_ >= WEAK_COUNT_MAX_; }
 	private:
 		void DamageProcess();
 
