@@ -56,9 +56,9 @@ private:
 	void SwitchStateWait();
 	void SwitchStateWeak();
 
-	BossHandL hand_l;
-	BossHandR hand_r;
-	BossAttack* attack;
+	boss::BossHandL hand_l;
+	boss::BossHandR hand_r;
+	boss::BossAttack* attack;
 
 	EFFECT beat_effect_;
 

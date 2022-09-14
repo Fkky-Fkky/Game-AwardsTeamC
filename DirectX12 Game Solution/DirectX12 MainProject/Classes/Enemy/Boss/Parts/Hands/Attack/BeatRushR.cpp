@@ -1,7 +1,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRushR.h"
 #include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
 
-void BeatRushR::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m){
+void boss::BeatRushR::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m){
 	pos_r_  = boss_handR_->GetHandPos();
 	rote_r_ = boss_handR_->GetRotation();
 	pos_l_  = boss_handL_->GetHandPos();
@@ -23,13 +23,13 @@ void BeatRushR::Update(const float deltaTime, const ObjectManager* const obj_m, 
 	boss_handL_->SetHandRote(rote_l_);
 }
 
-void BeatRushR::HandCheck() {	//手の状態を確認
+void boss::BeatRushR::HandCheck() {	//手の状態を確認
 	boss_handR_->SetHandMotion(HAND_MOTION::ROCK);
 	boss_handL_->SetHandMotion(HAND_MOTION::ROCK);
 	action_state_ = READY;
 }
 
-void BeatRushR::Ready() {	//両手を(ボスから見て)右側に構える
+void boss::BeatRushR::Ready() {	//両手を(ボスから見て)右側に構える
 	bool is_r_hand_start_pos_x_ = pos_r_.x  <= R_START_POS_X_;
 	bool is_r_hand_start_pos_z_ = pos_r_.z  <= ATTACK_POS_Z_;
 	bool is_r_hand_start_rot_	= rote_r_.x >= BEAT_HAND_ROCK_ROT_X_;
@@ -52,7 +52,7 @@ void BeatRushR::Ready() {	//両手を(ボスから見て)右側に構える
 	}
 }
 
-void BeatRushR::Attack(HandManager* const hand_m) {	//攻撃関数呼び出し
+void boss::BeatRushR::Attack(HandManager* const hand_m) {	//攻撃関数呼び出し
 	wait_time_ = std::min(wait_time_ + time_delta_, WAIT_TIME_MAX_);
 
 	BeatR(hand_m);
@@ -65,7 +65,7 @@ void BeatRushR::Attack(HandManager* const hand_m) {	//攻撃関数呼び出し
 	}
 }
 
-void BeatRushR::BeatR(HandManager* const hand_m) {	//右手叩きつけ攻撃
+void boss::BeatRushR::BeatR(HandManager* const hand_m) {	//右手叩きつけ攻撃
 	if (!r_hand_up_flag_) {
 		boss_handR_->SetAttackFlag(true);
 		r_beat_time_ += time_delta_;
@@ -95,7 +95,7 @@ void BeatRushR::BeatR(HandManager* const hand_m) {	//右手叩きつけ攻撃
 	is_r_attack_end_ = pos_r_.x >= HAND_RETURN_POS_X_;
 }
 
-void BeatRushR::BeatL(HandManager* const hand_m) {	//左手叩きつけ攻撃
+void boss::BeatRushR::BeatL(HandManager* const hand_m) {	//左手叩きつけ攻撃
 	if (!l_hand_up_flag_) {
 		boss_handL_->SetAttackFlag(true);
 		l_beat_time_ += time_delta_;
@@ -125,7 +125,7 @@ void BeatRushR::BeatL(HandManager* const hand_m) {	//左手叩きつけ攻撃
 	is_l_attack_end_ = pos_l_.x >= HAND_RETURN_POS_X_;
 }
 
-void BeatRushR::Reset() {	//手を画面外へ移動
+void boss::BeatRushR::Reset() {	//手を画面外へ移動
 	boss_handR_->SetAttackFlag(false);
 	boss_handR_->SetHandMotion(HAND_MOTION::WAIT_MOTION);
 	pos_r_.x  = -HAND_RETURN_POS_X_;
@@ -142,7 +142,7 @@ void BeatRushR::Reset() {	//手を画面外へ移動
 	action_state_ = RETURN;
 }
 
-void BeatRushR::HandReturn() {	//画面外から初期位置へ移動
+void boss::BeatRushR::HandReturn() {	//画面外から初期位置へ移動
 	pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
 	is_r_return_end_ = pos_r_.x >= HAND_R_INITIAL_POS_X_;
 

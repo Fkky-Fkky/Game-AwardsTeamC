@@ -37,9 +37,9 @@ public:
 	BoundingOrientedBox GetBodyCollision() const { return body_.GetBodyCollision(); }
 
 private:
-	BossBody body_;
+	boss::BossBody body_;
 	HandManager hand_;
-	Status status_;
+	boss::Status status_;
 
 	bool is_vertical_shake_;
 };

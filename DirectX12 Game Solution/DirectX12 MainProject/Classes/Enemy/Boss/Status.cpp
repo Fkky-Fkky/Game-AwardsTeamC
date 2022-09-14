@@ -1,7 +1,7 @@
 #include "Classes/Enemy/Boss/Status.h"
 #include "Classes/Collision/ObjectManager.h"
 
-void Status::Initialize() {
+void boss::Status::Initialize() {
 	damage_type_ = HAND;
 	weak_count_ = 0;
 	hp_ = BOSS_HP_MAX_;
@@ -11,7 +11,7 @@ void Status::Initialize() {
 	font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 }
 
-void Status::Update(const float deltaTime, const ObjectManager* const obj_m) {
+void boss::Status::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	invincible_time_ = std::max(invincible_time_ - deltaTime, 0.0f);
 	if (IsWeak()) {
 		weak_time_ = std::max(weak_time_ - deltaTime, 0.0f);
@@ -41,7 +41,7 @@ void Status::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	}
 }
 
-void Status::DamageProcess() {
+void boss::Status::DamageProcess() {
 	float damage_num_ = 0.0f;
 	switch (damage_type_) {
 	case HAND:	damage_num_ = HAND_DAMAGE_;	break;
@@ -52,7 +52,7 @@ void Status::DamageProcess() {
 	invincible_time_ = INVINCIBLE_TIME_MAX_;
 }
 
-void Status::Render2D() const {
+void boss::Status::Render2D() const {
 	DX9::SpriteBatch->DrawString(
 		font.Get(),
 		SimpleMath::Vector2(1000.0f, 0.0f),
