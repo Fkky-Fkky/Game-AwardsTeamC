@@ -20,7 +20,7 @@ void SceneChange::Update(const float deltaTime, ObjectManager* obj_m) {
 		is_game_start_ = black_alpha_ <= 0.0f;
 	}
 
-	if (obj_m->GetBossHP() <= 0.0f) {
+	if (obj_m->IsBossDeath()) {
 		white_alpha_ = std::min(white_alpha_ + ALPHA_SPEED_ * deltaTime, COLOR_MAX_);
 		scene_change_flag_ = white_alpha_ >= COLOR_MAX_;
 		is_game_clear_ = true;
