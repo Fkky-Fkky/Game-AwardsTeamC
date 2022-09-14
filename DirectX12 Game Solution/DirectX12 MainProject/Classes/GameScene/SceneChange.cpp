@@ -4,6 +4,7 @@
 void SceneChange::Initialize() {
 	black_alpha_ = COLOR_MAX_;
 	white_alpha_ = 0.0f;
+	wait_time_	 = 0.0f;
 	is_game_start_ = false;
 	is_game_clear_ = false;
 	scene_change_flag_ = false;
@@ -21,6 +22,9 @@ void SceneChange::Update(const float deltaTime, ObjectManager* obj_m) {
 	}
 
 	if (obj_m->IsBossDeath()) {
+		wait_time_ = std::min(wait_time_ + deltaTime, WAIT_TIME_MAX_);
+	}
+	if (wait_time_ >= WAIT_TIME_MAX_) {
 		white_alpha_ = std::min(white_alpha_ + ALPHA_SPEED_ * deltaTime, COLOR_MAX_);
 		scene_change_flag_ = white_alpha_ >= COLOR_MAX_;
 		is_game_clear_ = true;
