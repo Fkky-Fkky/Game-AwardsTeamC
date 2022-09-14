@@ -224,6 +224,7 @@
     <ClInclude Include="Classes\Player\PlayerRightMove.h" />
     <ClInclude Include="Classes\Player\PlayerState.h" />
     <ClInclude Include="Classes\Player\PlayerWait.h" />
+    <ClInclude Include="Classes\Player\PlayerStatus.h" />
     <ClInclude Include="Classes\UI\UI.h" />
     <ClInclude Include="ClearScene.h" />
     <ClInclude Include="DontDestroyOnLoad.h" />
@@ -280,6 +281,7 @@
     <ClCompile Include="Classes\Player\PlayerLeftMove.cpp" />
     <ClCompile Include="Classes\Player\PlayerRightMove.cpp" />
     <ClCompile Include="Classes\Player\PlayerWait.cpp" />
+    <ClCompile Include="Classes\Player\PlayerStatus.cpp" />
     <ClCompile Include="Classes\UI\UI.cpp" />
     <ClCompile Include="ClearScene.cpp" />
     <ClCompile Include="GameOverScene.cpp" />

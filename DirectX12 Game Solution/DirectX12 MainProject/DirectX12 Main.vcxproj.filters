@@ -213,6 +213,9 @@
     <ClInclude Include="Classes\Enemy\Boss\Status.h">
       <Filter>Classes\Enemy\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Player\PlayerStatus.h">
+      <Filter>Classes\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -337,6 +340,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Status.cpp">
       <Filter>Classes\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\PlayerStatus.cpp">
+      <Filter>Classes\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
