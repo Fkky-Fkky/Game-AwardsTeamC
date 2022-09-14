@@ -29,6 +29,7 @@ public:
 	bool IsBossHandOpen()const;
 	bool IsBossHandDmg()const;
 	bool IsBossWeak()const;
+	bool IsBossDeath()const;
 	bool IsGroundVerticalShake()const;
 	bool IsGroundSideShake()const;
 	SimpleMath::Vector3 GetPlayerPos()const;

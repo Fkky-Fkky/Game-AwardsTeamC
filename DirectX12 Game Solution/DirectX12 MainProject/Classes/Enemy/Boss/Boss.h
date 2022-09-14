@@ -27,7 +27,7 @@ public:
 
 	float GetBossHP() const { return status_.GetBossHP(); }
 	bool IsBossWeak() const { return status_.IsWeak(); }
-	bool IsBossDeath() const { return body_.IsBodyDeath(); }
+	bool IsBossDeath() const { return body_.IsBodyDeath() && hand_.IsHandDeath(); }
 	bool IsVerticalShake() const { if (hand_.IsVerticalShake() || is_vertical_shake_)  return true;  else return false; }
 	bool IsSideShake() const { return hand_.IsSideShake(); }
 	bool GetHandState() const { return hand_.GetHandState(); }
