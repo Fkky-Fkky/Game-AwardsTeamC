@@ -50,6 +50,13 @@ namespace boss {
 		const float BODY_SCALE_ = 0.8f;
 		const float COLLISION_SIZE_X_ = 0.1f;
 		const float COLLISION_SIZE_Z_ = 0.8f;
+		const float BODY_UP_SPEED_Y_ = 10.0f;
+		const float MOVE_SPEED_Z_ = 20.0f;
+		const float ROTATION_SPEED_ = 10.0f;
+		const float SHAKE_TIME_MAX_ = 0.2f;
+		const float ROTAION_SPEED_ = 200.0f;
+		const float DEATH_ROTATION_X_ = 40.0f;
+
 		const float JUMP_SPEED_ = 1.0f;
 		const float HALF_		= 0.5f;
 		const float GRAVITY_	= 2.0f;
