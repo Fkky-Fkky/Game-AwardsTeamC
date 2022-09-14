@@ -8,10 +8,21 @@ class Boss;
 namespace boss {
 	class BossBody : public BossParts {
 	public:
+		BossBody() {
+			time_delta_	  = 0.0f;
+			shake_time_   = 0.0f;
+			entyoku_time_ = 0.0f;
+			is_weak_		= false;
+			is_shake_		= false;
+			shake_set_flag_ = false;
+		}
+		~BossBody() {};
+
 		virtual void Initialize();
 		void LoadAssets();
 		void Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss);
 		void Render()const;
+
 		BoundingOrientedBox GetBodyCollision() const { return body_coll_; }
 	private:
 		void WeakAction();

@@ -25,7 +25,7 @@ public:
 
 	void SetVerticalShake(const bool enable) { is_vertical_shake_ = enable; }
 
-	int GetBossHP() const { return status_.GetBossHP(); }
+	float GetBossHP() const { return status_.GetBossHP(); }
 	bool IsBossWeak() const { return status_.IsWeak(); }
 	bool IsVerticalShake() const { if (hand_.IsVerticalShake() || is_vertical_shake_)  return true;  else return false; }
 	bool IsSideShake() const { return hand_.IsSideShake(); }
@@ -37,9 +37,9 @@ public:
 	BoundingOrientedBox GetBodyCollision() const { return body_.GetBodyCollision(); }
 
 private:
+	boss::Status status_;
 	boss::BossBody body_;
 	HandManager hand_;
-	boss::Status status_;
-
+	
 	bool is_vertical_shake_;
 };
