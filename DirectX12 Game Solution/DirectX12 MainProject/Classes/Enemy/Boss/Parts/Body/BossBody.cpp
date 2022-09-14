@@ -42,8 +42,13 @@ void boss::BossBody::Update(const float deltaTime, const ObjectManager* const ob
 	is_weak_ = obj_m->IsBossWeak();
 	SimpleMath::Vector3 player_pos_ = obj_m->GetPlayerPos();
 	rotation.y = player_pos_.x * -1;
-	WeakAction();
-	
+	if (boss->GetBossHP() <= 0.0f) {
+		DeathAction();
+	}
+	else {
+		WeakAction();
+	}
+
 	if (is_shake_) {
 		shake_time_ = std::max(shake_time_ - deltaTime, 0.0f);
 	}
@@ -63,7 +68,7 @@ void boss::BossBody::Render() const {
 	//coll_model_->Draw();
 }
 
-void boss::BossBody::WeakAction() {
+void boss::BossBody::WeakAction() {	//ウィーク状態時の動き
 	const float BODY_UP_SPEED_Y_   = 10.0f;
 	const float BODY_DOWN_SPEED_Y_ = 20.0f;
 	const float ROTATION_SPEED_ = 10.0f;
@@ -75,7 +80,6 @@ void boss::BossBody::WeakAction() {
 			position.y += entyoku;
 		}
 
-		//position.y = std::max(position.y - BODY_DOWN_SPEED_Y_ * time_delta_, BODY_DOWN_POS_Y_);
 		position.z = std::max(position.z - BODY_DOWN_SPEED_Y_ * time_delta_, BODY_WEAK_POS_Z_);
 		rotation.x = 0.0f;
 		rotation.y = 0.0f;
@@ -92,5 +96,19 @@ void boss::BossBody::WeakAction() {
 		rotation.x = std::max(rotation.x - ROTATION_SPEED_ * time_delta_, BODY_INIT_ROT_X_);
 		shake_set_flag_ = false;
 		entyoku_time_ = 0.0f;
+	}
+}
+
+void boss::BossBody::DeathAction() {	//HPが0になった時の動き
+	model_->SetTrackEnable(0, false);
+	const float BODY_DOWN_SPEED_Y_ = 20.0f;
+	const float SHAKE_TIME_MAX_ = 0.2f;
+
+	position.y = std::max(position.y - BODY_DOWN_SPEED_Y_ * time_delta_, BODY_WEAK_POS_Y_);
+	if (position.y <= BODY_WEAK_POS_Y_&& !shake_set_flag_) {
+		shake_set_flag_ = true;
+		is_shake_ = true;
+		shake_time_ = SHAKE_TIME_MAX_;
+		is_body_death_ = true;
 	}
 }
