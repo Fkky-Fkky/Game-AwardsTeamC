@@ -11,7 +11,8 @@ namespace boss {
 		BossBody() {
 			time_delta_	  = 0.0f;
 			shake_time_   = 0.0f;
-			entyoku_time_ = 0.0f;
+			body_jump_y_  = 0.0f;
+			body_jump_time_ = 0.0f;
 			is_weak_		= false;
 			is_shake_		= false;
 			shake_set_flag_ = false;
@@ -34,7 +35,8 @@ namespace boss {
 		DX9::MODEL coll_model_;
 		float time_delta_;
 		float shake_time_;
-		float entyoku_time_;
+		float body_jump_y_;
+		float body_jump_time_;
 		bool is_weak_;
 		bool is_shake_;
 		bool shake_set_flag_;
@@ -48,5 +50,8 @@ namespace boss {
 		const float BODY_SCALE_ = 0.8f;
 		const float COLLISION_SIZE_X_ = 0.1f;
 		const float COLLISION_SIZE_Z_ = 0.8f;
+		const float JUMP_SPEED_ = 1.0f;
+		const float HALF_		= 0.5f;
+		const float GRAVITY_	= 2.0f;
 	};
 }
