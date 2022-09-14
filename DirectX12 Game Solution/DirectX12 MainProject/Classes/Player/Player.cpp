@@ -12,6 +12,7 @@ void Player::Initialize() {
     player_state_ = &player_wait_;
     player_state_->Initialize();
     player_attack_colision_.Initialize();
+    player_status_.Initialize();
 }
 
 void Player::LoadAssets() {
@@ -45,6 +46,7 @@ void Player::Update(const float deltaTime, const ObjectManager* const obj_m) {
     if (is_jump_motion_play_) {
         JumpMotion(deltaTime);
     }
+    player_status_.Update(deltaTime, obj_m);
     model_->AdvanceTime(deltaTime);
     player_attack_colision_.Update(deltaTime, model_.get(), this);
     player_colision_.Update(deltaTime, model_.get());

@@ -12,6 +12,7 @@
 #include "Classes/Player/PlayerWait.h"
 #include "Classes/Player/PlayerState.h"
 #include "Classes/Player/PlayerDamage.h"
+#include "Classes/Player/PlayerStatus.h"
 
 using namespace DirectX;
 
@@ -61,7 +62,7 @@ public:
 	void SetStopInitializeFlag(const bool enable) { initialize_stop_flag_ = enable; }
 	void PlayAvoidSE()const;
 	void PlayJumpSE()const;
-	float GetPlayerHP() const { return player_dmg_.GetPlayerHP(); }
+	float GetPlayerHP() const { return player_status_.GetPlayerHP(); }
 	bool IsPlayerAttackStart() const { return player_attack_.IsPlayerAttackStart(); }
 	bool IsPlayerAttack() const { return player_attack_colision_.IsPlayerAttack(); }
 	SimpleMath::Vector3 GetPlayerPosition() const { return pos_; }
@@ -102,4 +103,5 @@ private:
 	player::PlayerWait			 player_wait_;
 	player::PlayerDamage		 player_dmg_;
 	player::PlayerState*		 player_state_;
+	player::PlayerStatus		 player_status_;
 };
