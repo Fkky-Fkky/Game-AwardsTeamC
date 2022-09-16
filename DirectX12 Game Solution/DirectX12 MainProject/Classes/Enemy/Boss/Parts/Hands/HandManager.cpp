@@ -106,7 +106,6 @@ void HandManager::RandomHandState() {	//手の状態を変更する(グー・パー)
 
 void HandManager::SwitchStateAttack() {	//ボスの攻撃変更
 	delete attack;
-	attack_state_ = RIGHT_BEAT;
 	switch (attack_state_) {
 	case LEFT_BEAT:		attack = new boss::LeftBeat;	break;
 	case LEFT_SLAP:		attack = new boss::LeftSlap;	break;
