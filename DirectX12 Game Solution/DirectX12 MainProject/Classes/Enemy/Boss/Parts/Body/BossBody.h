@@ -17,6 +17,7 @@ namespace boss {
 			is_shake_		= false;
 			shake_set_flag_ = false;
 			is_body_death_ = false;
+			is_shake_reset_ = false;
 		}
 		~BossBody() {};
 
@@ -41,12 +42,14 @@ namespace boss {
 		bool is_shake_;
 		bool shake_set_flag_;
 		bool is_body_death_;
+		bool is_shake_reset_;
 
 		const float BODY_INIT_POS_Y_ = 17.0f;
 		const float BODY_INIT_POS_Z_ = 15.0f;
 		const float BODY_INIT_ROT_X_ = -20.0f;
 		const float BODY_WEAK_POS_Y_ = 5.0f;
 		const float BODY_WEAK_POS_Z_ = 5.0f;
+		const float BODY_DEATH_POS_Y_ = 4.0f;
 		const float BODY_SCALE_ = 0.8f;
 		const float COLLISION_SIZE_X_ = 0.1f;
 		const float COLLISION_SIZE_Z_ = 0.8f;

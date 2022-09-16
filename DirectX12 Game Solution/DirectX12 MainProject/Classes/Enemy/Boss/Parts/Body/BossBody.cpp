@@ -12,6 +12,7 @@ void boss::BossBody::Initialize() {
 	body_jump_time_ = 0.0f;
 	is_weak_ = false;
 	shake_set_flag_ = false;
+	is_shake_reset_ = false;
 }
 
 void boss::BossBody::LoadAssets() {
@@ -42,6 +43,12 @@ void boss::BossBody::Update(const float deltaTime, const ObjectManager* const ob
 	is_weak_ = obj_m->IsBossWeak();
 	SimpleMath::Vector3 player_pos_ = obj_m->GetPlayerPos();
 	if (boss->GetBossHP() <= 0.0f) {
+		if(!is_shake_reset_){
+			is_shake_reset_ = true;
+			shake_time_ = 0.0f;
+			is_shake_ = false;
+			shake_set_flag_ = false;
+		}
 		DeathAction();
 	}
 	else {
@@ -102,17 +109,20 @@ void boss::BossBody::DeathAction() {	//HP‚ª0‚É‚È‚Á‚½Žž‚Ì“®‚«
 	body_jump_time_ += time_delta_;
 	body_jump_y_ = JUMP_SPEED_ * body_jump_time_ - HALF_ * GRAVITY_ * body_jump_time_ * body_jump_time_;
 	position.y += body_jump_y_;
+	if (position.y <= BODY_DEATH_POS_Y_) {
+		position.y = BODY_DEATH_POS_Y_;
+	}
 
+	position.z = std::min(position.z + MOVE_SPEED_Z_  * time_delta_, BODY_INIT_POS_Z_);
 	rotation.x = std::min(rotation.x + ROTAION_SPEED_ * time_delta_, DEATH_ROTATION_X_);
-	bool is_death_pos_ = position.y <= BODY_WEAK_POS_Y_;
+
+	bool is_death_pos_ = position.y <= BODY_DEATH_POS_Y_ && position.z >= BODY_INIT_POS_Z_;
 	bool is_death_rot_ = rotation.x >= DEATH_ROTATION_X_;
-	if (is_death_pos_) {
-		position.y = BODY_WEAK_POS_Y_;
-		if (is_death_rot_ && !shake_set_flag_) {
-			shake_set_flag_ = true;
-			is_shake_		= true;
-			shake_time_		= SHAKE_TIME_MAX_;
-			is_body_death_	= true;
-		}
+	bool is_body_death_set_ = is_death_pos_ && is_death_rot_;
+	if (is_body_death_set_ && !shake_set_flag_) {
+		shake_set_flag_ = true;
+		is_shake_		= true;
+		shake_time_		= SHAKE_TIME_MAX_;
+		is_body_death_	= true;
 	}
 }
