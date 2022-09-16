@@ -34,6 +34,12 @@ void BossHand::Update(const float deltaTime) {
 	BossParts::Update(deltaTime);
 	timde_delta_ = deltaTime;
 	PlayMotion();
+	if (is_death_motion_) {
+		motion_stop_time_ = std::max(motion_stop_time_ - timde_delta_, 0.0f);
+		if (motion_stop_time_ <= 0.0f) {
+			model_->SetTrackEnable(motion_track_, false);
+		}
+	}
 }
 
 void BossHand::Render() const {
@@ -99,4 +105,10 @@ void BossHand::HandMotionAttack() {	//攻撃モーション
 
 void BossHand::HandMotionWait() const {	//待機モーション
 	model_->SetTrackEnable(WAIT, true);
+}
+
+void BossHand::PlayDeathMotion() {	//ボスやられた時再生
+	is_death_motion_ = true;
+	SetHandMotion(WAIT);
+	motion_stop_time_ = STOP_TIME_;
 }

@@ -2,7 +2,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
 #include "Classes/Collision/ObjectManager.h"
 
-void Wait::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) {
+void boss::Wait::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) {
 	float boss_hp_ = obj_m->GetBossHP();
 
 	bool normal_time_ = boss_hp_ <= HP_NORMAL_MAX_ && boss_hp_ > HP_NORMAL_MIN_;

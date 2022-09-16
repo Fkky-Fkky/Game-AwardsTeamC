@@ -8,11 +8,13 @@ class BossHand : public BossParts{
 public:
 	BossHand() {
 		motion_track_ = 0;
-		timde_delta_ = 0.0f;
-		motion_time_ = 0.0f;
-		motion_time_max_ = 0.0f;
-		motion_flag_ = false;
-		attack_flag_ = false;
+		timde_delta_  = 0.0f;
+		motion_time_  = 0.0f;
+		motion_time_max_  = 0.0f;
+		motion_stop_time_ = 0.0f;
+		motion_flag_	 = false;
+		attack_flag_	 = false;
+		is_death_motion_ = false;
 	}
 
 	~BossHand() {};
@@ -21,6 +23,7 @@ public:
 	virtual void Update(const float deltaTime);
 	virtual void Render()const;
 
+	void PlayDeathMotion();
 	void SetHandPos(const SimpleMath::Vector3 position_) { position = position_; }
 	void SetHandRote(const SimpleMath::Vector3 rotation_) { rotation = rotation_; }
 	void SetAttackFlag(const bool attack_flag) { attack_flag_ = attack_flag; }
@@ -49,10 +52,11 @@ private:
 	float motion_time_;
 	float motion_time_max_;
 	float timde_delta_;
+	float motion_stop_time_;
 	bool motion_flag_;
 	bool attack_flag_;
+	bool is_death_motion_;
 
-	const int HAND_HP_MAX_ = 3;
 	const int MOTION_MAX_  = 5;
 	const float BACK_MOTION_TIME_ = 0.96f;
 	const float ATK_MOTION_TIME_  = 0.96f;
@@ -60,6 +64,7 @@ private:
 	const float COLLSION_SIZE_Y_ = 0.6f;
 	const float COLLSION_SIZE_Z_ = 2.0f;
 	const float HAND_SCALE = 0.8f;
+	const float STOP_TIME_ = 0.5f;
 protected:
 
 	BoundingOrientedBox collision;

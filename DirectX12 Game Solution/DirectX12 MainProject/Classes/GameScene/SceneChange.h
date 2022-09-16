@@ -12,6 +12,7 @@ public:
 	SceneChange() {
 		black_alpha_ = 0.0f;
 		white_alpha_ = 0.0f;
+		wait_time_	 = 0.0f;
 		scene_change_flag_ = false;
 		is_game_start_ = false;
 		is_game_clear_ = false;
@@ -33,6 +34,7 @@ private:
 
 	float black_alpha_;
 	float white_alpha_;
+	float wait_time_;
 	bool scene_change_flag_;
 	bool is_game_start_;
 	bool is_game_clear_;
@@ -42,4 +44,5 @@ private:
 	const float ALPHA_SPEED_ = 180.0f;
 	const float COLOR_MAX_ = 255.0f;
 	const float SPRITE_POS_Z_ = -10.0f;
+	const float WAIT_TIME_MAX_ = 1.0f;
 };

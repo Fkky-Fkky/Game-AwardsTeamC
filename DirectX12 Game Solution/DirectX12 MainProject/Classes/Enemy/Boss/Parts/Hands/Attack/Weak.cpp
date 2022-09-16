@@ -2,7 +2,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
 #include "Classes/Collision/ObjectManager.h"
 
-void Weak::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) {
+void boss::Weak::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) {
 	pos_r_ = boss_handR_->GetHandPos();
 	pos_l_ = boss_handL_->GetHandPos();
 	rot_r_ = boss_handR_->GetRotation();
@@ -23,7 +23,7 @@ void Weak::Update(const float deltaTime, const ObjectManager* const obj_m, HandM
 	boss_handL_->SetHandRote(rot_l_);
 }
 
-void Weak::AtkCancel(HandManager* const hand_m) {	//攻撃フラグを降ろす
+void boss::Weak::AtkCancel(HandManager* const hand_m) {	//攻撃フラグを降ろす
 	boss_handL_->SetAttackFlag(false);
 	boss_handR_->SetAttackFlag(false);
 	boss_handL_->SetHandMotion(HAND_MOTION::WAIT_MOTION);
@@ -33,7 +33,7 @@ void Weak::AtkCancel(HandManager* const hand_m) {	//攻撃フラグを降ろす
 	weak_state_ = READY;
 }
 
-void Weak::Ready(HandManager* const hand_m) {	//両手の移動処理
+void boss::Weak::Ready(HandManager* const hand_m) {	//両手の移動処理
 	const float WEAK_SPEED_Y_ = 2.0f;
 	const float WEAK_GRAVITY_ = 6.0f;
 	weak_time_y_ += time_delta_;
@@ -53,7 +53,7 @@ void Weak::Ready(HandManager* const hand_m) {	//両手の移動処理
 	}
 }
 
-void Weak::ReadyR() {	//右手の移動
+void boss::Weak::ReadyR() {	//右手の移動
 	if (pos_r_.x <= -WEAK_POS_X_) {
 		pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, -WEAK_POS_X_);
 	}
@@ -68,7 +68,7 @@ void Weak::ReadyR() {	//右手の移動
 	rot_r_.x = std::min(rot_r_.x + ROTE_SPEED_ + time_delta_, WEAK_ROT_X_);
 }
 
-void Weak::ReadyL() {	//左手の移動
+void boss::Weak::ReadyL() {	//左手の移動
 	if (pos_l_.x <= WEAK_POS_X_) {
 		pos_l_.x = std::min(pos_l_.x + MOVE_SPEED_X_ * time_delta_, WEAK_POS_X_);
 	}
@@ -83,14 +83,14 @@ void Weak::ReadyL() {	//左手の移動
 	rot_l_.x = std::min(rot_l_.x + ROTE_SPEED_ * time_delta_, WEAK_ROT_X_);
 }
 
-void Weak::BossWeak(const ObjectManager* const obj_m, HandManager* const hand_m) {	//ウィーク状態維持
+void boss::Weak::BossWeak(const ObjectManager* const obj_m, HandManager* const hand_m) {	//ウィーク状態維持
 	hand_m->SetVerticalShake(false);
 	if (!obj_m->IsBossWeak()) {
 		weak_state_ = INITIAL_POS_MOVE;
 	}
 }
 
-void Weak::InitialPosMove() {	//手を初期座標に移動
+void boss::Weak::InitialPosMove() {	//手を初期座標に移動
 	pos_r_.x = std::min(pos_r_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
 	pos_l_.x = std::max(pos_l_.x - MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
 	

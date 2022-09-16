@@ -81,6 +81,10 @@ bool ObjectManager::IsBossWeak() const {
 	return boss_->IsBossWeak();
 }
 
+bool ObjectManager::IsBossDeath() const {
+	return boss_->IsBossDeath();
+}
+
 bool ObjectManager::IsGroundVerticalShake() const {
 	return boss_->IsVerticalShake();
 }
