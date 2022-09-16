@@ -35,17 +35,22 @@ void boss::LeftBeat::HandCheck(const HandManager* const hand_m) {	//Žè‚Ìó‘Ô‚ðŠm
 }
 
 void boss::LeftBeat::Ready(const ObjectManager* const obj_m) { //ƒvƒŒƒCƒ„[‚ÌÀ•W‚ÉŽè‚ðˆÚ“®‚³‚¹‚é
-	SimpleMath::Vector3 move_dest_ = obj_m->GetPlayerPos();
-
-	ready_time_ = std::min(ready_time_ + time_delta_, READY_TIME_MAX_);
+	const SimpleMath::Vector3 move_dest_ = obj_m->GetPlayerPos();
+	const float DEST_SPEED_X_ = (is_player_pos_arrival_) ? CHASE_SPEED_ : MOVE_SPEED_X_;
+	ready_time_  = std::min(ready_time_ + time_delta_, READY_TIME_MAX_);
 	if (ready_time_ <= CHASE_PLAYER_TIME_) {
 		if (pos_.x < move_dest_.x) {
-			pos_.x = std::min(pos_.x + MOVE_SPEED_X_ * time_delta_, move_dest_.x);
+			pos_.x = std::min(pos_.x + DEST_SPEED_X_ * time_delta_, move_dest_.x);
 		}
 		else {
-			pos_.x = std::max(pos_.x - MOVE_SPEED_X_ * time_delta_, move_dest_.x);
+			pos_.x = std::max(pos_.x - DEST_SPEED_X_ * time_delta_, move_dest_.x);
 		}
 	}
+
+	if (pos_.x == move_dest_.x) {
+		is_player_pos_arrival_ = true;
+	}
+
 	pos_.z  = std::max(pos_.z  - MOVE_SPEED_Z_ * time_delta_, ATTACK_POS_Z_);
 	if (!hand_state_) {
 		rote_.x = std::min(rote_.x + ROTE_SPEED_ * time_delta_, BEAT_HAND_ROCK_ROT_X_);
@@ -62,7 +67,7 @@ void boss::LeftBeat::Ready(const ObjectManager* const obj_m) { //ƒvƒŒƒCƒ„[‚ÌÀ•
 void boss::LeftBeat::LeftBeatAttack(HandManager* const hand_m) { //’@‚«‚Â‚¯UŒ‚
 	boss_handL_->SetAttackFlag(true);
 	beat_time_ += time_delta_;
-	float beat_ = BEAT_SPEED_ * beat_time_ - HALF_ * BEAT_GRAVITY_ * beat_time_ * beat_time_;
+	const float beat_ = BEAT_SPEED_ * beat_time_ - HALF_ * BEAT_GRAVITY_ * beat_time_ * beat_time_;
 	pos_.y += beat_;
 
 	if (pos_.y <= limit_pos_y_) {
