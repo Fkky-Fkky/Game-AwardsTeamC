@@ -7,12 +7,16 @@ void boss::BossBody::Initialize() {
 		SimpleMath::Vector3(0.0f, BODY_INIT_POS_Y_, BODY_INIT_POS_Z_),
 		SimpleMath::Vector3(BODY_INIT_ROT_X_, 0.0f, 0.0f)
 	);
-	time_delta_ = 0.0f;
-	shake_time_ = 0.0f;
+	time_delta_		= 0.0f;
+	shake_time_		= 0.0f;
+	body_jump_y_	= 0.0f;
 	body_jump_time_ = 0.0f;
-	is_weak_ = false;
+	is_weak_  = false;
+	is_shake_ = false;
 	shake_set_flag_ = false;
+	is_body_death_	= false;
 	is_shake_reset_ = false;
+	is_start_pos_	= false;
 }
 
 void boss::BossBody::LoadAssets() {
@@ -42,6 +46,12 @@ void boss::BossBody::Update(const float deltaTime, const ObjectManager* const ob
 	time_delta_ = deltaTime;
 	is_weak_ = obj_m->IsBossWeak();
 	SimpleMath::Vector3 player_pos_ = obj_m->GetPlayerPos();
+
+	if (!is_start_pos_) {
+		AdventAction();
+		return;
+	}
+
 	if (boss->GetBossHP() <= 0.0f) {
 		if(!is_shake_reset_){
 			is_shake_reset_ = true;
@@ -75,6 +85,13 @@ void boss::BossBody::Render() const {
 	//coll_model_->Draw();
 }
 
+void boss::BossBody::AdventAction() {	//登場時の動き
+	position.y	  = std::max(position.y - ADVENT_SPEED_ * time_delta_, BODY_START_POS_Y_);
+	is_start_pos_ = position.y <= BODY_START_POS_Y_;
+	body_coll_.Center = model_->GetPosition();
+	body_coll_.Orientation = model_->GetRotationQuaternion();
+}
+
 void boss::BossBody::WeakAction() {	//ウィーク状態時の動き
 	if (is_weak_) {
 		if (position.y > BODY_WEAK_POS_Y_) {
@@ -94,7 +111,7 @@ void boss::BossBody::WeakAction() {	//ウィーク状態時の動き
 		}
 	}
 	else {
-		position.y = std::min(position.y + BODY_UP_SPEED_Y_ * time_delta_, BODY_INIT_POS_Y_);
+		position.y = std::min(position.y + BODY_UP_SPEED_Y_ * time_delta_, BODY_START_POS_Y_);
 		position.z = std::min(position.z + MOVE_SPEED_Z_	* time_delta_, BODY_INIT_POS_Z_);
 		rotation.x = std::max(rotation.x - ROTATION_SPEED_  * time_delta_, BODY_INIT_ROT_X_);
 		body_jump_time_ = 0.0f;
@@ -114,7 +131,7 @@ void boss::BossBody::DeathAction() {	//HPが0になった時の動き
 	}
 
 	position.z = std::min(position.z + MOVE_SPEED_Z_  * time_delta_, BODY_INIT_POS_Z_);
-	rotation.x = std::min(rotation.x + ROTAION_SPEED_ * time_delta_, DEATH_ROTATION_X_);
+	rotation.x = std::min(rotation.x + DEATH_ROTATION_SPEED_ * time_delta_, DEATH_ROTATION_X_);
 
 	bool is_death_pos_ = position.y <= BODY_DEATH_POS_Y_ && position.z >= BODY_INIT_POS_Z_;
 	bool is_death_rot_ = rotation.x >= DEATH_ROTATION_X_;
