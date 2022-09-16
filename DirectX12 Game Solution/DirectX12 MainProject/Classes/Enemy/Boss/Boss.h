@@ -21,7 +21,6 @@ public:
 	void LoadAseets();
 	void Update(const float deltaTime, const ObjectManager* const obj_m);
 	void Render()const;
-	void Render2D()const;
 
 	void SetVerticalShake(const bool enable) { is_vertical_shake_ = enable; }
 

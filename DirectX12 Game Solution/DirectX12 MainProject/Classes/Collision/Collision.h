@@ -20,9 +20,7 @@ public:
 	~Collision() {};
 
 	void Initialize();
-	void LoadAssets();
 	void Update(const float deltaTime, const ObjectManager* const obj_m_);
-	void Render2D()const;
 
 	bool GetPlayerDmgFlagR() const { return player_dmg_flag_r_; }
 	bool GetPlayerDmgFlagL() const { return player_dmg_flag_l_; }
@@ -30,7 +28,6 @@ public:
 	bool IsBossHandDmg() const { if (boss_hand_r_dmg_flag_ || boss_hand_l_dmg_flag_)  return true; else return false; }
 
 private:
-	DX9::SPRITEFONT font;
 
 	float hand_dmg_flag_reset_time_;
 	bool player_dmg_flag_r_; 

@@ -52,7 +52,6 @@ public:
 	void LoadAssets();
 	void Update(const float deltaTime, const ObjectManager* const obj_m);
 	void Render()const;
-	void Render2D()const;
 
 	void SwitchState(const PLAYER_STATE state);
 	void SetPlayerPosition(const SimpleMath::Vector3 position) { pos_ = position; }
@@ -75,7 +74,6 @@ private:
 	PLAYER_MOTION ConvertToMotion(const PLAYER_STATE player_state)const;
 
 	DX9::SKINNEDMODEL model_;
-	DX9::SPRITEFONT font;
 
 	XAudio::SOUNDEFFECT avoid_se_;
 	XAudio::SOUNDEFFECT jump_se_;
