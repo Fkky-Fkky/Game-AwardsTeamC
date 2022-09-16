@@ -7,8 +7,8 @@ void UI::Initialize() {
 	boss_side_shake_	 = RIGHT;
 	boss_vertical_shake_ = UP;
 
-	player_hp_width_ = PLAYER_HP_MAX_WIDTH_;
-	boss_hp_width_	 = BOSS_HP_MAX_WIDTH_;
+	player_hp_width_ = 0.0f;
+	boss_hp_width_	 = 0.0f;
 	old_player_hp_ = 0.0f;
 	old_boss_hp_   = 0.0f;
 	time_delta_	   = 0.0f;
@@ -29,25 +29,39 @@ void UI::LoadAssets() {
 
 void UI::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	time_delta_ = deltaTime;
-	player_hp_width_ = obj_m->GetPlayerHP() * PLAYER_HP_WIDTH_DIVIDE_;
-	boss_hp_width_	 = obj_m->GetBossHP()	* BOSS_HP_WIDTH_DIVIDE_;
+	const float player_hp_ = obj_m->GetPlayerHP() * PLAYER_HP_WIDTH_DIVIDE_;
+	const float boss_hp_   = obj_m->GetBossHP()	  * BOSS_HP_WIDTH_DIVIDE_;
 
-	if (old_player_hp_ > player_hp_width_) {
+	if (player_hp_width_ > player_hp_) {
+		player_hp_width_ = std::max(player_hp_width_ - HP_SPEED_ * deltaTime, player_hp_);
+	}
+	else {
+		player_hp_width_ = std::min(player_hp_width_ + HP_SPEED_ * deltaTime, player_hp_);
+	}
+
+	if (boss_hp_width_ > boss_hp_) {
+		boss_hp_width_ = std::max(boss_hp_width_ - HP_SPEED_ * deltaTime, boss_hp_);
+	}
+	else {
+		boss_hp_width_ = std::min(boss_hp_width_ + HP_SPEED_ * deltaTime, boss_hp_);
+	}
+
+	if (old_player_hp_ > player_hp_) {
 		is_player_damage_ = true;
 	}
 	if (is_player_damage_) {
 		PlayerUIShake();
 	}
 
-	if (old_boss_hp_ > boss_hp_width_) {
+	if (old_boss_hp_ > boss_hp_) {
 		is_boss_damage_ = true;
 	}
 	if (is_boss_damage_) {
 		BossUIShake();
 	}
 
-	old_player_hp_ = player_hp_width_;
-	old_boss_hp_   = boss_hp_width_;
+	old_player_hp_ = player_hp_;
+	old_boss_hp_   = boss_hp_;
 }
 
 void UI::Render() const{
