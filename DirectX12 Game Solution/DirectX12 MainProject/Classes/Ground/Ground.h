@@ -10,17 +10,17 @@ using namespace DirectX;
 class Ground {
 public:
 	Ground() { 
-		mist_pos_ = SimpleMath::Vector3(MIST_INIT_POS_X_,0.0f, MIST_INIT_POS_Z_);
-		bg_flag_ = false;
+		mist_pos_ = SimpleMath::Vector3(MIST_INIT_POS_X_, 0.0f, MIST_INIT_POS_Z_);
+		bg_change_flag_ = false;
 		enemy_bg_alpha_ = COLOR_MAX_;
 		miset_speed_ = MIST_MOVE_SPEED_SLOW_;
 	}
 	~Ground() {};
 
 	void LoadAssets();
-	void Update(const float deltaTime, ObjectManager* object);
-	void Render();
-	void Render2D();
+	void Update(const float deltaTime, const ObjectManager* const obj_m);
+	void Render()const;
+	void Render2D()const;
 
 private:
 	DX9::MODEL stage_;
@@ -30,7 +30,7 @@ private:
 	DX9::MEDIARENDERER bgm_main_;
 
 	SimpleMath::Vector3 mist_pos_;
-	bool bg_flag_;
+	bool bg_change_flag_;
 	float enemy_bg_alpha_;
 	float miset_speed_;
 
@@ -43,9 +43,10 @@ private:
 	const float MIST_INIT_POS_X_ = -1280.0f;
 	const float MIST_MOVE_SPEED_SLOW_ = 100.0f;
 	const float MIST_MOVE_SPEED_QUICK_ = 200.0f;
-	const float ADD_MIST_SPEED_ = 80.0f;
+	const float ADD_MIST_SPEED_  = 80.0f;
 	const float ADD_ALPHA_SPEED_ = 300.0f;
 	const float COLOR_MAX_ = 255.0f;
 	const float SPRITE_WIDTH_ = 1280.0f;
 	const float SPRITE_HIGHT_ = 720.0f;
+	const float BOSS_HP_HALF_ = 15.0f;
 };

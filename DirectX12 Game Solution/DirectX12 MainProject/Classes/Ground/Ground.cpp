@@ -8,35 +8,25 @@ void Ground::LoadAssets() {
 
     enemy_bg_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BG/EnemyBG.png");
     boss_bg_  = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BG/BossBattleBG.png");
-    mist_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BG/Mist.png");
+    mist_     = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BG/Mist.png");
 
     bgm_main_ = DX9::MediaRenderer::CreateFromFile(DXTK->Device9, L"BGM/game_main.mp3");
     bgm_main_->Play();
 }
 
-void Ground::Update(const float deltaTime, ObjectManager* object) {
+void Ground::Update(const float deltaTime, const ObjectManager* const obj_m) {
     if (bgm_main_->isComplete()) {
         bgm_main_->Replay();
     }
 
-    //if (!bg_flag_) {
-    //    bg_flag_ = true;
-    //}
-    //else {
-    //    bg_flag_ = false;
-    //}
+    bg_change_flag_ = obj_m->GetBossHP() <= BOSS_HP_HALF_;
     
-    if (bg_flag_) {
+    if (bg_change_flag_) {
         enemy_bg_alpha_ = std::max(enemy_bg_alpha_ - ADD_ALPHA_SPEED_ * deltaTime, 0.0f);
-    }
-    else {
-        enemy_bg_alpha_ = std::min(enemy_bg_alpha_ + ADD_ALPHA_SPEED_ * deltaTime, COLOR_MAX_);
-    }
-
-    if (bg_flag_) {
         miset_speed_ = std::min(miset_speed_ + ADD_MIST_SPEED_ * deltaTime, MIST_MOVE_SPEED_QUICK_);
     }
     else {
+        enemy_bg_alpha_ = std::min(enemy_bg_alpha_ + ADD_ALPHA_SPEED_ * deltaTime, COLOR_MAX_);
         miset_speed_ = std::max(miset_speed_ - ADD_MIST_SPEED_ * deltaTime, MIST_MOVE_SPEED_SLOW_);
     }
 
@@ -46,11 +36,11 @@ void Ground::Update(const float deltaTime, ObjectManager* object) {
     }
 }
 
-void Ground::Render() {
+void Ground::Render() const {
     stage_->Draw();
 }
 
-void Ground::Render2D() {
+void Ground::Render2D() const {
     DX9::SpriteBatch->DrawSimple(
         enemy_bg_.Get(),
         SimpleMath::Vector3(0.0f, 0.0f, ENEMY_BG_POS_Z_),
