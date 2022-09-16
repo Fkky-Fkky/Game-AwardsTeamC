@@ -36,7 +36,7 @@ namespace boss {
 		float invincible_time_;
 		float weak_time_;
 		bool is_set_weak_time_;
-		const int WEAK_COUNT_MAX_ = 1;
+		const int WEAK_COUNT_MAX_ = 3;
 		const float BOSS_HP_MAX_ = 30.0f;
 		const float HAND_DAMAGE_ = 1.0f;
 		const float BODY_DAMAGE_ = 5.0f;
