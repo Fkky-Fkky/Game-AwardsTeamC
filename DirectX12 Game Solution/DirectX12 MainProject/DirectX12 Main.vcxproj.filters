@@ -43,9 +43,6 @@
     <Filter Include="Classes\Enemy\Boss\Parts\Hands">
       <UniqueIdentifier>{7349bd19-d3a5-46e8-85cf-3203e782ec81}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Enemy\Boss\Parts\Hands\Attack">
-      <UniqueIdentifier>{bbe7deec-8661-4eff-a28f-c2a7c3e23e44}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Enemy\Boss\Parts\Hands\RightHand">
       <UniqueIdentifier>{1c80a96a-b425-47ab-93da-dddc11c75194}</UniqueIdentifier>
     </Filter>
@@ -63,6 +60,9 @@
     </Filter>
     <Filter Include="Classes\My_Light">
       <UniqueIdentifier>{08d279e1-8d7c-4f5f-bdb5-a4c4857d713b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Enemy\Boss\Parts\Hands\Attack">
+      <UniqueIdentifier>{bbe7deec-8661-4eff-a28f-c2a7c3e23e44}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +219,9 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Death.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Advent.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -348,6 +351,9 @@
       <Filter>Classes\Player</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Death.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Advent.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClCompile>
   </ItemGroup>

@@ -22,7 +22,3 @@ void Boss::Render() const {
 	body_.Render();
 	hand_.Render();
 }
-
-void Boss::Render2D() const {
-	status_.Render2D();
-}

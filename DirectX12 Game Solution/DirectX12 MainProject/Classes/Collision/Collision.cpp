@@ -10,10 +10,6 @@ void Collision::Initialize() {
 	boss_hand_l_dmg_flag_ = false;
 }
 
-void Collision::LoadAssets() {
-	font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
-}
-
 void Collision::Update(const float deltaTime, const ObjectManager* const obj_m_) {
 	bool boss_r_atk_flag_ = obj_m_->GetBossRAttackFlag();
 	bool boss_l_atk_flag_ = obj_m_->GetBossLAttackFlag();
@@ -56,43 +52,5 @@ void Collision::Update(const float deltaTime, const ObjectManager* const obj_m_)
 	if (hand_dmg_flag_reset_time_ <= 0.0f) {	//一定時間経過で手のダメージフラグ降ろす
 		boss_hand_r_dmg_flag_ = false;
 		boss_hand_l_dmg_flag_ = false;
-	}
-}
-
-void Collision::Render2D() const {
-	if (player_dmg_flag_r_ ||
-		player_dmg_flag_l_) {
-		DX9::SpriteBatch->DrawString(
-			font.Get(),
-			SimpleMath::Vector2(0.0f, 0.0f),
-			DX9::Colors::Red,
-			L"当たってる"
-		);
-	}
-	else {
-		DX9::SpriteBatch->DrawString(
-			font.Get(),
-			SimpleMath::Vector2(0.0f, 0.0f),
-			DX9::Colors::Red,
-			L"当たってない"
-		);
-	}
-
-	if (boss_hand_r_dmg_flag_ ||
-		boss_hand_l_dmg_flag_) {
-		DX9::SpriteBatch->DrawString(
-			font.Get(),
-			SimpleMath::Vector2(0.0f, 90.0f),
-			DX9::Colors::Red,
-			L"手に攻撃当たってる"
-		);
-	}
-	else {
-		DX9::SpriteBatch->DrawString(
-			font.Get(),
-			SimpleMath::Vector2(0.0f, 90.0f),
-			DX9::Colors::Red,
-			L"手に攻撃当たってない"
-		);
 	}
 }

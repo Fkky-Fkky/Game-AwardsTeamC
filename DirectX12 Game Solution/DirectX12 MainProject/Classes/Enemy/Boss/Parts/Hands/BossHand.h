@@ -70,7 +70,7 @@ protected:
 	BoundingOrientedBox collision;
 	DX9::MODEL collision_model;
 
-	const float INITIAL_POS_Y_ = 13.0f;
+	const float INITIAL_POS_Y_ = 50.0f;
 	const float INITIAL_POS_Z_ = 10.0f;
 	const float INITIAL_ROT_X_ = 30.0f;
 	const float INITIAL_ROT_Y_ = 90.0f;

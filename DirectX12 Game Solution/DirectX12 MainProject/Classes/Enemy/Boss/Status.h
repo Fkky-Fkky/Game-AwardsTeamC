@@ -21,14 +21,11 @@ namespace boss {
 
 		void Initialize();
 		void Update(const float deltaTime, const ObjectManager* const obj_m);
-		void Render2D()const;
 
 		float GetBossHP() const { return hp_; }
 		bool IsWeak() const { return weak_count_ >= WEAK_COUNT_MAX_; }
 	private:
 		void DamageProcess();
-
-		DX9::SPRITEFONT font;
 
 		int damage_type_;
 		int weak_count_;

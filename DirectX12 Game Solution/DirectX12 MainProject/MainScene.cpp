@@ -55,7 +55,6 @@ void MainScene::LoadAssets()
     boss_.LoadAseets();
     player_.LoadAssets();
     ground_.LoadAssets();
-    collision_.LoadAssets();
     scene_change_.LoadAssets();
     ui.LoadAssets();
     light_.LoadAssets();
@@ -132,10 +131,7 @@ void MainScene::Render()
     DX9::SpriteBatch->Begin();
 
     ground_.Render2D();
-    collision_.Render2D();
     scene_change_.Render2D();
-    player_.Render2D();
-    boss_.Render2D();
     ui.Render();
 
     DX9::SpriteBatch->End();

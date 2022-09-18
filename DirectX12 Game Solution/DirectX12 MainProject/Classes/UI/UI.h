@@ -69,10 +69,9 @@ private:
 	const int BOSS_HP_HIGHT_   = 30;
 	const float PLAYER_HP_POS_X_ = 50.0f;
 	const float PLAYER_HP_POS_Y_ = 680.0f;
-	const float PLAYER_HP_MAX_WIDTH_ = 340.0f;
-	const float PLAYER_HP_WIDTH_DIVIDE_ = 11.3f;	//HPゲージ1/30の数
 	const float BOSS_HP_POS_X_ = 190.0f;
 	const float BOSS_HP_POS_Y_ = 30.0f;
-	const float BOSS_HP_MAX_WIDTH_ = 900.0f;
+	const float PLAYER_HP_WIDTH_DIVIDE_ = 11.3f;	//HPゲージ1/30の数
 	const float BOSS_HP_WIDTH_DIVIDE_ = 30.0f;
+	const float HP_SPEED_ = 300.0f;
 };

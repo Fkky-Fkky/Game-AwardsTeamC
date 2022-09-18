@@ -21,8 +21,6 @@ void Player::LoadAssets() {
     player_colision_.LoadAssets(model_.get());
     player_attack_colision_.LoadAssets(model_.get());
 
-    font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
-
     DX12Effect.Create(L"Effect/upper_attack/upper_attack.efk", "swaord");
     DX12Effect.Create(L"Effect/Eff_Jump_001/Eff_jump_001.efk", "jump");
     DX12Effect.Create(L"Effect/Eff_kaihi/Eff_kaihi.efk", "avoid");
@@ -62,15 +60,6 @@ void Player::Render() const {
 
     player_colision_.Render();
     player_attack_colision_.Render();
-}
-
-void Player::Render2D() const {
-    DX9::SpriteBatch->DrawString(
-        font.Get(),
-        SimpleMath::Vector2(0.0f, 30.0f),
-        DX9::Colors::Red,
-        L"プレイヤー:%f", player_status_.GetPlayerHP()
-    );
 }
 
 void Player::SetMotion(const PLAYER_MOTION player_motion) {   //モーションの再生処理

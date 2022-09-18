@@ -8,12 +8,13 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Weak.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Death.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/Advent.h"
 #include "Classes/Collision/ObjectManager.h"
 
 void HandManager::Initialize() {
 	hand_l.Initialize();
 	hand_r.Initialize();
-	attack = new boss::Wait;
+	attack = new boss::Advent;
 	attack->Initialize(&hand_l, &hand_r);
 	std::random_device seed;
 	random_engine_	  = std::mt19937(seed());

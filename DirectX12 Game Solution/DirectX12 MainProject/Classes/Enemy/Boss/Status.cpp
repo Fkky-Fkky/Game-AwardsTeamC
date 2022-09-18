@@ -8,7 +8,6 @@ void boss::Status::Initialize() {
 	invincible_time_ = 0.0f;
 	weak_time_ = 0.0f;
 	is_set_weak_time_ = false;
-	font = DX9::SpriteFont::CreateDefaultFont(DXTK->Device9);
 }
 
 void boss::Status::Update(const float deltaTime, const ObjectManager* const obj_m) {
@@ -50,13 +49,4 @@ void boss::Status::DamageProcess() {
 	}
 	hp_ -= damage_num_;
 	invincible_time_ = INVINCIBLE_TIME_MAX_;
-}
-
-void boss::Status::Render2D() const {
-	DX9::SpriteBatch->DrawString(
-		font.Get(),
-		SimpleMath::Vector2(1000.0f, 0.0f),
-		DX9::Colors::White,
-		L"%i",weak_count_
-	);
 }
