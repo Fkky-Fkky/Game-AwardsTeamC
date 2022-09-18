@@ -5,12 +5,13 @@
 void Player::Initialize() {
     player_motion_track_ = 0;
 
-	pos_ = SimpleMath::Vector3::Zero;
-	rot_ = SimpleMath::Vector3(0.0f, RIGHT_WARD_,0.0f);
+    pos_ = SimpleMath::Vector3::Zero;
+    rot_ = SimpleMath::Vector3(0.0f, RIGHT_WARD_, 0.0f);
 
     jump_motion_time_ = 0.0f;
     death_motion_time_ = 0.0f;
     is_jump_motion_play_ = false;
+    is_death_motion_play_ = false;;
     is_switch_state_death_ = false;
 
     player_status_.Initialize();
@@ -32,7 +33,7 @@ void Player::LoadAssets() {
     DX12Effect.Create(L"Effect/Eff_kaihi/Eff_kaihi.efk", "avoid");
 
     avoid_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Avoidance.wav");
-    jump_se_  = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Jump.wav");
+    jump_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Jump.wav");
 
     for (int i = 0; i < MOTION_MAX_; ++i) {
         model_->SetTrackEnable(i, false);
@@ -40,7 +41,7 @@ void Player::LoadAssets() {
     model_->SetTrackEnable(player_motion_track_, true);
 }
 
-void Player::Update(const float deltaTime, const ObjectManager* const obj_m) { 
+void Player::Update(const float deltaTime, const ObjectManager* const obj_m) {
     player_status_.Update(deltaTime, obj_m);
 
     if (GetPlayerHP() <= 0.0f) {
@@ -60,19 +61,23 @@ void Player::Update(const float deltaTime, const ObjectManager* const obj_m) {
     if (is_jump_motion_play_) {
         JumpMotion(deltaTime);
     }
+    if (is_death_motion_play_) {
+        DeathMotion(deltaTime);
+    }
+
     model_->AdvanceTime(deltaTime);
     player_attack_colision_.Update(deltaTime, model_.get(), this);
     player_colision_.Update(deltaTime, model_.get());
 }
 
-void Player::Render() const { 
+void Player::Render() const {
     model_->SetPosition(pos_);
     model_->SetRotation(
         XMConvertToRadians(rot_.x),
         XMConvertToRadians(rot_.y),
         XMConvertToRadians(rot_.z)
     );
-	model_->Draw();
+    model_->Draw();
 
     player_colision_.Render();
     player_attack_colision_.Render();
@@ -90,6 +95,10 @@ void Player::SetMotion(const PLAYER_MOTION player_motion) {   //ƒ‚[ƒVƒ‡ƒ“‚ÌÄ¶
     else {
         is_jump_motion_play_ = false;
         jump_motion_time_ = 0.0f;
+    }
+
+    if (player_motion_track_ == (int)PLAYER_MOTION::DEATH) {
+        is_death_motion_play_ = true;
     }
     model_->SetTrackEnable(player_motion_track_, true);
 }

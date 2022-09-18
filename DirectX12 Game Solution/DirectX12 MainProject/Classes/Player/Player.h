@@ -47,6 +47,7 @@ public:
 		jump_motion_time_ = 0.0f;
 		death_motion_time_ = 0.0f;
 		is_jump_motion_play_ = false;
+		is_death_motion_play_ = false;
 		is_switch_state_death_ = false;
 		pos_ = SimpleMath::Vector3::Zero;
 		rot_ = SimpleMath::Vector3::Zero;
@@ -91,6 +92,7 @@ private:
 	float death_motion_time_;
 
 	bool is_jump_motion_play_;
+	bool is_death_motion_play_;
 	bool is_switch_state_death_;
 
 	SimpleMath::Vector3 pos_;
