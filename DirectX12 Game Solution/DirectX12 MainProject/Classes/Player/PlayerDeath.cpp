@@ -7,8 +7,11 @@ void player::PlayerDeath::Initialize() {
 
 void player::PlayerDeath::Update(const float deltaTime, Player* const player) {
 	SimpleMath::Vector3 pos_ = player->GetPlayerPosition();
-	if (pos_.y >= 0.0f) {
-		pos_.y  = std::max(pos_.y - FALL_SPEED_ * deltaTime, 0.0f);
+	if (pos_.y >= DEATH_POS_Y_) {
+		pos_.y = std::max(pos_.y - FALL_SPEED_ * deltaTime, DEATH_POS_Y_);
+	}
+	else {
+		pos_.y = DEATH_POS_Y_;
 	}
 	player->SetPlayerPosition(pos_);
 }

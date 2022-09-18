@@ -17,5 +17,7 @@ namespace player {
 
 	private:
 		bool is_player_death_;
+
+		const float DEATH_POS_Y_ = 0.1f;
 	};
 }
