@@ -57,6 +57,10 @@ bool ObjectManager::GetPlayerDmgFlag() const {
 	}
 }
 
+bool ObjectManager::IsPlayerDeath() const {
+	return player_->IsPlayerDeath();
+}
+
 bool ObjectManager::GetBossRAttackFlag() const {
 	return boss_->GetRHandAttackFlag();
 }
