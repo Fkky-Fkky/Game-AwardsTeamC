@@ -22,17 +22,20 @@ void SceneChange::Update(const float deltaTime, ObjectManager* obj_m) {
 	}
 
 	if (obj_m->IsBossDeath()) {
-		wait_time_ = std::min(wait_time_ + deltaTime, WAIT_TIME_MAX_);
-	}
-	if (wait_time_ >= WAIT_TIME_MAX_) {
-		white_alpha_ = std::min(white_alpha_ + ALPHA_SPEED_ * deltaTime, COLOR_MAX_);
-		scene_change_flag_ = white_alpha_ >= COLOR_MAX_;
-		is_game_clear_ = true;
+		wait_time_ = std::min(wait_time_ + deltaTime, BOSS_DEAD_WAIT_TIME_MAX_);
+		if (wait_time_ >= BOSS_DEAD_WAIT_TIME_MAX_) {
+			white_alpha_ = std::min(white_alpha_ + ALPHA_SPEED_ * deltaTime, COLOR_MAX_);
+			scene_change_flag_ = white_alpha_ >= COLOR_MAX_;
+			is_game_clear_ = true;
+		}
 	}
 
 	if (obj_m->IsPlayerDeath()) {
-		black_alpha_ = std::min(black_alpha_ + ALPHA_SPEED_ * deltaTime, COLOR_MAX_);
-		scene_change_flag_ = black_alpha_ >= COLOR_MAX_;
+		wait_time_ = std::min(wait_time_ + deltaTime, PLAYER_DEAD_WAIT_TIME_MAX_);
+		if (wait_time_ >= PLAYER_DEAD_WAIT_TIME_MAX_) {
+			black_alpha_ = std::min(black_alpha_ + ALPHA_SPEED_ * deltaTime, COLOR_MAX_);
+			scene_change_flag_ = black_alpha_ >= COLOR_MAX_;
+		}
 	}
 }
 
