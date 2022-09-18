@@ -222,6 +222,9 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Advent.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Player\PlayerDeath.h">
+      <Filter>Classes\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -355,6 +358,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Advent.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\PlayerDeath.cpp">
+      <Filter>Classes\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
