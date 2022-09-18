@@ -43,11 +43,16 @@ void Player::LoadAssets() {
 void Player::Update(const float deltaTime, const ObjectManager* const obj_m) { 
     player_status_.Update(deltaTime, obj_m);
 
-    if (obj_m->GetPlayerDmgFlag() && !IsPlayerInvincible()) {
-        SwitchState(PLAYER_STATE::DAMAGE);
+    if (GetPlayerHP() <= 0.0f) {
+        if (!is_switch_state_death_) {
+            SwitchState(PLAYER_STATE::DEATH);
+            is_switch_state_death_ = true;
+        }
     }
-    if (GetPlayerHP() <= 0.0f && !is_switch_state_death_) {
-        SwitchState(PLAYER_STATE::DEATH);
+    else {
+        if (obj_m->GetPlayerDmgFlag() && !IsPlayerInvincible()) {
+            SwitchState(PLAYER_STATE::DAMAGE);
+        }
     }
 
     player_state_->Update(deltaTime, this);
