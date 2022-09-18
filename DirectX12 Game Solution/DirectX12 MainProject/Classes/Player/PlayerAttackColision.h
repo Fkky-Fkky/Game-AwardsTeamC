@@ -34,7 +34,7 @@ namespace player {
 		const float RIGHT_ANGLE_ = 0.0f;
 		const float LEFT_ANGLE_ = 200.0f;
 		const float MAX_ATTACK_TIME_ = 3.3f;
-		const float ATTACK_DISTANCE_X_ = 4.0f;
+		const float ATTACK_DISTANCE_X_ = 4.5f;
 		const float ATTACK_DISTANCE_Y_ = 1.5f;
 		const float ATTACK_START_TIME_ = 1.3f;
 		const float ATTACK_END_TIME_ = 1.7f;
