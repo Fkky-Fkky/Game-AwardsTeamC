@@ -215,7 +215,6 @@
     <ClInclude Include="Classes\Ground\Ground.h" />
     <ClInclude Include="Classes\My_Camera\My_Camera.h" />
     <ClInclude Include="Classes\My_Light\My_Light.h" />
-    <ClInclude Include="Classes\PlayerTestCamera\PlayerTestCamera.h" />
     <ClInclude Include="Classes\Player\Player.h" />
     <ClInclude Include="Classes\Player\PlayerAttack.h" />
     <ClInclude Include="Classes\Player\PlayerAttackColision.h" />
@@ -276,7 +275,6 @@
     <ClCompile Include="Classes\Ground\Ground.cpp" />
     <ClCompile Include="Classes\My_Camera\My_Camera.cpp" />
     <ClCompile Include="Classes\My_Light\My_Light.cpp" />
-    <ClCompile Include="Classes\PlayerTestCamera\PlayerTestCamera.cpp" />
     <ClCompile Include="Classes\Player\Player.cpp" />
     <ClCompile Include="Classes\Player\PlayerAttack.cpp" />
     <ClCompile Include="Classes\Player\PlayerAttackColision.cpp" />
