@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAction.h"
 
 namespace boss {
-	class Wait : public BossAttack {
+	class Wait : public BossAction {
 	public:
 		Wait() {
 			wait_time_ = 0.0f;

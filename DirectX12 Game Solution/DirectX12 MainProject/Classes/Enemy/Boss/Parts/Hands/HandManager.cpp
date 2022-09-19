@@ -14,8 +14,8 @@
 void HandManager::Initialize() {
 	hand_l.Initialize();
 	hand_r.Initialize();
-	attack = new boss::Advent;
-	attack->Initialize(&hand_l, &hand_r);
+	action_ = new boss::Advent;
+	action_->Initialize(&hand_l, &hand_r);
 	std::random_device seed;
 	random_engine_	  = std::mt19937(seed());
 	random_atk_dist_  = std::uniform_int_distribution<>(ATTACK_STATE_MIN_, ATTACK_STATE_MAX_);
@@ -28,9 +28,13 @@ void HandManager::Initialize() {
 	boss_hp_	  = 0.0f;
 	hand_state_		= ROCK;
 	old_hand_state_ = PAPER;
-	action_end_flag_	   = false;
-	is_switch_weak_state_ = false;
-	same_handstate_flag_   = false;
+	action_end_flag_	 = false;
+	same_handstate_flag_ = false;
+	is_vertical_shake_	 = false;
+	is_side_shake_		 = false;
+	is_switch_state_weak_  = false;
+	is_switch_state_death_ = false;
+	is_hand_death_		   = false;
 }
 
 void HandManager::LoadAssets() {
@@ -43,10 +47,10 @@ void HandManager::Update(const float deltaTime, const ObjectManager* const obj_m
 	boss_hp_ = obj_m->GetBossHP();
 	hand_l.Update(deltaTime);
 	hand_r.Update(deltaTime);
-	attack->Update(deltaTime, obj_m, this);
+	action_->Update(deltaTime, obj_m, this);
 	SwitchStateWait();
-	if (obj_m->IsBossWeak() && !is_switch_weak_state_) {
-		is_switch_weak_state_ = true;
+	if (obj_m->IsBossWeak() && !is_switch_state_weak_) {
+		is_switch_state_weak_ = true;
 		SwitchStateWeak();
 	}
 
@@ -106,40 +110,40 @@ void HandManager::RandomHandState() {	//手の状態を変更する(グー・パー)
 }
 
 void HandManager::SwitchStateAttack() {	//ボスの攻撃変更
-	delete attack;
+	delete action_;
 	switch (attack_state_) {
-	case LEFT_BEAT:		attack = new boss::LeftBeat;	break;
-	case LEFT_SLAP:		attack = new boss::LeftSlap;	break;
-	case RIGHT_BEAT:	attack = new boss::RightBeat;	break;
-	case RIGHT_SLAP:	attack = new boss::RightSlap;	break;
-	case DOUBLE_SLAP:	attack = new boss::DoubleSlap;	break;
-	case BEAT_RUSH_R:	attack = new boss::BeatRushR;	break;
+	case LEFT_BEAT:		action_ = new boss::LeftBeat;	break;
+	case LEFT_SLAP:		action_ = new boss::LeftSlap;	break;
+	case RIGHT_BEAT:	action_ = new boss::RightBeat;	break;
+	case RIGHT_SLAP:	action_ = new boss::RightSlap;	break;
+	case DOUBLE_SLAP:	action_ = new boss::DoubleSlap;	break;
+	case BEAT_RUSH_R:	action_ = new boss::BeatRushR;	break;
 	}
-	attack->Initialize(&hand_l, &hand_r);
+	action_->Initialize(&hand_l, &hand_r);
 	RandomHandState();
 }
 
 void HandManager::SwitchStateWait() {	//待機状態に切り替え
 	if (action_end_flag_) {
-		delete attack;
-		attack = new boss::Wait;
-		attack->Initialize(&hand_l, &hand_r);
+		delete action_;
+		action_ = new boss::Wait;
+		action_->Initialize(&hand_l, &hand_r);
 		action_end_flag_ = false;
 	}
 }
 
 void HandManager::SwitchStateWeak() {	//ウィーク状態に切り替え
-	delete attack;
-	attack = new boss::Weak;
-	attack->Initialize(&hand_l, &hand_r);
+	delete action_;
+	action_ = new boss::Weak;
+	action_->Initialize(&hand_l, &hand_r);
 }
 
 void HandManager::SwitchStateDeath() {
 	if (!is_switch_state_death_) {
 		is_switch_state_death_ = true;
-		delete attack;
-		attack = new boss::Death;
-		attack->Initialize(&hand_l, &hand_r);
+		delete action_;
+		action_ = new boss::Death;
+		action_->Initialize(&hand_l, &hand_r);
 	}
 }
 
@@ -157,5 +161,5 @@ void HandManager::PlayBeatEffect(const SimpleMath::Vector3 effect_pos) const {
 
 void HandManager::ActionEnd() {
 	action_end_flag_ = true;
-	is_switch_weak_state_ = false;
+	is_switch_state_weak_ = false;
 }

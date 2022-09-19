@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAction.h"
 
 namespace boss {
-	class Death : public BossAttack {
+	class Death : public BossAction {
 	public:
 		Death() {
 			death_state_ = ATK_CANCEL;

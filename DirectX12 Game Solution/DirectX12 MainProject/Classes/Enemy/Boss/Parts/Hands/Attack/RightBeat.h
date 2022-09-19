@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAction.h"
 
 namespace boss {
-	class RightBeat : public BossAttack {
+	class RightBeat : public BossAction {
 	public:
 		RightBeat() {
 			boss_action_state_ = HAND_CHECK;

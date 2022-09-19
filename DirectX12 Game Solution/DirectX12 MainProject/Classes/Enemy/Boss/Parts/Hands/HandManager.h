@@ -4,7 +4,7 @@
 #include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/Hands/LeftHand/BossHandL.h"
 #include "Classes/Enemy/Boss/Parts/Hands/RightHand/BossHandR.h"
-#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAction.h"
 #include <random>
 #include "Base/DX12Effekseer.h"
 
@@ -15,7 +15,7 @@ class ObjectManager;
 class HandManager {
 public:
 	HandManager() {
-		attack		 = nullptr;
+		action_		 = nullptr;
 		beat_effect_ = nullptr;
 		attack_state_	= WAIT;
 		hand_state_		= ROCK;
@@ -23,7 +23,7 @@ public:
 		boss_hp_ = 0.0f;
 		action_end_flag_	   = false;
 		same_handstate_flag_   = false;
-		is_switch_weak_state_  = false;
+		is_switch_state_weak_  = false;
 		is_vertical_shake_	   = false;
 		is_side_shake_		   = false;
 		is_switch_state_death_ = false;
@@ -63,7 +63,7 @@ private:
 
 	boss::BossHandL hand_l;
 	boss::BossHandR hand_r;
-	boss::BossAttack* attack;
+	boss::BossAction* action_;
 
 	EFFECT beat_effect_;
 
@@ -78,18 +78,18 @@ private:
 	float boss_hp_;
 	bool hand_state_;
 	bool old_hand_state_;
-	bool is_switch_weak_state_;
 	bool action_end_flag_;
 	bool same_handstate_flag_;
 	bool is_vertical_shake_;
 	bool is_side_shake_;
+	bool is_switch_state_weak_;
 	bool is_switch_state_death_;
 	bool is_hand_death_;
 
 	const int ATTACK_STATE_MIN_ = 1;
 	const int ATTACK_STATE_MAX_ = 6;
-	const int NORMAL_MODE_MAX_ = 4;
-	const int HARD_MODE_MAX_ = 5;
+	const int NORMAL_MODE_MAX_  = 4;
+	const int HARD_MODE_MAX_	= 5;
 	const float HP_NORMAL_MAX_ = 30.0f;
 	const float HP_NORMAL_MIN_ = 20.0f;
 	const float HP_HARD_MIN_ = 10.0f;
