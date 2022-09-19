@@ -1,5 +1,4 @@
 #include "Classes/Player/PlayerJump.h"
-#include "Base/DX12Effekseer.h"
 #include "Classes/Player/Player.h"
 
 void player::PlayerJump::Initialize() {
@@ -37,7 +36,6 @@ void player::PlayerJump::Update(const float deltaTime, Player* const player) {
 }
 
 void player::PlayerJump::Ready(const Player* const player) {  //ジャンプに必要な変数の処理
-    DX12Effect.PlayOneShot("jump", pos_);
     player_up_flag_ = true;
     jump_time_      = 0.0f;
     player->PlayJumpSE();

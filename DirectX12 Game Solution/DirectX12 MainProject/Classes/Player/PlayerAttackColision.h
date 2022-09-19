@@ -19,13 +19,11 @@ namespace player {
 		void Initialize();
 		void LoadAssets(DX9::SkinnedModel* const model_);
 		void Update(const float deltaTime, const DX9::SkinnedModel* const model_, const Player* const player);
-		void Render()const;
 
 		bool IsPlayerAttack() const { return is_player_attack_; }
 		BoundingOrientedBox GetAttackCollision() const { return collision_; }
 	private:
 		BoundingOrientedBox collision_;
-		DX9::MODEL          collision_model_;
 		float attack_time_;
 		bool is_player_attack_;
 		bool is_effect_play_;
@@ -34,7 +32,7 @@ namespace player {
 		const float RIGHT_ANGLE_ = 0.0f;
 		const float LEFT_ANGLE_ = 200.0f;
 		const float MAX_ATTACK_TIME_ = 3.3f;
-		const float ATTACK_DISTANCE_X_ = 4.0f;
+		const float ATTACK_DISTANCE_X_ = 4.5f;
 		const float ATTACK_DISTANCE_Y_ = 1.5f;
 		const float ATTACK_START_TIME_ = 1.3f;
 		const float ATTACK_END_TIME_ = 1.7f;

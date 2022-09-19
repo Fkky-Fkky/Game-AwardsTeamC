@@ -19,9 +19,6 @@
     <Filter Include="Classes\Player">
       <UniqueIdentifier>{6792b414-9c7c-4a2b-a84c-f5035ae7f1a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\PlayerTestCamera">
-      <UniqueIdentifier>{07eb04ad-d140-4387-a5e4-5b6c5a862474}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Ground">
       <UniqueIdentifier>{7f04d87a-4bde-4258-85c0-656ecfc1002c}</UniqueIdentifier>
     </Filter>
@@ -101,9 +98,6 @@
     </ClInclude>
     <ClInclude Include="Classes\Player\Player.h">
       <Filter>Classes\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\PlayerTestCamera\PlayerTestCamera.h">
-      <Filter>Classes\PlayerTestCamera</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Ground\Ground.h">
       <Filter>Classes\Ground</Filter>
@@ -222,6 +216,9 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Advent.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Player\PlayerDeath.h">
+      <Filter>Classes\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -241,9 +238,6 @@
     </ClCompile>
     <ClCompile Include="Classes\Player\Player.cpp">
       <Filter>Classes\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\PlayerTestCamera\PlayerTestCamera.cpp">
-      <Filter>Classes\PlayerTestCamera</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Ground\Ground.cpp">
       <Filter>Classes\Ground</Filter>
@@ -355,6 +349,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Advent.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\PlayerDeath.cpp">
+      <Filter>Classes\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
