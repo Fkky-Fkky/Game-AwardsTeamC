@@ -21,7 +21,6 @@ public:
 	virtual void Initialize(const SimpleMath::Vector3 pos, const SimpleMath::Vector3 rote);
 	virtual void LoadAssets(const LPCWSTR file_name);
 	virtual void Update(const float deltaTime);
-	virtual void Render()const;
 
 	void PlayDeathMotion();
 	void SetHandPos(const SimpleMath::Vector3 position_) { position = position_; }
@@ -68,7 +67,6 @@ private:
 protected:
 
 	BoundingOrientedBox collision;
-	DX9::MODEL collision_model;
 
 	const float INITIAL_POS_Y_ = 50.0f;
 	const float INITIAL_POS_Z_ = 10.0f;

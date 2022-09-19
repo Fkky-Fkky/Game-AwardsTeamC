@@ -15,16 +15,6 @@ void BossHand::LoadAssets(const LPCWSTR file_name){
 		collision.Extents.z * COLLSION_SIZE_Z_
 	);
 
-	collision_model = DX9::Model::CreateBox(
-		DXTK->Device9,
-		collision.Extents.x,
-		collision.Extents.y,
-		collision.Extents.z
-	);
-	D3DMATERIAL9 material{};
-	material.Diffuse = DX9::Colors::Value(0.0f, 1.0f, 0.0f, 0.75f);
-	collision_model->SetMaterial(material);
-
 	for (int i = 0; i < MOTION_MAX_; ++i) {
 		model_->SetTrackEnable(i, false);
 	}
@@ -40,14 +30,6 @@ void BossHand::Update(const float deltaTime) {
 			model_->SetTrackEnable(motion_track_, false);
 		}
 	}
-}
-
-void BossHand::Render() const {
-	BossParts::Render();
-
-	collision_model->SetPosition(collision.Center);
-	collision_model->SetRotationQuaternion(collision.Orientation);
-	collision_model->Draw();
 }
 
 void BossHand::SetHandMotion(const int hand_motion) {	//モーションをセットする

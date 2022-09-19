@@ -28,15 +28,6 @@ void boss::BossBody::LoadAssets() {
 		body_coll_.Extents.y,
 		body_coll_.Extents.z * COLLISION_SIZE_Z_
 	);
-	coll_model_ = DX9::Model::CreateBox(
-		DXTK->Device9,
-		body_coll_.Extents.x,
-		body_coll_.Extents.y,
-		body_coll_.Extents.z
-	);
-	D3DMATERIAL9 material{};
-	material.Diffuse = DX9::Colors::Value(1.0f, 0.0f, 0.0f, 0.75f);
-	coll_model_->SetMaterial(material);
 
 	model_->SetTrackEnable(0, true);
 }
@@ -76,13 +67,6 @@ void boss::BossBody::Update(const float deltaTime, const ObjectManager* const ob
 	boss->SetVerticalShake(is_shake_);
 	body_coll_.Center = model_->GetPosition();
 	body_coll_.Orientation = model_->GetRotationQuaternion();
-}
-
-void boss::BossBody::Render() const {
-	BossParts::Render();
-	coll_model_->SetPosition(body_coll_.Center);
-	coll_model_->SetRotationQuaternion(body_coll_.Orientation);
-	//coll_model_->Draw();
 }
 
 void boss::BossBody::AdventAction() {	//“oê‚Ì“®‚«
