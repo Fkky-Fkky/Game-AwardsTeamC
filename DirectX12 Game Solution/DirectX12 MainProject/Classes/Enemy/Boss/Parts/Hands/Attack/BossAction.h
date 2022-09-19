@@ -11,7 +11,7 @@ class ObjectManager;
 using namespace DirectX;
 
 namespace boss {
-	class BossAttack {
+	class BossAction {
 	public:
 		virtual void Initialize(BossHand* const boss_handL, BossHand* const bosshandR) {
 			boss_handL_ = boss_handL;

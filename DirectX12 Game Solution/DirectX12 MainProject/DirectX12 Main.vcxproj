@@ -197,7 +197,7 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\BossParts.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Advent.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BeatRushR.h" />
-    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossAttack.h" />
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossAction.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Death.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\DoubleSlap.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\LeftBeat.h" />

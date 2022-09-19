@@ -120,7 +120,7 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\RightSlap.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossAttack.h">
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossAction.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\LeftHand\BossHandL.h">
