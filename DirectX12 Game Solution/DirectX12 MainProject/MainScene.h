@@ -6,7 +6,6 @@
 
 #include "Scene.h"
 #include "Classes/Enemy/Boss/Boss.h"
-#include "Classes/PlayerTestCamera/PlayerTestCamera.h"
 #include "Classes/Player/Player.h"
 #include "Classes/Ground/Ground.h"
 #include "Classes/My_Camera/My_Camera.h"
@@ -51,7 +50,7 @@ private:
 
 private:
 	Boss boss_;
-	PlayerTestCamera camera_;
+	My_Camera camera_;
 	Player player_;
 	Ground ground_;
 	Collision collision_;
