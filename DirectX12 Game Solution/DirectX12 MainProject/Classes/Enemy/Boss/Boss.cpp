@@ -1,5 +1,5 @@
 #include "Classes/Enemy/Boss/Boss.h"
-#include "Classes/Collision/ObjectManager.h"
+#include "Classes/Object/ObjectManager.h"
 
 void Boss::Initialize() {
 	body_.Initialize();

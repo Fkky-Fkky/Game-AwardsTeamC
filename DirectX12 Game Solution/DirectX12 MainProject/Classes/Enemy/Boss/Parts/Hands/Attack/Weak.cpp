@@ -1,6 +1,6 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Weak.h"
 #include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
-#include "Classes/Collision/ObjectManager.h"
+#include "Classes/Object/ObjectManager.h"
 
 void boss::Weak::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) {
 	pos_r_ = boss_handR_->GetHandPos();

@@ -1,5 +1,5 @@
 #include "Classes/Collision/Collision.h"
-#include "Classes/Collision/ObjectManager.h"
+#include "Classes/Object/ObjectManager.h"
 
 void Collision::Initialize() {
 	hand_dmg_flag_reset_time_ = 0.0f;

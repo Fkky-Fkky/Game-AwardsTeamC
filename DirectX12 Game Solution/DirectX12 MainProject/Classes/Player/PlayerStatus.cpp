@@ -1,5 +1,5 @@
 #include "Classes/Player/PlayerStatus.h"
-#include "Classes/Collision/ObjectManager.h"
+#include "Classes/Object/ObjectManager.h"
 
 void player::PlayerStatus::Initialize() {
 	hp_ = PLAYER_HP_MAX_;

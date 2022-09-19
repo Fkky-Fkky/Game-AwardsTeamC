@@ -1,5 +1,5 @@
 #include "Classes/GameScene/SceneChange.h"
-#include "Classes/Collision/ObjectManager.h"
+#include "Classes/Object/ObjectManager.h"
 
 void SceneChange::Initialize() {
 	black_alpha_ = COLOR_MAX_;

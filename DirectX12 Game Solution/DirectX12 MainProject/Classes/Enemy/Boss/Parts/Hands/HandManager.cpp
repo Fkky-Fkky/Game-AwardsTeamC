@@ -9,7 +9,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Weak.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Death.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Advent.h"
-#include "Classes/Collision/ObjectManager.h"
+#include "Classes/Object/ObjectManager.h"
 
 void HandManager::Initialize() {
 	hand_l.Initialize();
