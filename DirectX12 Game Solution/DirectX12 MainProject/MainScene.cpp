@@ -100,7 +100,6 @@ NextScene MainScene::Update(const float deltaTime)
         ground_.Update(deltaTime, &object_);
         collision_.Update(deltaTime, &object_);
         ui.Update(deltaTime, &object_);
-        light_.Update(deltaTime);
     }
     
     if (scene_change_.GetSceneChangeFlag()) {
