@@ -16,18 +16,6 @@ void player::PlayerAttackColision::LoadAssets(DX9::SkinnedModel* const model_) {
         collision_.Extents.y * COLLISION_SIZE_MULTIPLY_Y_,
         collision_.Extents.z * COLLISION_SIZE_MULTIPLY_Z_
     );
-
-    //デバッグ用
-    collision_model_ = DX9::Model::CreateBox(
-        DXTK->Device9,
-        collision_.Extents.x,
-        collision_.Extents.y,
-        collision_.Extents.z
-    );
-
-    D3DMATERIAL9 material_{};
-    material_.Diffuse = DX9::Colors::Value(0.0f, 0.0f, 1.0f, 0.75f);
-    collision_model_->SetMaterial(material_);
 }
 
 void player::PlayerAttackColision::Update(const float deltaTime, const DX9::SkinnedModel* const model_, const Player* const player) {
@@ -65,12 +53,4 @@ void player::PlayerAttackColision::Update(const float deltaTime, const DX9::Skin
     float attack_x_ = (is_player_right_ward_) ? ATTACK_DISTANCE_X_ : -ATTACK_DISTANCE_X_;
     collision_.Center = player_pos_ + SimpleMath::Vector3(attack_x_, ATTACK_DISTANCE_Y_, 0.0f);
     collision_.Orientation = model_->GetRotationQuaternion();
-    collision_model_->SetPosition(collision_.Center);
-    collision_model_->SetRotationQuaternion(collision_.Orientation);
-}
-
-void player::PlayerAttackColision::Render() const {
-    if (is_player_attack_) {
-        collision_model_->Draw();
-    }
 }

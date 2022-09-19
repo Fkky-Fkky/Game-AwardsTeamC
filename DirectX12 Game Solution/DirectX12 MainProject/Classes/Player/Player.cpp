@@ -4,15 +4,13 @@
 
 void Player::Initialize() {
     player_motion_track_ = 0;
-
+    jump_motion_time_  = 0.0f;
+    death_motion_time_ = 0.0f;
+    is_jump_motion_play_   = false;
+    is_death_motion_play_  = false;;
+    is_switch_state_death_ = false;
     pos_ = SimpleMath::Vector3::Zero;
     rot_ = SimpleMath::Vector3(0.0f, RIGHT_WARD_, 0.0f);
-
-    jump_motion_time_ = 0.0f;
-    death_motion_time_ = 0.0f;
-    is_jump_motion_play_ = false;
-    is_death_motion_play_ = false;;
-    is_switch_state_death_ = false;
 
     player_status_.Initialize();
     player_action_state_ = PLAYER_STATE::WAIT;
@@ -28,14 +26,13 @@ void Player::LoadAssets() {
     player_colision_.LoadAssets(model_.get());
     player_attack_colision_.LoadAssets(model_.get());
 
-    DX12Effect.Create(L"Effect/upper_attack/upper_attack.efk", "swaord");
-
-    jump_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Jump.wav");
-
     for (int i = 0; i < MOTION_MAX_; ++i) {
         model_->SetTrackEnable(i, false);
     }
     model_->SetTrackEnable(player_motion_track_, true);
+
+    DX12Effect.Create(L"Effect/upper_attack/upper_attack.efk", "swaord");
+    jump_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Jump.wav");
 }
 
 void Player::Update(const float deltaTime, const ObjectManager* const obj_m) {
@@ -75,9 +72,6 @@ void Player::Render() const {
         XMConvertToRadians(rot_.z)
     );
     model_->Draw();
-
-    player_colision_.Render();
-    player_attack_colision_.Render();
 }
 
 void Player::SetMotion(const PLAYER_MOTION player_motion) {   //ƒ‚[ƒVƒ‡ƒ“‚ÌÄ¶ˆ—
