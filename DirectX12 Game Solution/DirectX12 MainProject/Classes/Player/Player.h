@@ -63,7 +63,6 @@ public:
 	void SetPlayerPosition(const SimpleMath::Vector3 position) { pos_ = position; }
 	void SetPlayerRotation(const SimpleMath::Vector3 rotation) { rot_ = rotation; }
 	void SetMotion(const PLAYER_MOTION player_motion);
-	void PlayAvoidSE()const;
 	void PlayJumpSE()const;
 	float GetPlayerHP() const { return player_status_.GetPlayerHP(); }
 	bool IsPlayerAttackStart() const { return player_attack_.IsPlayerAttackStart(); }
@@ -83,7 +82,6 @@ private:
 
 	DX9::SKINNEDMODEL model_;
 
-	XAudio::SOUNDEFFECT avoid_se_;
 	XAudio::SOUNDEFFECT jump_se_;
 
 	PLAYER_STATE player_action_state_;

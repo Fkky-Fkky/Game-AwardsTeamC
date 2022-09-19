@@ -29,10 +29,7 @@ void Player::LoadAssets() {
     player_attack_colision_.LoadAssets(model_.get());
 
     DX12Effect.Create(L"Effect/upper_attack/upper_attack.efk", "swaord");
-    DX12Effect.Create(L"Effect/Eff_Jump_001/Eff_jump_001.efk", "jump");
-    DX12Effect.Create(L"Effect/Eff_kaihi/Eff_kaihi.efk", "avoid");
 
-    avoid_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Avoidance.wav");
     jump_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Jump.wav");
 
     for (int i = 0; i < MOTION_MAX_; ++i) {
@@ -162,10 +159,6 @@ void Player::SwitchState(const PLAYER_STATE state) {
     }
     SetMotion(ConvertToMotion(player_action_state_));
     player_state_->Initialize();
-}
-
-void Player::PlayAvoidSE() const {
-    avoid_se_->Play();
 }
 
 void Player::PlayJumpSE() const {
