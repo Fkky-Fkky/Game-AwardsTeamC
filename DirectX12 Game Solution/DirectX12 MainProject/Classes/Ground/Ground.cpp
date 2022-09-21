@@ -1,5 +1,5 @@
 #include "Classes/Ground/Ground.h"
-#include "Classes/Collision/ObjectManager.h"
+#include "Classes/Object/ObjectManager.h"
 
 void Ground::LoadAssets() {
     stage_ = DX9::Model::CreateFromFile(DXTK->Device9, L"Ground/Stage/stage.X");

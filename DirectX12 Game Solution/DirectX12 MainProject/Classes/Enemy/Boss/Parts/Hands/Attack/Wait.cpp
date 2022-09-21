@@ -1,6 +1,6 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Wait.h"
 #include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
-#include "Classes/Collision/ObjectManager.h"
+#include "Classes/Object/ObjectManager.h"
 
 void boss::Wait::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) {
 	float boss_hp_ = obj_m->GetBossHP();

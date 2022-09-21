@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAction.h"
 
 namespace boss {
-	class Advent : public BossAttack {
+	class Advent : public BossAction {
 	public:
 		Advent() {
 			advent_state_ = ADVENT_ACTION;

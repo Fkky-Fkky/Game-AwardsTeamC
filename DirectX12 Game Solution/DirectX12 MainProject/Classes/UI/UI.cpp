@@ -1,5 +1,5 @@
 #include "Classes/UI/UI.h"
-#include "Classes/Collision/ObjectManager.h"
+#include "Classes/Object/ObjectManager.h"
 
 void UI::Initialize() {
 	player_side_shake_	   = RIGHT;

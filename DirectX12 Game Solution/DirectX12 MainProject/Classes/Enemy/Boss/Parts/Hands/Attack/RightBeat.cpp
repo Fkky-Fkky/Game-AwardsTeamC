@@ -1,6 +1,6 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightBeat.h"
 #include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
-#include "Classes/Collision/ObjectManager.h"
+#include "Classes/Object/ObjectManager.h"
 
 void boss::RightBeat::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m){
 	pos_  = boss_handR_->GetHandPos();

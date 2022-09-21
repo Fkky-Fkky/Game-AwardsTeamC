@@ -10,7 +10,7 @@
 #include "Classes/Ground/Ground.h"
 #include "Classes/My_Camera/My_Camera.h"
 #include "Classes/Collision/Collision.h"
-#include "Classes/Collision/ObjectManager.h"
+#include "Classes/Object/ObjectManager.h"
 #include "Classes/GameScene/SceneChange.h"
 #include "Classes/UI/UI.h"
 #include "Classes/My_Light/My_Light.h"

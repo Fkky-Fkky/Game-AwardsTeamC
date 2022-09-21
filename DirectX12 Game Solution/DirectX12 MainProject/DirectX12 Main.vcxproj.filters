@@ -61,6 +61,9 @@
     <Filter Include="Classes\Enemy\Boss\Parts\Hands\Attack">
       <UniqueIdentifier>{bbe7deec-8661-4eff-a28f-c2a7c3e23e44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Object">
+      <UniqueIdentifier>{04e77ca0-56a2-4d8a-b901-8025da9df027}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -120,7 +123,7 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\RightSlap.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossAttack.h">
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossAction.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\LeftHand\BossHandL.h">
@@ -161,9 +164,6 @@
     </ClInclude>
     <ClInclude Include="Classes\Player\PlayerRightMove.h">
       <Filter>Classes\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Collision\ObjectManager.h">
-      <Filter>Classes\Collision</Filter>
     </ClInclude>
     <ClInclude Include="TitleScene.h">
       <Filter>Scene</Filter>
@@ -218,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="Classes\Player\PlayerDeath.h">
       <Filter>Classes\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\ObjectManager.h">
+      <Filter>Classes\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -299,9 +302,6 @@
     <ClCompile Include="Classes\Player\PlayerRightMove.cpp">
       <Filter>Classes\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Collision\ObjectManager.cpp">
-      <Filter>Classes\Collision</Filter>
-    </ClCompile>
     <ClCompile Include="TitleScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -352,6 +352,12 @@
     </ClCompile>
     <ClCompile Include="Classes\Player\PlayerDeath.cpp">
       <Filter>Classes\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\ObjectManager.cpp">
+      <Filter>Classes\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossAction.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

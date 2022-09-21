@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAttack.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAction.h"
 
 namespace boss {
-	class Weak : public BossAttack {
+	class Weak : public BossAction {
 	public:
 		Weak() {
 			weak_state_ = ATK_CANCEL;

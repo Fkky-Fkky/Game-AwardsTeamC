@@ -25,7 +25,6 @@ namespace boss {
 		virtual void Initialize();
 		void LoadAssets();
 		void Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss);
-		void Render()const;
 
 		bool IsBodyDeath() const { return is_body_death_; }
 		BoundingOrientedBox GetBodyCollision() const { return body_coll_; }
@@ -35,7 +34,6 @@ namespace boss {
 		void DeathAction();
 
 		BoundingOrientedBox body_coll_;
-		DX9::MODEL coll_model_;
 		float time_delta_;
 		float shake_time_;
 		float body_jump_y_;

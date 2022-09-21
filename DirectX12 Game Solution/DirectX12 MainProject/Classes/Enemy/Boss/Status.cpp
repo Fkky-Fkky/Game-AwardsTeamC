@@ -1,5 +1,5 @@
 #include "Classes/Enemy/Boss/Status.h"
-#include "Classes/Collision/ObjectManager.h"
+#include "Classes/Object/ObjectManager.h"
 
 void boss::Status::Initialize() {
 	damage_type_ = HAND;

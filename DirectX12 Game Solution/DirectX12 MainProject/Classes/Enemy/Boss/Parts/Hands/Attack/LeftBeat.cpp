@@ -1,6 +1,6 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/LeftBeat.h"
 #include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
-#include "Classes/Collision/ObjectManager.h"
+#include "Classes/Object/ObjectManager.h"
 
 void boss::LeftBeat::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) {
 	pos_  = boss_handL_->GetHandPos();
