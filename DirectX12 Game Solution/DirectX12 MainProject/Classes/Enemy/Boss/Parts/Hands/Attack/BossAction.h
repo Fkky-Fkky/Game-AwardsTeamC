@@ -13,15 +13,33 @@ using namespace DirectX;
 namespace boss {
 	class BossAction {
 	public:
-		virtual void Initialize(BossHand* const boss_handL, BossHand* const bosshandR) {
-			boss_handL_ = boss_handL;
-			boss_handR_ = bosshandR;
-		};
+		BossAction() {
+			slap_speed_  = 0.0f;
+			slap_y_time_ = 0.0f;
+			is_se_play_	  = false;
+			is_shake_set_ = false;
+			boss_handL_ = nullptr;
+			boss_handR_ = nullptr;
+		}
+
+		virtual void Initialize(BossHand* const boss_handL, BossHand* const bosshandR);
 		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) = 0;
 
+	private:
+		float slap_y_time_;
+		bool is_se_play_;
+		bool is_shake_set_;
+		const float SLAP_SPEED_Y_	= 2.0f;
+		const float SLAP_GRAVITY_Y_ = 5.0f;
+
 	protected:
+		virtual void SlapAttackBase(const float deltaTime, HandManager* const hand_m);	
+		virtual float SlapY(const float deltaTime);
+
 		BossHand* boss_handL_;
 		BossHand* boss_handR_;
+		float slap_speed_;
+
 
 		const float HAND_R_INITIAL_POS_X_ = -13.0f;
 		const float HAND_L_INITIAL_POS_X_ = 13.0f;
@@ -36,11 +54,8 @@ namespace boss {
 		const float HAND_RETURN_POS_X_ = 30.0f;
 
 		const float SLAP_POS_Y_ = 0.5f;
-		const float SLAP_ROT_X_ = 30.0f;
-		const float SLAP_SPEED_X_ = 0.5f;
-		const float SLAP_SPEED_Y_ = 2.0f;
-		const float SLAP_GRAVITY_X_ = 1.3f;
-		const float SLAP_GRAVITY_Y_ = 5.0f;
+		const float SLAP_SPEED_MAX_X_ = 40.0f;
+		const float ADD_SLAP_SPEED_ = 20.0f;
 
 		const float WAIT_TIME_MAX_ = 0.7f;
 
