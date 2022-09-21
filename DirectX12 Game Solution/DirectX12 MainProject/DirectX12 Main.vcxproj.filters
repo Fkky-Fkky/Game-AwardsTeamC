@@ -356,6 +356,9 @@
     <ClCompile Include="Classes\Object\ObjectManager.cpp">
       <Filter>Classes\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossAction.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resource\directx.ico">
