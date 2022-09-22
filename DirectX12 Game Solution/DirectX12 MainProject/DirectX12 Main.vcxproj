@@ -194,6 +194,7 @@
     <ClInclude Include="Classes\Enemy\Boss\Boss.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Body\BossBody.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\BossParts.h" />
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\ActionManager.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Advent.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BeatRushR.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossAction.h" />
@@ -256,6 +257,7 @@
     <ClCompile Include="Classes\Enemy\Boss\Boss.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Body\BossBody.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\BossParts.cpp" />
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\ActionManager.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Advent.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\BeatRushR.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\BossAction.cpp" />

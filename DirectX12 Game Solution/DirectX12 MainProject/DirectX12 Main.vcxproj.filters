@@ -225,6 +225,9 @@
     <ClInclude Include="Classes\GameScene\SceneBase.h">
       <Filter>Classes\GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\ActionManager.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -364,6 +367,9 @@
     </ClCompile>
     <ClCompile Include="Classes\GameScene\SceneBase.cpp">
       <Filter>Classes\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\ActionManager.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
