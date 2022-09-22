@@ -16,11 +16,11 @@ namespace boss {
 			r_rot_ = SimpleMath::Vector3::Zero;
 		};
 		~Death() {};
-		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m);
+		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m);
 
 	private:
-		void AtkCancel(HandManager* const hand_m);
-		void DeathAction(HandManager* const hand_m);
+		void AtkCancel(ActionManager* const act_m);
+		void DeathAction(ActionManager* const act_m);
 
 		int death_state_;
 		float time_delta_;

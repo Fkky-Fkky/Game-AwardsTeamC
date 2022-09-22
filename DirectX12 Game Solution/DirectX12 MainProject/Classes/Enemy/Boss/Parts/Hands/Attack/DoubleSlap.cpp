@@ -1,27 +1,28 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
-#include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
+#include "Classes/Enemy/Boss/Parts/Hands/ActionManager.h"
+#include "Classes/Object/ObjectManager.h"
 
-void boss::DoubleSlap::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m)	{
+void boss::DoubleSlap::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m)	{
 	r_pos_  = boss_handR_->GetHandPos();
 	l_pos_  = boss_handL_->GetHandPos();
 
 	time_delta_ = deltaTime;
 
 	switch (action_state_) {
-	case HAND_CHECK:	HandCheck(hand_m);		break;
-	case READY:			Ready(hand_m);			break;
-	case ATTACK:		Attack(hand_m);			break;
-	case RESET:			Reset();				break;
-	case RETURN:		HandReturn();			break;
-	case ACTION_END:	hand_m->ActionEnd();	break;
+	case HAND_CHECK:	HandCheck(obj_m);	break;
+	case READY:			Ready(act_m);		break;
+	case ATTACK:		Attack(act_m);		break;
+	case RESET:			Reset();			break;
+	case RETURN:		HandReturn();		break;
+	case ACTION_END:	act_m->ActionEnd();	break;
 	}
 
 	boss_handR_->SetHandPos(r_pos_);
 	boss_handL_->SetHandPos(l_pos_);
 }
 
-void boss::DoubleSlap::HandCheck(const HandManager* const hand_m) {	//Žè‚Ìó‘Ô‚ðŠm”F
-	hand_state_	= hand_m->GetHandState();
+void boss::DoubleSlap::HandCheck(const ObjectManager* const obj_m) {	//Žè‚Ìó‘Ô‚ðŠm”F
+	hand_state_	= obj_m->IsBossHandOpen();
 	if (!hand_state_) {
 		boss_handR_->SetHandMotion(HAND_MOTION::ROCK);
 		boss_handL_->SetHandMotion(HAND_MOTION::ROCK);
@@ -34,13 +35,13 @@ void boss::DoubleSlap::HandCheck(const HandManager* const hand_m) {	//Žè‚Ìó‘Ô‚ð
 	action_state_ = READY;
 }
 
-void boss::DoubleSlap::Ready(HandManager* const hand_m) {	//—\”õ“®ì
+void boss::DoubleSlap::Ready(ActionManager* const act_m) {	//—\”õ“®ì
 	slap_y_ = SlapY(time_delta_);
 	ReadyR();
 	ReadyL();
 
 	if (ready_end_r_ && ready_end_l_) {
-		hand_m->SetVerticalShake(true);
+		act_m->SetVerticalShake(true);
 		action_state_ = ATTACK;
 	}
 }
@@ -63,16 +64,16 @@ void boss::DoubleSlap::ReadyL() {	//¶Žè\‚¦
 	}
 }
 
-void boss::DoubleSlap::Attack(HandManager* const hand_m) {	//“ã‚¬•¥‚¢UŒ‚
+void boss::DoubleSlap::Attack(ActionManager* const act_m) {	//“ã‚¬•¥‚¢UŒ‚
 	wait_time_ = std::min(wait_time_ + time_delta_, WAIT_TIME_MAX_);
-	hand_m->SetVerticalShake(false);
+	act_m->SetVerticalShake(false);
 
 	if (wait_time_ >= ATTACK_START_TIME_R_) {
-		SlapR(hand_m);
+		SlapR(act_m);
 	}
 
 	if (wait_time_ >= WAIT_TIME_MAX_) {
-		SlapL(hand_m);
+		SlapL(act_m);
 	}
 
 	if (atk_end_r_ && atk_end_l_) {
@@ -80,17 +81,17 @@ void boss::DoubleSlap::Attack(HandManager* const hand_m) {	//“ã‚¬•¥‚¢UŒ‚
 	}
 }
 
-void boss::DoubleSlap::SlapR(HandManager* const hand_m) {	//‰EŽè“ã‚¬•¥‚¢
+void boss::DoubleSlap::SlapR(ActionManager* const act_m) {	//‰EŽè“ã‚¬•¥‚¢
 	boss_handR_->SetAttackFlag(true);
-	SlapAttackBase(time_delta_, hand_m);
+	SlapAttackBase(time_delta_, act_m);
 	r_pos_.x = std::min(r_pos_.x + slap_speed_ * time_delta_, HAND_LIMIT_POS_X_);
 	if (r_pos_.x >= HAND_LIMIT_POS_X_) {
 		atk_end_r_ = true;
-		hand_m->SetSideShake(false);
+		act_m->SetSideShake(false);
 	}
 }
 
-void boss::DoubleSlap::SlapL(HandManager* const hand_m) {	//¶Žè“ã‚¬•¥‚¢
+void boss::DoubleSlap::SlapL(ActionManager* const act_m) {	//¶Žè“ã‚¬•¥‚¢
 	boss_handL_->SetAttackFlag(true);
 	l_slap_speed_x_ = std::min(l_slap_speed_x_ + ADD_SLAP_SPEED_ * time_delta_, SLAP_SPEED_MAX_X_);
 	l_pos_.x		= std::max(l_pos_.x - l_slap_speed_x_ * time_delta_, -HAND_LIMIT_POS_X_);

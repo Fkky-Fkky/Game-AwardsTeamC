@@ -1,7 +1,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRushR.h"
-#include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
+#include "Classes/Enemy/Boss/Parts/Hands/ActionManager.h"
 
-void boss::BeatRushR::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m){
+void boss::BeatRushR::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m) {
 	r_pos_  = boss_handR_->GetHandPos();
 	r_rote_ = boss_handR_->GetRotation();
 	l_pos_  = boss_handL_->GetHandPos();
@@ -9,12 +9,12 @@ void boss::BeatRushR::Update(const float deltaTime, const ObjectManager* const o
 
 	time_delta_ = deltaTime;
 	switch (action_state_) {
-	case HAND_CHECK:	HandCheck();			break;
-	case READY:			Ready();				break;
-	case ATTACK:		Attack(hand_m);			break;
-	case RESET:			Reset();				break;
-	case RETURN:		HandReturn();			break;
-	case ACTION_END:	hand_m->ActionEnd();	break;
+	case HAND_CHECK:	HandCheck();		break;
+	case READY:			Ready();			break;
+	case ATTACK:		Attack(act_m);		break;
+	case RESET:			Reset();			break;
+	case RETURN:		HandReturn();		break;
+	case ACTION_END:	act_m->ActionEnd();	break;
 	}
 
 	boss_handR_->SetHandPos(r_pos_);
@@ -52,12 +52,12 @@ void boss::BeatRushR::Ready() {	//—¼è‚ğ(ƒ{ƒX‚©‚çŒ©‚Ä)‰E‘¤‚É\‚¦‚é
 	}
 }
 
-void boss::BeatRushR::Attack(HandManager* const hand_m) {	//UŒ‚ŠÖ”ŒÄ‚Ño‚µ
+void boss::BeatRushR::Attack(ActionManager* const act_m) {	//UŒ‚ŠÖ”ŒÄ‚Ño‚µ
 	wait_time_ = std::min(wait_time_ + time_delta_, WAIT_TIME_MAX_);
 
-	BeatR(hand_m);
+	BeatR(act_m);
 	if (wait_time_ >= WAIT_TIME_MAX_) {
-		BeatL(hand_m);
+		BeatL(act_m);
 	}
 
 	if (is_r_attack_end_ && is_l_attack_end_) {
@@ -65,14 +65,14 @@ void boss::BeatRushR::Attack(HandManager* const hand_m) {	//UŒ‚ŠÖ”ŒÄ‚Ño‚µ
 	}
 }
 
-void boss::BeatRushR::BeatR(HandManager* const hand_m) {	//‰Eè’@‚«‚Â‚¯UŒ‚
+void boss::BeatRushR::BeatR(ActionManager* const act_m) {	//‰Eè’@‚«‚Â‚¯UŒ‚
 	if (!r_hand_up_flag_) {
 		boss_handR_->SetAttackFlag(true);
 		r_beat_time_ += time_delta_;
 		r_pos_.y += BEAT_SPEED_ * r_beat_time_ - HALF_ * BEAT_GRAVITY_ * r_beat_time_ * r_beat_time_;
 	}
 	else {
-		hand_m->SetVerticalShake(false);
+		act_m->SetVerticalShake(false);
 		boss_handR_->SetAttackFlag(false);
 		r_pos_.y = std::min(r_pos_.y + MOVE_SPEED_X_ * time_delta_, HAND_INITIAL_POS_Y_);
 		r_pos_.x = std::min(r_pos_.x + MOVE_SPEED_X_ * time_delta_, r_move_dest_x_);
@@ -80,9 +80,9 @@ void boss::BeatRushR::BeatR(HandManager* const hand_m) {	//‰Eè’@‚«‚Â‚¯UŒ‚
 
 	if (r_pos_.y <= HAND_ROCK_LIMIT_POS_Y_) {
 		r_pos_.y  = HAND_ROCK_LIMIT_POS_Y_;
-		hand_m->SetVerticalShake(true);
-		hand_m->PlayBeatSE();
-		hand_m->PlayBeatEffect(SimpleMath::Vector3(r_pos_.x, r_pos_.y - HAND_ROCK_LIMIT_POS_Y_, r_pos_.z));
+		act_m->SetVerticalShake(true);
+		act_m->PlayBeatSE();
+		act_m->PlayBeatEffect(SimpleMath::Vector3(r_pos_.x, r_pos_.y - HAND_ROCK_LIMIT_POS_Y_, r_pos_.z));
 		r_hand_up_flag_ = true;
 		r_move_dest_x_ = std::min(r_pos_.x + ADD_DISTANCE_, HAND_RETURN_POS_X_);
 	}
@@ -95,14 +95,14 @@ void boss::BeatRushR::BeatR(HandManager* const hand_m) {	//‰Eè’@‚«‚Â‚¯UŒ‚
 	is_r_attack_end_ = r_pos_.x >= HAND_RETURN_POS_X_;
 }
 
-void boss::BeatRushR::BeatL(HandManager* const hand_m) {	//¶è’@‚«‚Â‚¯UŒ‚
+void boss::BeatRushR::BeatL(ActionManager* const act_m) {	//¶è’@‚«‚Â‚¯UŒ‚
 	if (!l_hand_up_flag_) {
 		boss_handL_->SetAttackFlag(true);
 		l_beat_time_ += time_delta_;
 		l_pos_.y += BEAT_SPEED_ * l_beat_time_ - HALF_ * BEAT_GRAVITY_ * l_beat_time_ * l_beat_time_;
 	}
 	else {
-		hand_m->SetVerticalShake(false);
+		act_m->SetVerticalShake(false);
 		boss_handL_->SetAttackFlag(false);
 		l_pos_.y = std::min(l_pos_.y + MOVE_SPEED_X_ * time_delta_, HAND_INITIAL_POS_Y_);
 		l_pos_.x = std::min(l_pos_.x + MOVE_SPEED_X_ * time_delta_, l_move_dest_x_);
@@ -110,9 +110,9 @@ void boss::BeatRushR::BeatL(HandManager* const hand_m) {	//¶è’@‚«‚Â‚¯UŒ‚
 
 	if (l_pos_.y <= HAND_ROCK_LIMIT_POS_Y_) {
 		l_pos_.y  = HAND_ROCK_LIMIT_POS_Y_;
-		hand_m->SetVerticalShake(true);
-		hand_m->PlayBeatSE();
-		hand_m->PlayBeatEffect(SimpleMath::Vector3(l_pos_.x, l_pos_.y - HAND_ROCK_LIMIT_POS_Y_, l_pos_.z));
+		act_m->SetVerticalShake(true);
+		act_m->PlayBeatSE();
+		act_m->PlayBeatEffect(SimpleMath::Vector3(l_pos_.x, l_pos_.y - HAND_ROCK_LIMIT_POS_Y_, l_pos_.z));
 		l_hand_up_flag_ = true;
 		l_move_dest_x_ = std::min(l_pos_.x + ADD_DISTANCE_, HAND_RETURN_POS_X_);
 	}

@@ -1,8 +1,8 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Weak.h"
-#include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
+#include "Classes/Enemy/Boss/Parts/Hands/ActionManager.h"
 #include "Classes/Object/ObjectManager.h"
 
-void boss::Weak::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) {
+void boss::Weak::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m) {
 	pos_r_ = boss_handR_->GetHandPos();
 	pos_l_ = boss_handL_->GetHandPos();
 	rot_r_ = boss_handR_->GetRotation();
@@ -10,11 +10,11 @@ void boss::Weak::Update(const float deltaTime, const ObjectManager* const obj_m,
 
 	time_delta_ = deltaTime;
 	switch (weak_state_) {
-	case ATK_CANCEL:	   AtkCancel(hand_m);		break;
-	case READY:			   Ready(hand_m);			break;
-	case WEAK:			   BossWeak(obj_m, hand_m);	break;
+	case ATK_CANCEL:	   AtkCancel(act_m);		break;
+	case READY:			   Ready(act_m);			break;
+	case WEAK:			   BossWeak(obj_m, act_m);	break;
 	case INITIAL_POS_MOVE: InitialPosMove();		break;
-	case ACTION_END:	   hand_m->ActionEnd();		break;
+	case ACTION_END:	   act_m->ActionEnd();		break;
 	}
 
 	boss_handR_->SetHandPos(pos_r_);
@@ -23,17 +23,17 @@ void boss::Weak::Update(const float deltaTime, const ObjectManager* const obj_m,
 	boss_handL_->SetHandRote(rot_l_);
 }
 
-void boss::Weak::AtkCancel(HandManager* const hand_m) {	//攻撃フラグを降ろす
+void boss::Weak::AtkCancel(ActionManager* const act_m) {	//攻撃フラグを降ろす
 	boss_handL_->SetAttackFlag(false);
 	boss_handR_->SetAttackFlag(false);
 	boss_handL_->SetHandMotion(HAND_MOTION::WAIT_MOTION);
 	boss_handR_->SetHandMotion(HAND_MOTION::WAIT_MOTION);
-	hand_m->SetSideShake(false);
-	hand_m->SetVerticalShake(false);
+	act_m->SetSideShake(false);
+	act_m->SetVerticalShake(false);
 	weak_state_ = READY;
 }
 
-void boss::Weak::Ready(HandManager* const hand_m) {	//両手の移動処理
+void boss::Weak::Ready(ActionManager* const act_m) {	//両手の移動処理
 	const float WEAK_SPEED_Y_ = 2.0f;
 	const float WEAK_GRAVITY_ = 6.0f;
 	weak_time_y_ += time_delta_;
@@ -48,7 +48,7 @@ void boss::Weak::Ready(HandManager* const hand_m) {	//両手の移動処理
 	const bool ready_end_l_ = is_set_l_pos_end_ && is_set_l_rot_end_;
 	const bool ready_end_r_ = is_set_r_pos_end_ && is_set_r_rot_end_;
 	if (ready_end_l_ && ready_end_r_) {
-		hand_m->SetVerticalShake(true);
+		act_m->SetVerticalShake(true);
 		weak_state_ = WEAK;
 	}
 }
@@ -83,8 +83,8 @@ void boss::Weak::ReadyL() {	//左手の移動
 	rot_l_.x = std::min(rot_l_.x + ROTE_SPEED_ * time_delta_, WEAK_ROT_X_);
 }
 
-void boss::Weak::BossWeak(const ObjectManager* const obj_m, HandManager* const hand_m) {	//ウィーク状態維持
-	hand_m->SetVerticalShake(false);
+void boss::Weak::BossWeak(const ObjectManager* const obj_m, ActionManager* const act_m) {	//ウィーク状態維持
+	act_m->SetVerticalShake(false);
 	if (!obj_m->IsBossWeak()) {
 		weak_state_ = INITIAL_POS_MOVE;
 	}

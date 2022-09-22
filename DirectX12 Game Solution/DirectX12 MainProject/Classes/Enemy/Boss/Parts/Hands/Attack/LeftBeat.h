@@ -17,13 +17,13 @@ namespace boss {
 			pos_  = SimpleMath::Vector3::Zero;
 			rote_ = SimpleMath::Vector3::Zero;
 		}
-		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m);
+		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m);
 
 	private:
-		void HandCheck(const HandManager* const hand_m);
+		void HandCheck(const ObjectManager* const obj_m);
 		void Ready(const ObjectManager* const obj_m);
-		void LeftBeatAttack(HandManager* const hand_m);
-		void Wait(HandManager* const hand_m);
+		void LeftBeatAttack(ActionManager* const act_m);
+		void Wait(ActionManager* const act_m);
 		void HandReturn();
 
 		int boss_action_state_;

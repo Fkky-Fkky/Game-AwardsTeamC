@@ -14,7 +14,7 @@ namespace boss {
 			r_rot_ = SimpleMath::Vector3::Zero;
 		};
 		~Advent() {};
-		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m);
+		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m);
 
 	private:
 		void AdventAction();

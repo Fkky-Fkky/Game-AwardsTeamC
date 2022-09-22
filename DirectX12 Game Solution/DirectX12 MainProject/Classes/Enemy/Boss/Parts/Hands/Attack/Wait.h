@@ -10,7 +10,7 @@ namespace boss {
 			max_wait_time_ = 0.0f;
 			first_processed_flag_ = false;
 		}
-		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m);
+		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m);
 
 	private:
 		float wait_time_;

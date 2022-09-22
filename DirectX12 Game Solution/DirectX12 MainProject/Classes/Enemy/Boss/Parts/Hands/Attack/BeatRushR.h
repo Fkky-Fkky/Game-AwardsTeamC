@@ -20,14 +20,14 @@ namespace boss {
 			is_r_return_end_ = false;
 			is_l_return_end_ = false;
 		}
-		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m);
+		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m);
 
 	private:
 		void HandCheck();
 		void Ready();
-		void Attack(HandManager* const hand_m);
-		void BeatR(HandManager* const hand_m);
-		void BeatL(HandManager* const hand_m);
+		void Attack(ActionManager* const act_m);
+		void BeatR(ActionManager* const act_m);
+		void BeatL(ActionManager* const act_m);
 		void Reset();
 		void HandReturn();
 

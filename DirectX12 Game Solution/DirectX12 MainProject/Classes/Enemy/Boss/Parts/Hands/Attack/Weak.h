@@ -16,14 +16,14 @@ namespace boss {
 			rot_l_ = SimpleMath::Vector3::Zero;
 		}
 		~Weak() {};
-		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m);
+		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m);
 
 	private:
-		void AtkCancel(HandManager* const hand_m);
-		void Ready(HandManager* const hand_m);
+		void AtkCancel(ActionManager* const act_m);
+		void Ready(ActionManager* const act_m);
 		void ReadyR();
 		void ReadyL();
-		void BossWeak(const ObjectManager* const obj_m, HandManager* const hand_m);
+		void BossWeak(const ObjectManager* const obj_m, ActionManager* const act_m);
 		void InitialPosMove();
 
 		int weak_state_;

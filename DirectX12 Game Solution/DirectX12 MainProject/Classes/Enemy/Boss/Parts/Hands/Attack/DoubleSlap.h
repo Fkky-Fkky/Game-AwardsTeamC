@@ -23,16 +23,16 @@ namespace boss {
 		}
 
 		~DoubleSlap() {};
-		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m);
+		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m);
 
 	private:
-		void HandCheck(const HandManager* const hand_m);
-		void Ready(HandManager* const hand_m);
+		void HandCheck(const ObjectManager* const obj_m);
+		void Ready(ActionManager* const act_m);
 		void ReadyR();
 		void ReadyL();
-		void Attack(HandManager* const hand_m);
-		void SlapR(HandManager* const hand_m);
-		void SlapL(HandManager* const hand_m);
+		void Attack(ActionManager* const act_m);
+		void SlapR(ActionManager* const act_m);
+		void SlapL(ActionManager* const act_m);
 		void Reset();
 		void HandReturn();
 

@@ -5,8 +5,8 @@
 #include "Classes/Enemy/Boss/Parts/Hands/BossHand.h"
 #include "Base/DX12Effekseer.h"
 
-class HandManager;
 class ObjectManager;
+class ActionManager;
 
 using namespace DirectX;
 
@@ -23,7 +23,7 @@ namespace boss {
 		}
 
 		virtual void Initialize(BossHand* const boss_handL, BossHand* const bosshandR);
-		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) = 0;
+		virtual void Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m) = 0;
 
 	private:
 		float slap_y_time_;
@@ -33,7 +33,7 @@ namespace boss {
 		const float SLAP_GRAVITY_Y_ = 5.0f;
 
 	protected:
-		virtual void SlapAttackBase(const float deltaTime, HandManager* const hand_m);	
+		virtual void SlapAttackBase(const float deltaTime, ActionManager* const act_m);
 		virtual float SlapY(const float deltaTime);
 
 		BossHand* boss_handL_;
