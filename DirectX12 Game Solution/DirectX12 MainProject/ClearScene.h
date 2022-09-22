@@ -5,6 +5,7 @@
 #pragma once
 
 #include "Scene.h"
+#include "Classes/GameScene/SceneBase.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -35,10 +36,6 @@ public:
 	void Render() override;
 
 private:
-    DX12::DESCRIPTORHEAP descriptorHeap;
-    DX12::SPRITEBATCH    spriteBatch;
-    DX12::HGPUDESCRIPTOR dx9GpuDescriptor;
-
-private:
+	SceneBase scene_base_;
 	DX9::SPRITE clear_;
 };

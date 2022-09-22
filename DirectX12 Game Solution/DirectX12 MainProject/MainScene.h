@@ -12,6 +12,7 @@
 #include "Classes/Collision/Collision.h"
 #include "Classes/Object/ObjectManager.h"
 #include "Classes/GameScene/SceneChange.h"
+#include "Classes/GameScene/SceneBase.h"
 #include "Classes/UI/UI.h"
 #include "Classes/My_Light/My_Light.h"
 
@@ -44,17 +45,13 @@ public:
 	void Render() override;
 
 private:
-	DX12::DESCRIPTORHEAP descriptorHeap;
-	DX12::SPRITEBATCH    spriteBatch;
-	DX12::HGPUDESCRIPTOR dx9GpuDescriptor;
-
-private:
 	Boss boss_;
 	My_Camera camera_;
 	Player player_;
 	Ground ground_;
 	Collision collision_;
 	ObjectManager object_;
+	SceneBase scene_base_;
 	SceneChange scene_change_;
 	UI ui;
 	My_Light light_;

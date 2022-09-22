@@ -5,6 +5,7 @@
 #pragma once
 
 #include "Scene.h"
+#include "Classes/GameScene/SceneBase.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -34,12 +35,9 @@ public:
 	NextScene Update(const float deltaTime) override;
 	void Render() override;
 
-private:
-    DX12::DESCRIPTORHEAP descriptorHeap;
-    DX12::SPRITEBATCH    spriteBatch;
-    DX12::HGPUDESCRIPTOR dx9GpuDescriptor;
 
 private:
+	SceneBase scene_base_;
 	DX9::SPRITE title_;
 	DX9::SPRITE black_;
 	float black_alpha_;
