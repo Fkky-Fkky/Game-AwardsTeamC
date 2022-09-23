@@ -27,7 +27,7 @@ void HandManager::Render()const {
 	hand_r.Render();
 }
 
-void HandManager::RandomHandState() {	//手の状態を変更する(グー・パー)
+void HandManager::RandomHandState(const bool is_rush) {	//手の状態を変更する(グー・パー)
 	if (same_handstate_flag_) {	//2連続同じ状態だった場合もう片方の状態にする
 		hand_state_ = (old_hand_state_ == ROCK) ? PAPER : ROCK;
 		same_handstate_flag_ = false;
@@ -36,9 +36,9 @@ void HandManager::RandomHandState() {	//手の状態を変更する(グー・パー)
 		hand_state_ = random_hand_dist_(random_engine_);
 	}
 
-	//if (attack_state_ == BEAT_RUSH_R) {	//連続叩きつけ攻撃のみグーに固定する
-	//	hand_state_ = ROCK;
-	//}
+	if (is_rush) {	//連続叩きつけ攻撃のみグーに固定する
+		hand_state_ = ROCK;
+	}
 
 	if (hand_state_ == old_hand_state_) {
 		same_handstate_flag_ = true;

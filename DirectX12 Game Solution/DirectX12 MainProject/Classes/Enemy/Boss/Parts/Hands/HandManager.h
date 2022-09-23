@@ -22,11 +22,11 @@ public:
 	void Update(const float deltaTime);
 	void Render()const;
 
-	void RandomHandState();
+	void RandomHandState(const bool is_rush);
 
-	bool GetHandState() const { return hand_state_; }
-	bool GetLHandAttackFlag() const { return hand_l.GetAttackFlag(); }
-	bool GetRHandAttackFlag() const { return hand_r.GetAttackFlag(); }
+	bool IsHandOpen() const { return hand_state_; }
+	bool IsLHandAttack() const { return hand_l.IsAttack(); }
+	bool IsRHandAttack() const { return hand_r.IsAttack(); }
 
 	boss::BossHandL& GetHandL() { return hand_l; }
 	boss::BossHandR& GetHandR() { return hand_r; }

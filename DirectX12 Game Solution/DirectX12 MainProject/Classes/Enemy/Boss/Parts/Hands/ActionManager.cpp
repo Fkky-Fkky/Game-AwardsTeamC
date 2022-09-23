@@ -92,7 +92,8 @@ void ActionManager::SwitchStateAttack() {	//ボスの攻撃変更
 	case BEAT_RUSH_R:	action_ = new boss::BeatRushR;	break;
 	}
 	action_->Initialize(&hand_.GetHandL(), &hand_.GetHandR());
-	hand_.RandomHandState();
+	const bool IS_BEAT_RUSH_ = attack_state_ == BEAT_RUSH_R;
+	hand_.RandomHandState(IS_BEAT_RUSH_);
 }
 
 void ActionManager::SwitchStateWait() {	//待機状態に切り替え
