@@ -27,7 +27,7 @@ public:
 	void SetHandRote(const SimpleMath::Vector3 rotation_) { rotation = rotation_; }
 	void SetAttackFlag(const bool attack_flag) { attack_flag_ = attack_flag; }
 	void SetHandMotion(const int hand_motion);
-	bool GetAttackFlag() const { return attack_flag_; }
+	bool IsAttack() const { return attack_flag_; }
 	BoundingOrientedBox GetHandCollision() const { return collision; }
 	SimpleMath::Vector3 GetHandPos() const { return position; }
 	SimpleMath::Vector3 GetRotation() const { return rotation; }

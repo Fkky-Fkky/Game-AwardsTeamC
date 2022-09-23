@@ -48,25 +48,19 @@ bool ObjectManager::GetPlayerAttackFlag() const {
 }
 
 bool ObjectManager::GetPlayerDmgFlag() const {
-	if (collision_->GetPlayerDmgFlagR() ||
-		collision_->GetPlayerDmgFlagL()) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return collision_->GetPlayerDmgFlagR() || collision_->GetPlayerDmgFlagL();
 }
 
 bool ObjectManager::IsPlayerDeath() const {
 	return player_->IsPlayerDeath();
 }
 
-bool ObjectManager::GetBossRAttackFlag() const {
-	return boss_->GetRHandAttackFlag();
+bool ObjectManager::IsBossRAttack() const {
+	return boss_->IsRHandAttack();
 }
 
-bool ObjectManager::GetBossLAttackFlag() const {
-	return boss_->GetLHandAttackFlag();
+bool ObjectManager::IsBossLAttack() const {
+	return boss_->IsLHandAttack();
 }
 
 bool ObjectManager::IsBossBodyDmg() const {
@@ -74,7 +68,7 @@ bool ObjectManager::IsBossBodyDmg() const {
 }
 
 bool ObjectManager::IsBossHandOpen() const {
-	return boss_->GetHandState();
+	return boss_->IsHandOpen();
 }
 
 bool ObjectManager::IsBossHandDmg() const {

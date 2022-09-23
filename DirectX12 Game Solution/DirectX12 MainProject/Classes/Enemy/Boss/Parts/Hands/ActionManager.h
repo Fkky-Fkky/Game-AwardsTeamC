@@ -44,9 +44,9 @@ public:
 	bool IsVerticalShake() const { return is_vertical_shake_; }
 	bool IsSideShake() const { return is_side_shake_; }
 	bool IsHandDeath() const { return is_hand_death_; }
-	bool GetHandState() const { return hand_.GetHandState(); }
-	bool GetLHandAttackFlag() const { return hand_.GetLHandAttackFlag(); }
-	bool GetRHandAttackFlag() const { return hand_.GetRHandAttackFlag(); }
+	bool IsHandOpen() const { return hand_.IsHandOpen(); }
+	bool IsLHandAttack() const { return hand_.IsLHandAttack(); }
+	bool IsRHandAttack() const { return hand_.IsRHandAttack(); }
 
 	BoundingOrientedBox GetLHandCollision() const { return hand_.GetLHandCollision(); }
 	BoundingOrientedBox GetRHandCollision() const { return hand_.GetRHandCollision(); }

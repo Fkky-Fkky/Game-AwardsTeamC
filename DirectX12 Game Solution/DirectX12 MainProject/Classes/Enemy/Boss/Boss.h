@@ -29,9 +29,9 @@ public:
 	bool IsBossDeath() const { return body_.IsBodyDeath() && action_.IsHandDeath(); }
 	bool IsVerticalShake() const { return action_.IsVerticalShake() || is_vertical_shake_; }
 	bool IsSideShake() const { return action_.IsSideShake(); }
-	bool GetHandState() const { return action_.GetHandState(); }
-	bool GetLHandAttackFlag() const { return action_.GetLHandAttackFlag(); }
-	bool GetRHandAttackFlag() const { return action_.GetRHandAttackFlag(); }
+	bool IsHandOpen() const { return action_.IsHandOpen(); }
+	bool IsLHandAttack() const { return action_.IsLHandAttack(); }
+	bool IsRHandAttack() const { return action_.IsRHandAttack(); }
 	BoundingOrientedBox GetLHandCollision() const { return action_.GetLHandCollision(); }
 	BoundingOrientedBox GetRHandCollision() const { return action_.GetRHandCollision(); }
 	BoundingOrientedBox GetBodyCollision() const { return body_.GetBodyCollision(); }
