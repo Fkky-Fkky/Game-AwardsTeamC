@@ -78,8 +78,8 @@ namespace boss {
 		const float BODY_DEATH_POS_Y_ = 4.0f; /**< 死亡時のZ座標 */
 		const float DEATH_ROTATION_X_ = 40.0f; /**< 死亡時の回転X軸 */
 		const float BODY_SCALE_ = 0.8f; /**< モデルの大きさ */
-		const float COLLISION_SIZE_X_ = 0.1f; /**< 当たり判定のXサイズ */
-		const float COLLISION_SIZE_Z_ = 0.8f; /**< 当たり判定のZサイズ */
+		const float COLLISION_SIZE_X_ = 0.1f; /**< コリジョンのXサイズ */
+		const float COLLISION_SIZE_Z_ = 0.8f; /**< コリジョンのZサイズ */
 		const float ADVENT_SPEED_	 = 10.0f; /**< 登場時の降りてくるスピード */
 		const float BODY_UP_SPEED_Y_ = 10.0f; /**< 上に移動するスピード */
 		const float MOVE_SPEED_Z_	 = 20.0f; /**< Z座標で動くスピード */

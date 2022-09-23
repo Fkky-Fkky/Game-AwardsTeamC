@@ -120,9 +120,9 @@ public:
 	BoundingOrientedBox GetRHandCollision() const { return action_.GetRHandCollision(); }
 
 	/**
-	* @brief 頭のコリジョン取得
+	* @brief 本体のコリジョン取得
 	*
-	* @return 頭のコリジョン
+	* @return 本体のコリジョン
 	*/
 	BoundingOrientedBox GetBodyCollision() const { return body_.GetBodyCollision(); }
 

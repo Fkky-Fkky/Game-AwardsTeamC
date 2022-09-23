@@ -68,7 +68,7 @@ void boss::BossBody::Update(const float deltaTime, const ObjectManager* const ob
 		DeathAction();
 	}
 	else {
-		rotation.y = player_pos_.x * -1;
+		rotation_.y = player_pos_.x * -1;
 		WeakAction();
 	}
 
@@ -88,8 +88,8 @@ void boss::BossBody::Update(const float deltaTime, const ObjectManager* const ob
 * @brief ìoèÍéûÇÃìÆÇ´
 */
 void boss::BossBody::AdventAction() {
-	position.y	  = std::max(position.y - ADVENT_SPEED_ * time_delta_, BODY_START_POS_Y_);
-	is_start_pos_ = position.y <= BODY_START_POS_Y_;
+	position_.y	  = std::max(position_.y - ADVENT_SPEED_ * time_delta_, BODY_START_POS_Y_);
+	is_start_pos_ = position_.y <= BODY_START_POS_Y_;
 	body_coll_.Center = model_->GetPosition();
 	body_coll_.Orientation = model_->GetRotationQuaternion();
 }
@@ -99,26 +99,26 @@ void boss::BossBody::AdventAction() {
 */
 void boss::BossBody::WeakAction() {
 	if (is_weak_) {
-		if (position.y > BODY_WEAK_POS_Y_) {
+		if (position_.y > BODY_WEAK_POS_Y_) {
 			body_jump_time_ += time_delta_;
 			body_jump_y_ = JUMP_SPEED_ * body_jump_time_ - HALF_ * GRAVITY_ * body_jump_time_ * body_jump_time_;
-			position.y += body_jump_y_;
+			position_.y += body_jump_y_;
 		}
 
-		position.z = std::max(position.z - MOVE_SPEED_Z_ * time_delta_, BODY_WEAK_POS_Z_);
-		rotation.x = 0.0f;
-		rotation.y = 0.0f;
-		if (!shake_set_flag_ && position.y <= BODY_WEAK_POS_Y_) {
-			position.y = BODY_WEAK_POS_Y_;
+		position_.z = std::max(position_.z - MOVE_SPEED_Z_ * time_delta_, BODY_WEAK_POS_Z_);
+		rotation_.x = 0.0f;
+		rotation_.y = 0.0f;
+		if (!shake_set_flag_ && position_.y <= BODY_WEAK_POS_Y_) {
+			position_.y = BODY_WEAK_POS_Y_;
 			shake_set_flag_ = true;
 			is_shake_		= true;
 			shake_time_ = SHAKE_TIME_MAX_;
 		}
 	}
 	else {
-		position.y = std::min(position.y + BODY_UP_SPEED_Y_ * time_delta_, BODY_START_POS_Y_);
-		position.z = std::min(position.z + MOVE_SPEED_Z_	* time_delta_, BODY_INIT_POS_Z_);
-		rotation.x = std::max(rotation.x - ROTATION_SPEED_  * time_delta_, BODY_INIT_ROT_X_);
+		position_.y = std::min(position_.y + BODY_UP_SPEED_Y_ * time_delta_, BODY_START_POS_Y_);
+		position_.z = std::min(position_.z + MOVE_SPEED_Z_	* time_delta_, BODY_INIT_POS_Z_);
+		rotation_.x = std::max(rotation_.x - ROTATION_SPEED_  * time_delta_, BODY_INIT_ROT_X_);
 		body_jump_time_ = 0.0f;
 		body_jump_y_	= 0.0f;
 		shake_set_flag_ = false;
@@ -133,16 +133,16 @@ void boss::BossBody::DeathAction() {
 
 	body_jump_time_ += time_delta_;
 	body_jump_y_ = JUMP_SPEED_ * body_jump_time_ - HALF_ * GRAVITY_ * body_jump_time_ * body_jump_time_;
-	position.y += body_jump_y_;
-	if (position.y <= BODY_DEATH_POS_Y_) {
-		position.y = BODY_DEATH_POS_Y_;
+	position_.y += body_jump_y_;
+	if (position_.y <= BODY_DEATH_POS_Y_) {
+		position_.y = BODY_DEATH_POS_Y_;
 	}
 
-	position.z = std::min(position.z + MOVE_SPEED_Z_  * time_delta_, BODY_INIT_POS_Z_);
-	rotation.x = std::min(rotation.x + DEATH_ROTATION_SPEED_ * time_delta_, DEATH_ROTATION_X_);
+	position_.z = std::min(position_.z + MOVE_SPEED_Z_  * time_delta_, BODY_INIT_POS_Z_);
+	rotation_.x = std::min(rotation_.x + DEATH_ROTATION_SPEED_ * time_delta_, DEATH_ROTATION_X_);
 
-	bool is_death_pos_ = position.y <= BODY_DEATH_POS_Y_ && position.z >= BODY_INIT_POS_Z_; /**< éÄñSéûÇÃç¿ïWÇ…Ç¢ÇÈÇ© */
-	bool is_death_rot_ = rotation.x >= DEATH_ROTATION_X_; /**< éÄñSéûÇÃâÒì]é≤Ç…Ç»Ç¡ÇƒÇ¢ÇÈÇ© */
+	bool is_death_pos_ = position_.y <= BODY_DEATH_POS_Y_ && position_.z >= BODY_INIT_POS_Z_; /**< éÄñSéûÇÃç¿ïWÇ…Ç¢ÇÈÇ© */
+	bool is_death_rot_ = rotation_.x >= DEATH_ROTATION_X_; /**< éÄñSéûÇÃâÒì]é≤Ç…Ç»Ç¡ÇƒÇ¢ÇÈÇ© */
 	bool is_body_death_set_ = is_death_pos_ && is_death_rot_; /**< éÄñSéûÇÃç¿ïWÇ∆âÒì]Ç…Ç»Ç¡ÇƒÇ¢ÇÈÇ© */
 	if (is_body_death_set_ && !shake_set_flag_) {
 		shake_set_flag_ = true;
