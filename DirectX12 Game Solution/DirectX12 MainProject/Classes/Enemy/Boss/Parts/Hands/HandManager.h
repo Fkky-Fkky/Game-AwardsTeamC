@@ -43,16 +43,6 @@ private:
 	bool old_hand_state_;
 	bool same_handstate_flag_;
 
-	enum BOSS_STATE {
-		WAIT,
-		LEFT_BEAT,
-		LEFT_SLAP,
-		RIGHT_BEAT,
-		RIGHT_SLAP,
-		DOUBLE_SLAP,
-		BEAT_RUSH_R
-	};
-
 	enum HAND_STATE {
 		ROCK,
 		PAPER
