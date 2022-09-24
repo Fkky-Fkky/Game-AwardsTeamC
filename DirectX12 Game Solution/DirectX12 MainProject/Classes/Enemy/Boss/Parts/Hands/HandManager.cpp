@@ -1,5 +1,8 @@
 #include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
 
+/**
+* @brief ’l‚Ì‰Šú‰»
+*/
 void HandManager::Initialize() {
 	hand_l.Initialize();
 	hand_r.Initialize();
@@ -12,23 +15,41 @@ void HandManager::Initialize() {
 	same_handstate_flag_ = false;
 }
 
+/**
+* @brief è‚Ìƒ‚ƒfƒ‹“Ç‚İ‚İ
+*/
 void HandManager::LoadAssets() {
 	hand_l.LoadAssets();
 	hand_r.LoadAssets();
 }
 
+/**
+* @brief è‚ÌXV
+* 
+* @param[in] deltaTime ŠÔ
+*/
 void HandManager::Update(const float deltaTime) {
 	hand_l.Update(deltaTime);
 	hand_r.Update(deltaTime);
 }
 
+/**
+* @brief è‚Ì•`‰æ
+*/
 void HandManager::Render()const {
 	hand_l.Render();
 	hand_r.Render();
 }
 
-void HandManager::RandomHandState(const bool is_rush) {	//è‚Ìó‘Ô‚ğ•ÏX‚·‚é(ƒO[Eƒp[)
-	if (same_handstate_flag_) {	//2˜A‘±“¯‚¶ó‘Ô‚¾‚Á‚½ê‡‚à‚¤•Ğ•û‚Ìó‘Ô‚É‚·‚é
+/**
+* @brief è‚Ìó‘Ô‚ğ•ÏX‚·‚é(ƒO[Eƒp[)
+* 
+* 2˜A‘±“¯‚¶ó‘Ô‚¾‚Á‚½ê‡‚à‚¤•Ğ•û‚Ìó‘Ô‚É‚·‚é
+* ˜A‘±’@‚«‚Â‚¯UŒ‚‚Ì‚İƒO[‚ÉŒÅ’è‚·‚é
+* @param[in] is_rush s‚í‚ê‚éUŒ‚‚ª˜A‘±’@‚«‚Â‚¯UŒ‚‚©
+*/
+void HandManager::RandomHandState(const bool is_rush) {
+	if (same_handstate_flag_) {
 		hand_state_ = (old_hand_state_ == ROCK) ? PAPER : ROCK;
 		same_handstate_flag_ = false;
 	}
@@ -36,7 +57,7 @@ void HandManager::RandomHandState(const bool is_rush) {	//è‚Ìó‘Ô‚ğ•ÏX‚·‚é(ƒO
 		hand_state_ = random_hand_dist_(random_engine_);
 	}
 
-	if (is_rush) {	//˜A‘±’@‚«‚Â‚¯UŒ‚‚Ì‚İƒO[‚ÉŒÅ’è‚·‚é
+	if (is_rush) {
 		hand_state_ = ROCK;
 	}
 
