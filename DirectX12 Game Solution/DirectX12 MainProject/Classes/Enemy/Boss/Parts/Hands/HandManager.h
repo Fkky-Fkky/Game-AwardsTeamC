@@ -92,7 +92,7 @@ private:
 	boss::BossHandR hand_r; /**< ボス右手クラス */
 
 	std::mt19937 random_engine_; /**< ランダムエンジン */
-	std::uniform_int_distribution<int> random_hand_dist_; /**< 同一分布 */
+	std::uniform_int_distribution<int> random_hand_dist_; /**< 手の状態同一分布 */
 
 	bool hand_state_; /**< 手の状態を格納 */
 	bool old_hand_state_; /**< ひとつ前の手の状態を格納 */

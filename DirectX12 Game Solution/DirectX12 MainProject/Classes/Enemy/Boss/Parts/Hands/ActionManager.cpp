@@ -11,6 +11,9 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Weak.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Death.h"
 
+/**
+* @brief 値の初期化
+*/
 void ActionManager::Initialize() {
 	hand_.Initialize();
 	action_ = new boss::Advent;
@@ -31,11 +34,20 @@ void ActionManager::Initialize() {
 	beat_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Beat.wav");
 }
 
+/**
+* @brief モデルとエフェクトの読み込み
+*/
 void ActionManager::LoadAssets() {
 	hand_.LoadAssets();
 	beat_effect_ = DX12Effect.Create(L"Effect/Eff_shock/Eff_shock.efk");
 }
 
+/**
+* @breif ActioManager更新
+* 
+* @param[in] deltaTime 時間
+* @param[out] obj_m オブジェクトマネージャー
+*/
 void ActionManager::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	boss_hp_ = obj_m->GetBossHP();
 
@@ -52,11 +64,19 @@ void ActionManager::Update(const float deltaTime, const ObjectManager* const obj
 	}
 }
 
+/**
+* @brief モデルの描画
+*/
 void ActionManager::Render() const {
 	hand_.Render();
 }
 
-void ActionManager::RandomAttackState() {	//ボスのHPに比例して攻撃の種類変化
+/**
+* @brief ランダムで攻撃の種類変更
+* 
+* ボスのHPに比例して攻撃の種類を変化させる
+*/
+void ActionManager::RandomAttackState() {
 	int random_state_max_ = ATTACK_STATE_MAX_;
 	int old_atk_state_	  = attack_state_;
 	bool normal_mode_ = boss_hp_ <= HP_NORMAL_MAX_ && boss_hp_ > HP_NORMAL_MIN_;
@@ -81,7 +101,10 @@ void ActionManager::RandomAttackState() {	//ボスのHPに比例して攻撃の種類変化
 	SwitchStateAttack();
 }
 
-void ActionManager::SwitchStateAttack() {	//ボスの攻撃変更
+/**
+* @brief ボスの攻撃変更
+*/
+void ActionManager::SwitchStateAttack() {
 	delete action_;
 	switch (attack_state_) {
 	case LEFT_BEAT:		action_ = new boss::LeftBeat;	break;
@@ -96,7 +119,10 @@ void ActionManager::SwitchStateAttack() {	//ボスの攻撃変更
 	hand_.RandomHandState(IS_BEAT_RUSH_);
 }
 
-void ActionManager::SwitchStateWait() {	//待機状態に切り替え
+/**
+* @brief 待機状態に切り替え
+*/
+void ActionManager::SwitchStateWait() {
 	if (action_end_flag_) {
 		delete action_;
 		action_ = new boss::Wait;
@@ -105,12 +131,18 @@ void ActionManager::SwitchStateWait() {	//待機状態に切り替え
 	}
 }
 
-void ActionManager::SwitchStateWeak() {	//ウィーク状態に切り替え
+/**
+* @brief ウィーク状態に切り替え
+*/
+void ActionManager::SwitchStateWeak() {
 	delete action_;
 	action_ = new boss::Weak;
 	action_->Initialize(&hand_.GetHandL(), &hand_.GetHandR());
 }
 
+/**
+* @brief 死亡状態に切り替え
+*/
 void ActionManager::SwitchStateDeath() {
 	if (!is_switch_state_death_) {
 		is_switch_state_death_ = true;
@@ -120,23 +152,38 @@ void ActionManager::SwitchStateDeath() {
 	}
 }
 
+/**
+* @brief 行動の終了
+*/
 void ActionManager::ActionEnd() {
 	action_end_flag_ = true;
 	is_switch_state_weak_ = false;
 }
 
+/**
+* @breif 死亡状態の行動終了
+*/
 void ActionManager::DeathActionEnd() {
 	is_hand_death_ = true;
 }
 
+/**
+* @brief 薙ぎ払いSE再生
+*/
 void ActionManager::PlaySlapSE() const {
 	slap_se_->Play();
 }
 
+/**
+* @brief 叩きつけSE再生
+*/
 void ActionManager::PlayBeatSE() const {
 	beat_se_->Play();
 }
 
+/**
+* @brief 叩きつけエフェクト再生
+*/
 void ActionManager::PlayBeatEffect(const SimpleMath::Vector3 effect_pos) const {
 	DX12Effect.Play(beat_effect_, effect_pos);
 }
