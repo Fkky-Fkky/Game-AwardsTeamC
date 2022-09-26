@@ -1,11 +1,15 @@
+/**
+* @file BeatRush.h
+*/
+
 #pragma once
 
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAction.h"
 
 namespace boss {
-	class BeatRushR : public BossAction {
+	class BeatRush : public BossAction {
 	public:
-		BeatRushR() {
+		BeatRush() {
 			action_state_ = HAND_CHECK;
 			r_beat_time_ = 0.0f;
 			l_beat_time_ = 0.0f;

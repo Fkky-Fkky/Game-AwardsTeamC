@@ -6,7 +6,7 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightBeat.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightSlap.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/DoubleSlap.h"
-#include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRushR.h"
+#include "Classes/Enemy/Boss/Parts/Hands/Attack/BeatRush.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Wait.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Weak.h"
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Death.h"
@@ -112,7 +112,7 @@ void ActionManager::SwitchStateAttack() {
 	case RIGHT_BEAT:	action_ = new boss::RightBeat;	break;
 	case RIGHT_SLAP:	action_ = new boss::RightSlap;	break;
 	case DOUBLE_SLAP:	action_ = new boss::DoubleSlap;	break;
-	case BEAT_RUSH_R:	action_ = new boss::BeatRushR;	break;
+	case BEAT_RUSH_R:	action_ = new boss::BeatRush;	break;
 	}
 	action_->Initialize(&hand_.GetHandL(), &hand_.GetHandR());
 	const bool IS_BEAT_RUSH_ = attack_state_ == BEAT_RUSH_R;
