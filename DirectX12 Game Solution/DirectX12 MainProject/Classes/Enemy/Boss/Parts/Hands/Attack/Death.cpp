@@ -1,6 +1,13 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Death.h"
 #include "Classes/Enemy/Boss/Parts/Hands/ActionManager.h"
 
+/**
+* @brief 死亡時行動の更新
+* 
+* @param[in] deltaTime 時間
+* @param[out] obj_m オブジェクトマネージャー
+* @param[out] act_m アクションマネージャー
+*/
 void boss::Death::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m) {
 	l_pos_ = boss_handL_->GetHandPos();
 	r_pos_ = boss_handR_->GetHandPos();
@@ -23,7 +30,12 @@ void boss::Death::Update(const float deltaTime, const ObjectManager* const obj_m
 	boss_handL_->SetHandRote(l_rot_);
 }
 
-void boss::Death::AtkCancel(ActionManager* const act_m) {	//攻撃フラグ降ろす
+/**
+* @brief 攻撃フラグ降ろす
+* 
+* @param[out] act_m アクションマネージャー
+*/
+void boss::Death::AtkCancel(ActionManager* const act_m) {
 	boss_handL_->SetAttackFlag(false);
 	boss_handR_->SetAttackFlag(false);
 	boss_handL_->PlayDeathMotion();
@@ -33,7 +45,12 @@ void boss::Death::AtkCancel(ActionManager* const act_m) {	//攻撃フラグ降ろす
 	death_state_ = DEATH_ACTION;
 }
 
-void boss::Death::DeathAction(ActionManager* const act_m) {	//やられた時の動き
+/**
+* @brief 死亡時の動き
+* 
+* @param[out] act_m アクションマネージャー
+*/
+void boss::Death::DeathAction(ActionManager* const act_m) {
 	if (r_pos_.x <= -DEATH_POS_X_) {
 		r_pos_.x = std::min(r_pos_.x + MOVE_SPEED_X_ * time_delta_, -DEATH_POS_X_);
 	}
@@ -64,13 +81,13 @@ void boss::Death::DeathAction(ActionManager* const act_m) {	//やられた時の動き
 	r_rot_.x = std::min(r_rot_.x + ROTE_SPEED_ + time_delta_, DEATH_ROT_X_);
 	l_rot_.x = std::min(l_rot_.x + ROTE_SPEED_ * time_delta_, DEATH_ROT_X_);
 
-	const bool is_set_l_pos_end_ = l_pos_.x ==  DEATH_POS_X_ && l_pos_.y <= DEATH_POS_Y_ && l_pos_.z >= HAND_INITIAL_POS_Z_;
-	const bool is_set_r_pos_end_ = r_pos_.x == -DEATH_POS_X_ && r_pos_.y <= DEATH_POS_Y_ && r_pos_.z >= HAND_INITIAL_POS_Z_;
-	const bool is_set_l_rot_end_ = l_rot_.x >= DEATH_ROT_X_;
-	const bool is_set_r_rot_end_ = r_rot_.x >= DEATH_ROT_X_;
-	const bool ready_end_l_ = is_set_l_pos_end_ && is_set_l_rot_end_;
-	const bool ready_end_r_ = is_set_r_pos_end_ && is_set_r_rot_end_;
-	if (ready_end_l_ && ready_end_r_) {
+	const bool is_l_death_pos_ = l_pos_.x ==  DEATH_POS_X_ && l_pos_.y <= DEATH_POS_Y_ && l_pos_.z >= HAND_INITIAL_POS_Z_; /**< 左手が死亡座標にいるか */
+	const bool is_r_death_pos_ = r_pos_.x == -DEATH_POS_X_ && r_pos_.y <= DEATH_POS_Y_ && r_pos_.z >= HAND_INITIAL_POS_Z_; /**< 右手が死亡座標にいるか */
+	const bool is_l_death_rot_ = l_rot_.x >= DEATH_ROT_X_; /**< 左手が死亡回転軸か */
+	const bool is_r_death_rot_ = r_rot_.x >= DEATH_ROT_X_; /**< 右手が死亡回転軸か */
+	const bool is_l_death_ = is_l_death_pos_ && is_l_death_rot_; /**< 左手が死亡しているか */
+	const bool is_r_death_ = is_r_death_pos_ && is_r_death_rot_; /**< 右手が死亡しているか */
+	if (is_l_death_ && is_r_death_) {
 		act_m->SetVerticalShake(true);
 		death_state_ = ACTION_END;
 	}

@@ -1,8 +1,20 @@
+/**
+* @file DoubleSlap.h
+* @brief 両手薙ぎ払い攻撃処理クラス
+* @outhor 吹上純平
+*/
+
 #pragma once
 
+/**
+* インクルードファイル
+*/
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAction.h"
 
 namespace boss {
+	/**
+	* @brief DoubleSlapクラス定義
+	*/
 	class DoubleSlap : public BossAction {
 	public:
 		DoubleSlap() {
@@ -36,26 +48,26 @@ namespace boss {
 		void Reset();
 		void HandReturn();
 
-		int action_state_;
+		int action_state_; /**< 現在の攻撃行動格納 */
 
-		float time_delta_;
-		float slap_y_;
-		float l_slap_speed_x_;
-		float wait_time_;
+		float time_delta_; /**< 時間 */
+		float slap_y_; /**< 構えに必要な処理格納 */
+		float l_slap_speed_x_; /**< 左薙ぎ払いスピード格納 */
+		float wait_time_; /**< 待機時間格納 */
 
-		bool ready_end_r_;
-		bool ready_end_l_;
-		bool atk_end_r_;
-		bool atk_end_l_;
-		bool return_end_r_;
-		bool return_end_l_;
-		bool hand_state_;
+		bool ready_end_r_; /**< 右手構えが完了したか */
+		bool ready_end_l_; /**< 左手構えが完了したか */
+		bool atk_end_r_; /**< 右手の攻撃が完了したか */
+		bool atk_end_l_; /**< 左手の攻撃が完了したか */
+		bool return_end_r_; /**< 右手が初期座標に移動したか */
+		bool return_end_l_; /**< 左手が初期座標に移動したか */
+		bool hand_state_; /**< 手の状態格納 */
 
-		SimpleMath::Vector3 r_pos_;
-		SimpleMath::Vector3 l_pos_;
+		SimpleMath::Vector3 r_pos_; /**< 右手の座標格納 */
+		SimpleMath::Vector3 l_pos_; /**< 左手の座標格納 */
 
-		const float L_HAND_DEST_Y_ = 8.0f;
-		const float ATTACK_START_TIME_R_ = 1.0f;
-		const float WAIT_TIME_MAX_ = 1.5f;
+		const float L_HAND_DEST_Y_ = 8.0f; /**< 左手の移動先Y座標 */
+		const float ATTACK_START_TIME_R_ = 1.0f; /**< 右手の攻撃開始時間 */
+		const float WAIT_TIME_MAX_ = 1.5f; /**< 最大待機時間 */
 	};
 }
