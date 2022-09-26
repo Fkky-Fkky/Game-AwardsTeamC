@@ -2,6 +2,13 @@
 #include "Classes/Enemy/Boss/Parts/Hands/ActionManager.h"
 #include "Classes/Object/ObjectManager.h"
 
+/**
+* @brief UŒ‚ˆ—XV
+*
+* @param[in] deltaTime ŠÔ
+* @param[out] obj_m ƒIƒuƒWƒFƒNƒgƒ}ƒl[ƒWƒƒ[
+* @param[out] act_m ƒAƒNƒVƒ‡ƒ“ƒ}ƒl[ƒWƒƒ[
+*/
 void boss::LeftBeat::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m) {
 	pos_  = boss_handL_->GetHandPos();
 	rote_ = boss_handL_->GetRotation();
@@ -21,7 +28,12 @@ void boss::LeftBeat::Update(const float deltaTime, const ObjectManager* const ob
 	boss_handL_->SetHandRote(rote_);
 }
 
-void boss::LeftBeat::HandCheck(const ObjectManager* const obj_m) {	//è‚Ìó‘Ô‚ğŠm”F
+/**
+* @brief è‚Ìó‘Ô‚ğŠm”F
+* 
+* @param[out] obj_m ƒIƒuƒWƒFƒNƒgƒ}ƒl[ƒWƒƒ[
+*/
+void boss::LeftBeat::HandCheck(const ObjectManager* const obj_m) {
 	hand_state_ = obj_m->IsBossHandOpen();
 	if (!hand_state_) {
 		boss_handL_->SetHandMotion(HAND_MOTION::ROCK);
@@ -34,9 +46,14 @@ void boss::LeftBeat::HandCheck(const ObjectManager* const obj_m) {	//è‚Ìó‘Ô‚ğŠ
 	boss_action_state_ = READY;
 }
 
-void boss::LeftBeat::Ready(const ObjectManager* const obj_m) { //ƒvƒŒƒCƒ„[‚ÌÀ•W‚Éè‚ğˆÚ“®‚³‚¹‚é
+/**
+* @brief ƒvƒŒƒCƒ„[‚ÌÀ•W‚Éè‚ğˆÚ“®‚³‚¹‚é
+* 
+* @param[out] obj_m ƒIƒuƒWƒFƒNƒgƒ}ƒl[ƒWƒƒ[
+*/
+void boss::LeftBeat::Ready(const ObjectManager* const obj_m) {
 	const SimpleMath::Vector3 move_dest_ = obj_m->GetPlayerPos();
-	const float DEST_SPEED_X_ = (is_player_pos_arrival_) ? CHASE_SPEED_ : MOVE_SPEED_X_;
+	const float DEST_SPEED_X_ = (is_player_pos_arrival_) ? CHASE_SPEED_ : MOVE_SPEED_X_; /**< ’ÇÕ‚·‚éƒXƒs[ƒh */
 	ready_time_  = std::min(ready_time_ + time_delta_, READY_TIME_MAX_);
 	if (ready_time_ <= CHASE_PLAYER_TIME_) {
 		if (pos_.x < move_dest_.x) {
@@ -64,7 +81,12 @@ void boss::LeftBeat::Ready(const ObjectManager* const obj_m) { //ƒvƒŒƒCƒ„[‚ÌÀ•
 	}
 }
 
-void boss::LeftBeat::LeftBeatAttack(ActionManager* const act_m) { //’@‚«‚Â‚¯UŒ‚
+/**
+* @brief ’@‚«‚Â‚¯UŒ‚
+* 
+* @param[out] act_m ƒAƒNƒVƒ‡ƒ“ƒ}ƒl[ƒWƒƒ[
+*/
+void boss::LeftBeat::LeftBeatAttack(ActionManager* const act_m) {
 	boss_handL_->SetAttackFlag(true);
 	beat_time_ += time_delta_;
 	const float beat_ = BEAT_SPEED_ * beat_time_ - HALF_ * BEAT_GRAVITY_ * beat_time_ * beat_time_;
@@ -80,7 +102,12 @@ void boss::LeftBeat::LeftBeatAttack(ActionManager* const act_m) { //’@‚«‚Â‚¯UŒ‚
 	}
 }
 
-void boss::LeftBeat::Wait(ActionManager* const act_m) {	//d’¼
+/**
+* @brief UŒ‚Œãd’¼
+* 
+* @param[out] act_m ƒAƒNƒVƒ‡ƒ“ƒ}ƒl[ƒWƒƒ[
+*/
+void boss::LeftBeat::Wait(ActionManager* const act_m) {
 	act_m->SetVerticalShake(false);
 	wait_time_ += time_delta_;
 	if (wait_time_ >= WAIT_TIME_MAX_) {
@@ -89,7 +116,10 @@ void boss::LeftBeat::Wait(ActionManager* const act_m) {	//d’¼
 	}
 }
 
-void boss::LeftBeat::HandReturn() { //è‚ğ‰ŠúˆÊ’u‚ÖˆÚ“®
+/**
+* @brief è‚ğ‰ŠúˆÊ’u‚ÖˆÚ“®
+*/
+void boss::LeftBeat::HandReturn() {
 	if (pos_.x < HAND_L_INITIAL_POS_X_) {
 		pos_.x = std::min(pos_.x + MOVE_SPEED_X_ * time_delta_, HAND_L_INITIAL_POS_X_);
 	}

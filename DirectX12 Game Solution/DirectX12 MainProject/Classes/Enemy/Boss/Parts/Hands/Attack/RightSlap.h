@@ -1,8 +1,20 @@
+/**
+* @file LeftSlap.h
+* @brief ¶“ã‚¬•¥‚¢UŒ‚ˆ—ƒNƒ‰ƒX
+* @outhor ãƒ•½
+*/
+
 #pragma once
 
+/**
+* ƒCƒ“ƒNƒ‹[ƒhƒtƒ@ƒCƒ‹
+*/
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAction.h"
 
 namespace boss {
+	/**
+	* @brief RightSlapƒNƒ‰ƒX’è‹`
+	*/
 	class RightSlap : public BossAction {
 	public:
 		RightSlap() {
@@ -22,13 +34,13 @@ namespace boss {
 		void Reset();
 		void HandReturn();
 
-		int action_state_;
+		int action_state_; /**< Œ»İ‚ÌUŒ‚s“®Ši”[ */
 
-		float time_delta_;
-		float wait_time_;
+		float time_delta_; /**< ŠÔŠi”[ */
+		float wait_time_; /**< ‘Ò‹@ŠÔŠi”[ */
 
-		bool hand_state_;
+		bool hand_state_; /**< è‚Ìó‘ÔŠi”[ */
 
-		SimpleMath::Vector3 pos_;
+		SimpleMath::Vector3 pos_; /**< è‚ÌÀ•WŠi”[ */
 	};
 }

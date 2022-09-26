@@ -2,6 +2,13 @@
 #include "Classes/Enemy/Boss/Parts/Hands/ActionManager.h"
 #include "Classes/Object/ObjectManager.h"
 
+/**
+* @brief 攻撃処理更新
+*
+* @param[in] deltaTime 時間
+* @param[out] obj_m オブジェクトマネージャー
+* @param[out] act_m アクションマネージャー
+*/
 void boss::RightBeat::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m){
 	pos_  = boss_handR_->GetHandPos();
 	rote_ = boss_handR_->GetRotation();
@@ -21,7 +28,12 @@ void boss::RightBeat::Update(const float deltaTime, const ObjectManager* const o
 	boss_handR_->SetHandRote(rote_);
 }
 
-void boss::RightBeat::HandCheck(const ObjectManager* const obj_m) {	//手の状態を確認
+/**
+* @brief 手の状態を確認
+*
+* @param[out] obj_m オブジェクトマネージャー
+*/
+void boss::RightBeat::HandCheck(const ObjectManager* const obj_m) {
 	hand_state_ = obj_m->IsBossHandOpen();
 	if (!hand_state_) {
 		boss_handR_->SetHandMotion(HAND_MOTION::ROCK);
@@ -33,7 +45,12 @@ void boss::RightBeat::HandCheck(const ObjectManager* const obj_m) {	//手の状態を
 	boss_action_state_ = READY;
 }
 
-void boss::RightBeat::Ready(const ObjectManager* const obj_m) {	//プレイヤーの座標に手を移動させる
+/**
+* @brief プレイヤーの座標に手を移動させる
+*
+* @param[out] obj_m オブジェクトマネージャー
+*/
+void boss::RightBeat::Ready(const ObjectManager* const obj_m) {
 	const SimpleMath::Vector3 move_dest_ = obj_m->GetPlayerPos();
 	const float DEST_SPEED_X_ = (is_player_pos_arrival_) ? CHASE_SPEED_ : MOVE_SPEED_X_;
 	ready_time_ = std::min(ready_time_ + time_delta_, READY_TIME_MAX_);
@@ -63,7 +80,12 @@ void boss::RightBeat::Ready(const ObjectManager* const obj_m) {	//プレイヤーの座
 	}
 }
 
-void boss::RightBeat::RightBeatAttack(ActionManager* const act_m) {	//叩きつけ攻撃
+/**
+* @brief 叩きつけ攻撃
+*
+* @param[out] act_m アクションマネージャー
+*/
+void boss::RightBeat::RightBeatAttack(ActionManager* const act_m) {
 	boss_handR_->SetAttackFlag(true);
 	beat_time_ += time_delta_;
 	const float beat_ = BEAT_SPEED_ * beat_time_ - HALF_ * BEAT_GRAVITY_ * beat_time_ * beat_time_;
@@ -79,7 +101,12 @@ void boss::RightBeat::RightBeatAttack(ActionManager* const act_m) {	//叩きつけ攻
 	}
 }
 
-void boss::RightBeat::Wait(ActionManager* const act_m) {	//硬直
+/**
+* @brief 攻撃後硬直
+*
+* @param[out] act_m アクションマネージャー
+*/
+void boss::RightBeat::Wait(ActionManager* const act_m) {
 	act_m->SetVerticalShake(false);
 	wait_time_ += time_delta_;
 	if (wait_time_ >= WAIT_TIME_MAX_) {
@@ -88,7 +115,10 @@ void boss::RightBeat::Wait(ActionManager* const act_m) {	//硬直
 	}
 }
 
-void boss::RightBeat::HandReturn() {	//手を初期位置へ移動
+/**
+* @brief 手を初期位置へ移動
+*/
+void boss::RightBeat::HandReturn() {
 	if (pos_.x < HAND_R_INITIAL_POS_X_) {
 		pos_.x = std::min(pos_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
 	}
