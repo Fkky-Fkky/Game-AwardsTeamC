@@ -1,6 +1,7 @@
 /**
 * @file Advent.h
 * @brief ボスの手降臨処理クラス
+* @author 吹上純平
 */
 
 #pragma once
