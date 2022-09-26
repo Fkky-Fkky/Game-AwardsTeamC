@@ -2,6 +2,13 @@
 #include "Classes/Enemy/Boss/Parts/Hands/ActionManager.h"
 #include "Classes/Object/ObjectManager.h"
 
+/**
+* @brief 待機処理更新
+*
+* @param[in] deltaTime 時間
+* @param[out] obj_m オブジェクトマネージャー
+* @param[out] act_m アクションマネージャー
+*/
 void boss::Wait::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m) {
 	float boss_hp_ = obj_m->GetBossHP();
 
