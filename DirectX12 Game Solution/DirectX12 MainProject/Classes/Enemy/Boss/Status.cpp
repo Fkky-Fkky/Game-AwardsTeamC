@@ -11,6 +11,8 @@ void boss::Status::Initialize() {
 	invincible_time_ = 0.0f;
 	weak_time_ = 0.0f;
 	is_set_weak_time_ = false;
+	hand_dmg_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"BGM_SE/SE/BossHandDmg.wav");
+	body_dmg_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"BGM_SE/SE/BossBodyDmg.wav");
 }
 
 /**
@@ -34,6 +36,7 @@ void boss::Status::Update(const float deltaTime, const ObjectManager* const obj_
 		if (!is_invincible_) {
 			damage_type_ = HAND;
 			DamageProcess();
+			hand_dmg_se_->Play();
 			weak_count_++;
 		}
 	}
@@ -41,6 +44,7 @@ void boss::Status::Update(const float deltaTime, const ObjectManager* const obj_
 		if (!is_invincible_) {
 			damage_type_ = BODY;
 			DamageProcess();
+			body_dmg_se_->Play();
 		}
 	}
 	if (IsWeak() && !is_set_weak_time_) {

@@ -57,6 +57,9 @@ namespace boss {
 		float invincible_time_; /**< 無敵時間 */
 		float weak_time_; /**< ウィーク状態の時間 */
 		bool is_set_weak_time_; /**< ウィーク状態の時間を設定したか */
+		XAudio::SOUNDEFFECT hand_dmg_se_; /**< 手被ダメSE格納 */
+		XAudio::SOUNDEFFECT body_dmg_se_; /**< 本体被ダメSE格納 */
+
 		const int WEAK_COUNT_MAX_ = 3; /**< ウィーク状態になるまでの回数 */
 		const float BOSS_HP_MAX_ = 30.0f; /**< ボスの最大HP */
 		const float HAND_DAMAGE_ = 1.0f; /**< 手が攻撃を受けた時のダメージ量 */
