@@ -2,6 +2,9 @@
 #include "Base/DX12Effekseer.h"
 #include "Classes/Object/ObjectManager.h"
 
+/**
+* @brief 値の初期化
+*/
 void Player::Initialize() {
     player_motion_track_ = 0;
     jump_motion_time_  = 0.0f;
@@ -19,6 +22,9 @@ void Player::Initialize() {
     player_attack_colision_.Initialize();
 }
 
+/**
+* @brief モデル、エフェクトの読み込み
+*/
 void Player::LoadAssets() {
     model_ = DX9::SkinnedModel::CreateFromFile(DXTK->Device9, L"Player/warrior/warrior.x");
     model_->SetScale(PLAYER_SCALE_);
@@ -35,6 +41,12 @@ void Player::LoadAssets() {
     jump_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"BGM_SE/SE/Jump.wav");
 }
 
+/**
+* @brief プレイヤーの更新
+* 
+* @param[in] deltaTime 時間
+* @param[in] obj_m オブジェクトマネージャー
+*/
 void Player::Update(const float deltaTime, const ObjectManager* const obj_m) {
     player_status_.Update(deltaTime, obj_m);
 
@@ -64,6 +76,9 @@ void Player::Update(const float deltaTime, const ObjectManager* const obj_m) {
     player_colision_.Update(deltaTime, model_.get());
 }
 
+/**
+* @brief モデルの描画
+*/
 void Player::Render() const {
     model_->SetPosition(pos_);
     model_->SetRotation(
@@ -74,7 +89,12 @@ void Player::Render() const {
     model_->Draw();
 }
 
-void Player::SetMotion(const PLAYER_MOTION player_motion) {   //モーションの再生処理
+/**
+* @brief プレイヤーモーションの再生処理
+* 
+* @param[in] player_motion 再生するモーション
+*/
+void Player::SetMotion(const PLAYER_MOTION player_motion) {
     player_motion_track_ = (int)player_motion;
 
     ResetPlayerMotion();
@@ -94,7 +114,10 @@ void Player::SetMotion(const PLAYER_MOTION player_motion) {   //モーションの再生
     model_->SetTrackEnable(player_motion_track_, true);
 }
 
-void Player::ResetPlayerMotion() const {  //モーションのトラックをリセット
+/**
+* @brief モーションのトラックをリセット
+*/
+void Player::ResetPlayerMotion() const {
     for (int i = 0; i < MOTION_MAX_; ++i) {
         if (player_motion_track_ == i) {
             continue;
@@ -104,7 +127,12 @@ void Player::ResetPlayerMotion() const {  //モーションのトラックをリセット
     }
 }
 
-void Player::JumpMotion(const float deltaTime) {    //ジャンプモーション処理
+/**
+* @brief ジャンプモーション処理
+* 
+* @param[in] deltaTIme 時間
+*/
+void Player::JumpMotion(const float deltaTime) {
     const float JUMP_UP_TIME_MAX_ = 0.36f;
     jump_motion_time_ = std::min(jump_motion_time_ + deltaTime, JUMP_UP_TIME_MAX_);
     if (jump_motion_time_ >= JUMP_UP_TIME_MAX_) {
@@ -112,7 +140,12 @@ void Player::JumpMotion(const float deltaTime) {    //ジャンプモーション処理
     }
 }
 
-void Player::DeathMotion(const float delaTime) {    //デスモーション処理
+/**
+* @brief デスモーション処理
+* 
+* @param[deltaTime] 時間
+*/
+void Player::DeathMotion(const float delaTime) {
     const float DEATH_MOTION_TIME_MAX_ = 0.86f;
     death_motion_time_ = std::min(death_motion_time_ + delaTime, DEATH_MOTION_TIME_MAX_);
     if (death_motion_time_ >= DEATH_MOTION_TIME_MAX_) {
@@ -120,7 +153,12 @@ void Player::DeathMotion(const float delaTime) {    //デスモーション処理
     }
 }
 
-PLAYER_MOTION Player::ConvertToMotion(const PLAYER_STATE player_state) const {  //プレイヤーの状態をモーショントラックに変換
+/**
+* @brief プレイヤーの状態をモーショントラックに変換
+* 
+* @param[in] player_state プレイヤーの状態
+*/
+PLAYER_MOTION Player::ConvertToMotion(const PLAYER_STATE player_state) const {
     PLAYER_MOTION motion_track_;
     switch (player_state) {
     case    PLAYER_STATE::WAIT:         motion_track_ = PLAYER_MOTION::WAIT;    break;
@@ -136,6 +174,11 @@ PLAYER_MOTION Player::ConvertToMotion(const PLAYER_STATE player_state) const {  
     return motion_track_;
 }
 
+/**
+* @brief 状態変更
+* 
+* @param[in] state 変更する状態
+*/
 void Player::SwitchState(const PLAYER_STATE state) {
     if (player_action_state_ == PLAYER_STATE::ATTACK) {
         player_state_->Initialize();
