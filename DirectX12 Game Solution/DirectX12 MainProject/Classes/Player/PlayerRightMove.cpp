@@ -19,7 +19,7 @@ void player::PlayerRightMove::Update(const float deltaTime, Player* const player
         player->SwitchState(PLAYER_STATE::JUMP);
     }
 
-    if (DXTK->KeyEvent->pressed.Space) {
+    if (DXTK->KeyEvent->pressed.Enter) {
         player->SwitchState(PLAYER_STATE::ATTACK);
     }
 
