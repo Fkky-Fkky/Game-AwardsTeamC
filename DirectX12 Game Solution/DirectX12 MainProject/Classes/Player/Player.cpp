@@ -14,6 +14,7 @@ void Player::Initialize() {
     is_switch_state_death_ = false;
     pos_ = SimpleMath::Vector3::Zero;
     rot_ = SimpleMath::Vector3(0.0f, RIGHT_WARD_, 0.0f);
+    atk_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"BGM_SE/SE/PlayerAtk.wav");
 
     player_status_.Initialize();
     player_action_state_ = PLAYER_STATE::WAIT;
@@ -38,7 +39,6 @@ void Player::LoadAssets() {
     model_->SetTrackEnable(player_motion_track_, true);
 
     DX12Effect.Create(L"Effect/upper_attack/upper_attack.efk", "swaord");
-    jump_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"BGM_SE/SE/Jump.wav");
 }
 
 /**
@@ -198,6 +198,9 @@ void Player::SwitchState(const PLAYER_STATE state) {
     player_state_->Initialize();
 }
 
-void Player::PlayJumpSE() const {
-    jump_se_->Play();
+/**
+* @brief UŒ‚SEÄ¶
+*/
+void Player::PlayAtkSE() const {
+    atk_se_->Play();
 }

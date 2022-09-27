@@ -19,7 +19,7 @@ void player::PlayerJump::Update(const float deltaTime, Player* const player) {
     time_delta_ = deltaTime;
 
     switch (action_state_) {
-    case READY: Ready(player);  break;
+    case READY: Ready();        break;
     case JUMP:
         Jump(player);
         JumpingMove();          break;
@@ -35,10 +35,9 @@ void player::PlayerJump::Update(const float deltaTime, Player* const player) {
     }
 }
 
-void player::PlayerJump::Ready(const Player* const player) {  //ジャンプに必要な変数の処理
+void player::PlayerJump::Ready() {  //ジャンプに必要な変数の処理
     player_up_flag_ = true;
     jump_time_      = 0.0f;
-    player->PlayJumpSE();
     action_state_   = JUMP;
 }
 

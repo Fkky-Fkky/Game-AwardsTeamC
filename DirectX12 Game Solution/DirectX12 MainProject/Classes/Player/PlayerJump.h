@@ -21,7 +21,7 @@ namespace player {
 		virtual void Update(const float deltaTime, Player* const player);
 
 	private:
-		void Ready(const Player* const player);
+		void Ready();
 		void Jump(Player* const player);
 		void CoolTime();
 		void JumpingMove();

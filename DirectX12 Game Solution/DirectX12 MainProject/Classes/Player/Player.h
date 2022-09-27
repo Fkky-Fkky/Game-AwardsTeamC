@@ -89,7 +89,7 @@ public:
 	*/
 	void SetPlayerRotation(const SimpleMath::Vector3 rotation) { rot_ = rotation; }
 	void SetMotion(const PLAYER_MOTION player_motion);
-	void PlayJumpSE()const;
+	void PlayAtkSE()const;
 
 	/**
 	* @biref プレイヤーのHP取得
@@ -166,7 +166,7 @@ private:
 
 	DX9::SKINNEDMODEL model_; /**< プレイヤーモデル格納 */
 
-	XAudio::SOUNDEFFECT jump_se_;
+	XAudio::SOUNDEFFECT atk_se_; /**< 攻撃SE格納 */
 
 	PLAYER_STATE player_action_state_; /**< 現在のプレイヤー行動 */
 	int player_motion_track_; /**< モーショントラック格納 */
