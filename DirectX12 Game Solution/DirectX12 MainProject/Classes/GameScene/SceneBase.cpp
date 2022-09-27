@@ -38,3 +38,14 @@ void SceneBase::Render() const {
     );
     spriteBatch->End();
 }
+
+void SceneBase::SetBGM(LPCWSTR bgm_file) {
+    bgm_ = DX9::MediaRenderer::CreateFromFile(DXTK->Device9, bgm_file);
+    bgm_->Play();
+}
+
+void SceneBase::PlayBGM() const {
+    if (bgm_->isComplete()) {
+        bgm_->Replay();
+    }
+}
