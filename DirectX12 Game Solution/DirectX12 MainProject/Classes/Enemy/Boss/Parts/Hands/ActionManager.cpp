@@ -30,8 +30,8 @@ void ActionManager::Initialize() {
 	is_switch_state_death_ = false;
 	is_hand_death_		   = false;
 
-	slap_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Slap.wav");
-	beat_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Beat.wav");
+	slap_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"BGM_SE/SE/Slap.wav");
+	beat_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"BGM_SE/SE/Beat.wav");
 }
 
 /**

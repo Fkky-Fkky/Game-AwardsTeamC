@@ -32,7 +32,7 @@ void Player::LoadAssets() {
     model_->SetTrackEnable(player_motion_track_, true);
 
     DX12Effect.Create(L"Effect/upper_attack/upper_attack.efk", "swaord");
-    jump_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"SE/Jump.wav");
+    jump_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"BGM_SE/SE/Jump.wav");
 }
 
 void Player::Update(const float deltaTime, const ObjectManager* const obj_m) {

@@ -10,7 +10,7 @@ void Ground::LoadAssets() {
     boss_bg_  = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BG/BossBattleBG.png");
     mist_     = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BG/Mist.png");
 
-    bgm_main_ = DX9::MediaRenderer::CreateFromFile(DXTK->Device9, L"BGM/game_main.mp3");
+    bgm_main_ = DX9::MediaRenderer::CreateFromFile(DXTK->Device9, L"BGM_SE/BGM/game_main.mp3");
     bgm_main_->Play();
 }
 
