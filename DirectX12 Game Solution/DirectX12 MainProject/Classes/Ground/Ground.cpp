@@ -10,30 +10,31 @@ void Ground::LoadAssets() {
     boss_bg_  = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BG/BossBattleBG.png");
     mist_     = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Ground/BG/Mist.png");
 
-    bgm_main_ = DX9::MediaRenderer::CreateFromFile(DXTK->Device9, L"BGM_SE/BGM/game_main.mp3");
-    bgm_main_->Play();
+    first_battle_bgm_ = DX9::MediaRenderer::CreateFromFile(DXTK->Device9, L"BGM_SE/BGM/FirstBattle.mp3");
+    first_battle_bgm_->Play();
+
+    second_battle_bgm_ = DX9::MediaRenderer::CreateFromFile(DXTK->Device9, L"BGM_SE/BGM/SecondBattle.mp3");
 }
 
 void Ground::Update(const float deltaTime, const ObjectManager* const obj_m) {
-    if (bgm_main_->isComplete()) {
-        bgm_main_->Replay();
-    }
-
-    bg_change_flag_ = obj_m->GetBossHP() <= BOSS_HP_HALF_;
-    
-    if (bg_change_flag_) {
-        enemy_bg_alpha_ = std::max(enemy_bg_alpha_ - ADD_ALPHA_SPEED_ * deltaTime, 0.0f);
-        miset_speed_ = std::min(miset_speed_ + ADD_MIST_SPEED_ * deltaTime, MIST_MOVE_SPEED_QUICK_);
-    }
-    else {
+    is_frist_battle_ = obj_m->GetBossHP() >= BOSS_HP_HALF_;
+ 
+    if (is_frist_battle_) {
         enemy_bg_alpha_ = std::min(enemy_bg_alpha_ + ADD_ALPHA_SPEED_ * deltaTime, COLOR_MAX_);
         miset_speed_ = std::max(miset_speed_ - ADD_MIST_SPEED_ * deltaTime, MIST_MOVE_SPEED_SLOW_);
+    }
+    else {
+        enemy_bg_alpha_ = std::max(enemy_bg_alpha_ - ADD_ALPHA_SPEED_ * deltaTime, 0.0f);
+        miset_speed_ = std::min(miset_speed_ + ADD_MIST_SPEED_ * deltaTime, MIST_MOVE_SPEED_QUICK_);
+        second_battle_bgm_->Play();
     }
 
     mist_pos_.x += miset_speed_ * deltaTime;
     if (mist_pos_.x >= 0.0f) {
         mist_pos_.x  = MIST_INIT_POS_X_;
     }
+
+    BGMChange(deltaTime);
 }
 
 void Ground::Render() const {
@@ -57,4 +58,23 @@ void Ground::Render2D() const {
         mist_.Get(),
         SimpleMath::Vector3(mist_pos_)
     );
+}
+
+void Ground::BGMChange(const float deltaTime) {
+    if (is_frist_battle_) {
+        if (first_battle_bgm_->isComplete()) {
+            first_battle_bgm_->Replay();
+        }
+    }
+    else {
+        bgm_volume_ = std::max(bgm_volume_ - VOLUME_SPEED_ * deltaTime, VOLUME_MIN_);
+        first_battle_bgm_->SetVolume((long)bgm_volume_);
+        if (bgm_volume_ <= VOLUME_MIN_) {
+            first_battle_bgm_->Stop();
+        }
+
+        if (second_battle_bgm_->isComplete()) {
+            second_battle_bgm_->Replay();
+        }
+    }
 }
