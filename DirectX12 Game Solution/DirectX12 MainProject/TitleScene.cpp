@@ -26,7 +26,7 @@ void TitleScene::LoadAssets()
     scene_base_.LoadAssets();
     // グラフィックリソースの初期化処理
 
-    title_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Scene/Title.png");
+    scene_base_.LoadBG(L"Scene/Title.png");
     black_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Scene/Black.png");
     scene_base_.SetBGM(L"BGM_SE/BGM/Title.mp3");
 }
@@ -84,10 +84,7 @@ void TitleScene::Render()
     DXTK->Direct3D9->BeginScene();
     DX9::SpriteBatch->Begin();
 
-    DX9::SpriteBatch->DrawSimple(
-        title_.Get(),
-        SimpleMath::Vector3::Zero
-    );
+    scene_base_.RenderBG();
 
     DX9::SpriteBatch->DrawSimple(
         black_.Get(),
