@@ -44,7 +44,7 @@ void boss::BossBody::LoadAssets() {
 * @brief Bodyの更新
 * 
 * @param[in] deltaTime 時間
-* @param[out] obj_m オブジェクトマネージャー
+* @param[in] obj_m オブジェクトマネージャー
 * @param[out] boss ボスクラス
 */
 void boss::BossBody::Update(const float deltaTime, const ObjectManager* const obj_m, Boss* const boss) {

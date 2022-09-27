@@ -46,7 +46,7 @@ void ActionManager::LoadAssets() {
 * @breif ActioManager更新
 * 
 * @param[in] deltaTime 時間
-* @param[out] obj_m オブジェクトマネージャー
+* @param[in] obj_m オブジェクトマネージャー
 */
 void ActionManager::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	boss_hp_ = obj_m->GetBossHP();
@@ -183,6 +183,8 @@ void ActionManager::PlayBeatSE() const {
 
 /**
 * @brief 叩きつけエフェクト再生
+* 
+* @param[in] effect_pos エフェクト再生位置
 */
 void ActionManager::PlayBeatEffect(const SimpleMath::Vector3 effect_pos) const {
 	DX12Effect.Play(beat_effect_, effect_pos);

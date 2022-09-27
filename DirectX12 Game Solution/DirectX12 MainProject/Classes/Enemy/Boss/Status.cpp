@@ -17,7 +17,7 @@ void boss::Status::Initialize() {
 * @brief Statusの更新
 * 
 * @param[in] deltaTime 時間
-* @param[out] obj_m オブジェクトマネージャー
+* @param[in] obj_m オブジェクトマネージャー
 */
 void boss::Status::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	invincible_time_ = std::max(invincible_time_ - deltaTime, 0.0f);

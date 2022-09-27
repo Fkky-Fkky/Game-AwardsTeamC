@@ -6,7 +6,7 @@
 * @brief 攻撃処理更新
 *
 * @param[in] deltaTime 時間
-* @param[out] obj_m オブジェクトマネージャー
+* @param[in] obj_m オブジェクトマネージャー
 * @param[out] act_m アクションマネージャー
 */
 void boss::RightBeat::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m){
@@ -31,7 +31,7 @@ void boss::RightBeat::Update(const float deltaTime, const ObjectManager* const o
 /**
 * @brief 手の状態を確認
 *
-* @param[out] obj_m オブジェクトマネージャー
+* @param[in] obj_m オブジェクトマネージャー
 */
 void boss::RightBeat::HandCheck(const ObjectManager* const obj_m) {
 	hand_state_ = obj_m->IsBossHandOpen();
@@ -48,7 +48,7 @@ void boss::RightBeat::HandCheck(const ObjectManager* const obj_m) {
 /**
 * @brief プレイヤーの座標に手を移動させる
 *
-* @param[out] obj_m オブジェクトマネージャー
+* @param[in] obj_m オブジェクトマネージャー
 */
 void boss::RightBeat::Ready(const ObjectManager* const obj_m) {
 	const SimpleMath::Vector3 move_dest_ = obj_m->GetPlayerPos();

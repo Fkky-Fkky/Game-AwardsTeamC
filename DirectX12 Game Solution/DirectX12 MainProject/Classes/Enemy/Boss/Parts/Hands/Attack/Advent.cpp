@@ -5,7 +5,7 @@
 * @brief 手の降臨処理更新
 * 
 * @param[in] deltaTIme 時間
-* @oaram[out] obj_m オブジェクトマネージャー
+* @oaram[in] obj_m オブジェクトマネージャー
 * @oaram[out] act_m アクションマネージャー
 */
 void boss::Advent::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m) {

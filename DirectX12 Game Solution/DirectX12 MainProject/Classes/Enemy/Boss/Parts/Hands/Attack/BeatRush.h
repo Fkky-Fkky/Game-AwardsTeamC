@@ -1,6 +1,7 @@
 /**
 * @file BeatRush.h
 * @brief ˜A‘±’@‚«‚Â‚¯UŒ‚ˆ—ƒNƒ‰ƒX
+* 
 * @outhor ãƒ•½
 */
 

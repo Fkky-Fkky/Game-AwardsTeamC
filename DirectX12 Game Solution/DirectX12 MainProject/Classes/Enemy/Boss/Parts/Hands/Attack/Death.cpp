@@ -5,7 +5,7 @@
 * @brief 死亡時行動の更新
 * 
 * @param[in] deltaTime 時間
-* @param[out] obj_m オブジェクトマネージャー
+* @param[in] obj_m オブジェクトマネージャー
 * @param[out] act_m アクションマネージャー
 */
 void boss::Death::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m) {

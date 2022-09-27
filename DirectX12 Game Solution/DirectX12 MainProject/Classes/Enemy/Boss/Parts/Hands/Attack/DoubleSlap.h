@@ -44,7 +44,7 @@ namespace boss {
 		void ReadyL();
 		void Attack(ActionManager* const act_m);
 		void SlapR(ActionManager* const act_m);
-		void SlapL(ActionManager* const act_m);
+		void SlapL();
 		void Reset();
 		void HandReturn();
 

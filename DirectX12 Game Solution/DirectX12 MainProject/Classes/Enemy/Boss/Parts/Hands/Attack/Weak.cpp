@@ -6,7 +6,7 @@
 * @brief Weak処理更新
 *
 * @param[in] deltaTime 時間
-* @param[out] obj_m オブジェクトマネージャー
+* @param[in] obj_m オブジェクトマネージャー
 * @param[out] act_m アクションマネージャー
 */
 void boss::Weak::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m) {
@@ -106,6 +106,9 @@ void boss::Weak::WeakL() {
 
 /**
 * @brief ウィーク状態維持
+* 
+* @param[in] obj_m オブジェクトマネージャー
+* @param[out] act_m アクションマネージャー
 */
 void boss::Weak::Wait(const ObjectManager* const obj_m, ActionManager* const act_m) {
 	act_m->SetVerticalShake(false);

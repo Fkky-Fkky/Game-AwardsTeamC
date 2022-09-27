@@ -22,7 +22,7 @@ void Boss::LoadAseets() {
 * @brief 各パーツの更新
 * 
 * @param[in] deltaTime 時間
-* @param[out] obj_m オブジェクトマネージャー
+* @param[in] obj_m オブジェクトマネージャー
 */
 void Boss::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	body_.Update(deltaTime, obj_m, this);

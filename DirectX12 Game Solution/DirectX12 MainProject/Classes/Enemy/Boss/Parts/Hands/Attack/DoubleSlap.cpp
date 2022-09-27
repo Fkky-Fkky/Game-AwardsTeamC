@@ -6,7 +6,7 @@
 * @brief 攻撃処理更新
 *
 * @param[in] deltaTime 時間
-* @param[out] obj_m オブジェクトマネージャー
+* @param[in] obj_m オブジェクトマネージャー
 * @param[out] act_m アクションマネージャー
 */
 void boss::DoubleSlap::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m)	{
@@ -31,7 +31,7 @@ void boss::DoubleSlap::Update(const float deltaTime, const ObjectManager* const 
 /**
 * @brief 手の状態を確認、モーション設定
 * 
-* @param[out] obj_m オブジェクトマネージャー
+* @param[in] obj_m オブジェクトマネージャー
 */
 void boss::DoubleSlap::HandCheck(const ObjectManager* const obj_m) {
 	hand_state_	= obj_m->IsBossHandOpen();
@@ -101,7 +101,7 @@ void boss::DoubleSlap::Attack(ActionManager* const act_m) {
 	}
 
 	if (wait_time_ >= WAIT_TIME_MAX_) {
-		SlapL(act_m);
+		SlapL();
 	}
 
 	if (atk_end_r_ && atk_end_l_) {
@@ -129,7 +129,7 @@ void boss::DoubleSlap::SlapR(ActionManager* const act_m) {
 * 
 * @param[out] act_m アクションマネージャー
 */
-void boss::DoubleSlap::SlapL(ActionManager* const act_m) {
+void boss::DoubleSlap::SlapL() {
 	boss_handL_->SetAttackFlag(true);
 	l_slap_speed_x_ = std::min(l_slap_speed_x_ + ADD_SLAP_SPEED_ * time_delta_, SLAP_SPEED_MAX_X_);
 	l_pos_.x		= std::max(l_pos_.x - l_slap_speed_x_ * time_delta_, -HAND_LIMIT_POS_X_);
