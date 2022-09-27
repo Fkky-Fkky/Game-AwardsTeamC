@@ -68,6 +68,7 @@ namespace boss {
 		bool is_body_death_; /**< 本体が死んでいるか */
 		bool is_shake_reset_; /**< 画面揺れをリセットしたか */
 		bool is_start_pos_; /**< スタート位置にいるか */
+		XAudio::SOUNDEFFECT death_se_; /**< 死亡SE格納 */
 
 		const float BODY_INIT_POS_Y_  = 50.0f; /**< 初期Y座標 */
 		const float BODY_INIT_POS_Z_  = 15.0f; /**< 初期Z座標 */

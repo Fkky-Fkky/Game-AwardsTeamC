@@ -20,6 +20,7 @@ void boss::BossBody::Initialize() {
 	is_body_death_	= false;
 	is_shake_reset_ = false;
 	is_start_pos_	= false;
+	death_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"BGM_SE/SE/BossDeath.wav");
 }
 
 /**
@@ -63,6 +64,7 @@ void boss::BossBody::Update(const float deltaTime, const ObjectManager* const ob
 			is_shake_reset_ = true;
 			shake_time_ = 0.0f;
 			is_shake_ = false;
+			death_se_->Play();
 			shake_set_flag_ = false;
 		}
 		DeathAction();
