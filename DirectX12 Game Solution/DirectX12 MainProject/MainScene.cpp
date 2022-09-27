@@ -84,7 +84,7 @@ NextScene MainScene::Update(const float deltaTime)
         ui.Update(deltaTime, &object_);
     }
     
-    if (scene_change_.GetSceneChangeFlag()) {
+    if (scene_change_.IsSceneChange()) {
         if (scene_change_.IsGameClear()) {
             return NextScene::ClearScene;
         }

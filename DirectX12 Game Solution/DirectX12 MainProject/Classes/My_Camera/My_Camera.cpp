@@ -2,6 +2,9 @@
 #include "Classes/Object/ObjectManager.h"
 #include "Base/DX12Effekseer.h"
 
+/**
+* @brief 値とカメラの初期化
+*/
 void My_Camera::Initialize() {
     vertical_shake_state_ = Down;
     side_shake_state_     = Right;
@@ -21,9 +24,15 @@ void My_Camera::Initialize() {
     camera_pos_ = camera_.GetPosition();
 }
 
+/**
+* @brief カメラの更新
+* 
+* @param[in] deltaTime 時間
+* @param[in] obj_m オブジェクトマネージャー
+*/
 void My_Camera::Update(const float deltaTime, const ObjectManager* const obj_m) {
     time_delta_ = deltaTime;
-    bool is_vertical_shake_ = obj_m->IsGroundVerticalShake();
+    bool is_vertical_shake_ = obj_m->IsGroundVerticalShake(); /**< 縦揺れをするか */
     side_shake_flag_ = obj_m->IsGroundSideShake();
 
     if (is_vertical_shake_ && !is_vertical_shaking_) {
@@ -36,7 +45,10 @@ void My_Camera::Update(const float deltaTime, const ObjectManager* const obj_m) 
     DXTK->Direct3D9->SetCamera(camera_);
 }
 
-void My_Camera::VerticalShake() {  //カメラ縦揺れ
+/**
+* @brief カメラ縦揺れ
+*/
+void My_Camera::VerticalShake() {
     if (!is_vertical_shaking_) {
         return;
     }
@@ -60,7 +72,10 @@ void My_Camera::VerticalShake() {  //カメラ縦揺れ
     }
 }
 
-void My_Camera::SideShake() {    //カメラ横揺れ
+/**
+* @brief カメラ横揺れ
+*/
+void My_Camera::SideShake() {
     if (!side_shake_flag_) {
         camera_pos_.x = 0.0f;
         return;
