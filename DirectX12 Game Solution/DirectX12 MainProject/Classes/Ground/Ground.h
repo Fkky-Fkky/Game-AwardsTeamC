@@ -1,6 +1,6 @@
 /**
 * @file Ground.h
-* @brief ステージ、BGMの処理
+* @brief ステージ、BGMの処理クラス
 * @author 吹上純平
 */
 

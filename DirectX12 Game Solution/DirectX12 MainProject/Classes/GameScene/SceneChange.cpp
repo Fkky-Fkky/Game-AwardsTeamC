@@ -1,6 +1,9 @@
 #include "Classes/GameScene/SceneChange.h"
 #include "Classes/Object/ObjectManager.h"
 
+/**
+* @brief 値の初期化
+*/
 void SceneChange::Initialize() {
 	black_alpha_ = COLOR_MAX_;
 	white_alpha_ = 0.0f;
@@ -10,12 +13,21 @@ void SceneChange::Initialize() {
 	scene_change_flag_ = false;
 }
 
+/**
+* @brief 画像の読み込み
+*/
 void SceneChange::LoadAssets() {
 	black_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Scene/Black.png");
 	white_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Scene/White.png");
 }
 
-void SceneChange::Update(const float deltaTime, ObjectManager* obj_m) {
+/**
+* @brief 画像のアルファ値更新
+* 
+* @param[in] deltaTime 時間
+* @param[in] obj_m オブジェクトマネージャー
+*/
+void SceneChange::Update(const float deltaTime, const ObjectManager* obj_m) {
 	if (!is_game_start_) {
 		black_alpha_ = std::max(black_alpha_ - ALPHA_SPEED_ * deltaTime, 0.0f);
 		is_game_start_ = black_alpha_ <= 0.0f;
@@ -39,7 +51,10 @@ void SceneChange::Update(const float deltaTime, ObjectManager* obj_m) {
 	}
 }
 
-void SceneChange::Render2D() {
+/**
+* @brief 画像の描画
+*/
+void SceneChange::Render2D() const {
 	DX9::SpriteBatch->DrawSimple(
 		black_.Get(),
 		SimpleMath::Vector3(0.0f, 0.0f, SPRITE_POS_Z_),
