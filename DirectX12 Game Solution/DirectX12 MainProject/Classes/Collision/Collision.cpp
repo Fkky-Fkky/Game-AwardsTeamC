@@ -13,7 +13,7 @@ void Collision::Initialize() {
 void Collision::Update(const float deltaTime, const ObjectManager* const obj_m_) {
 	bool is_boss_r_atk_ = obj_m_->IsBossRAttack();
 	bool is_boss_l_atk_ = obj_m_->IsBossLAttack();
-	bool is_player_atk_ = obj_m_->GetPlayerAttackFlag();
+	bool is_player_atk_ = obj_m_->IsPlayerAttack();
 	BoundingOrientedBox player_col_		 = obj_m_->GetPlayerCollision();
 	BoundingOrientedBox player_atk_col_	 = obj_m_->GetPlayerAttackCollision();
 	BoundingOrientedBox boss_body_col_	 = obj_m_->GetBossBodyCollision();

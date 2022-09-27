@@ -32,8 +32,8 @@ void My_Camera::Initialize() {
 */
 void My_Camera::Update(const float deltaTime, const ObjectManager* const obj_m) {
     time_delta_ = deltaTime;
-    bool is_vertical_shake_ = obj_m->IsGroundVerticalShake(); /**< c—h‚ê‚ð‚·‚é‚© */
-    side_shake_flag_ = obj_m->IsGroundSideShake();
+    bool is_vertical_shake_ = obj_m->IsCameraVerticalShake(); /**< c—h‚ê‚ð‚·‚é‚© */
+    side_shake_flag_ = obj_m->IsCameraSideShake();
 
     if (is_vertical_shake_ && !is_vertical_shaking_) {
         is_vertical_shaking_ = true;

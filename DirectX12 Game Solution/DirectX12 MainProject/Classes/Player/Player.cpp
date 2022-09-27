@@ -45,7 +45,7 @@ void Player::Update(const float deltaTime, const ObjectManager* const obj_m) {
         }
     }
     else {
-        if (obj_m->GetPlayerDmgFlag() && !IsPlayerInvincible()) {
+        if (obj_m->IsPlayerDmg() && !IsPlayerInvincible()) {
             SwitchState(PLAYER_STATE::DAMAGE);
         }
     }
