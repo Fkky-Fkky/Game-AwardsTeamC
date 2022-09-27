@@ -26,12 +26,16 @@ public:
 	void LoadAssets();
 	void Render()const;
 
+	void LoadBG(const LPCWSTR bg_file);
+	void RenderBG()const;
 	void SetBGM(const LPCWSTR bgm_file);
 	void PlayBGM()const;
+
 private:
 	DX12::DESCRIPTORHEAP descriptorHeap;
 	DX12::SPRITEBATCH    spriteBatch;
 	DX12::HGPUDESCRIPTOR dx9GpuDescriptor;
 
+	DX9::SPRITE bg_; /**< ‰æ‘œŠi”[ */
 	DX9::MEDIARENDERER bgm_; /**< BGMŠi”[ */
 };

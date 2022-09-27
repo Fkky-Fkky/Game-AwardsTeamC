@@ -46,6 +46,25 @@ void SceneBase::Render() const {
 }
 
 /**
+* @brief 画像読み込み
+* 
+* @param[in] bg_file 画像ファイル名
+*/
+void SceneBase::LoadBG(const LPCWSTR bg_file) {
+    bg_ = DX9::Sprite::CreateFromFile(DXTK->Device9, bg_file);
+}
+
+/**
+* @brief 画像描画
+*/
+void SceneBase::RenderBG() const {
+    DX9::SpriteBatch->DrawSimple(
+        bg_.Get(),
+        SimpleMath::Vector3::Zero
+    );
+}
+
+/**
 * @brief BGMの読み込み
 * 
 * @param[in] bgm_file 再生する音楽ファイル名
