@@ -1,6 +1,8 @@
-//
-// MainScene.h
-//
+/**
+* @file MainScene.h
+* @brief メインシーン処理
+* @author 吹上純平
+*/
 
 #pragma once
 
@@ -45,14 +47,14 @@ public:
 	void Render() override;
 
 private:
-	Boss boss_;
-	My_Camera camera_;
-	Player player_;
-	Ground ground_;
-	Collision collision_;
-	ObjectManager object_;
-	SceneBase scene_base_;
-	SceneChange scene_change_;
-	UI ui;
-	My_Light light_;
+	Boss boss_; /**< ボスクラス */
+	My_Camera camera_; /**< カメラクラス */
+	Player player_; /**< プレイヤークラス */
+	Ground ground_; /**< グラウンドクラス */
+	Collision collision_; /**< コリジョンクラス */
+	ObjectManager object_; /**< オブジェクトクラス */
+	SceneBase scene_base_; /**< シーンベースクラス */
+	SceneChange scene_change_; /**< シーン切り替えクラス */
+	UI ui; /**< UIクラス */
+	My_Light light_; /**< ライトクラス */
 };

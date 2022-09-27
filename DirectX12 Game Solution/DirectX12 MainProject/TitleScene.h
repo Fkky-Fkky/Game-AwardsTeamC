@@ -1,6 +1,8 @@
-//
-// TitleScene.h
-//
+/**
+* @file TitleScene.h
+* @brief タイトルシーン処理
+* @author 吹上純平
+*/
 
 #pragma once
 
