@@ -1,28 +1,40 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/RightBeat.h"
-#include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
+#include "Classes/Enemy/Boss/Parts/Hands/ActionManager.h"
 #include "Classes/Object/ObjectManager.h"
 
-void boss::RightBeat::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m){
+/**
+* @brief UŒ‚ˆ—XV
+*
+* @param[in] deltaTime ŠÔ
+* @param[in] obj_m ƒIƒuƒWƒFƒNƒgƒ}ƒl[ƒWƒƒ[
+* @param[out] act_m ƒAƒNƒVƒ‡ƒ“ƒ}ƒl[ƒWƒƒ[
+*/
+void boss::RightBeat::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m){
 	pos_  = boss_handR_->GetHandPos();
 	rote_ = boss_handR_->GetRotation();
 
 	time_delta_ = deltaTime;
 
 	switch (boss_action_state_)	{
-	case HAND_CHECK:	HandCheck(hand_m);			break;
-	case READY:			Ready(obj_m);				break;
-	case ATTACK:		RightBeatAttack(hand_m);	break;
-	case WAIT:			Wait(hand_m);				break;
-	case RETURN:		HandReturn();				break;
-	case ACTION_END:	hand_m->ActionEnd();		break;
+	case HAND_CHECK:	HandCheck(obj_m);		break;
+	case READY:			Ready(obj_m);			break;
+	case ATTACK:		RightBeatAttack(act_m);	break;
+	case WAIT:			Wait(act_m);			break;
+	case RETURN:		HandReturn();			break;
+	case ACTION_END:	act_m->ActionEnd();		break;
 	}
 
 	boss_handR_->SetHandPos(pos_);
 	boss_handR_->SetHandRote(rote_);
 }
 
-void boss::RightBeat::HandCheck(const HandManager* const hand_m) {	//è‚Ìó‘Ô‚ğŠm”F
-	hand_state_ = hand_m->GetHandState();
+/**
+* @brief è‚Ìó‘Ô‚ğŠm”F
+*
+* @param[in] obj_m ƒIƒuƒWƒFƒNƒgƒ}ƒl[ƒWƒƒ[
+*/
+void boss::RightBeat::HandCheck(const ObjectManager* const obj_m) {
+	hand_state_ = obj_m->IsBossHandOpen();
 	if (!hand_state_) {
 		boss_handR_->SetHandMotion(HAND_MOTION::ROCK);
 		limit_pos_y_ = HAND_ROCK_LIMIT_POS_Y_;
@@ -33,7 +45,12 @@ void boss::RightBeat::HandCheck(const HandManager* const hand_m) {	//è‚Ìó‘Ô‚ğŠ
 	boss_action_state_ = READY;
 }
 
-void boss::RightBeat::Ready(const ObjectManager* const obj_m) {	//ƒvƒŒƒCƒ„[‚ÌÀ•W‚Éè‚ğˆÚ“®‚³‚¹‚é
+/**
+* @brief ƒvƒŒƒCƒ„[‚ÌÀ•W‚Éè‚ğˆÚ“®‚³‚¹‚é
+*
+* @param[in] obj_m ƒIƒuƒWƒFƒNƒgƒ}ƒl[ƒWƒƒ[
+*/
+void boss::RightBeat::Ready(const ObjectManager* const obj_m) {
 	const SimpleMath::Vector3 move_dest_ = obj_m->GetPlayerPos();
 	const float DEST_SPEED_X_ = (is_player_pos_arrival_) ? CHASE_SPEED_ : MOVE_SPEED_X_;
 	ready_time_ = std::min(ready_time_ + time_delta_, READY_TIME_MAX_);
@@ -63,7 +80,12 @@ void boss::RightBeat::Ready(const ObjectManager* const obj_m) {	//ƒvƒŒƒCƒ„[‚ÌÀ
 	}
 }
 
-void boss::RightBeat::RightBeatAttack(HandManager* const hand_m) {	//’@‚«‚Â‚¯UŒ‚
+/**
+* @brief ’@‚«‚Â‚¯UŒ‚
+*
+* @param[out] act_m ƒAƒNƒVƒ‡ƒ“ƒ}ƒl[ƒWƒƒ[
+*/
+void boss::RightBeat::RightBeatAttack(ActionManager* const act_m) {
 	boss_handR_->SetAttackFlag(true);
 	beat_time_ += time_delta_;
 	const float beat_ = BEAT_SPEED_ * beat_time_ - HALF_ * BEAT_GRAVITY_ * beat_time_ * beat_time_;
@@ -71,16 +93,21 @@ void boss::RightBeat::RightBeatAttack(HandManager* const hand_m) {	//’@‚«‚Â‚¯UŒ
 
 	if (pos_.y <= limit_pos_y_) {
 		pos_.y  = limit_pos_y_;
-		hand_m->PlayBeatSE();
-		hand_m->PlayBeatEffect(SimpleMath::Vector3(pos_.x, pos_.y - limit_pos_y_, pos_.z));
-		hand_m->SetVerticalShake(true);
+		act_m->PlayBeatSE();
+		act_m->PlayBeatEffect(SimpleMath::Vector3(pos_.x, pos_.y - limit_pos_y_, pos_.z));
+		act_m->SetVerticalShake(true);
 		boss_handR_->SetAttackFlag(false);
 		boss_action_state_ = WAIT;
 	}
 }
 
-void boss::RightBeat::Wait(HandManager* const hand_m) {	//d’¼
-	hand_m->SetVerticalShake(false);
+/**
+* @brief UŒ‚Œãd’¼
+*
+* @param[out] act_m ƒAƒNƒVƒ‡ƒ“ƒ}ƒl[ƒWƒƒ[
+*/
+void boss::RightBeat::Wait(ActionManager* const act_m) {
+	act_m->SetVerticalShake(false);
 	wait_time_ += time_delta_;
 	if (wait_time_ >= WAIT_TIME_MAX_) {
 		(!hand_state_) ? boss_handR_->SetHandMotion(HAND_MOTION::ROCK_BACK) : boss_handR_->SetHandMotion(HAND_MOTION::PAPER_BACK);
@@ -88,7 +115,10 @@ void boss::RightBeat::Wait(HandManager* const hand_m) {	//d’¼
 	}
 }
 
-void boss::RightBeat::HandReturn() {	//è‚ğ‰ŠúˆÊ’u‚ÖˆÚ“®
+/**
+* @brief è‚ğ‰ŠúˆÊ’u‚ÖˆÚ“®
+*/
+void boss::RightBeat::HandReturn() {
 	if (pos_.x < HAND_R_INITIAL_POS_X_) {
 		pos_.x = std::min(pos_.x + MOVE_SPEED_X_ * time_delta_, HAND_R_INITIAL_POS_X_);
 	}

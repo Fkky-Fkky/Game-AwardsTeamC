@@ -24,8 +24,8 @@ public:
 	bool GetPlayerAttackFlag()const;
 	bool GetPlayerDmgFlag()const;
 	bool IsPlayerDeath()const;
-	bool GetBossRAttackFlag()const;
-	bool GetBossLAttackFlag()const;
+	bool IsBossRAttack()const;
+	bool IsBossLAttack()const;
 	bool IsBossBodyDmg()const;
 	bool IsBossHandOpen()const;
 	bool IsBossHandDmg()const;

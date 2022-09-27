@@ -11,9 +11,9 @@ void Collision::Initialize() {
 }
 
 void Collision::Update(const float deltaTime, const ObjectManager* const obj_m_) {
-	bool boss_r_atk_flag_ = obj_m_->GetBossRAttackFlag();
-	bool boss_l_atk_flag_ = obj_m_->GetBossLAttackFlag();
-	bool player_atk_flag_ = obj_m_->GetPlayerAttackFlag();
+	bool is_boss_r_atk_ = obj_m_->IsBossRAttack();
+	bool is_boss_l_atk_ = obj_m_->IsBossLAttack();
+	bool is_player_atk_ = obj_m_->GetPlayerAttackFlag();
 	BoundingOrientedBox player_col_		 = obj_m_->GetPlayerCollision();
 	BoundingOrientedBox player_atk_col_	 = obj_m_->GetPlayerAttackCollision();
 	BoundingOrientedBox boss_body_col_	 = obj_m_->GetBossBodyCollision();
@@ -21,28 +21,28 @@ void Collision::Update(const float deltaTime, const ObjectManager* const obj_m_)
 	BoundingOrientedBox boss_l_hand_col_ = obj_m_->GetBossLHandCollision();
 
 
-	if (boss_r_atk_flag_) {	//プレイヤー:ボス攻撃の判定
+	if (is_boss_r_atk_) {	//プレイヤー:ボス攻撃の判定
 		player_dmg_flag_r_ = player_col_.Intersects(boss_r_hand_col_);
 	}
 	else {
 		player_dmg_flag_r_ = false;
 	}
 
-	if (boss_l_atk_flag_) {
+	if (is_boss_l_atk_) {
 		player_dmg_flag_l_ = player_col_.Intersects(boss_l_hand_col_);
 	}
 	else {
 		player_dmg_flag_l_ = false;
 	}
 	
-	if (player_atk_flag_) {	//プレイヤー攻撃:ボス頭の判定
+	if (is_player_atk_) {	//プレイヤー攻撃:ボス頭の判定
 		boss_body_dmg_flg_ = player_atk_col_.Intersects(boss_body_col_);
 	}
 	else {
 		boss_body_dmg_flg_ = false;
 	}
 
-	if (player_atk_flag_) {	//プレイヤー攻撃:ボス手の判定
+	if (is_player_atk_) {	//プレイヤー攻撃:ボス手の判定
 		boss_hand_r_dmg_flag_ = player_atk_col_.Intersects(boss_r_hand_col_);
 		boss_hand_l_dmg_flag_ = player_atk_col_.Intersects(boss_l_hand_col_);
 		hand_dmg_flag_reset_time_ = 0.1f;

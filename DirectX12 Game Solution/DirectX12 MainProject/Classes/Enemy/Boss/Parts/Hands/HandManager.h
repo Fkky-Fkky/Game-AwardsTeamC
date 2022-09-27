@@ -1,111 +1,106 @@
+/**
+* @file HandManager.h
+* @brief 手を管理するクラス
+* @author 吹上純平
+*/
+
 #pragma once
 
+/**
+* インクルードファイル
+*/
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 #include "Classes/Enemy/Boss/Parts/Hands/LeftHand/BossHandL.h"
 #include "Classes/Enemy/Boss/Parts/Hands/RightHand/BossHandR.h"
-#include "Classes/Enemy/Boss/Parts/Hands/Attack/BossAction.h"
 #include <random>
-#include "Base/DX12Effekseer.h"
 
 using namespace DirectX;
 
-class ObjectManager;
-
+/**
+* @brief HandManagerクラス定義
+*/
 class HandManager {
 public:
 	HandManager() {
-		action_		 = nullptr;
-		beat_effect_ = nullptr;
-		attack_state_	= WAIT;
 		hand_state_		= ROCK;
 		old_hand_state_ = PAPER;
-		boss_hp_ = 0.0f;
-		action_end_flag_	   = false;
 		same_handstate_flag_   = false;
-		is_switch_state_weak_  = false;
-		is_vertical_shake_	   = false;
-		is_side_shake_		   = false;
-		is_switch_state_death_ = false;
-		is_hand_death_		   = false;
 	}
 	~HandManager() {};
 
 	void Initialize();
 	void LoadAssets();
-	void Update(const float deltaTime, const ObjectManager* const obj_m);
+	void Update(const float deltaTime);
 	void Render()const;
 
-	void PlaySlapSE()const;
-	void PlayBeatSE()const;
-	void PlayBeatEffect(const SimpleMath::Vector3 effect_pos)const;
+	void RandomHandState(const bool is_rush);
 
-	void RandomAttackState();
-	void ActionEnd();
-	void DeathActionEnd() { is_hand_death_ = true; };
-	void SetVerticalShake(const bool enable) { is_vertical_shake_ = enable; }
-	void SetSideShake(const bool enable) { is_side_shake_ = enable; }
-	bool IsVerticalShake() const { return is_vertical_shake_; }
-	bool IsSideShake() const { return is_side_shake_; }
-	bool IsHandDeath() const { return is_hand_death_; }
-	bool GetHandState() const { return hand_state_; }
-	bool GetLHandAttackFlag() const { return hand_l.GetAttackFlag(); }
-	bool GetRHandAttackFlag() const { return hand_r.GetAttackFlag(); }
+	/**
+	* @brief 手を開いているか
+	* 
+	* @retval TRUE 手を開いている
+	* @retval FALSE 手を握っている
+	*/
+	bool IsHandOpen() const { return hand_state_; }
 
+	/**
+	* @brief 左手が攻撃しているか
+	* 
+	* @retval TRUE 攻撃している
+	* @retval FALSE 攻撃していない
+	*/
+	bool IsLHandAttack() const { return hand_l.IsAttack(); }
+
+	/**
+	* @brief 右手が攻撃しているか
+	* 
+	* @retval TRUE 攻撃している
+	* @retval FALSE 攻撃していない
+	*/
+	bool IsRHandAttack() const { return hand_r.IsAttack(); }
+
+	/**
+	* @brief 左手取得
+	* 
+	* @return BossHandL
+	*/
+	boss::BossHandL& GetHandL() { return hand_l; }
+
+	/**
+	* @brief 右手取得
+	* 
+	* @return BossHandR
+	*/
+	boss::BossHandR& GetHandR() { return hand_r; }
+
+	/**
+	* @brief 左手のコリジョン取得
+	* 
+	* @return 左手のコリジョン
+	*/
 	BoundingOrientedBox GetLHandCollision() const { return hand_l.GetHandCollision(); }
+
+	/**
+	* @brief 右手のコリジョン取得
+	* 
+	* @return 右手のコリジョン
+	*/
 	BoundingOrientedBox GetRHandCollision() const { return hand_r.GetHandCollision(); }
 private:
-	void RandomHandState();
-	void SwitchStateAttack();
-	void SwitchStateWait();
-	void SwitchStateWeak();
-	void SwitchStateDeath();
+	boss::BossHandL hand_l; /**< ボス左手クラス */
+	boss::BossHandR hand_r; /**< ボス右手クラス */
 
-	boss::BossHandL hand_l;
-	boss::BossHandR hand_r;
-	boss::BossAction* action_;
+	std::mt19937 random_engine_; /**< ランダムエンジン */
+	std::uniform_int_distribution<int> random_hand_dist_; /**< 手の状態同一分布 */
 
-	EFFECT beat_effect_;
+	bool hand_state_; /**< 手の状態を格納 */
+	bool old_hand_state_; /**< ひとつ前の手の状態を格納 */
+	bool same_handstate_flag_; /** 手の状態が前と同じか */
 
-	std::mt19937 random_engine_;
-	std::uniform_int_distribution<int> random_atk_dist_;
-	std::uniform_int_distribution<int> random_hand_dist_;
-
-	XAudio::SOUNDEFFECT slap_se_;
-	XAudio::SOUNDEFFECT	beat_se_;
-
-	int attack_state_;
-	float boss_hp_;
-	bool hand_state_;
-	bool old_hand_state_;
-	bool action_end_flag_;
-	bool same_handstate_flag_;
-	bool is_vertical_shake_;
-	bool is_side_shake_;
-	bool is_switch_state_weak_;
-	bool is_switch_state_death_;
-	bool is_hand_death_;
-
-	const int ATTACK_STATE_MIN_ = 1;
-	const int ATTACK_STATE_MAX_ = 6;
-	const int NORMAL_MODE_MAX_  = 4;
-	const int HARD_MODE_MAX_	= 5;
-	const float HP_NORMAL_MAX_ = 30.0f;
-	const float HP_NORMAL_MIN_ = 20.0f;
-	const float HP_HARD_MIN_ = 10.0f;
-
-	enum BOSS_STATE {
-		WAIT,
-		LEFT_BEAT,
-		LEFT_SLAP,
-		RIGHT_BEAT,
-		RIGHT_SLAP,
-		DOUBLE_SLAP,
-		BEAT_RUSH_R
-	};
-
+	/**< 手の状態 */
 	enum HAND_STATE {
-		ROCK,
-		PAPER
+		ROCK, /** <手を握っている(グー) */
+		PAPER /** <手を開いている(パー) */
 	};
 };

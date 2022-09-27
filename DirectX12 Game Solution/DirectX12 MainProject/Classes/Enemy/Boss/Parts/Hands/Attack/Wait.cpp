@@ -1,8 +1,15 @@
 #include "Classes/Enemy/Boss/Parts/Hands/Attack/Wait.h"
-#include "Classes/Enemy/Boss/Parts/Hands/HandManager.h"
+#include "Classes/Enemy/Boss/Parts/Hands/ActionManager.h"
 #include "Classes/Object/ObjectManager.h"
 
-void boss::Wait::Update(const float deltaTime, const ObjectManager* const obj_m, HandManager* const hand_m) {
+/**
+* @brief 待機処理更新
+*
+* @param[in] deltaTime 時間
+* @param[in] obj_m オブジェクトマネージャー
+* @param[out] act_m アクションマネージャー
+*/
+void boss::Wait::Update(const float deltaTime, const ObjectManager* const obj_m, ActionManager* const act_m) {
 	float boss_hp_ = obj_m->GetBossHP();
 
 	bool normal_time_ = boss_hp_ <= HP_NORMAL_MAX_ && boss_hp_ > HP_NORMAL_MIN_;
@@ -26,6 +33,6 @@ void boss::Wait::Update(const float deltaTime, const ObjectManager* const obj_m,
 
 	wait_time_ = std::min(wait_time_ + deltaTime, max_wait_time_);
 	if (wait_time_ >= max_wait_time_) {
-		hand_m->RandomAttackState();
+		act_m->RandomAttackState();
 	}
 }

@@ -144,7 +144,7 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Wait.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BeatRushR.h">
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\BeatRush.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
     <ClInclude Include="Base\DX12Effekseer.h">
@@ -225,6 +225,9 @@
     <ClInclude Include="Classes\GameScene\SceneBase.h">
       <Filter>Classes\GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\ActionManager.h">
+      <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -284,7 +287,7 @@
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Wait.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\BeatRushR.cpp">
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\BeatRush.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClCompile>
     <ClCompile Include="Base\DX12Effekseer.cpp">
@@ -364,6 +367,9 @@
     </ClCompile>
     <ClCompile Include="Classes\GameScene\SceneBase.cpp">
       <Filter>Classes\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\ActionManager.cpp">
+      <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
