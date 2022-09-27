@@ -13,6 +13,7 @@ namespace player {
 			attack_time_ = 0.0f;
 			is_player_attack_ = false;
 			is_effect_play_ = false;
+			is_se_play_ = false;
 		}
 		~PlayerAttackColision() {};
 
@@ -23,10 +24,12 @@ namespace player {
 		bool IsPlayerAttack() const { return is_player_attack_; }
 		BoundingOrientedBox GetAttackCollision() const { return collision_; }
 	private:
+		void AtkProcess(const Player* const player);
 		BoundingOrientedBox collision_;
 		float attack_time_;
 		bool is_player_attack_;
 		bool is_effect_play_;
+		bool is_se_play_;
 
 		const float RIGHT_ = -90.0f;
 		const float RIGHT_ANGLE_ = 0.0f;
