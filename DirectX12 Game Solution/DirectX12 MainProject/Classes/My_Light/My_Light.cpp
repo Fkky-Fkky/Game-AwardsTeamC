@@ -1,8 +1,11 @@
 #include "Classes/My_Light/My_Light.h"
 
+/**
+* @brief ライトの設定、設置
+*/
 void My_Light::LoadAssets() {
     D3DLIGHT9 light{};
-    //1つ目のライト
+    //1つ目のライト(範囲ライト)
     light.Type = D3DLIGHT_DIRECTIONAL;
     light.Diffuse   = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
     light.Specular  = DX9::Colors::Value(1.0f, 1.0f, 1.0f, 1.0f);
@@ -10,7 +13,7 @@ void My_Light::LoadAssets() {
     light.Direction = DX9::VectorSet(DIRECTION_X_, DIRECTION_Y_, DIRECTION_Z_);
     DXTK->Direct3D9->SetLight(0, light);
 
-    //2つ目のライト
+    //2つ目のライト(ポイントライト)
     light.Type      = D3DLIGHT_POINT;
     light.Diffuse   = DX9::Colors::Value(50.0f, 5.0f, 10.0f, 1.0f);
     light.Specular  = DX9::Colors::Value(50.0f, 5.0f, 10.0f, 1.0f);

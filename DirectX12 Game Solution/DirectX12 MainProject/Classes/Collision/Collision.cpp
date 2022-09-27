@@ -1,6 +1,9 @@
 #include "Classes/Collision/Collision.h"
 #include "Classes/Object/ObjectManager.h"
 
+/**
+* @brief 値の初期化
+*/
 void Collision::Initialize() {
 	hand_dmg_flag_reset_time_ = 0.0f;
 	player_dmg_flag_r_ = false;
@@ -10,10 +13,16 @@ void Collision::Initialize() {
 	boss_hand_l_dmg_flag_ = false;
 }
 
+/**
+* @brief コリジョンの判定更新
+* 
+* @param [in] deltaTIme 時間
+* @param [in] obj_m オブジェクトマネージャー
+*/
 void Collision::Update(const float deltaTime, const ObjectManager* const obj_m_) {
 	bool is_boss_r_atk_ = obj_m_->IsBossRAttack();
 	bool is_boss_l_atk_ = obj_m_->IsBossLAttack();
-	bool is_player_atk_ = obj_m_->GetPlayerAttackFlag();
+	bool is_player_atk_ = obj_m_->IsPlayerAttack();
 	BoundingOrientedBox player_col_		 = obj_m_->GetPlayerCollision();
 	BoundingOrientedBox player_atk_col_	 = obj_m_->GetPlayerAttackCollision();
 	BoundingOrientedBox boss_body_col_	 = obj_m_->GetBossBodyCollision();

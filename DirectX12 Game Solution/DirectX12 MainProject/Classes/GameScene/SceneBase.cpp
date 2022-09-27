@@ -1,5 +1,8 @@
 #include "SceneBase.h"
 
+/**
+* @brief 各シーン共通LoadAssets処理
+*/
 void SceneBase::LoadAssets() {
     descriptorHeap = DX12::CreateDescriptorHeap(DXTK->Device, 1);
 
@@ -21,6 +24,9 @@ void SceneBase::LoadAssets() {
     uploadResourcesFinished.wait();
 }
 
+/**
+* @brief 各シーン共通Render処理
+*/
 void SceneBase::Render() const {
     DXTK->Direct3D9->UpdateResource();
 
@@ -37,4 +43,42 @@ void SceneBase::Render() const {
         SimpleMath::Vector2(0.0f, 0.0f)
     );
     spriteBatch->End();
+}
+
+/**
+* @brief 画像読み込み
+* 
+* @param[in] bg_file 画像ファイル名
+*/
+void SceneBase::LoadBG(const LPCWSTR bg_file) {
+    bg_ = DX9::Sprite::CreateFromFile(DXTK->Device9, bg_file);
+}
+
+/**
+* @brief 画像描画
+*/
+void SceneBase::RenderBG() const {
+    DX9::SpriteBatch->DrawSimple(
+        bg_.Get(),
+        SimpleMath::Vector3::Zero
+    );
+}
+
+/**
+* @brief BGMの読み込み
+* 
+* @param[in] bgm_file 再生する音楽ファイル名
+*/
+void SceneBase::SetBGM(const LPCWSTR bgm_file) {
+    bgm_ = DX9::MediaRenderer::CreateFromFile(DXTK->Device9, bgm_file);
+    bgm_->Play();
+}
+
+/**
+* @brief BGMの再生処理
+*/
+void SceneBase::PlayBGM() const {
+    if (bgm_->isComplete()) {
+        bgm_->Replay();
+    }
 }

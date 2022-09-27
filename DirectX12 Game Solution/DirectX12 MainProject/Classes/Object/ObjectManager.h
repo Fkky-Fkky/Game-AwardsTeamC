@@ -1,5 +1,13 @@
+/**
+* @file ObjectManager.h
+* @brief プレイヤーとボスのパラメータ受け渡し処理クラス
+*/
+
 #pragma once
 
+/**
+* インクルードファイル
+*/
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 
@@ -9,11 +17,14 @@ class Collision;
 
 using namespace DirectX;
 
+/**
+* @brief ObjectManagerクラス定義
+*/
 class ObjectManager {
 public:
-	void SetPlayer(Player* const p_);
-	void SetBoss(Boss* const b_);
-	void SetCollision(Collision* const col_);
+	void SetPlayer(Player* const player);
+	void SetBoss(Boss* const boss);
+	void SetCollision(Collision* const collision);
 	BoundingOrientedBox GetPlayerCollision()const;
 	BoundingOrientedBox GetPlayerAttackCollision()const;
 	BoundingOrientedBox GetBossBodyCollision()const;
@@ -21,8 +32,8 @@ public:
 	BoundingOrientedBox GetBossLHandCollision()const;
 	float GetBossHP()const;
 	float GetPlayerHP()const;
-	bool GetPlayerAttackFlag()const;
-	bool GetPlayerDmgFlag()const;
+	bool IsPlayerAttack()const;
+	bool IsPlayerDmg()const;
 	bool IsPlayerDeath()const;
 	bool IsBossRAttack()const;
 	bool IsBossLAttack()const;
@@ -31,12 +42,12 @@ public:
 	bool IsBossHandDmg()const;
 	bool IsBossWeak()const;
 	bool IsBossDeath()const;
-	bool IsGroundVerticalShake()const;
-	bool IsGroundSideShake()const;
+	bool IsCameraVerticalShake()const;
+	bool IsCameraSideShake()const;
 	SimpleMath::Vector3 GetPlayerPos()const;
 
 private:
-	Player* player_;
-	Boss*  boss_;
-	Collision* collision_;
+	Player* player_; /**< プレイヤー格納 */
+	Boss*  boss_; /**< ボス格納 */
+	Collision* collision_; /**< コリジョン格納 */
 };

@@ -1,6 +1,8 @@
-//
-// ClearScene.h
-//
+/**
+* @file ClearScene.h
+* @brief クリアシーン処理
+* @author 吹上純平
+*/
 
 #pragma once
 
@@ -36,6 +38,5 @@ public:
 	void Render() override;
 
 private:
-	SceneBase scene_base_;
-	DX9::SPRITE clear_;
+	SceneBase scene_base_; /**< シーンベース */
 };

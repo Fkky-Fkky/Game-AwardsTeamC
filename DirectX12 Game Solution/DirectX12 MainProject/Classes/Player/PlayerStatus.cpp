@@ -14,7 +14,7 @@ void player::PlayerStatus::Update(const float deltatime, const ObjectManager* co
 		is_invincible_ = false;
 	}
 
-	if (obj_m->GetPlayerDmgFlag() && !is_invincible_) {
+	if (obj_m->IsPlayerDmg() && !is_invincible_) {
 		is_invincible_ = true;
 		if (obj_m->IsBossHandOpen()) {
 			damage_ = OPEN_DAMAGE_;

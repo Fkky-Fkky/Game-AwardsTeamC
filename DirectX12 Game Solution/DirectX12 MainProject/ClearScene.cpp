@@ -23,7 +23,8 @@ void ClearScene::LoadAssets()
 {
     scene_base_.LoadAssets();
     // グラフィックリソースの初期化処理
-    clear_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Scene/GameClear.png");
+    scene_base_.LoadBG(L"Scene/GameClear.png");
+    scene_base_.SetBGM(L"BGM_SE/BGM/GameClear.mp3");
 }
 
 // Releasing resources required for termination.
@@ -56,6 +57,8 @@ NextScene ClearScene::Update(const float deltaTime)
 
 	// TODO: Add your game logic here.
 
+    scene_base_.PlayBGM();
+
     if (DXTK->KeyEvent->pressed.Enter)
         return NextScene::TitleScene;
 
@@ -71,10 +74,7 @@ void ClearScene::Render()
     DXTK->Direct3D9->BeginScene();
     DX9::SpriteBatch->Begin();
 
-    DX9::SpriteBatch->DrawSimple(
-        clear_.Get(),
-        SimpleMath::Vector3::Zero
-    );
+    scene_base_.RenderBG();
 
     DX9::SpriteBatch->End();
     DXTK->Direct3D9->EndScene();

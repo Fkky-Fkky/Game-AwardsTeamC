@@ -1,6 +1,9 @@
 #include "Classes/UI/UI.h"
 #include "Classes/Object/ObjectManager.h"
 
+/**
+* @brief 値の初期化
+*/
 void UI::Initialize() {
 	player_side_shake_	   = RIGHT;
 	player_vertical_shake_ = UP;
@@ -20,6 +23,9 @@ void UI::Initialize() {
 	boss_hp_pos_   = SimpleMath::Vector3(BOSS_HP_POS_X_,   BOSS_HP_POS_Y_,	 0.0f);
 }
 
+/**
+* @brief 画像の読み込み
+*/
 void UI::LoadAssets() {
 	player_hp_top_	  = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/player_max.png");
 	player_hp_bottom_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/player_min.png");
@@ -27,6 +33,12 @@ void UI::LoadAssets() {
 	boss_hp_bottom_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/boss_min.png");
 }
 
+/**
+* @brief UIの更新
+* 
+* @param[in] deltaTime 時間
+* @param[in] obj_m オブジェクトマネージャー
+*/
 void UI::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	time_delta_ = deltaTime;
 	const float player_hp_ = obj_m->GetPlayerHP() * PLAYER_HP_WIDTH_DIVIDE_;
@@ -64,6 +76,9 @@ void UI::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	old_boss_hp_   = boss_hp_;
 }
 
+/**
+* @brief UIの描画
+*/
 void UI::Render() const{
 	DX9::SpriteBatch->DrawSimple(
 		player_hp_bottom_.Get(),
@@ -88,7 +103,10 @@ void UI::Render() const{
 	);
 }
 
-void UI::PlayerUIShake() {	//プレイヤーのHPを揺らす
+/**
+* @brief プレイヤーのHPを揺らす
+*/
+void UI::PlayerUIShake() {
 	const float SHAKE_TIME_MAX_  = 0.5f;
 	const float SHAKE_POS_MIN_X_ = 40.0f;
 	const float SHAKE_POS_MAX_X_ = 60.0f;
@@ -133,7 +151,10 @@ void UI::PlayerUIShake() {	//プレイヤーのHPを揺らす
 	}
 }
 
-void UI::BossUIShake() {	//ボスのHPを揺らす
+/**
+* @brief ボスのHPを揺らす
+*/
+void UI::BossUIShake() {
 	const float SHAKE_TIME_MAX_ = 0.4f;
 	const float SHAKE_POS_MIN_X_ = 170.0f;
 	const float SHAKE_POS_MAX_X_ = 210.0f;
