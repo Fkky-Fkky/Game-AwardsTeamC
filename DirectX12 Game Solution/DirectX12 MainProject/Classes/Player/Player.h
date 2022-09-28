@@ -16,7 +16,7 @@
 #include "Classes/Player/PlayerColision.h"
 #include "Classes/Player/PlayerAttackColision.h"
 #include "Classes/Player/PlayerWait.h"
-#include "Classes/Player/PlayerState.h"
+#include "Classes/Player/PlayerActionState.h"
 #include "Classes/Player/PlayerDamage.h"
 #include "Classes/Player/PlayerDeath.h"
 #include "Classes/Player/PlayerStatus.h"
@@ -58,7 +58,7 @@ public:
 	Player() {
 		player_action_state_ = PLAYER_STATE::WAIT;
 		player_motion_track_ = 0;
-		player_state_ = nullptr;
+		player_action_ = nullptr;
 		jump_motion_time_ = 0.0f;
 		death_motion_time_ = 0.0f;
 		is_jump_motion_play_ = false;
@@ -193,6 +193,6 @@ private:
 	player::PlayerWait			 player_wait_; /**< プレイヤー待機クラス */
 	player::PlayerDamage		 player_dmg_; /**< プレイヤーダメージクラス */
 	player::PlayerDeath			 player_death_; /**< プレイヤー死亡クラス */
-	player::PlayerState*		 player_state_; /**< プレイヤー状態クラス */
+	player::PlayerActionState*	 player_action_; /**< プレイヤー状態クラス */
 	player::PlayerStatus		 player_status_; /**< プレイヤーステータスクラス */
 };

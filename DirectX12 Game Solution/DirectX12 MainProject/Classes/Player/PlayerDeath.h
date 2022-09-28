@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Classes/Player/PlayerState.h"
+#include "Classes/Player/PlayerActionState.h"
 
 namespace player {
-	class PlayerDeath : public PlayerState {
+	class PlayerDeath : public PlayerActionState {
 	public:
 		PlayerDeath() {
 			is_player_death_ = false;

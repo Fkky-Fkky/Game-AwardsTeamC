@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Classes/Player/PlayerState.h"
+#include "Classes/Player/PlayerActionState.h"
 
 namespace player {
-	class PlayerRightMove : public PlayerState {
+	class PlayerRightMove : public PlayerActionState {
 	public:
 		PlayerRightMove() {};
 		~PlayerRightMove() {};

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Classes/Player/PlayerState.h"
+#include "Classes/Player/PlayerActionState.h"
 
 namespace player {
-	class PlayerAttack : public PlayerState {
+	class PlayerAttack : public PlayerActionState {
 	public:
 		PlayerAttack() {
 			attack_time_ = 0.0f;

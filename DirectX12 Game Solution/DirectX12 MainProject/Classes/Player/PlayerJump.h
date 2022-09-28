@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Classes/Player/PlayerState.h"
+#include "Classes/Player/PlayerActionState.h"
 
 namespace player {
-	class PlayerJump : public PlayerState {
+	class PlayerJump : public PlayerActionState {
 	public:
 		PlayerJump() {
 			action_state_ = READY;

@@ -18,8 +18,8 @@ void Player::Initialize() {
 
     player_status_.Initialize();
     player_action_state_ = PLAYER_STATE::WAIT;
-    player_state_ = &player_wait_;
-    player_state_->Initialize();
+    player_action_ = &player_wait_;
+    player_action_->Initialize();
     player_attack_colision_.Initialize();
 }
 
@@ -62,7 +62,7 @@ void Player::Update(const float deltaTime, const ObjectManager* const obj_m) {
         }
     }
 
-    player_state_->Update(deltaTime, this);
+    player_action_->Update(deltaTime, this);
 
     if (is_jump_motion_play_) {
         JumpMotion(deltaTime);
@@ -181,21 +181,21 @@ PLAYER_MOTION Player::ConvertToMotion(const PLAYER_STATE player_state) const {
 */
 void Player::SwitchState(const PLAYER_STATE state) {
     if (player_action_state_ == PLAYER_STATE::ATTACK) {
-        player_state_->Initialize();
+        player_action_->Initialize();
     }
     player_action_state_ = state;
     
     switch (player_action_state_) {
-    case PLAYER_STATE::WAIT:        player_state_ = &player_wait_;          break;
-    case PLAYER_STATE::RIGHT_MOVE:  player_state_ = &player_right_move_;    break;
-    case PLAYER_STATE::LEFT_MOVE :  player_state_ = &player_left_move_;     break;
-    case PLAYER_STATE::JUMP:        player_state_ = &player_jump_;          break;
-    case PLAYER_STATE::ATTACK:      player_state_ = &player_attack_;        break;
-    case PLAYER_STATE::DAMAGE:      player_state_ = &player_dmg_;           break;
-    case PLAYER_STATE::DEATH:       player_state_ = &player_death_;         break;
+    case PLAYER_STATE::WAIT:        player_action_ = &player_wait_;          break;
+    case PLAYER_STATE::RIGHT_MOVE:  player_action_ = &player_right_move_;    break;
+    case PLAYER_STATE::LEFT_MOVE :  player_action_ = &player_left_move_;     break;
+    case PLAYER_STATE::JUMP:        player_action_ = &player_jump_;          break;
+    case PLAYER_STATE::ATTACK:      player_action_ = &player_attack_;        break;
+    case PLAYER_STATE::DAMAGE:      player_action_ = &player_dmg_;           break;
+    case PLAYER_STATE::DEATH:       player_action_ = &player_death_;         break;
     }
     SetMotion(ConvertToMotion(player_action_state_));
-    player_state_->Initialize();
+    player_action_->Initialize();
 }
 
 /**
