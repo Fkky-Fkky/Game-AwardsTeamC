@@ -1,6 +1,9 @@
 #include "Classes/Player/PlayerDamage.h"
 #include "Classes/Player/Player.h"
 
+/**
+* @brief 値の初期化
+*/
 void player::PlayerDamage::Initialize() {
 	dmg_time = 0.0f;
 	knock_back_dest_ = 0.0f;
@@ -8,6 +11,12 @@ void player::PlayerDamage::Initialize() {
 	is_invinsible_ = false;
 }
 
+/**
+* @brief ダメージ状態の更新
+*
+* @param[in] deltaTime 時間
+* @param[out] player プレイヤー
+*/
 void player::PlayerDamage::Update(const float deltaTime, Player* const player) {
 	pos_ = player->GetPlayerPosition();
 	rot_ = player->GetPlayerRotation();
@@ -18,7 +27,6 @@ void player::PlayerDamage::Update(const float deltaTime, Player* const player) {
 		is_invinsible_ = false;
 		player->SwitchState(PLAYER_STATE::WAIT);
 	}
-
 	
 	if (!one_process_flag_) {
 		knock_back_dest_ = (rot_.y <= -PLAYER_ROTATION_ANGLE_) ? pos_.x - ADD_DEST_ : pos_.x + ADD_DEST_;
