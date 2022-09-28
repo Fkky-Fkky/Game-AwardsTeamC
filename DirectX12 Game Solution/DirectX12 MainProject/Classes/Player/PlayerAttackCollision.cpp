@@ -2,6 +2,9 @@
 #include <Base/DX12Effekseer.h>
 #include "Classes/Player/Player.h"
 
+/**
+* @brief 値の初期化
+*/
 void player::PlayerAttackCollision::Initialize() {
     attack_time_ = 0.0f;
     is_player_attack_ = false;
@@ -9,6 +12,11 @@ void player::PlayerAttackCollision::Initialize() {
     is_se_play_ = false;
 }
 
+/**
+* @brief コリジョンモデルの生成
+* 
+* @param[out] model_ プレイヤーのモデル
+*/
 void player::PlayerAttackCollision::LoadAssets(DX9::SkinnedModel* const model_) {
     collision_ = model_->GetBoundingOrientedBox();
 
@@ -19,10 +27,17 @@ void player::PlayerAttackCollision::LoadAssets(DX9::SkinnedModel* const model_) 
     );
 }
 
+/**
+* @brief 攻撃コリジョンの更新
+* 
+* @param[in] deltaTime 時間
+* @param[in] プレイヤーモデル
+* @param[in] プレイヤー
+*/
 void player::PlayerAttackCollision::Update(const float deltaTime, const DX9::SkinnedModel* const model_, const Player* const player) {
     float player_angle_             = player->GetPlayerRotation().y;
     bool  is_player_attack_start_   = player->IsPlayerAttackStart();
-    bool  is_player_right_ward_     = player_angle_ == RIGHT_;
+    bool  is_player_right_ward_     = player_angle_ == PLAYER_RIGHT_;
     float effect_angle_             = (is_player_right_ward_) ? RIGHT_ANGLE_ : LEFT_ANGLE_;
     SimpleMath::Vector3 player_pos_ = player->GetPlayerPosition();
 
@@ -50,6 +65,11 @@ void player::PlayerAttackCollision::Update(const float deltaTime, const DX9::Ski
     collision_.Orientation = model_->GetRotationQuaternion();
 }
 
+/**
+* @brief 攻撃フラグの管理
+* 
+* @param[in] player プレイヤー
+*/
 void player::PlayerAttackCollision::AtkProcess(const Player* const player) {
     if (attack_time_ >= ATTACK_START_TIME_) {
         is_player_attack_ = true;
