@@ -31,7 +31,7 @@ namespace player {
 		bool is_invincible_;
 
 		const float PLAYER_HP_MAX_ = 30.0f;
-		const float INVINCIBLE_TIME_MAX_ = 1.0f;
+		const float INVINCIBLE_TIME_MAX_ = 1.5f;
 		const float OPEN_DAMAGE_ = 2.0f;
 		const float CLOSE_DAMAGE_ = 4.0f;
 	};
