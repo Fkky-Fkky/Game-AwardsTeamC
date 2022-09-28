@@ -1,6 +1,12 @@
 #include "Classes/Player/PlayerLeftMove.h"
 #include "Classes/Player/Player.h"
 
+/**
+* @brief 左移動の更新
+*
+* @param[in] deltaTime 時間
+* @param[out] player プレイヤー
+*/
 void player::PlayerLeftMove::Update(const float deltaTime, Player* const player) {
     SimpleMath::Vector3 pos_ = player->GetPlayerPosition();
     SimpleMath::Vector3 rot_ = player->GetPlayerRotation();

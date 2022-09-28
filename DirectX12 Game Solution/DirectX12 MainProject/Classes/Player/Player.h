@@ -6,6 +6,9 @@
 
 #pragma once
 
+/**
+* インクルードファイル
+*/
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 
