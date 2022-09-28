@@ -13,7 +13,7 @@
 #include "Classes/Player/PlayerLeftMove.h"
 #include "Classes/Player/PlayerJump.h"
 #include "Classes/Player/PlayerAttack.h"
-#include "Classes/Player/PlayerColision.h"
+#include "Classes/Player/PlayerCollision.h"
 #include "Classes/Player/PlayerAttackCollision.h"
 #include "Classes/Player/PlayerWait.h"
 #include "Classes/Player/PlayerActionState.h"
@@ -188,7 +188,7 @@ private:
 	player::PlayerLeftMove		 player_left_move_; /**< プレイヤー左移動クラス */
 	player::PlayerJump           player_jump_; /**< プレイヤージャンプクラス */
 	player::PlayerAttack		 player_attack_; /**< プレイヤー攻撃クラス */
-	player::PlayerColision       player_colision_; /**< プレイヤーコリジョンクラス */
+	player::PlayerCollision       player_colision_; /**< プレイヤーコリジョンクラス */
 	player::PlayerAttackCollision player_attack_colision_; /**< プレイヤー攻撃コリジョンクラス */
 	player::PlayerWait			 player_wait_; /**< プレイヤー待機クラス */
 	player::PlayerDamage		 player_dmg_; /**< プレイヤーダメージクラス */

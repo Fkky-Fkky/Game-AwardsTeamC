@@ -6,10 +6,10 @@
 using namespace DirectX;
 
 namespace player {
-	class PlayerColision {
+	class PlayerCollision {
 	public:
-		PlayerColision() {};
-		~PlayerColision() {};
+		PlayerCollision() {};
+		~PlayerCollision() {};
 
 		void LoadAssets(DX9::SkinnedModel* const model);
 		void Update(const float deltaTime, const DX9::SkinnedModel* const model);
