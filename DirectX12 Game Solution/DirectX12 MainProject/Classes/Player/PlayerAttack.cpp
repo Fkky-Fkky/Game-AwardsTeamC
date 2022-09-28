@@ -1,11 +1,20 @@
 #include "Classes/Player/PlayerAttack.h"
 #include "Classes/Player/Player.h"
 
+/**
+* @brief 値の初期化
+*/
 void player::PlayerAttack::Initialize(){
 	attack_flg_ = false;
 	attack_time_ = 0.0f;
 }
 
+/**
+* @brief 攻撃の更新
+* 
+* @param[in] deltaTime 時間
+* @param[out] player プレイヤー
+*/
 void player::PlayerAttack::Update(const float deltaTime, Player* const player){
     attack_time_ = std::min(attack_time_ + deltaTime, MAX_ATTACK_TIME_);
     attack_flg_  = true;

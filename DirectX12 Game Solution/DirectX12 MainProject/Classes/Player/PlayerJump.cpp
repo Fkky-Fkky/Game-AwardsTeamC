@@ -1,6 +1,9 @@
 #include "Classes/Player/PlayerJump.h"
 #include "Classes/Player/Player.h"
 
+/**
+* @brief 値の初期化
+*/
 void player::PlayerJump::Initialize() {
     action_state_ = READY;
     time_delta_ = 0.0f;
@@ -12,6 +15,12 @@ void player::PlayerJump::Initialize() {
     old_player_pos_ = SimpleMath::Vector3::Zero;
 }
 
+/**
+* @brief ジャンプ状態の更新
+*
+* @param[in] deltaTime 時間
+* @param[out] player プレイヤー
+*/
 void player::PlayerJump::Update(const float deltaTime, Player* const player) {
     pos_ = player->GetPlayerPosition();
     rot_ = player->GetPlayerRotation();
@@ -19,7 +28,7 @@ void player::PlayerJump::Update(const float deltaTime, Player* const player) {
     time_delta_ = deltaTime;
 
     switch (action_state_) {
-    case READY: Ready(player);  break;
+    case READY: Ready();        break;
     case JUMP:
         Jump(player);
         JumpingMove();          break;
@@ -35,14 +44,21 @@ void player::PlayerJump::Update(const float deltaTime, Player* const player) {
     }
 }
 
-void player::PlayerJump::Ready(const Player* const player) {  //ジャンプに必要な変数の処理
+/**
+* @brief ジャンプに必要な変数の処理
+*/
+void player::PlayerJump::Ready() {
     player_up_flag_ = true;
     jump_time_      = 0.0f;
-    player->PlayJumpSE();
     action_state_   = JUMP;
 }
 
-void player::PlayerJump::Jump(Player* const player) {   //ジャンプ
+/**
+* @brief ジャンプ
+* 
+* @param[out] プレイヤー
+*/
+void player::PlayerJump::Jump(Player* const player) {
     if (player_up_flag_) {  //プレイヤージャンプ処理(上昇)
         jump_time_ += time_delta_ * DOWN_SPEED_;
         old_player_pos_ = pos_;
@@ -63,7 +79,10 @@ void player::PlayerJump::Jump(Player* const player) {   //ジャンプ
     }
 }
 
-void player::PlayerJump::CoolTime() {   //クールタイム
+/**
+* @brief クールタイム
+*/
+void player::PlayerJump::CoolTime() {
     cool_time_ = std::min(cool_time_ += time_delta_, COOL_TIME_MAX_);
     if (cool_time_ >= COOL_TIME_MAX_) {
         cool_time_ = 0.0f;
@@ -71,7 +90,10 @@ void player::PlayerJump::CoolTime() {   //クールタイム
     }
 }
 
-void player::PlayerJump::JumpingMove() {    //ジャンプ中の移動処理
+/**
+* @brief ジャンプ中の移動処理
+*/
+void player::PlayerJump::JumpingMove() {
     const bool is_player_right_ward_ = rot_.y < 0;
 
     if (is_player_right_ward_) {

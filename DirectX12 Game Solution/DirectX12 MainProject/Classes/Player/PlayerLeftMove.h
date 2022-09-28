@@ -1,9 +1,21 @@
+/**
+* @file PlayerLeftMove.h
+* @brief プレイヤー左移動処理クラス
+* @outhor 吹上純平
+*/
+
 #pragma once
 
-#include "Classes/Player/PlayerState.h"
+/**
+* インクルードファイル
+*/
+#include "Classes/Player/PlayerActionState.h"
 
 namespace player {
-	class PlayerLeftMove : public PlayerState {
+	/**
+	* @brief PlayerLeftMoveクラス定義
+	*/
+	class PlayerLeftMove : public PlayerActionState {
 	public:
 		PlayerLeftMove() {};
 		~PlayerLeftMove() {};

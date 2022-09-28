@@ -1,9 +1,21 @@
+/**
+* @file PlayerWait.h
+* @brief プレイヤー待機処理クラス
+* @outhor 吹上純平
+*/
+
 #pragma once
 
-#include "Classes/Player/PlayerState.h"
+/**
+* インクルードファイル
+*/
+#include "Classes/Player/PlayerActionState.h"
 
 namespace player {
-	class PlayerWait : public PlayerState {
+	/**
+	* @brief PlayerWaitクラス定義
+	*/
+	class PlayerWait : public PlayerActionState {
 		virtual void Initialize() {};
 		virtual void Update(const float deltaTime, Player* const player);
 	};
