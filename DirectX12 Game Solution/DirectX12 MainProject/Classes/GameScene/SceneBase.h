@@ -21,6 +21,7 @@ class SceneBase {
 public:
 	SceneBase() {
 		dx9GpuDescriptor = {};
+		volume_ = 0;
 	}
 
 	void LoadAssets();
@@ -30,7 +31,7 @@ public:
 	void RenderBG()const;
 	void SetBGM(const LPCWSTR bgm_file);
 	void PlayBGM()const;
-
+	void FadeOut(const float deltaTime);
 private:
 	DX12::DESCRIPTORHEAP descriptorHeap;
 	DX12::SPRITEBATCH    spriteBatch;
@@ -38,4 +39,7 @@ private:
 
 	DX9::SPRITE bg_; /**< ‰æ‘œŠi”[ */
 	DX9::MEDIARENDERER bgm_; /**< BGMŠi”[ */
+	float volume_; /**< BGM‚Ì‰¹—ÊŠi”[ */
+	const float VOLUME_DOWN_SPEED_ = 800.0f; /**< ‰¹—Ê‚ð‰º‚°‚é‘¬“x */
+	const float VOLUME_MIN_ = -2000.0f; /**< ‰¹—Ê‚ÌÅ’á’l */
 };

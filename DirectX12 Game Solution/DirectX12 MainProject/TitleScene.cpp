@@ -66,6 +66,7 @@ NextScene TitleScene::Update(const float deltaTime)
 
     if (start_flag_) {
         black_alpha_ = std::min(black_alpha_ + ALPHA_SPEED_ * deltaTime, ALPHA_MAX_);
+        scene_base_.FadeOut(deltaTime);
     }
 
     if (black_alpha_ >= ALPHA_MAX_) {

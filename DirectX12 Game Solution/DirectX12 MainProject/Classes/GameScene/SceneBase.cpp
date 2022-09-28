@@ -82,3 +82,13 @@ void SceneBase::PlayBGM() const {
         bgm_->Replay();
     }
 }
+
+/**
+* @brief BGMのフェードアウト
+* 
+* @param[in] deltaTime 時間
+*/
+void SceneBase::FadeOut(const float deltaTime) {
+    volume_ = std::max(volume_ - VOLUME_DOWN_SPEED_ * deltaTime, VOLUME_MIN_);
+    bgm_->SetVolume(volume_);
+}
