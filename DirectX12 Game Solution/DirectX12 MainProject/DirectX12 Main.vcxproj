@@ -226,7 +226,7 @@
     <ClInclude Include="Classes\Player\PlayerJump.h" />
     <ClInclude Include="Classes\Player\PlayerLeftMove.h" />
     <ClInclude Include="Classes\Player\PlayerRightMove.h" />
-    <ClInclude Include="Classes\Player\PlayerState.h" />
+    <ClInclude Include="Classes\Player\PlayerActionState.h" />
     <ClInclude Include="Classes\Player\PlayerWait.h" />
     <ClInclude Include="Classes\Player\PlayerStatus.h" />
     <ClInclude Include="Classes\UI\UI.h" />

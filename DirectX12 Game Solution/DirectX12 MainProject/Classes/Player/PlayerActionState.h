@@ -8,7 +8,7 @@ using namespace DirectX;
 class Player;
 
 namespace player {
-	class PlayerState {
+	class PlayerActionState {
 	public:
 		virtual void Initialize() = 0;
 		virtual void Update(const float deltaTime, Player* const player) = 0;
