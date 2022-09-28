@@ -73,7 +73,7 @@ void Player::Update(const float deltaTime, const ObjectManager* const obj_m) {
 
     model_->AdvanceTime(deltaTime);
     player_attack_colision_.Update(deltaTime, model_.get(), this);
-    player_colision_.Update(deltaTime, model_.get());
+    player_colision_.Update(model_.get());
 }
 
 /**
