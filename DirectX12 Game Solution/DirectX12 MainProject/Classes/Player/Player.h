@@ -14,7 +14,7 @@
 #include "Classes/Player/PlayerJump.h"
 #include "Classes/Player/PlayerAttack.h"
 #include "Classes/Player/PlayerColision.h"
-#include "Classes/Player/PlayerAttackColision.h"
+#include "Classes/Player/PlayerAttackCollision.h"
 #include "Classes/Player/PlayerWait.h"
 #include "Classes/Player/PlayerActionState.h"
 #include "Classes/Player/PlayerDamage.h"
@@ -189,7 +189,7 @@ private:
 	player::PlayerJump           player_jump_; /**< プレイヤージャンプクラス */
 	player::PlayerAttack		 player_attack_; /**< プレイヤー攻撃クラス */
 	player::PlayerColision       player_colision_; /**< プレイヤーコリジョンクラス */
-	player::PlayerAttackColision player_attack_colision_; /**< プレイヤー攻撃コリジョンクラス */
+	player::PlayerAttackCollision player_attack_colision_; /**< プレイヤー攻撃コリジョンクラス */
 	player::PlayerWait			 player_wait_; /**< プレイヤー待機クラス */
 	player::PlayerDamage		 player_dmg_; /**< プレイヤーダメージクラス */
 	player::PlayerDeath			 player_death_; /**< プレイヤー死亡クラス */

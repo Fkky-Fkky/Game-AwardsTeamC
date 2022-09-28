@@ -1,3 +1,7 @@
+/**
+* @file PlayerAttackCollision
+*/
+
 #pragma once
 
 #include "Base/pch.h"
@@ -7,15 +11,15 @@ using namespace DirectX;
 class Player;
 
 namespace player {
-	class PlayerAttackColision {
+	class PlayerAttackCollision {
 	public:
-		PlayerAttackColision() {
+		PlayerAttackCollision() {
 			attack_time_ = 0.0f;
 			is_player_attack_ = false;
 			is_effect_play_ = false;
 			is_se_play_ = false;
 		}
-		~PlayerAttackColision() {};
+		~PlayerAttackCollision() {};
 
 		void Initialize();
 		void LoadAssets(DX9::SkinnedModel* const model_);

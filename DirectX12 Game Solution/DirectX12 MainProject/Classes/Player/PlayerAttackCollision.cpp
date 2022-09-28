@@ -1,15 +1,15 @@
-#include "Classes/Player/PlayerAttackColision.h"
+#include "Classes/Player/PlayerAttackCollision.h"
 #include <Base/DX12Effekseer.h>
 #include "Classes/Player/Player.h"
 
-void player::PlayerAttackColision::Initialize() {
+void player::PlayerAttackCollision::Initialize() {
     attack_time_ = 0.0f;
     is_player_attack_ = false;
     is_effect_play_   = false;
     is_se_play_ = false;
 }
 
-void player::PlayerAttackColision::LoadAssets(DX9::SkinnedModel* const model_) {
+void player::PlayerAttackCollision::LoadAssets(DX9::SkinnedModel* const model_) {
     collision_ = model_->GetBoundingOrientedBox();
 
     collision_.Extents = SimpleMath::Vector3(   //“–‚½‚è”»’è‚ÌƒTƒCƒY’²®
@@ -19,7 +19,7 @@ void player::PlayerAttackColision::LoadAssets(DX9::SkinnedModel* const model_) {
     );
 }
 
-void player::PlayerAttackColision::Update(const float deltaTime, const DX9::SkinnedModel* const model_, const Player* const player) {
+void player::PlayerAttackCollision::Update(const float deltaTime, const DX9::SkinnedModel* const model_, const Player* const player) {
     float player_angle_             = player->GetPlayerRotation().y;
     bool  is_player_attack_start_   = player->IsPlayerAttackStart();
     bool  is_player_right_ward_     = player_angle_ == RIGHT_;
@@ -50,7 +50,7 @@ void player::PlayerAttackColision::Update(const float deltaTime, const DX9::Skin
     collision_.Orientation = model_->GetRotationQuaternion();
 }
 
-void player::PlayerAttackColision::AtkProcess(const Player* const player) {
+void player::PlayerAttackCollision::AtkProcess(const Player* const player) {
     if (attack_time_ >= ATTACK_START_TIME_) {
         is_player_attack_ = true;
         if (!is_se_play_) {

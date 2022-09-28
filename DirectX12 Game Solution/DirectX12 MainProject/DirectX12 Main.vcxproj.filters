@@ -153,7 +153,7 @@
     <ClInclude Include="Classes\Player\PlayerAttack.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerAttackColision.h">
+    <ClInclude Include="Classes\Player\PlayerAttackCollision.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Player\PlayerColision.h">
@@ -296,7 +296,7 @@
     <ClCompile Include="Classes\Player\PlayerAttack.cpp">
       <Filter>Classes\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Player\PlayerAttackColision.cpp">
+    <ClCompile Include="Classes\Player\PlayerAttackCollision.cpp">
       <Filter>Classes\Player</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Player\PlayerColision.cpp">
