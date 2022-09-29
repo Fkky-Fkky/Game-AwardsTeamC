@@ -9,7 +9,6 @@
 // Initialize member variables.
 TitleScene::TitleScene()
 {
-    text_alpha_ = 0;
     black_alpha_ = 0;
     start_flag_ = false;
 }
@@ -17,9 +16,9 @@ TitleScene::TitleScene()
 // Initialize a variable and audio resources.
 void TitleScene::Initialize()
 {
-    text_alpha_ = 0;
     black_alpha_ = 0;
     start_flag_ = false;
+    scene_base_.SetTextPosY(TITLE_TEXT_POS_Y_);
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -29,8 +28,8 @@ void TitleScene::LoadAssets()
     // グラフィックリソースの初期化処理
 
     scene_base_.LoadBG(L"Scene/TitleBG.png");
+    scene_base_.LoadText(L"Scene/TitleText.png");
     black_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Scene/Black.png");
-    title_text_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"Scene/TitleText.png");
     scene_base_.SetBGM(L"BGM_SE/BGM/Title.mp3");
 }
 
@@ -62,11 +61,7 @@ NextScene TitleScene::Update(const float deltaTime)
 	// TODO: Add your game logic here.
 
     scene_base_.PlayBGM();
-
-    text_alpha_ += TEXT_ALPHA_SPEED_ * deltaTime;
-    if (text_alpha_ > COLOR_MAX_) {
-        text_alpha_ = COLOR_MAX_;
-    }
+    scene_base_.UpdateText(deltaTime);
 
     if (DXTK->KeyEvent->pressed.Enter) {
         start_flag_ = true;
@@ -97,14 +92,7 @@ void TitleScene::Render()
     DX9::SpriteBatch->Begin();
 
     scene_base_.RenderBG();
-
-    DX9::SpriteBatch->DrawSimple(
-        title_text_.Get(),
-        SimpleMath::Vector3(TITLE_TEXT_POS_X_, TITLE_TEXT_POS_Y_, 0.0f),
-        RectWH(0, 0, TITLE_TEXT_WIDTH_, TITLE_TEXT_HIGHT_),
-        DX9::Colors::RGBA(COLOR_MAX_, COLOR_MAX_, COLOR_MAX_, text_alpha_),
-        SimpleMath::Vector3(TITLE_TEXT_ORIGIN_X_, TITLE_TEXT_ORIGIN_Y_, 0.0f)
-    );
+    scene_base_.RenderText();
 
     DX9::SpriteBatch->DrawSimple(
         black_.Get(),
