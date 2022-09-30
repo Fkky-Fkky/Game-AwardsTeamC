@@ -11,16 +11,13 @@ void Player::Initialize() {
     death_motion_time_ = 0.0f;
     is_jump_motion_play_   = false;
     is_death_motion_play_  = false;;
-    is_switch_state_death_ = false;
     pos_ = SimpleMath::Vector3::Zero;
     rot_ = SimpleMath::Vector3(0.0f, RIGHT_WARD_, 0.0f);
     atk_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"BGM_SE/SE/PlayerAtk.wav");
 
     player_status_.Initialize();
-    player_action_state_ = PLAYER_STATE::WAIT;
-    player_action_ = &player_wait_;
-    player_action_->Initialize();
     player_attack_colision_.Initialize();
+    action_.Initialize();
 }
 
 /**
@@ -49,20 +46,7 @@ void Player::LoadAssets() {
 */
 void Player::Update(const float deltaTime, const ObjectManager* const obj_m) {
     player_status_.Update(deltaTime, obj_m);
-
-    if (GetPlayerHP() <= 0.0f) {
-        if (!is_switch_state_death_) {
-            SwitchState(PLAYER_STATE::DEATH);
-            is_switch_state_death_ = true;
-        }
-    }
-    else {
-        if (obj_m->IsPlayerDmg() && !IsPlayerInvincible()) {
-            SwitchState(PLAYER_STATE::DAMAGE);
-        }
-    }
-
-    player_action_->Update(deltaTime, this);
+    action_.Update(deltaTime, this, obj_m);
 
     if (is_jump_motion_play_) {
         JumpMotion(deltaTime);
@@ -94,8 +78,8 @@ void Player::Render() const {
 * 
 * @param[in] player_motion 再生するモーション
 */
-void Player::SetMotion(const PLAYER_MOTION player_motion) {
-    player_motion_track_ = (int)player_motion;
+void Player::SetMotion(const int player_motion) {
+    player_motion_track_ = player_motion;
 
     ResetPlayerMotion();
 
@@ -151,51 +135,6 @@ void Player::DeathMotion(const float delaTime) {
     if (death_motion_time_ >= DEATH_MOTION_TIME_MAX_) {
         model_->SetTrackEnable(player_motion_track_, false);
     }
-}
-
-/**
-* @brief プレイヤーの状態をモーショントラックに変換
-* 
-* @param[in] player_state プレイヤーの状態
-*/
-PLAYER_MOTION Player::ConvertToMotion(const PLAYER_STATE player_state) const {
-    PLAYER_MOTION motion_track_;
-    switch (player_state) {
-    case    PLAYER_STATE::WAIT:         motion_track_ = PLAYER_MOTION::WAIT;    break;
-    case    PLAYER_STATE::RIGHT_MOVE:
-    case    PLAYER_STATE::LEFT_MOVE:    motion_track_ = PLAYER_MOTION::MOVE;    break;
-    case    PLAYER_STATE::JUMP:         motion_track_ = PLAYER_MOTION::JUMP;    break;
-    case    PLAYER_STATE::ATTACK:       motion_track_ = PLAYER_MOTION::ATTACK;  break;
-    case    PLAYER_STATE::DAMAGE:       motion_track_ = PLAYER_MOTION::DAMAGE;  break;
-    case    PLAYER_STATE::DEATH:        motion_track_ = PLAYER_MOTION::DEATH;   break;
-    default:                            motion_track_ = PLAYER_MOTION::WAIT;    break;
-    }
-
-    return motion_track_;
-}
-
-/**
-* @brief 状態変更
-* 
-* @param[in] state 変更する状態
-*/
-void Player::SwitchState(const PLAYER_STATE state) {
-    if (player_action_state_ == PLAYER_STATE::ATTACK) {
-        player_action_->Initialize();
-    }
-    player_action_state_ = state;
-    
-    switch (player_action_state_) {
-    case PLAYER_STATE::WAIT:        player_action_ = &player_wait_;          break;
-    case PLAYER_STATE::RIGHT_MOVE:  player_action_ = &player_right_move_;    break;
-    case PLAYER_STATE::LEFT_MOVE :  player_action_ = &player_left_move_;     break;
-    case PLAYER_STATE::JUMP:        player_action_ = &player_jump_;          break;
-    case PLAYER_STATE::ATTACK:      player_action_ = &player_attack_;        break;
-    case PLAYER_STATE::DAMAGE:      player_action_ = &player_dmg_;           break;
-    case PLAYER_STATE::DEATH:       player_action_ = &player_death_;         break;
-    }
-    SetMotion(ConvertToMotion(player_action_state_));
-    player_action_->Initialize();
 }
 
 /**
