@@ -64,6 +64,9 @@
     <Filter Include="Classes\Object">
       <UniqueIdentifier>{04e77ca0-56a2-4d8a-b901-8025da9df027}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Player\Action">
+      <UniqueIdentifier>{d61bf3df-7e6e-4873-9a35-cf99e1f7e8c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -150,19 +153,10 @@
     <ClInclude Include="Base\DX12Effekseer.h">
       <Filter>Classes\Effeseer</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerAttack.h">
-      <Filter>Classes\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Player\PlayerAttackCollision.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Player\PlayerCollision.h">
-      <Filter>Classes\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerJump.h">
-      <Filter>Classes\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerRightMove.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
     <ClInclude Include="TitleScene.h">
@@ -176,18 +170,6 @@
     </ClInclude>
     <ClInclude Include="Classes\UI\UI.h">
       <Filter>Classes\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerActionState.h">
-      <Filter>Classes\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerWait.h">
-      <Filter>Classes\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerLeftMove.h">
-      <Filter>Classes\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerDamage.h">
-      <Filter>Classes\Player</Filter>
     </ClInclude>
     <ClInclude Include="Classes\My_Light\My_Light.h">
       <Filter>Classes\My_Light</Filter>
@@ -207,17 +189,11 @@
     <ClInclude Include="Classes\Enemy\Boss\Status.h">
       <Filter>Classes\Enemy\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerStatus.h">
-      <Filter>Classes\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Death.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Advent.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerDeath.h">
-      <Filter>Classes\Player</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Object\ObjectManager.h">
       <Filter>Classes\Object</Filter>
@@ -227,6 +203,36 @@
     </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\ActionManager.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\Action\PlayerActionState.h">
+      <Filter>Classes\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\Action\PlayerAttack.h">
+      <Filter>Classes\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\Action\PlayerDamage.h">
+      <Filter>Classes\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\Action\PlayerDeath.h">
+      <Filter>Classes\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\Action\PlayerJump.h">
+      <Filter>Classes\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\Action\PlayerLeftMove.h">
+      <Filter>Classes\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\Action\PlayerRightMove.h">
+      <Filter>Classes\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\Action\PlayerWait.h">
+      <Filter>Classes\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\Action\PlayerActionManager.h">
+      <Filter>Classes\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\PlayerStatus.h">
+      <Filter>Classes\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -293,19 +299,10 @@
     <ClCompile Include="Base\DX12Effekseer.cpp">
       <Filter>Classes\Effeseer</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Player\PlayerAttack.cpp">
-      <Filter>Classes\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Player\PlayerAttackCollision.cpp">
       <Filter>Classes\Player</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Player\PlayerCollision.cpp">
-      <Filter>Classes\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Player\PlayerJump.cpp">
-      <Filter>Classes\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Player\PlayerRightMove.cpp">
       <Filter>Classes\Player</Filter>
     </ClCompile>
     <ClCompile Include="TitleScene.cpp">
@@ -319,15 +316,6 @@
     </ClCompile>
     <ClCompile Include="Classes\UI\UI.cpp">
       <Filter>Classes\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Player\PlayerWait.cpp">
-      <Filter>Classes\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Player\PlayerLeftMove.cpp">
-      <Filter>Classes\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Player\PlayerDamage.cpp">
-      <Filter>Classes\Player</Filter>
     </ClCompile>
     <ClCompile Include="Classes\My_Light\My_Light.cpp">
       <Filter>Classes\My_Light</Filter>
@@ -347,17 +335,11 @@
     <ClCompile Include="Classes\Enemy\Boss\Status.cpp">
       <Filter>Classes\Enemy\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Player\PlayerStatus.cpp">
-      <Filter>Classes\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Death.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Advent.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Player\PlayerDeath.cpp">
-      <Filter>Classes\Player</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Object\ObjectManager.cpp">
       <Filter>Classes\Object</Filter>
@@ -370,6 +352,33 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\ActionManager.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\Action\PlayerAttack.cpp">
+      <Filter>Classes\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\Action\PlayerDamage.cpp">
+      <Filter>Classes\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\Action\PlayerDeath.cpp">
+      <Filter>Classes\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\Action\PlayerJump.cpp">
+      <Filter>Classes\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\Action\PlayerLeftMove.cpp">
+      <Filter>Classes\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\Action\PlayerRightMove.cpp">
+      <Filter>Classes\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\Action\PlayerWait.cpp">
+      <Filter>Classes\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\Action\PlayerActionManager.cpp">
+      <Filter>Classes\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\PlayerStatus.cpp">
+      <Filter>Classes\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

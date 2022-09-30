@@ -1,4 +1,4 @@
-#include "Classes/Player/PlayerWait.h"
+#include "Classes/Player/Action/PlayerWait.h"
 #include "Classes/Player/Player.h"
 
 /**

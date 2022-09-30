@@ -1,19 +1,19 @@
-#include "Classes/Player/PlayerRightMove.h"
+#include "Classes/Player/Action/PlayerLeftMove.h"
 #include "Classes/Player/Player.h"
 
 /**
-* @brief 右移動の更新
+* @brief 左移動の更新
 *
 * @param[in] deltaTime 時間
 * @param[out] player プレイヤー
 */
-void player::PlayerRightMove::Update(const float deltaTime, Player* const player) {
+void player::PlayerLeftMove::Update(const float deltaTime, Player* const player) {
     SimpleMath::Vector3 pos_ = player->GetPlayerPosition();
     SimpleMath::Vector3 rot_ = player->GetPlayerRotation();
 
-    if (DXTK->KeyState->D) {
-        pos_.x += PLAYER_MOVE_SPEED_ * deltaTime;
-        rot_.y = -PLAYER_ROTATION_ANGLE_;
+    if (DXTK->KeyState->A) {
+        pos_.x -= PLAYER_MOVE_SPEED_ * deltaTime;
+        rot_.y = PLAYER_ROTATION_ANGLE_;
     }
     else {
         player->SwitchState(PLAYER_STATE::WAIT);
