@@ -15,8 +15,8 @@ void Player::Initialize() {
     rot_ = SimpleMath::Vector3(0.0f, RIGHT_WARD_, 0.0f);
     atk_se_ = XAudio::CreateSoundEffect(DXTK->AudioEngine, L"BGM_SE/SE/PlayerAtk.wav");
 
-    player_status_.Initialize();
-    player_attack_colision_.Initialize();
+    status_.Initialize();
+    attack_colision_.Initialize();
     action_.Initialize();
 }
 
@@ -27,8 +27,8 @@ void Player::LoadAssets() {
     model_ = DX9::SkinnedModel::CreateFromFile(DXTK->Device9, L"Player/warrior/warrior.x");
     model_->SetScale(PLAYER_SCALE_);
 
-    player_colision_.LoadAssets(model_.get());
-    player_attack_colision_.LoadAssets(model_.get());
+    colision_.LoadAssets(model_.get());
+    attack_colision_.LoadAssets(model_.get());
 
     for (int i = 0; i < MOTION_MAX_; ++i) {
         model_->SetTrackEnable(i, false);
@@ -45,7 +45,7 @@ void Player::LoadAssets() {
 * @param[in] obj_m オブジェクトマネージャー
 */
 void Player::Update(const float deltaTime, const ObjectManager* const obj_m) {
-    player_status_.Update(deltaTime, obj_m);
+    status_.Update(deltaTime, obj_m);
     action_.Update(deltaTime, this, obj_m);
 
     if (is_jump_motion_play_) {
@@ -56,8 +56,8 @@ void Player::Update(const float deltaTime, const ObjectManager* const obj_m) {
     }
 
     model_->AdvanceTime(deltaTime);
-    player_attack_colision_.Update(deltaTime, model_.get(), this);
-    player_colision_.Update(model_.get());
+    attack_colision_.Update(deltaTime, model_.get(), this);
+    colision_.Update(model_.get());
 }
 
 /**

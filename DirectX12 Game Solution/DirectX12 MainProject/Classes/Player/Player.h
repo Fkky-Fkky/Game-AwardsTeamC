@@ -75,7 +75,7 @@ public:
 	* 
 	* @return プレイヤーのHP
 	*/
-	float GetPlayerHP() const { return player_status_.GetPlayerHP(); }
+	float GetPlayerHP() const { return status_.GetPlayerHP(); }
 
 	/**
 	* @brief プレイヤーの攻撃が始まったか
@@ -91,7 +91,7 @@ public:
 	* @retval TRUE 攻撃している
 	* @retval FALSE 攻撃していない
 	*/
-	bool IsPlayerAttack() const { return player_attack_colision_.IsPlayerAttack(); }
+	bool IsPlayerAttack() const { return attack_colision_.IsPlayerAttack(); }
 
 	/**
 	* @brief プレイヤーが無敵か
@@ -128,14 +128,14 @@ public:
 	* 
 	* @return プレイヤーのコリジョン
 	*/
-	BoundingOrientedBox GetPlayerCollision() const { return player_colision_.GetColision(); }
+	BoundingOrientedBox GetPlayerCollision() const { return colision_.GetColision(); }
 
 	/**
 	* @brief プレイヤーの攻撃コリジョン取得
 	* 
 	* @return プレイヤーの攻撃コリジョン
 	*/
-	BoundingOrientedBox GetPlayerAttackCollision() const { return player_attack_colision_.GetAttackCollision(); }
+	BoundingOrientedBox GetPlayerAttackCollision() const { return attack_colision_.GetAttackCollision(); }
 
 private:
 	void ResetPlayerMotion()const;
@@ -160,8 +160,8 @@ private:
 	const float PLAYER_SCALE_ = 0.02f; /**< プレイヤーモデルの大きさ */
 	const float RIGHT_WARD_ = -90.0f; /**< 右向き */
 
-	player::PlayerCollision       player_colision_; /**< プレイヤーコリジョンクラス */
-	player::PlayerAttackCollision player_attack_colision_; /**< プレイヤー攻撃コリジョンクラス */
-	player::PlayerStatus		 player_status_; /**< プレイヤーステータスクラス */
-	PlayerActionManager action_; /**< プレイヤーアクションマネージャークラス */
+	player::PlayerCollision       colision_; /**< プレイヤーコリジョンクラス */
+	player::PlayerAttackCollision attack_colision_; /**< プレイヤー攻撃コリジョンクラス */
+	player::PlayerStatus		  status_; /**< プレイヤーステータスクラス */
+	PlayerActionManager			  action_; /**< プレイヤーアクションマネージャークラス */
 };
