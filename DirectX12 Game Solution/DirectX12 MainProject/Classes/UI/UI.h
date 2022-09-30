@@ -87,4 +87,18 @@ private:
 	const float PLAYER_HP_WIDTH_DIVIDE_ = 11.3f; /**< プレイヤーHP1/30の横幅 */
 	const float BOSS_HP_WIDTH_DIVIDE_ = 30.0f; /**< ボスHP1/30の横幅 */
 	const float HP_SPEED_ = 300.0f; /**< HPの増減速度 */
+	const float PLAYER_SHAKE_TIME_MAX_ = 0.5f; /**< プレイヤーUI揺らす時間 */
+	const float PLAYER_SHAKE_POS_MIN_X_ = 40.0f; /**< プレイヤーUI揺らす最小X座標 */
+	const float PLAYER_SHAKE_POS_MAX_X_ = 60.0f; /**<プレイヤーUI揺らす最大X座標 */
+	const float PLAYER_SHAKE_POS_MIN_Y_ = 670.0f; /**< プレイヤーUI揺らす最小Y座標 */
+	const float PLAYER_SHAKE_POS_MAX_Y_ = 690.0f; /**< プレイヤーUI揺らす最大Y座標 */
+	const float PLAYER_SHAKE_POWER_X_ = 300.0f; /**< プレイヤーUI横方向に揺らす強さ */
+	const float PLAYER_SHAKE_POWER_Y_ = 200.0f; /**< プレイヤーUI縦方向に揺らす強さ */
+	const float BOSS_SHAKE_TIME_MAX_ = 0.4f; /**< ボスUI揺らす時間 */
+	const float BOSS_SHAKE_POS_MIN_X_ = 170.0f; /**< ボスUI揺らす最小X座標 */
+	const float BOSS_SHAKE_POS_MAX_X_ = 210.0f; /**< ボスUI揺らす最大X座標 */
+	const float BOSS_SHAKE_POS_MIN_Y_ = 10.0f; /**< ボスUI揺らす最小Y座標 */
+	const float BOSS_SHAKE_POS_MAX_Y_ = 50.0f; /**< ボスUI揺らす最大Y座標 */
+	const float BOSS_SHAKE_POWER_X_ = 500.0f; /**< ボスUI横方向に揺らす強さ */
+	const float BOSS_SHAKE_POWER_Y_ = 500.0f; /**< ボスUI縦方向に揺らす強さ */
 };

@@ -41,11 +41,12 @@ public:
 private:
 	SceneBase scene_base_; /**< シーンベース */
 	DX9::SPRITE black_; /** 黒画像格納 */
-	float black_alpha_; /**< 黒画像のアルファ値 */
+	int black_alpha_; /**< 黒画像のアルファ値 */
 	bool start_flag_; /**< ゲームを始めるか */
 
 	const int WIDTH_MAX_ = 1280; /**< 画像の横幅 */
 	const int HIGHT_MAX_ = 720; /**< 画像の縦幅 */
-	const float ALPHA_SPEED_ = 180.0f; /**< アルファ値増減速度 */
-	const float ALPHA_MAX_ = 255.0f; /**< アルファ最大値 */
+	const int COLOR_MAX_ = 255.0f; /**< 色の最大値 */
+	const int BLACK_ALPHA_SPEED_ = 180; /**< 黒画像アルファ値増減速度 */
+	const float TITLE_TEXT_POS_Y_ = 210.0f; /**< タイトルY座標 */
 };

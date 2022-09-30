@@ -9,13 +9,12 @@
 // Initialize member variables.
 ClearScene::ClearScene()
 {
-
 }
 
 // Initialize a variable and audio resources.
 void ClearScene::Initialize()
 {
-
+    scene_base_.SetTextPosY(TEXT_INIT_POS_Y_);
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -23,7 +22,8 @@ void ClearScene::LoadAssets()
 {
     scene_base_.LoadAssets();
     // グラフィックリソースの初期化処理
-    scene_base_.LoadBG(L"Scene/GameClear.png");
+    scene_base_.LoadBG(L"Scene/White.png");
+    scene_base_.LoadText(L"Scene/GameClearText.png");
     scene_base_.SetBGM(L"BGM_SE/BGM/GameClear.mp3");
 }
 
@@ -52,12 +52,10 @@ void ClearScene::OnRestartSound()
 // Updates the scene.
 NextScene ClearScene::Update(const float deltaTime)
 {
-	// If you use 'deltaTime', remove it.
-	UNREFERENCED_PARAMETER(deltaTime);
-
 	// TODO: Add your game logic here.
 
     scene_base_.PlayBGM();
+    scene_base_.UpdateText(deltaTime);
 
     if (DXTK->KeyEvent->pressed.Enter)
         return NextScene::TitleScene;
@@ -75,6 +73,7 @@ void ClearScene::Render()
     DX9::SpriteBatch->Begin();
 
     scene_base_.RenderBG();
+    scene_base_.RenderText();
 
     DX9::SpriteBatch->End();
     DXTK->Direct3D9->EndScene();

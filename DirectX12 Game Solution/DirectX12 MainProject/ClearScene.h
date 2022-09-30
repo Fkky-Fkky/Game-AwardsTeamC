@@ -39,4 +39,5 @@ public:
 
 private:
 	SceneBase scene_base_; /**< シーンベース */
+	const float TEXT_INIT_POS_Y_ = 240.0f; /**< テキストの初期Y座標 */
 };
