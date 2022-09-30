@@ -15,6 +15,7 @@
 using namespace DirectX;
 
 class Player;
+class PlayerActionManager;
 
 namespace player {
 	/**
@@ -29,8 +30,12 @@ namespace player {
 
 		/**
 		* @brief 値の更新純粋仮想関数
+		* 
+		* @param[in] deltaTime 時間
+		* @param[out] player プレイヤー
+		* @param[out] act_m アクションマネージャー
 		*/
-		virtual void Update(const float deltaTime, Player* const player) = 0;
+		virtual void Update(const float deltaTime, Player* const player, PlayerActionManager* const act_m) = 0;
 
 	protected:
 		const float PLAYER_MOVE_SPEED_ = 10.0f; /**< 移動速度 */

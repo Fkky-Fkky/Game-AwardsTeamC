@@ -1,5 +1,6 @@
-#include "Classes/Player/PlayerJump.h"
+#include "Classes/Player/Action/PlayerJump.h"
 #include "Classes/Player/Player.h"
+#include "Classes/Player/Action/PlayerActionManager.h"
 
 /**
 * @brief 値の初期化
@@ -21,7 +22,7 @@ void player::PlayerJump::Initialize() {
 * @param[in] deltaTime 時間
 * @param[out] player プレイヤー
 */
-void player::PlayerJump::Update(const float deltaTime, Player* const player) {
+void player::PlayerJump::Update(const float deltaTime, Player* const player, PlayerActionManager* const act_m) {
     pos_ = player->GetPlayerPosition();
     rot_ = player->GetPlayerRotation();
 
@@ -40,7 +41,7 @@ void player::PlayerJump::Update(const float deltaTime, Player* const player) {
     player->SetPlayerRotation(rot_);
     if (action_state_ == ACTION_END) {
         action_state_ = READY;
-        player->SwitchState(PLAYER_STATE::WAIT);
+        act_m->SwitchState(PLAYER_STATE::WAIT, player);
     }
 }
 
@@ -74,7 +75,7 @@ void player::PlayerJump::Jump(Player* const player) {
 
     if (pos_.y <= GROUND_Y_) {
         pos_.y  = GROUND_Y_;
-        player->SetMotion(PLAYER_MOTION::JUMP);
+        player->SetMotion((int)PLAYER_MOTION::JUMP);
         action_state_ = COOL_TIME;
     }
 }

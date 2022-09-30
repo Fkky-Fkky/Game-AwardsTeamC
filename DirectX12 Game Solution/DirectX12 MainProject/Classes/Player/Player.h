@@ -12,34 +12,14 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 
-#include "Classes/Player/PlayerRightMove.h"
-#include "Classes/Player/PlayerLeftMove.h"
-#include "Classes/Player/PlayerJump.h"
-#include "Classes/Player/PlayerAttack.h"
-#include "Classes/Player/PlayerCollision.h"
-#include "Classes/Player/PlayerAttackCollision.h"
-#include "Classes/Player/PlayerWait.h"
-#include "Classes/Player/PlayerActionState.h"
-#include "Classes/Player/PlayerDamage.h"
-#include "Classes/Player/PlayerDeath.h"
+#include "Classes/Player/Collision/PlayerCollision.h"
+#include "Classes/Player/Collision/PlayerAttackCollision.h"
 #include "Classes/Player/PlayerStatus.h"
+#include "Classes/Player/Action/PlayerActionManager.h"
 
 using namespace DirectX;
 
 class ObjectManager;
-
-/**
-* @brief プレイヤーの状態種類
-*/
-enum class PLAYER_STATE {
-	WAIT, /**< 待機 */
-	RIGHT_MOVE, /**< 右移動 */
-	LEFT_MOVE, /**< 左移動 */
-	JUMP, /**< ジャンプ */
-	ATTACK, /**< 攻撃 */
-	DAMAGE, /**< ダメージ */
-	DEATH /**< 死亡 */
-};
 
 /**
 * @brief プレイヤーモーション種類
@@ -59,14 +39,11 @@ enum class PLAYER_MOTION {
 class Player {
 public:
 	Player() {
-		player_action_state_ = PLAYER_STATE::WAIT;
 		player_motion_track_ = 0;
-		player_action_ = nullptr;
 		jump_motion_time_ = 0.0f;
 		death_motion_time_ = 0.0f;
 		is_jump_motion_play_ = false;
 		is_death_motion_play_ = false;
-		is_switch_state_death_ = false;
 		pos_ = SimpleMath::Vector3::Zero;
 		rot_ = SimpleMath::Vector3::Zero;
 	}
@@ -77,7 +54,6 @@ public:
 	void Update(const float deltaTime, const ObjectManager* const obj_m);
 	void Render()const;
 
-	void SwitchState(const PLAYER_STATE state);
 	/**
 	* @brief 座標設定
 	* 
@@ -91,7 +67,7 @@ public:
 	* @param[in] rotation 回転
 	*/
 	void SetPlayerRotation(const SimpleMath::Vector3 rotation) { rot_ = rotation; }
-	void SetMotion(const PLAYER_MOTION player_motion);
+	void SetMotion(const int player_motion);
 	void PlayAtkSE()const;
 
 	/**
@@ -99,7 +75,7 @@ public:
 	* 
 	* @return プレイヤーのHP
 	*/
-	float GetPlayerHP() const { return player_status_.GetPlayerHP(); }
+	float GetPlayerHP() const { return status_.GetPlayerHP(); }
 
 	/**
 	* @brief プレイヤーの攻撃が始まったか
@@ -107,7 +83,7 @@ public:
 	* @retval TRUE 始まっている
 	* @retval FALSE 始まっていない
 	*/
-	bool IsPlayerAttackStart() const { return player_attack_.IsPlayerAttackStart(); }
+	bool IsPlayerAttackStart() const { return action_.IsPlayerAttackStart(); }
 
 	/**
 	* @brief プレイヤーが攻撃しているか
@@ -115,7 +91,7 @@ public:
 	* @retval TRUE 攻撃している
 	* @retval FALSE 攻撃していない
 	*/
-	bool IsPlayerAttack() const { return player_attack_colision_.IsPlayerAttack(); }
+	bool IsPlayerAttack() const { return attack_colision_.IsPlayerAttack(); }
 
 	/**
 	* @brief プレイヤーが無敵か
@@ -123,7 +99,7 @@ public:
 	* @retval TRUE 無敵
 	* @retval FALSE 無敵ではない
 	*/
-	bool IsPlayerInvincible()  const { return player_dmg_.IsInvincible(); }
+	bool IsPlayerInvincible()  const { return action_.IsPlayerInvincible(); }
 
 	/**
 	* @brief プレイヤーが死亡しているか
@@ -131,7 +107,7 @@ public:
 	* @retval TRUE 死亡している
 	* @retval FALSE 死亡していない
 	*/
-	bool IsPlayerDeath() const { return player_death_.IsPlayerDeath(); }
+	bool IsPlayerDeath() const { return action_.IsPlayerDeath(); }
 
 	/**
 	* @brief プレイヤーの座標取得
@@ -152,33 +128,30 @@ public:
 	* 
 	* @return プレイヤーのコリジョン
 	*/
-	BoundingOrientedBox GetPlayerCollision() const { return player_colision_.GetColision(); }
+	BoundingOrientedBox GetPlayerCollision() const { return colision_.GetColision(); }
 
 	/**
 	* @brief プレイヤーの攻撃コリジョン取得
 	* 
 	* @return プレイヤーの攻撃コリジョン
 	*/
-	BoundingOrientedBox GetPlayerAttackCollision() const { return player_attack_colision_.GetAttackCollision(); }
+	BoundingOrientedBox GetPlayerAttackCollision() const { return attack_colision_.GetAttackCollision(); }
 
 private:
 	void ResetPlayerMotion()const;
 	void JumpMotion(const float deltaTime);
 	void DeathMotion(const float delaTime);
-	PLAYER_MOTION ConvertToMotion(const PLAYER_STATE player_state)const;
 
 	DX9::SKINNEDMODEL model_; /**< プレイヤーモデル格納 */
 
 	XAudio::SOUNDEFFECT atk_se_; /**< 攻撃SE格納 */
 
-	PLAYER_STATE player_action_state_; /**< 現在のプレイヤー行動 */
 	int player_motion_track_; /**< モーショントラック格納 */
 	float jump_motion_time_; /**< ジャンプモーションの再生時間 */
 	float death_motion_time_; /**< 死亡モーションの再生時間 */
 
 	bool is_jump_motion_play_; /**< ジャンプモーション再生するか */
 	bool is_death_motion_play_; /**< 死亡モーション再生するか */
-	bool is_switch_state_death_; /**< 死亡状態に切り替えたか */
 
 	SimpleMath::Vector3 pos_; /**< プレイヤーの座標格納 */
 	SimpleMath::Vector3 rot_; /**< プレイヤーの回転格納 */
@@ -187,15 +160,8 @@ private:
 	const float PLAYER_SCALE_ = 0.02f; /**< プレイヤーモデルの大きさ */
 	const float RIGHT_WARD_ = -90.0f; /**< 右向き */
 
-	player::PlayerRightMove      player_right_move_; /**< プレイヤー右移動クラス */
-	player::PlayerLeftMove		 player_left_move_; /**< プレイヤー左移動クラス */
-	player::PlayerJump           player_jump_; /**< プレイヤージャンプクラス */
-	player::PlayerAttack		 player_attack_; /**< プレイヤー攻撃クラス */
-	player::PlayerCollision       player_colision_; /**< プレイヤーコリジョンクラス */
-	player::PlayerAttackCollision player_attack_colision_; /**< プレイヤー攻撃コリジョンクラス */
-	player::PlayerWait			 player_wait_; /**< プレイヤー待機クラス */
-	player::PlayerDamage		 player_dmg_; /**< プレイヤーダメージクラス */
-	player::PlayerDeath			 player_death_; /**< プレイヤー死亡クラス */
-	player::PlayerActionState*	 player_action_; /**< プレイヤー状態クラス */
-	player::PlayerStatus		 player_status_; /**< プレイヤーステータスクラス */
+	player::PlayerCollision       colision_; /**< プレイヤーコリジョンクラス */
+	player::PlayerAttackCollision attack_colision_; /**< プレイヤー攻撃コリジョンクラス */
+	player::PlayerStatus		  status_; /**< プレイヤーステータスクラス */
+	PlayerActionManager			  action_; /**< プレイヤーアクションマネージャークラス */
 };

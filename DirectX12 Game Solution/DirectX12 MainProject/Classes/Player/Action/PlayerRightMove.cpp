@@ -1,5 +1,6 @@
-#include "Classes/Player/PlayerRightMove.h"
+#include "Classes/Player/Action/PlayerRightMove.h"
 #include "Classes/Player/Player.h"
+#include "Classes/Player/Action/PlayerActionManager.h"
 
 /**
 * @brief 右移動の更新
@@ -7,7 +8,7 @@
 * @param[in] deltaTime 時間
 * @param[out] player プレイヤー
 */
-void player::PlayerRightMove::Update(const float deltaTime, Player* const player) {
+void player::PlayerRightMove::Update(const float deltaTime, Player* const player, PlayerActionManager* const act_m) {
     SimpleMath::Vector3 pos_ = player->GetPlayerPosition();
     SimpleMath::Vector3 rot_ = player->GetPlayerRotation();
 
@@ -16,17 +17,17 @@ void player::PlayerRightMove::Update(const float deltaTime, Player* const player
         rot_.y = -PLAYER_ROTATION_ANGLE_;
     }
     else {
-        player->SwitchState(PLAYER_STATE::WAIT);
+        act_m->SwitchState(PLAYER_STATE::WAIT, player);
     }
 
     pos_.x = std::clamp(pos_.x, PLAYER_LIMIT_MIN_POS_X_, PLAYER_LIMIT_MAX_POS_X_);
 
     if (DXTK->KeyEvent->pressed.W) {
-        player->SwitchState(PLAYER_STATE::JUMP);
+        act_m->SwitchState(PLAYER_STATE::JUMP, player);
     }
 
     if (DXTK->KeyEvent->pressed.Enter) {
-        player->SwitchState(PLAYER_STATE::ATTACK);
+        act_m->SwitchState(PLAYER_STATE::ATTACK, player);
     }
 
     player->SetPlayerPosition(pos_);

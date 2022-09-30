@@ -9,7 +9,7 @@
 /**
 * インクルードファイル
 */
-#include "Classes/Player/PlayerActionState.h"
+#include "Classes/Player/Action/PlayerActionState.h"
 
 namespace player {
 	/**
@@ -26,7 +26,7 @@ namespace player {
 		~PlayerDamage() {};
 
 		virtual void Initialize();
-		virtual void Update(const float deltaTime, Player* const player);
+		virtual void Update(const float deltaTime, Player* const player, PlayerActionManager* const act_m);
 
 		/**
 		* @brief プレイヤーが無敵か
