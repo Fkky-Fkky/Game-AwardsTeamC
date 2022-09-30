@@ -67,6 +67,9 @@
     <Filter Include="Classes\Player\Action">
       <UniqueIdentifier>{d61bf3df-7e6e-4873-9a35-cf99e1f7e8c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Player\Collision">
+      <UniqueIdentifier>{89eec60c-2b22-426b-88ec-716998a3b27a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -153,12 +156,6 @@
     <ClInclude Include="Base\DX12Effekseer.h">
       <Filter>Classes\Effeseer</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerAttackCollision.h">
-      <Filter>Classes\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Player\PlayerCollision.h">
-      <Filter>Classes\Player</Filter>
-    </ClInclude>
     <ClInclude Include="TitleScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -234,6 +231,12 @@
     <ClInclude Include="Classes\Player\PlayerStatus.h">
       <Filter>Classes\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Player\Collision\PlayerAttackCollision.h">
+      <Filter>Classes\Player\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Player\Collision\PlayerCollision.h">
+      <Filter>Classes\Player\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -298,12 +301,6 @@
     </ClCompile>
     <ClCompile Include="Base\DX12Effekseer.cpp">
       <Filter>Classes\Effeseer</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Player\PlayerAttackCollision.cpp">
-      <Filter>Classes\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Player\PlayerCollision.cpp">
-      <Filter>Classes\Player</Filter>
     </ClCompile>
     <ClCompile Include="TitleScene.cpp">
       <Filter>Scene</Filter>
@@ -379,6 +376,12 @@
     </ClCompile>
     <ClCompile Include="Classes\Player\PlayerStatus.cpp">
       <Filter>Classes\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\Collision\PlayerAttackCollision.cpp">
+      <Filter>Classes\Player\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Player\Collision\PlayerCollision.cpp">
+      <Filter>Classes\Player\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

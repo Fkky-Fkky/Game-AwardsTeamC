@@ -12,8 +12,8 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 
-#include "Classes/Player/PlayerCollision.h"
-#include "Classes/Player/PlayerAttackCollision.h"
+#include "Classes/Player/Collision/PlayerCollision.h"
+#include "Classes/Player/Collision/PlayerAttackCollision.h"
 #include "Classes/Player/PlayerStatus.h"
 #include "Classes/Player/Action/PlayerActionManager.h"
 
