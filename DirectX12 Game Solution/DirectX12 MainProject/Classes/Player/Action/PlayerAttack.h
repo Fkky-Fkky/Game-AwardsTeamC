@@ -24,7 +24,7 @@ namespace player {
 		~PlayerAttack() {};
 
 		virtual void Initialize();
-		virtual void Update(const float deltaTime, Player* const player);
+		virtual void Update(const float deltaTime, Player* const player, PlayerActionManager* const act_m);
 
 		/**
 		* @brief プレイヤーが攻撃を始めたか

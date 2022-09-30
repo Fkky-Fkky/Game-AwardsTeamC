@@ -14,7 +14,7 @@ void player::PlayerDeath::Initialize() {
 * @param[in] deltaTime ŽžŠÔ
 * @param[out] player ƒvƒŒƒCƒ„[
 */
-void player::PlayerDeath::Update(const float deltaTime, Player* const player) {
+void player::PlayerDeath::Update(const float deltaTime, Player* const player, PlayerActionManager* const act_m) {
 	SimpleMath::Vector3 pos_ = player->GetPlayerPosition();
 	if (pos_.y >= DEATH_POS_Y_) {
 		pos_.y = std::max(pos_.y - FALL_SPEED_ * deltaTime, DEATH_POS_Y_);

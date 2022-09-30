@@ -21,6 +21,6 @@ namespace player {
 		~PlayerLeftMove() {};
 
 		virtual void Initialize() {};
-		virtual void Update(const float deltaTime, Player* const player);
+		virtual void Update(const float deltaTime, Player* const player, PlayerActionManager* const act_m);
 	};
 }

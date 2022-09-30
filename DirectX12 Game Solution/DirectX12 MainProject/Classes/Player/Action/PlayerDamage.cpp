@@ -1,5 +1,7 @@
 #include "Classes/Player/Action/PlayerDamage.h"
 #include "Classes/Player/Player.h"
+#include "Classes/Player/Action/PlayerActionManager.h"
+
 
 /**
 * @brief 値の初期化
@@ -17,7 +19,7 @@ void player::PlayerDamage::Initialize() {
 * @param[in] deltaTime 時間
 * @param[out] player プレイヤー
 */
-void player::PlayerDamage::Update(const float deltaTime, Player* const player) {
+void player::PlayerDamage::Update(const float deltaTime, Player* const player, PlayerActionManager* const act_m) {
 	pos_ = player->GetPlayerPosition();
 	rot_ = player->GetPlayerRotation();
 
@@ -25,7 +27,7 @@ void player::PlayerDamage::Update(const float deltaTime, Player* const player) {
 	if (dmg_time >= DMG_TIME_MAX_) {
 		dmg_time = 0.0f;
 		is_invinsible_ = false;
-		player->SwitchState(PLAYER_STATE::WAIT);
+		act_m->SwitchState(PLAYER_STATE::WAIT, player);
 	}
 	
 	if (!one_process_flag_) {
