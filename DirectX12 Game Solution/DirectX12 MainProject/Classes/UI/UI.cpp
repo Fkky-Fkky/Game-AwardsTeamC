@@ -21,6 +21,7 @@ void UI::Initialize() {
 
 	player_hp_pos_ = SimpleMath::Vector3(PLAYER_HP_POS_X_, PLAYER_HP_POS_Y_, 0.0f);
 	boss_hp_pos_   = SimpleMath::Vector3(BOSS_HP_POS_X_,   BOSS_HP_POS_Y_,	 0.0f);
+	ReadFile();
 }
 
 /**
@@ -107,35 +108,35 @@ void UI::Render() const{
 * @brief プレイヤーのHPを揺らす
 */
 void UI::PlayerUIShake() {
-	player_shake_time_ = std::min(player_shake_time_ + time_delta_, PLAYER_SHAKE_TIME_MAX_);
+	player_shake_time_ = std::min(player_shake_time_ + time_delta_, player_shake_time_max_);
 
 	if (player_side_shake_ == LEFT) {
-		player_hp_pos_.x = std::max(player_hp_pos_.x - PLAYER_SHAKE_POWER_X_ * time_delta_, PLAYER_SHAKE_POS_MIN_X_);
-		if (player_hp_pos_.x <= PLAYER_SHAKE_POS_MIN_X_) {
+		player_hp_pos_.x = std::max(player_hp_pos_.x - player_shake_power_x_ * time_delta_, player_shake_pos_min_x_);
+		if (player_hp_pos_.x <= player_shake_pos_min_x_) {
 			player_side_shake_ = RIGHT;
 		}
 	}
 	else {
-		player_hp_pos_.x = std::min(player_hp_pos_.x + PLAYER_SHAKE_POWER_X_ * time_delta_, PLAYER_SHAKE_POS_MAX_X_);
-		if (player_hp_pos_.x >= PLAYER_SHAKE_POS_MAX_X_) {
+		player_hp_pos_.x = std::min(player_hp_pos_.x + player_shake_power_x_ * time_delta_, player_shake_pos_max_x_);
+		if (player_hp_pos_.x >= player_shake_pos_max_x_) {
 			player_side_shake_ = LEFT;
 		}
 	}
 
 	if (player_vertical_shake_ == UP) {
-		player_hp_pos_.y = std::max(player_hp_pos_.y - PLAYER_SHAKE_POWER_Y_ * time_delta_, PLAYER_SHAKE_POS_MIN_Y_);
-		if (player_hp_pos_.y <= PLAYER_SHAKE_POS_MIN_Y_) {
+		player_hp_pos_.y = std::max(player_hp_pos_.y - player_shake_power_y_ * time_delta_, player_shake_pos_min_y_);
+		if (player_hp_pos_.y <= player_shake_pos_min_y_) {
 			player_vertical_shake_ = DOWN;
 		}
 	}
 	else {
-		player_hp_pos_.y = std::min(player_hp_pos_.y + PLAYER_SHAKE_POWER_Y_ * time_delta_, PLAYER_SHAKE_POS_MAX_Y_);
-		if (player_hp_pos_.y >= PLAYER_SHAKE_POS_MAX_Y_) {
+		player_hp_pos_.y = std::min(player_hp_pos_.y + player_shake_power_y_ * time_delta_, player_shake_pos_max_y_);
+		if (player_hp_pos_.y >= player_shake_pos_max_y_) {
 			player_vertical_shake_ = UP;
 		}
 	}
 
-	if (player_shake_time_ >= PLAYER_SHAKE_TIME_MAX_) {
+	if (player_shake_time_ >= player_shake_time_max_) {
 		player_shake_time_ = 0.0f;
 		player_hp_pos_.x = PLAYER_HP_POS_X_;
 		player_hp_pos_.y = PLAYER_HP_POS_Y_;
@@ -147,37 +148,75 @@ void UI::PlayerUIShake() {
 * @brief ボスのHPを揺らす
 */
 void UI::BossUIShake() {
-	boss_shake_time_ = std::min(boss_shake_time_ + time_delta_, BOSS_SHAKE_TIME_MAX_);
+	boss_shake_time_ = std::min(boss_shake_time_ + time_delta_, boss_shake_time_max_);
 
 	if (boss_vertical_shake_ == UP) {
-		boss_hp_pos_.y = std::max(boss_hp_pos_.y - BOSS_SHAKE_POWER_Y_ * time_delta_, BOSS_SHAKE_POS_MIN_Y_);
-		if (boss_hp_pos_.y <= BOSS_SHAKE_POS_MIN_Y_) {
+		boss_hp_pos_.y = std::max(boss_hp_pos_.y - boss_shake_power_y_ * time_delta_, boss_shake_pos_min_y_);
+		if (boss_hp_pos_.y <= boss_shake_pos_min_y_) {
 			boss_vertical_shake_ = DOWN;
 		}
 	}
 	else {
-		boss_hp_pos_.y = std::min(boss_hp_pos_.y + BOSS_SHAKE_POWER_Y_ * time_delta_, BOSS_SHAKE_POS_MAX_Y_);
-		if (boss_hp_pos_.y >= BOSS_SHAKE_POS_MAX_Y_) {
+		boss_hp_pos_.y = std::min(boss_hp_pos_.y + boss_shake_power_y_ * time_delta_, boss_shake_pos_max_y_);
+		if (boss_hp_pos_.y >= boss_shake_pos_max_y_) {
 			boss_vertical_shake_ = UP;
 		}
 	}
 	if (boss_side_shake_ == RIGHT) {
-		boss_hp_pos_.x = std::min(boss_hp_pos_.x + BOSS_SHAKE_POWER_X_ * time_delta_, BOSS_SHAKE_POS_MAX_X_);
-		if (boss_hp_pos_.x >= BOSS_SHAKE_POS_MAX_X_) {
+		boss_hp_pos_.x = std::min(boss_hp_pos_.x + boss_shake_power_x_ * time_delta_, boss_shake_pos_max_x_);
+		if (boss_hp_pos_.x >= boss_shake_pos_max_x_) {
 			boss_side_shake_ = LEFT;
 		}
 	}
 	else {
-		boss_hp_pos_.x = std::max(boss_hp_pos_.x - BOSS_SHAKE_POWER_X_ * time_delta_, BOSS_SHAKE_POS_MIN_X_);
-		if (boss_hp_pos_.x <= BOSS_SHAKE_POS_MIN_X_) {
+		boss_hp_pos_.x = std::max(boss_hp_pos_.x - boss_shake_power_x_ * time_delta_, boss_shake_pos_min_x_);
+		if (boss_hp_pos_.x <= boss_shake_pos_min_x_) {
 			boss_side_shake_ = RIGHT;
 		}
 	}
 
-	if (boss_shake_time_ >= BOSS_SHAKE_TIME_MAX_) {
+	if (boss_shake_time_ >= boss_shake_time_max_) {
 		boss_shake_time_ = 0.0f;
 		boss_hp_pos_.x = BOSS_HP_POS_X_;
 		boss_hp_pos_.y = BOSS_HP_POS_Y_;
 		is_boss_damage_ = false;
 	}
+}
+
+/**
+* @brief ファイルを読み込みパラメーターを設定
+*/
+void UI::ReadFile() {
+	FILE* fp;
+	if (fopen_s(&fp, "UI/UI_data.csv", "r") != 0) {
+		assert(!"UI_data.csvを開けません");
+		throw std::exception();
+	}
+
+	char file_data_[256];
+	fgets(file_data_, 255, fp);
+
+	float shake_range_x_;
+	float shake_range_y_;
+	fscanf_s(
+		fp,
+		"%f,%f,%f,%f,%f,",
+		&shake_range_x_, &shake_range_y_, &player_shake_power_x_, &player_shake_power_y_, &player_shake_time_max_
+	);
+	player_shake_pos_min_x_ = PLAYER_HP_POS_X_ - shake_range_x_;
+	player_shake_pos_max_x_ = PLAYER_HP_POS_X_ + shake_range_x_;
+	player_shake_pos_min_y_ = PLAYER_HP_POS_Y_ - shake_range_y_;
+	player_shake_pos_max_y_ = PLAYER_HP_POS_Y_ + shake_range_y_;
+
+	fscanf_s(
+		fp,
+		"%f,%f,%f,%f,%f,",
+		&shake_range_x_, &shake_range_y_, &boss_shake_power_x_, &boss_shake_power_y_, &boss_shake_time_max_
+	);
+	boss_shake_pos_min_x_ = BOSS_HP_POS_X_ - shake_range_x_;
+	boss_shake_pos_max_x_ = BOSS_HP_POS_X_ + shake_range_x_;
+	boss_shake_pos_min_y_ = BOSS_HP_POS_Y_ - shake_range_y_;
+	boss_shake_pos_max_y_ = BOSS_HP_POS_Y_ + shake_range_y_;
+
+	fclose(fp);
 }
