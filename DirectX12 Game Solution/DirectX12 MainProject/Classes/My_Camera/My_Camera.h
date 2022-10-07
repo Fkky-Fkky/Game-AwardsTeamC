@@ -25,6 +25,15 @@ public:
 		side_shake_state_	  = Right;
 		time_delta_			 = 0.0f;
 		vertical_shake_time_ = 0.0f;
+		camera_init_pos_x_ = 0.0f;
+		camera_init_pos_y_ = 0.0f;
+		vertical_shake_pos_max_ = 0.0f;
+		vertical_shake_pos_min_ = 0.0f;
+		vertical_shake_power_ = 0.0f;
+		vertical_shake_time_max_ = 0.0f;
+		side_shake_power_ = 0.0f;
+		side_shake_pos_min_ = 0.0f;
+		side_shake_pos_max_ = 0.0f;
 		is_vertical_shaking_ = false;
 		side_shake_flag_	 = false;
 		camera_pos_	= SimpleMath::Vector3::Zero;
@@ -35,6 +44,7 @@ public:
 	void Update(const float deltaTime, const ObjectManager* const obj_m_);
 
 private:
+	void ReadFile();
 	void VerticalShake();
 	void SideShake();
 
@@ -43,7 +53,17 @@ private:
 	int vertical_shake_state_; /**< ƒJƒƒ‰c—h‚ê‚Ìó‘Ô */
 	int side_shake_state_; /**< ƒJƒƒ‰‰¡—h‚ê‚Ìó‘Ô */
 	float time_delta_; /**< ŽžŠÔ */
-	float vertical_shake_time_; /**< c—h‚ê‚·‚éŽžŠÔ */
+	float vertical_shake_time_; /**< c—h‚ê‚·‚éŽžŠÔŠi”[ */
+	float camera_init_pos_x_; /**< ƒJƒƒ‰‚Ì‰ŠúXÀ•W*/
+	float camera_init_pos_y_; /**< ƒJƒƒ‰‚Ì‰ŠúYÀ•W */
+	float vertical_shake_pos_max_; /**< c—h‚êŽž‚ÌÅ‘åYÀ•W */
+	float vertical_shake_pos_min_; /**< c—h‚êŽž‚ÌÅ¬YÀ•W@*/
+	float vertical_shake_power_; /**< c—h‚ê‚Ì‹­‚³ */
+	float vertical_shake_time_max_; /**< c—h‚ê‚·‚éÅ‘åŽžŠÔ */
+	float side_shake_power_; /**< ‰¡—h‚ê‚·‚é‹­‚³ */
+	float side_shake_pos_min_; /**< ‰¡—h‚êŽž‚ÌÅ¬XÀ•W */
+	float side_shake_pos_max_; /**< ‰¡—h‚êŽž‚ÌÅ‘åXÀ•W */
+
 	bool is_vertical_shaking_; /**< c—h‚ê‚µ‚Ä‚¢‚é‚© */
 	bool side_shake_flag_; /**< ‰¡—h‚ê‚·‚é‚©ƒtƒ‰ƒO */
 	SimpleMath::Vector3 camera_pos_; /**< ƒJƒƒ‰‚ÌÀ•WŠi”[ */
@@ -56,18 +76,8 @@ private:
 		Left /**< ¶ */
 	};
 
-	const float CAMERA_POS_Y_  = 2.0f; /**< ƒJƒƒ‰‚ÌYÀ•W */
-	const float CAMERA_POS_Z_  = -26.0f; /**< ƒJƒƒ‰‚ÌZÀ•W */
-	const float LOOK_AT_POS_Y_ = 9.0f; /**< ’–Ú‚·‚éYÀ•W */
 	const float FOV_Y_  = 45.0f; /**< Y•ûŒü‚ÌŽ‹–ì */
 	const float ASPECT_ = 16.0f / 9.0f; /**< ƒAƒXƒyƒNƒg”ä */
 	const float NEAR_Z_ = 1.0f; /**< ƒJƒƒ‰‚ª‰f‚·Å¬Z’l */
 	const float FAR_Z_  = 10000.0f; /**< ƒJƒƒ‰‚ª‰f‚·Å‘åZ’l */
-	const float VERTICAL_SHAKE_POS_MAX_  = 2.0f; /**< c—h‚êŽž‚ÌÅ‘åYÀ•W */
-	const float VERTICAL_SHAKE_POS_MIN_  = 0.5f; /**< c—h‚êŽž‚ÌÅ¬YÀ•W@*/
-	const float VERTICAL_SHAKE_POWER_	 = 50.0f; /**< c—h‚ê‚Ì‹­‚³ */
-	const float VERTICAL_SHAKE_TIME_MAX_ = 0.1f; /**< c—h‚ê‚·‚éŽžŠÔ */
-	const float SIDE_SHAKE_POWER_	= 7.0f; /**< ‰¡—h‚ê‚·‚é‹­‚³ */
-	const float SIDE_SHAKE_POS_MIN_ = -0.3f; /**< ‰¡—h‚êŽž‚ÌÅ¬XÀ•W */
-	const float SIDE_SHAKE_POS_MAX_ = 0.3f; /**< ‰¡—h‚êŽž‚ÌÅ‘åXÀ•W */
 };
