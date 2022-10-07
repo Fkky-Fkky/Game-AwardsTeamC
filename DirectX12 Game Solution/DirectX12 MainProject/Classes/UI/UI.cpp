@@ -188,7 +188,7 @@ void UI::BossUIShake() {
 */
 void UI::ReadFile() {
 	FILE* fp;
-	if (fopen_s(&fp, "UI/UI_data.csv", "r") != 0) {
+	if (fopen_s(&fp, "CSV/UI_data.csv", "r") != 0) {
 		assert(!"UI_data.csv‚ðŠJ‚¯‚Ü‚¹‚ñ");
 		throw std::exception();
 	}
