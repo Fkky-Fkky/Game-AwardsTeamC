@@ -23,10 +23,10 @@ void UI::Initialize() {
 * @brief ‰æ‘œ‚Ì“Ç‚Ýž‚Ý
 */
 void UI::LoadAssets() {
-	hp_top_[0] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/player_max.png");
-	hp_top_[1] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/boss_max.png");
-	hp_bottom_[0] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/player_min.png");
-	hp_bottom_[1] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/boss_min.png");
+	hp_top_[PLAYER] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/player_max.png");
+	hp_top_[BOSS]	= DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/boss_max.png");
+	hp_bottom_[PLAYER] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/player_min.png");
+	hp_bottom_[BOSS]   = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/boss_min.png");
 }
 
 /**
@@ -52,9 +52,13 @@ void UI::Update(const float deltaTime, const ObjectManager* const obj_m) {
 		if (old_hp_[i] > hp_[i]) {
 			is_damage_[i] = true;
 		}
+
+		if (is_damage_[i]) {
+			UIShake(i);
+		}
+
 		old_hp_[i] = hp_[i];
 	}
-	UIShake();
 }
 
 /**
@@ -77,47 +81,43 @@ void UI::Render() const{
 
 /**
 * @brief HP‚ð—h‚ç‚·
+* 
+* @param[in] i “®‚©‚·“Y‚¦Žš
 */
-void UI::UIShake() {
-	for (int i = 0; i < CHARACTER_MAX_; i++) {
-		if (!is_damage_[i]) {
-			continue;
-		}
+void UI::UIShake(const int i) {
+	ui_shake_time_[i] = std::min(ui_shake_time_[i] + time_delta_, ui_shake_time_max_[i]);
 
-		ui_shake_time_[i] = std::min(ui_shake_time_[i] + time_delta_, ui_shake_time_max_[i]);
+	if (side_shake_state_[i] == LEFT) {
+		hp_pos_[i].x = std::max(hp_pos_[i].x - ui_side_shake_power_[i] * time_delta_, ui_side_shake_pos_min_[i]);
+		if (hp_pos_[i].x <= ui_side_shake_pos_min_[i]) {
+			side_shake_state_[i] = RIGHT;
+		}
+	}
+	else {
+		hp_pos_[i].x = std::min(hp_pos_[i].x + ui_side_shake_power_[i] * time_delta_, ui_side_shake_pos_max_[i]);
+		if (hp_pos_[i].x >= ui_side_shake_pos_max_[i]) {
+			side_shake_state_[i] = LEFT;
+		}
+	}
 
-		if (side_shake_state_[i] == LEFT) {
-			hp_pos_[i].x = std::max(hp_pos_[i].x - ui_side_shake_power_[i] * time_delta_, ui_side_shake_pos_min_[i]);
-			if (hp_pos_[i].x <= ui_side_shake_pos_min_[i]) {
-				side_shake_state_[i] = RIGHT;
-			}
+	if (vertical_shake_state_[i] == UP) {
+		hp_pos_[i].y = std::max(hp_pos_[i].y - ui_vertical_shake_power_[i] * time_delta_, ui_vertical_shake_pos_min_[i]);
+		if (hp_pos_[i].y <= ui_vertical_shake_pos_min_[i]) {
+			vertical_shake_state_[i] = DOWN;
 		}
-		else {
-			hp_pos_[i].x = std::min(hp_pos_[i].x + ui_side_shake_power_[i] * time_delta_, ui_side_shake_pos_max_[i]);
-			if (hp_pos_[i].x >= ui_side_shake_pos_max_[i]) {
-				side_shake_state_[i] = LEFT;
-			}
+	}
+	else {
+		hp_pos_[i].y = std::min(hp_pos_[i].y + ui_vertical_shake_power_[i] * time_delta_, ui_vertical_shake_pos_max_[i]);
+		if (hp_pos_[i].y >= ui_vertical_shake_pos_max_[i]) {
+			vertical_shake_state_[i] = UP;
 		}
+	}
 
-		if (vertical_shake_state_[i] == UP) {
-			hp_pos_[i].y = std::max(hp_pos_[i].y - ui_vertical_shake_power_[i] * time_delta_, ui_vertical_shake_pos_min_[i]);
-			if (hp_pos_[i].y <= ui_vertical_shake_pos_min_[i]) {
-				vertical_shake_state_[i] = DOWN;
-			}
-		}
-		else {
-			hp_pos_[i].y = std::min(hp_pos_[i].y + ui_vertical_shake_power_[i] * time_delta_, ui_vertical_shake_pos_max_[i]);
-			if (hp_pos_[i].y >= ui_vertical_shake_pos_max_[i]) {
-				vertical_shake_state_[i] = UP;
-			}
-		}
-
-		if (ui_shake_time_[i] >= ui_shake_time_max_[i]) {
-			ui_shake_time_[i] = 0.0f;
-			hp_pos_[i].x = hp_init_pos_x_[i];
-			hp_pos_[i].y = hp_init_pos_y_[i];
-			is_damage_[i] = false;
-		}
+	if (ui_shake_time_[i] >= ui_shake_time_max_[i]) {
+		ui_shake_time_[i] = 0.0f;
+		hp_pos_[i].x = hp_init_pos_x_[i];
+		hp_pos_[i].y = hp_init_pos_y_[i];
+		is_damage_[i] = false;
 	}
 }
 

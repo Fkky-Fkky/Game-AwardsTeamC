@@ -51,7 +51,7 @@ public:
 
 private:
 	void ReadFile();
-	void UIShake();
+	void UIShake(const int i);
 
 	enum { CHARACTER_MAX_ = 2 }; /**< キャラクターの最大数 */
 	DX9::SPRITE hp_top_[CHARACTER_MAX_]; /**< HP満タン画像格納 */
