@@ -22,35 +22,25 @@ class ObjectManager;
 class UI {
 public:
 	UI() {
-		player_side_shake_	   = 0;
-		player_vertical_shake_ = 0;
-		boss_side_shake_	 = 0;
-		boss_vertical_shake_ = 0;
-		player_hp_width_ = 0.0f;
-		boss_hp_width_	 = 0.0f;
-		time_delta_		 = 0.0f;
-		old_player_hp_	 = 0.0f;
-		old_boss_hp_	 = 0.0f;
-		player_shake_time_ = 0.0f;
-		boss_shake_time_   = 0.0f;
-		player_shake_time_max_ = 0.0f;
-		player_shake_pos_min_x_ = 0.0f;
-		player_shake_pos_max_x_ = 0.0f;
-		player_shake_pos_min_y_ = 0.0f;
-		player_shake_pos_max_y_ = 0.0f;
-		player_shake_power_x_ = 0.0f;
-		player_shake_power_y_ = 0.0f;
-		boss_shake_time_max_ = 0.0f;
-		boss_shake_pos_min_x_ = 0.0f;
-		boss_shake_pos_max_x_ = 0.0f;
-		boss_shake_pos_min_y_ = 0.0f;
-		boss_shake_pos_max_y_ = 0.0f;
-		boss_shake_power_x_ = 0.0f;
-		boss_shake_power_y_ = 0.0f;
-		is_player_damage_ = false;
-		is_boss_damage_	  = false;
-		player_hp_pos_ = SimpleMath::Vector3::Zero;
-		boss_hp_pos_   = SimpleMath::Vector3::Zero;
+		time_delta_ = 0.0f;
+		for (int i = 0; i < CHARACTER_MAX_; i++) {
+			side_shake_state_[i]	 = 0;
+			vertical_shake_state_[i] = 0;
+			hp_init_pos_x_[i] = 0.0f;
+			hp_init_pos_y_[i] = 0.0f;
+			hp_width_[i] = 0.0f;
+			old_hp_[i]	 = 0.0f;
+			ui_shake_time_[i]	  = 0.0f;
+			ui_shake_time_max_[i] = 0.0f;
+			ui_side_shake_pos_min_[i] = 0.0f;
+			ui_side_shake_pos_max_[i] = 0.0f;
+			ui_vertical_shake_pos_min_[i] = 0.0f;
+			ui_vertical_shake_pos_max_[i] = 0.0f;
+			ui_side_shake_power_[i]		= 0.0f;
+			ui_vertical_shake_power_[i] = 0.0f;
+			is_damage_[i] = false;
+			hp_pos_[i] = SimpleMath::Vector3::Zero;
+		}
 	}
 	~UI() {};
 
@@ -61,44 +51,35 @@ public:
 
 private:
 	void ReadFile();
-	void PlayerUIShake();
-	void BossUIShake();
+	void UIShake();
 
-	DX9::SPRITE player_hp_top_; /**< プレイヤーHP満タン画像格納 */
-	DX9::SPRITE player_hp_bottom_; /**< プレイヤーHP空画像格納 */
-	DX9::SPRITE boss_hp_top_; /**< ボスHP満タン画像格納 */
-	DX9::SPRITE boss_hp_bottom_; /**< ボスHP空画像格納 */
+	enum { CHARACTER_MAX_ = 2 }; /**< キャラクターの最大数 */
+	DX9::SPRITE hp_top_[CHARACTER_MAX_]; /**< HP満タン画像格納 */
+	DX9::SPRITE hp_bottom_[CHARACTER_MAX_]; /**< HP空画像格納 */
 	
-	int player_side_shake_; /**< プレイヤーHP横揺れ状態 */
-	int player_vertical_shake_; /**< プレイヤーHP縦揺れ状態 */
-	int boss_side_shake_; /**< ボスHP横揺れ状態 */
-	int boss_vertical_shake_; /**< ボスHP縦揺れ状態 */
-	float player_hp_width_; /**< プレイヤーHPの横幅 */
-	float boss_hp_width_; /**< ボスHPの横幅 */
+	int side_shake_state_[CHARACTER_MAX_]; /**< HP横揺れ状態 */
+	int vertical_shake_state_[CHARACTER_MAX_]; /**< HP縦揺れ状態 */
 	float time_delta_; /**< 時間 */
-	float old_player_hp_; /**< 過去のプレイヤーHP格納 */
-	float old_boss_hp_; /**< 過去のボスHP格納 */
-	float player_shake_time_; /**< プレイヤーHP揺らす時間 */
-	float boss_shake_time_; /**< ボスHP揺らす時間 */
-	float player_shake_time_max_; /**< プレイヤーUI揺らす最大時間 */
-	float player_shake_pos_min_x_; /**< プレイヤーUI揺らす最小X座標 */
-	float player_shake_pos_max_x_; /**<プレイヤーUI揺らす最大X座標 */
-	float player_shake_pos_min_y_; /**< プレイヤーUI揺らす最小Y座標 */
-	float player_shake_pos_max_y_; /**< プレイヤーUI揺らす最大Y座標 */
-	float player_shake_power_x_; /**< プレイヤーUI横方向に揺らす強さ */
-	float player_shake_power_y_; /**< プレイヤーUI縦方向に揺らす強さ */
-	float boss_shake_time_max_; /**< ボスUI揺らす最大時間 */
-	float boss_shake_pos_min_x_; /**< ボスUI揺らす最小X座標 */
-	float boss_shake_pos_max_x_; /**< ボスUI揺らす最大X座標 */
-	float boss_shake_pos_min_y_; /**< ボスUI揺らす最小Y座標 */
-	float boss_shake_pos_max_y_; /**< ボスUI揺らす最大Y座標 */
-	float boss_shake_power_x_; /**< ボスUI横方向に揺らす強さ */
-	float boss_shake_power_y_; /**< ボスUI縦方向に揺らす強さ */
+	float hp_init_pos_x_[CHARACTER_MAX_]; /**< HPの初期X座標 */
+	float hp_init_pos_y_[CHARACTER_MAX_]; /**< HPの初期Y座標 */
+	float hp_width_[CHARACTER_MAX_]; /**< HPの横幅 */
+	float old_hp_[CHARACTER_MAX_]; /**< 過去のHP格納 */
+	float ui_shake_time_[CHARACTER_MAX_]; /**< HP揺らす時間 */
+	float ui_shake_time_max_[CHARACTER_MAX_]; /**< UI揺らす最大時間 */
+	float ui_side_shake_pos_min_[CHARACTER_MAX_]; /**< UI揺らす最小X座標 */
+	float ui_side_shake_pos_max_[CHARACTER_MAX_]; /**<UI揺らす最大X座標 */
+	float ui_vertical_shake_pos_min_[CHARACTER_MAX_]; /**< UI揺らす最小Y座標 */
+	float ui_vertical_shake_pos_max_[CHARACTER_MAX_]; /**< UI揺らす最大Y座標 */
+	float ui_side_shake_power_[CHARACTER_MAX_]; /**< UI横方向に揺らす強さ */
+	float ui_vertical_shake_power_[CHARACTER_MAX_]; /**< UI縦方向に揺らす強さ */	
+	bool is_damage_[CHARACTER_MAX_]; /**< ダメージを受けたか */
+	SimpleMath::Vector3 hp_pos_[CHARACTER_MAX_]; /**< HP座標格納 */
 
-	bool is_player_damage_; /**< プレイヤーがダメージを受けたか */
-	bool is_boss_damage_; /**< ボスがダメージを受けたか */
-	SimpleMath::Vector3 player_hp_pos_; /**< プレイヤーHP座標格納 */
-	SimpleMath::Vector3 boss_hp_pos_; /**< ボスHP座標格納 */
+	/**< キャラクターの種類 */
+	enum  CHARACTER {
+		PLAYER, /**< プレイヤー */
+		BOSS /**< ボス */
+	};
 
 	/**< UI揺れる種類 */
 	enum SHAKE_STATE_ {
@@ -108,12 +89,7 @@ private:
 		LEFT /**< 左 */
 	};
 
-	const int PLAYER_HP_HIGHT_ = 30; /**< プレイヤーHP高さ */
-	const int BOSS_HP_HIGHT_   = 30; /**< ボスHP高さ */
-	const float PLAYER_HP_POS_X_ = 50.0f; /**< プレイヤーHPのX座標 */
-	const float PLAYER_HP_POS_Y_ = 680.0f; /**< プレイヤーHPのY座標 */
-	const float BOSS_HP_POS_X_ = 190.0f; /**< ボスHPのX座標 */
-	const float BOSS_HP_POS_Y_ = 30.0f; /**< ボスHPのY座標 */
+	const int HP_HIGHT_ = 30; /**< HP画像の高さ */
 	const float PLAYER_HP_WIDTH_DIVIDE_ = 11.3f; /**< プレイヤーHP1/30の横幅 */
 	const float BOSS_HP_WIDTH_DIVIDE_ = 30.0f; /**< ボスHP1/30の横幅 */
 	const float HP_SPEED_ = 300.0f; /**< HPの増減速度 */
