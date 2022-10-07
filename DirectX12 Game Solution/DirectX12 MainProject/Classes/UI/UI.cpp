@@ -5,33 +5,28 @@
 * @brief 値の初期化
 */
 void UI::Initialize() {
-	player_side_shake_	   = RIGHT;
-	player_vertical_shake_ = UP;
-	boss_side_shake_	 = RIGHT;
-	boss_vertical_shake_ = UP;
-
-	player_hp_width_ = 0.0f;
-	boss_hp_width_	 = 0.0f;
-	old_player_hp_ = 0.0f;
-	old_boss_hp_   = 0.0f;
-	time_delta_	   = 0.0f;
-	player_shake_time_ = 0.0f;
-	is_player_damage_ = false;
-	is_boss_damage_	  = false;
-
-	player_hp_pos_ = SimpleMath::Vector3(PLAYER_HP_POS_X_, PLAYER_HP_POS_Y_, 0.0f);
-	boss_hp_pos_   = SimpleMath::Vector3(BOSS_HP_POS_X_,   BOSS_HP_POS_Y_,	 0.0f);
+	time_delta_ = 0.0f;
 	ReadFile();
+
+	for (int i = 0; i < CHARACTER_MAX_; i++) {
+		side_shake_state_[i]	 = RIGHT;
+		vertical_shake_state_[i] = UP;
+		hp_width_[i] = 0.0f;
+		old_hp_[i]	 = 0.0f;
+		ui_shake_time_[i] = 0.0f;
+		is_damage_[i] = false;
+		hp_pos_[i] = SimpleMath::Vector3(hp_init_pos_x_[i], hp_init_pos_y_[i], 0.0f);
+	}	
 }
 
 /**
 * @brief 画像の読み込み
 */
 void UI::LoadAssets() {
-	player_hp_top_	  = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/player_max.png");
-	player_hp_bottom_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/player_min.png");
-	boss_hp_top_	= DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/boss_max.png");
-	boss_hp_bottom_ = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/boss_min.png");
+	hp_top_[PLAYER] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/player_max.png");
+	hp_top_[BOSS]	= DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/boss_max.png");
+	hp_bottom_[PLAYER] = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/player_min.png");
+	hp_bottom_[BOSS]   = DX9::Sprite::CreateFromFile(DXTK->Device9, L"UI/boss_min.png");
 }
 
 /**
@@ -42,153 +37,96 @@ void UI::LoadAssets() {
 */
 void UI::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	time_delta_ = deltaTime;
-	const float player_hp_ = obj_m->GetPlayerHP() * PLAYER_HP_WIDTH_DIVIDE_;
-	const float boss_hp_   = obj_m->GetBossHP()	  * BOSS_HP_WIDTH_DIVIDE_;
+	float hp_[CHARACTER_MAX_]{};
+	hp_[PLAYER] = obj_m->GetPlayerHP() * PLAYER_HP_WIDTH_DIVIDE_;
+	hp_[BOSS]	= obj_m->GetBossHP()   * BOSS_HP_WIDTH_DIVIDE_;
 
-	if (player_hp_width_ > player_hp_) {
-		player_hp_width_ = std::max(player_hp_width_ - HP_SPEED_ * deltaTime, player_hp_);
-	}
-	else {
-		player_hp_width_ = std::min(player_hp_width_ + HP_SPEED_ * deltaTime, player_hp_);
-	}
+	for (int i = 0; i < CHARACTER_MAX_; i++) {
+		if (hp_width_[i] > hp_[i]) {
+			hp_width_[i] = std::max(hp_width_[i] - HP_SPEED_ * deltaTime, hp_[i]);
+		}
+		else {
+			hp_width_[i] = std::min(hp_width_[i] + HP_SPEED_ * deltaTime, hp_[i]);
+		}
 
-	if (boss_hp_width_ > boss_hp_) {
-		boss_hp_width_ = std::max(boss_hp_width_ - HP_SPEED_ * deltaTime, boss_hp_);
-	}
-	else {
-		boss_hp_width_ = std::min(boss_hp_width_ + HP_SPEED_ * deltaTime, boss_hp_);
-	}
+		if (old_hp_[i] > hp_[i]) {
+			is_damage_[i] = true;
+		}
 
-	if (old_player_hp_ > player_hp_) {
-		is_player_damage_ = true;
-	}
-	if (is_player_damage_) {
-		PlayerUIShake();
-	}
+		if (is_damage_[i]) {
+			UIShake(i);
+		}
 
-	if (old_boss_hp_ > boss_hp_) {
-		is_boss_damage_ = true;
+		old_hp_[i] = hp_[i];
 	}
-	if (is_boss_damage_) {
-		BossUIShake();
-	}
-
-	old_player_hp_ = player_hp_;
-	old_boss_hp_   = boss_hp_;
 }
 
 /**
 * @brief UIの描画
 */
 void UI::Render() const{
-	DX9::SpriteBatch->DrawSimple(
-		player_hp_bottom_.Get(),
-		SimpleMath::Vector3(player_hp_pos_)
-	);
+	for (int i = 0; i < CHARACTER_MAX_; i++) {
+		DX9::SpriteBatch->DrawSimple(
+			hp_bottom_[i].Get(),
+			hp_pos_[i]
+		);
 
-	DX9::SpriteBatch->DrawSimple(
-		player_hp_top_.Get(),
-		SimpleMath::Vector3(player_hp_pos_),
-		RectWH(0, 0, (int)player_hp_width_, PLAYER_HP_HIGHT_)
-	);
-
-	DX9::SpriteBatch->DrawSimple(
-		boss_hp_bottom_.Get(),
-		SimpleMath::Vector3(boss_hp_pos_)
-	);
-
-	DX9::SpriteBatch->DrawSimple(
-		boss_hp_top_.Get(),
-		SimpleMath::Vector3(boss_hp_pos_),
-		RectWH(0, 0, (int)boss_hp_width_, BOSS_HP_HIGHT_)
-	);
+		DX9::SpriteBatch->DrawSimple(
+			hp_top_[i].Get(),
+			hp_pos_[i],
+			RectWH(0, 0, (int)hp_width_[i], HP_HIGHT_)
+		);
+	}
 }
 
 /**
-* @brief プレイヤーのHPを揺らす
+* @brief HPを揺らす
+* 
+* @param[in] i 動かす添え字
 */
-void UI::PlayerUIShake() {
-	player_shake_time_ = std::min(player_shake_time_ + time_delta_, player_shake_time_max_);
+void UI::UIShake(const int i) {
+	ui_shake_time_[i] = std::min(ui_shake_time_[i] + time_delta_, ui_shake_time_max_[i]);
 
-	if (player_side_shake_ == LEFT) {
-		player_hp_pos_.x = std::max(player_hp_pos_.x - player_shake_power_x_ * time_delta_, player_shake_pos_min_x_);
-		if (player_hp_pos_.x <= player_shake_pos_min_x_) {
-			player_side_shake_ = RIGHT;
+	if (side_shake_state_[i] == LEFT) {
+		hp_pos_[i].x = std::max(hp_pos_[i].x - ui_side_shake_power_[i] * time_delta_, ui_side_shake_pos_min_[i]);
+		if (hp_pos_[i].x <= ui_side_shake_pos_min_[i]) {
+			side_shake_state_[i] = RIGHT;
 		}
 	}
 	else {
-		player_hp_pos_.x = std::min(player_hp_pos_.x + player_shake_power_x_ * time_delta_, player_shake_pos_max_x_);
-		if (player_hp_pos_.x >= player_shake_pos_max_x_) {
-			player_side_shake_ = LEFT;
+		hp_pos_[i].x = std::min(hp_pos_[i].x + ui_side_shake_power_[i] * time_delta_, ui_side_shake_pos_max_[i]);
+		if (hp_pos_[i].x >= ui_side_shake_pos_max_[i]) {
+			side_shake_state_[i] = LEFT;
 		}
 	}
 
-	if (player_vertical_shake_ == UP) {
-		player_hp_pos_.y = std::max(player_hp_pos_.y - player_shake_power_y_ * time_delta_, player_shake_pos_min_y_);
-		if (player_hp_pos_.y <= player_shake_pos_min_y_) {
-			player_vertical_shake_ = DOWN;
+	if (vertical_shake_state_[i] == UP) {
+		hp_pos_[i].y = std::max(hp_pos_[i].y - ui_vertical_shake_power_[i] * time_delta_, ui_vertical_shake_pos_min_[i]);
+		if (hp_pos_[i].y <= ui_vertical_shake_pos_min_[i]) {
+			vertical_shake_state_[i] = DOWN;
 		}
 	}
 	else {
-		player_hp_pos_.y = std::min(player_hp_pos_.y + player_shake_power_y_ * time_delta_, player_shake_pos_max_y_);
-		if (player_hp_pos_.y >= player_shake_pos_max_y_) {
-			player_vertical_shake_ = UP;
+		hp_pos_[i].y = std::min(hp_pos_[i].y + ui_vertical_shake_power_[i] * time_delta_, ui_vertical_shake_pos_max_[i]);
+		if (hp_pos_[i].y >= ui_vertical_shake_pos_max_[i]) {
+			vertical_shake_state_[i] = UP;
 		}
 	}
 
-	if (player_shake_time_ >= player_shake_time_max_) {
-		player_shake_time_ = 0.0f;
-		player_hp_pos_.x = PLAYER_HP_POS_X_;
-		player_hp_pos_.y = PLAYER_HP_POS_Y_;
-		is_player_damage_ = false;
+	if (ui_shake_time_[i] >= ui_shake_time_max_[i]) {
+		ui_shake_time_[i] = 0.0f;
+		hp_pos_[i].x = hp_init_pos_x_[i];
+		hp_pos_[i].y = hp_init_pos_y_[i];
+		is_damage_[i] = false;
 	}
 }
 
 /**
-* @brief ボスのHPを揺らす
-*/
-void UI::BossUIShake() {
-	boss_shake_time_ = std::min(boss_shake_time_ + time_delta_, boss_shake_time_max_);
-
-	if (boss_vertical_shake_ == UP) {
-		boss_hp_pos_.y = std::max(boss_hp_pos_.y - boss_shake_power_y_ * time_delta_, boss_shake_pos_min_y_);
-		if (boss_hp_pos_.y <= boss_shake_pos_min_y_) {
-			boss_vertical_shake_ = DOWN;
-		}
-	}
-	else {
-		boss_hp_pos_.y = std::min(boss_hp_pos_.y + boss_shake_power_y_ * time_delta_, boss_shake_pos_max_y_);
-		if (boss_hp_pos_.y >= boss_shake_pos_max_y_) {
-			boss_vertical_shake_ = UP;
-		}
-	}
-	if (boss_side_shake_ == RIGHT) {
-		boss_hp_pos_.x = std::min(boss_hp_pos_.x + boss_shake_power_x_ * time_delta_, boss_shake_pos_max_x_);
-		if (boss_hp_pos_.x >= boss_shake_pos_max_x_) {
-			boss_side_shake_ = LEFT;
-		}
-	}
-	else {
-		boss_hp_pos_.x = std::max(boss_hp_pos_.x - boss_shake_power_x_ * time_delta_, boss_shake_pos_min_x_);
-		if (boss_hp_pos_.x <= boss_shake_pos_min_x_) {
-			boss_side_shake_ = RIGHT;
-		}
-	}
-
-	if (boss_shake_time_ >= boss_shake_time_max_) {
-		boss_shake_time_ = 0.0f;
-		boss_hp_pos_.x = BOSS_HP_POS_X_;
-		boss_hp_pos_.y = BOSS_HP_POS_Y_;
-		is_boss_damage_ = false;
-	}
-}
-
-/**
-* @brief ファイルを読み込みパラメーターを設定
+* @brief CSVファイルを読み込み、パラメーターを設定
 */
 void UI::ReadFile() {
 	FILE* fp;
-	if (fopen_s(&fp, "UI/UI_data.csv", "r") != 0) {
+	if (fopen_s(&fp, "CSV/UI_data.csv", "r") != 0) {
 		assert(!"UI_data.csvを開けません");
 		throw std::exception();
 	}
@@ -196,27 +134,19 @@ void UI::ReadFile() {
 	char file_data_[256];
 	fgets(file_data_, 255, fp);
 
-	float shake_range_x_;
-	float shake_range_y_;
-	fscanf_s(
-		fp,
-		"%f,%f,%f,%f,%f,",
-		&shake_range_x_, &shake_range_y_, &player_shake_power_x_, &player_shake_power_y_, &player_shake_time_max_
-	);
-	player_shake_pos_min_x_ = PLAYER_HP_POS_X_ - shake_range_x_;
-	player_shake_pos_max_x_ = PLAYER_HP_POS_X_ + shake_range_x_;
-	player_shake_pos_min_y_ = PLAYER_HP_POS_Y_ - shake_range_y_;
-	player_shake_pos_max_y_ = PLAYER_HP_POS_Y_ + shake_range_y_;
-
-	fscanf_s(
-		fp,
-		"%f,%f,%f,%f,%f,",
-		&shake_range_x_, &shake_range_y_, &boss_shake_power_x_, &boss_shake_power_y_, &boss_shake_time_max_
-	);
-	boss_shake_pos_min_x_ = BOSS_HP_POS_X_ - shake_range_x_;
-	boss_shake_pos_max_x_ = BOSS_HP_POS_X_ + shake_range_x_;
-	boss_shake_pos_min_y_ = BOSS_HP_POS_Y_ - shake_range_y_;
-	boss_shake_pos_max_y_ = BOSS_HP_POS_Y_ + shake_range_y_;
-
+	for (int i = 0; i < CHARACTER_MAX_; i++) {
+		float shake_range_x_;
+		float shake_range_y_;
+		fscanf_s(
+			fp,
+			"%f,%f,%f,%f,%f,%f,%f,",
+			&hp_init_pos_x_[i], &hp_init_pos_y_[i], &shake_range_x_, &shake_range_y_,
+			&ui_side_shake_power_[i], &ui_vertical_shake_power_[i], &ui_shake_time_max_[i]
+		);
+		ui_side_shake_pos_min_[i] = hp_init_pos_x_[i] - shake_range_x_;
+		ui_side_shake_pos_max_[i] = hp_init_pos_x_[i] + shake_range_x_;
+		ui_vertical_shake_pos_min_[i] = hp_init_pos_y_[i] - shake_range_y_;
+		ui_vertical_shake_pos_max_[i] = hp_init_pos_y_[i] + shake_range_y_;
+	}
 	fclose(fp);
 }
