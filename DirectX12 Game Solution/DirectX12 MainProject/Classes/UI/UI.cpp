@@ -37,7 +37,7 @@ void UI::LoadAssets() {
 */
 void UI::Update(const float deltaTime, const ObjectManager* const obj_m) {
 	time_delta_ = deltaTime;
-	float hp_[CHARACTER_MAX_];
+	float hp_[CHARACTER_MAX_]{};
 	hp_[PLAYER] = obj_m->GetPlayerHP() * PLAYER_HP_WIDTH_DIVIDE_;
 	hp_[BOSS]	= obj_m->GetBossHP()   * BOSS_HP_WIDTH_DIVIDE_;
 
@@ -122,7 +122,7 @@ void UI::UIShake(const int i) {
 }
 
 /**
-* @brief ファイルを読み込みパラメーターを設定
+* @brief CSVファイルを読み込み、パラメーターを設定
 */
 void UI::ReadFile() {
 	FILE* fp;
