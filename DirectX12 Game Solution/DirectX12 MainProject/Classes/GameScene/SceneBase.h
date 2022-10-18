@@ -27,7 +27,7 @@ public:
 	}
 
 	void LoadAssets();
-	void Render()const;
+	virtual void Render()const;
 
 	void LoadBG(const LPCWSTR bg_file);
 	void RenderBG()const;
@@ -54,10 +54,12 @@ private:
 	const int TEXT_WIDTH_  = 1200; /**< テキスト画像の幅 */
 	const int TEXT_HIGHT_  = 300; /**< テキスト画像の高さ */
 	const int ALPHA_SPEED_ = 300; /**< アルファ値増減速度 */
-	const int COLOR_MAX_   = 255; /**< 色の最大値 */
 	const float TEXT_POS_X_ = 40.0f; /**< テキストのX座標 */
 	const float MOVE_SPEED_  = 20.0f; /**< テキストの移動速度 */
 	const float MOVE_DEST_Y_ = 210.0f; /**< テキストの移動先 */
 	const float VOLUME_DOWN_SPEED_ = 800.0f; /**< 音量を下げる速度 */
 	const float VOLUME_MIN_ = -2000.0f; /**< 音量の最低値 */
+
+protected:
+	const int COLOR_MAX_ = 255; /**< 色の最大値 */
 };
