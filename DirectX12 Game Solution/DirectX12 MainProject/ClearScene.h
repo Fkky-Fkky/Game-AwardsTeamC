@@ -7,7 +7,7 @@
 #pragma once
 
 #include "Scene.h"
-#include "Classes/GameScene/SceneBase.h"
+#include "Classes/GameScene/ResultSceneBase.h"
 
 using Microsoft::WRL::ComPtr;
 using std::unique_ptr;
@@ -38,6 +38,6 @@ public:
 	void Render() override;
 
 private:
-	SceneBase scene_base_; /**< シーンベース */
+	ResultSceneBase scene_base_; /**< リザルトシーンベース */
 	const float TEXT_INIT_POS_Y_ = 240.0f; /**< テキストの初期Y座標 */
 };
