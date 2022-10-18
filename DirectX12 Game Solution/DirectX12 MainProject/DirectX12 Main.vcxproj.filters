@@ -237,6 +237,9 @@
     <ClInclude Include="Classes\Player\Collision\PlayerCollision.h">
       <Filter>Classes\Player\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\GameScene\ResultSceneBase.h">
+      <Filter>Classes\GameScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -382,6 +385,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Player\Collision\PlayerCollision.cpp">
       <Filter>Classes\Player\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameScene\ResultSceneBase.cpp">
+      <Filter>Classes\GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

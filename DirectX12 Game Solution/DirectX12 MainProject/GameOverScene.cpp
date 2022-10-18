@@ -53,9 +53,7 @@ void GameOverScene::OnRestartSound()
 NextScene GameOverScene::Update(const float deltaTime)
 {
 	// TODO: Add your game logic here.
-
-    scene_base_.PlayBGM();
-    scene_base_.UpdateText(deltaTime);
+    scene_base_.Update(deltaTime);
 
     if (DXTK->KeyEvent->pressed.Enter)
         return NextScene::TitleScene;
@@ -67,19 +65,5 @@ NextScene GameOverScene::Update(const float deltaTime)
 void GameOverScene::Render()
 {
 	// TODO: Add your rendering code here.
-    DXTK->Direct3D9->Clear(static_cast<D3DCOLOR>(DX9::Colors::RGBA(0, 0, 0, 255)));
-
-    DXTK->Direct3D9->BeginScene();
-    DX9::SpriteBatch->Begin();
-
-    scene_base_.RenderBG();
-    scene_base_.RenderText();
-
-    DX9::SpriteBatch->End();
-    DXTK->Direct3D9->EndScene();
-
     scene_base_.Render();
-
-    DXTK->Direct3D9->WaitUpdate();
-    DXTK->ExecuteCommandList();
 }
