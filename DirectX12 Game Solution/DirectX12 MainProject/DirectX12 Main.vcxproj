@@ -211,6 +211,7 @@
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\LeftHand\BossHandL.h" />
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\RightHand\BossHandR.h" />
     <ClInclude Include="Classes\Enemy\Boss\Status.h" />
+    <ClInclude Include="Classes\GameScene\ResultSceneBase.h" />
     <ClInclude Include="Classes\GameScene\SceneBase.h" />
     <ClInclude Include="Classes\GameScene\SceneChange.h" />
     <ClInclude Include="Classes\Ground\Ground.h" />
@@ -275,6 +276,7 @@
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\LeftHand\BossHandL.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\RightHand\BossHandR.cpp" />
     <ClCompile Include="Classes\Enemy\Boss\Status.cpp" />
+    <ClCompile Include="Classes\GameScene\ResultSceneBase.cpp" />
     <ClCompile Include="Classes\GameScene\SceneBase.cpp" />
     <ClCompile Include="Classes\GameScene\SceneChange.cpp" />
     <ClCompile Include="Classes\Ground\Ground.cpp" />
