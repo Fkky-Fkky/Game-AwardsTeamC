@@ -20,7 +20,6 @@ void ActionManager::Initialize() {
 	action_->Initialize(&hand_.GetHandL(), &hand_.GetHandR());
 	std::random_device seed;
 	random_engine_	 = std::mt19937(seed());
-	random_atk_dist_ = std::uniform_int_distribution<>(ATTACK_STATE_MIN_, ATTACK_STATE_MAX_);
 
 	attack_state_ = WAIT;
 	action_end_flag_	= false;
@@ -89,14 +88,17 @@ void ActionManager::RandomAttackState() {
 		random_state_max_ = HARD_MODE_MAX_;
 	}
 
-	random_atk_dist_ = std::uniform_int_distribution<>(ATTACK_STATE_MIN_, random_state_max_);
-
-	while (true) {
-		attack_state_ = random_atk_dist_(random_engine_);
-		if (attack_state_ != old_atk_state_) {
-			break;
-		}
+	std::vector<int> atk_type_;
+	for (int i = ATTACK_STATE_MIN_; i <= random_state_max_; ++i) {
+		atk_type_.push_back(i);
 	}
+
+	auto result_ = std::remove(atk_type_.begin(), atk_type_.end(), old_atk_state_);
+	atk_type_.erase(result_, atk_type_.end());
+
+	std::shuffle(atk_type_.begin(), atk_type_.end(), random_engine_);
+
+	attack_state_ = atk_type_.front();
 
 	SwitchStateAttack();
 }

@@ -136,7 +136,6 @@ private:
 
 	EFFECT beat_effect_; /**< ’@‚«‚Â‚¯ƒGƒtƒFƒNƒgŠi”[ */
 	std::mt19937 random_engine_; /**< ƒ‰ƒ“ƒ_ƒ€ƒGƒ“ƒWƒ“ */
-	std::uniform_int_distribution<int> random_atk_dist_; /**< UŒ‚‚ÌŽí—Þ“¯ˆê•ª•z */
 
 	XAudio::SOUNDEFFECT slap_se_; /**< “ã‚¬•¥‚¢SEŠi”[ */
 	XAudio::SOUNDEFFECT	beat_se_; /**< ’@‚«‚Â‚¯SEŠi”[ */
