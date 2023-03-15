@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Scene.h"
+#include "Scene/Scene.h"
 #include "Classes/GameScene/SceneBase.h"
 
 using Microsoft::WRL::ComPtr;

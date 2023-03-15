@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Scene.h"
+#include "Scene/Scene.h"
 #include "Classes/Enemy/Boss/Boss.h"
 #include "Classes/Player/Player.h"
 #include "Classes/Ground/Ground.h"

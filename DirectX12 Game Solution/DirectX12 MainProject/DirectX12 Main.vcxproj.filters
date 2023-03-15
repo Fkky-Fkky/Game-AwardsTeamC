@@ -7,9 +7,6 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{29c1d6e3-875e-4d01-a01d-0974e170e5c1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{d7d56ad3-60f4-40ad-b499-8133f5f75990}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes">
       <UniqueIdentifier>{dd2958ce-2f7b-4a6f-a9a6-6e2ed58a8081}</UniqueIdentifier>
     </Filter>
@@ -70,6 +67,9 @@
     <Filter Include="Classes\Player\Collision">
       <UniqueIdentifier>{89eec60c-2b22-426b-88ec-716998a3b27a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{f3edc01b-836b-4f44-8c9a-ccde35dbecab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -84,23 +84,11 @@
     <ClInclude Include="Base\GameBase.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="MainScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Base\dxtk.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneFactory.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Base\DXTKHelpers.h">
       <Filter>Base</Filter>
-    </ClInclude>
-    <ClInclude Include="DontDestroyOnLoad.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Classes\My_Camera\My_Camera.h">
       <Filter>Classes\My_Camera</Filter>
@@ -156,9 +144,6 @@
     <ClInclude Include="Base\DX12Effekseer.h">
       <Filter>Classes\Effeseer</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\GameScene\SceneChange.h">
       <Filter>Classes\GameScene</Filter>
     </ClInclude>
@@ -173,12 +158,6 @@
     </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\Attack\Weak.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOverScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ClearScene.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Enemy\Boss\Parts\Hands\HandManager.h">
       <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
@@ -240,6 +219,27 @@
     <ClInclude Include="Classes\GameScene\ResultSceneBase.h">
       <Filter>Classes\GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\SceneFactory.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ClearScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\DontDestroyOnLoad.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameOverScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\MainScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Main.cpp">
@@ -250,9 +250,6 @@
     </ClCompile>
     <ClCompile Include="Base\GameBase.cpp">
       <Filter>Base</Filter>
-    </ClCompile>
-    <ClCompile Include="MainScene.cpp">
-      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Classes\My_Camera\My_Camera.cpp">
       <Filter>Classes\My_Camera</Filter>
@@ -305,9 +302,6 @@
     <ClCompile Include="Base\DX12Effekseer.cpp">
       <Filter>Classes\Effeseer</Filter>
     </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\GameScene\SceneChange.cpp">
       <Filter>Classes\GameScene</Filter>
     </ClCompile>
@@ -322,12 +316,6 @@
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\Attack\Weak.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands\Attack</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOverScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ClearScene.cpp">
-      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Enemy\Boss\Parts\Hands\HandManager.cpp">
       <Filter>Classes\Enemy\Boss\Parts\Hands</Filter>
@@ -388,6 +376,18 @@
     </ClCompile>
     <ClCompile Include="Classes\GameScene\ResultSceneBase.cpp">
       <Filter>Classes\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ClearScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameOverScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\MainScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

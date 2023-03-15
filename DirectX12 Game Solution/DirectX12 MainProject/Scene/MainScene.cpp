@@ -4,7 +4,7 @@
 
 #include "Base/pch.h"
 #include "Base/dxtk.h"
-#include "SceneFactory.h"
+#include "Scene/SceneFactory.h"
 #include <Base/DX12Effekseer.h>
 
 // Initialize member variables.
