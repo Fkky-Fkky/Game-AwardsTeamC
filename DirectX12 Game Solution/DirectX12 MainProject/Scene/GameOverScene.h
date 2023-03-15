@@ -1,12 +1,12 @@
 /**
-* @file ClearScene.h
-* @brief クリアシーン処理
+* @file GameOverScene.h
+* @brief ゲームオーバーシーン処理
 * @author 吹上純平
 */
 
 #pragma once
 
-#include "Scene.h"
+#include "Scene/Scene.h"
 #include "Classes/GameScene/ResultSceneBase.h"
 
 using Microsoft::WRL::ComPtr;
@@ -14,16 +14,16 @@ using std::unique_ptr;
 using std::make_unique;
 using namespace DirectX;
 
-class ClearScene final : public Scene {
+class GameOverScene final : public Scene {
 public:
-	ClearScene();
-	virtual ~ClearScene() { Terminate(); }
+	GameOverScene();
+	virtual ~GameOverScene() { Terminate(); }
 
-	ClearScene(ClearScene&&) = default;
-	ClearScene& operator= (ClearScene&&) = default;
+	GameOverScene(GameOverScene&&) = default;
+	GameOverScene& operator= (GameOverScene&&) = default;
 
-	ClearScene(ClearScene const&) = delete;
-	ClearScene& operator= (ClearScene const&) = delete;
+	GameOverScene(GameOverScene const&) = delete;
+	GameOverScene& operator= (GameOverScene const&) = delete;
 
 	// These are the functions you will implement.
 	void Initialize() override;
@@ -39,5 +39,5 @@ public:
 
 private:
 	ResultSceneBase scene_base_; /**< リザルトシーンベース */
-	const float TEXT_INIT_POS_Y_ = 240.0f; /**< テキストの初期Y座標 */
+	const float TEXT_INIT_POS_Y_ = 180.0f; /**< テキストの初期Y座標 */
 };

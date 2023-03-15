@@ -4,7 +4,7 @@
 
 #include "pch.h"
 #include "dxtk.h"
-#include "SceneFactory.h"
+#include "Scene/SceneFactory.h"
 
 #pragma comment(lib, "d3d9.lib")
 

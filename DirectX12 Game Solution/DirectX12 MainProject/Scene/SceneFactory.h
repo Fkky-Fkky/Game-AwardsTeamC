@@ -2,10 +2,10 @@
 // SceneFactory.h
 //
 
-#include "TitleScene.h"
-#include "MainScene.h"
-#include "ClearScene.h"
-#include "GameOverScene.h"
+#include "Scene/TitleScene.h"
+#include "Scene/MainScene.h"
+#include "Scene/ClearScene.h"
+#include "Scene/GameOverScene.h"
 
 class SceneFactory final {
 public:

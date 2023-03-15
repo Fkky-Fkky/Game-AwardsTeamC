@@ -4,7 +4,7 @@
 
 #include "Base/pch.h"
 #include "Base/dxtk.h"
-#include "SceneFactory.h"
+#include "Scene/SceneFactory.h"
 
 // Initialize member variables.
 GameOverScene::GameOverScene()
