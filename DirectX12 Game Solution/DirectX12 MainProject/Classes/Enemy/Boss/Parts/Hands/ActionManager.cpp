@@ -21,7 +21,7 @@ void ActionManager::Initialize() {
 	std::random_device seed;
 	random_engine_	 = std::mt19937(seed());
 
-	attack_state_ = WAIT;
+	attack_state_ = LEFT_BEAT;
 	action_end_flag_	= false;
 	is_vertical_shake_  = false;
 	is_side_shake_		= false;
@@ -88,16 +88,19 @@ void ActionManager::RandomAttackState() {
 		random_state_max_ = HARD_MODE_MAX_;
 	}
 
+	//攻撃のリストを作成
 	std::vector<int> atk_type_;
 	for (int i = ATTACK_STATE_MIN_; i <= random_state_max_; ++i) {
 		atk_type_.push_back(i);
 	}
 
-	auto result_ = std::remove(atk_type_.begin(), atk_type_.end(), old_atk_state_);
-	atk_type_.erase(result_, atk_type_.end());
+	//前回の攻撃を一番後ろの要素と入れ替える
+	std::swap(atk_type_[old_atk_state_ - 1], atk_type_.back());
 
-	std::shuffle(atk_type_.begin(), atk_type_.end(), random_engine_);
+	//先頭と、後ろから1つ前の要素の中をシャッフル
+	std::shuffle(atk_type_.begin(), atk_type_.end() - 1, random_engine_);
 
+	//先頭の要素を選択
 	attack_state_ = atk_type_.front();
 
 	SwitchStateAttack();
