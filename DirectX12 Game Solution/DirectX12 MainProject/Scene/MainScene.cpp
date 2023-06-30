@@ -10,7 +10,7 @@
 // Initialize member variables.
 MainScene::MainScene() 
 {
-
+    frame_time_ = 0.0f;
 }
 
 // Initialize a variable and audio resources.
@@ -22,10 +22,11 @@ void MainScene::Initialize()
     player_.Initialize();
     collision_.Initialize();
     scene_change_.Initialize();
-    ui.Initialize();
+    ui_.Initialize();
     object_.SetPlayer(&player_);
     object_.SetBoss(&boss_);
     object_.SetCollision(&collision_);
+    frame_time_ = 0.0f;
 }
 
 // Allocate all memory the Direct3D and Direct2D resources.
@@ -38,7 +39,7 @@ void MainScene::LoadAssets()
     player_.LoadAssets();
     ground_.LoadAssets();
     scene_change_.LoadAssets();
-    ui.LoadAssets();
+    ui_.LoadAssets();
     light_.LoadAssets();
 }
 
@@ -67,19 +68,24 @@ void MainScene::OnRestartSound()
 // Updates the scene.
 NextScene MainScene::Update(const float deltaTime)
 {
-
     // TODO: Add your game logic here.
 
     scene_change_.Update(deltaTime, &object_);
 
+    constexpr float FRAMES_60 = 0.0166666666666667f;
+
     if (scene_change_.IsGameStart()) {
+        frame_time_ += deltaTime;
+        if (frame_time_ >= FRAMES_60) { //60ƒtƒŒ[ƒ€•ªˆ—‚·‚é
+            DX12Effect.Update(deltaTime);
+            frame_time_ -= FRAMES_60;
+        }
         player_.Update(deltaTime, &object_);
         boss_.Update(deltaTime, &object_);
         camera_.Update(deltaTime, &object_);
-        DX12Effect.Update(deltaTime);
         ground_.Update(deltaTime, &object_);
         collision_.Update(deltaTime, &object_);
-        ui.Update(deltaTime, &object_);
+        ui_.Update(deltaTime, &object_);
     }
     
     if (scene_change_.IsSceneChange()) {
@@ -111,7 +117,7 @@ void MainScene::Render()
 
     ground_.Render2D();
     scene_change_.Render2D();
-    ui.Render();
+    ui_.Render();
 
     DX9::SpriteBatch->End();
     DXTK->Direct3D9->EndScene();

@@ -90,7 +90,6 @@ void DX12Effekseer::CEffekseer::Reset()
 void DX12Effekseer::CEffekseer::Update(const float deltaTime)
 {
 	m_manager->Update();
-	m_renderer->SetTime(deltaTime);
 }
 
 /**
