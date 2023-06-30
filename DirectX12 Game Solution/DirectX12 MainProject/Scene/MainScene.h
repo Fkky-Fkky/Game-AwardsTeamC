@@ -55,6 +55,8 @@ private:
 	ObjectManager object_; /**< オブジェクトクラス */
 	SceneBase scene_base_; /**< シーンベースクラス */
 	SceneChange scene_change_; /**< シーン切り替えクラス */
-	UI ui; /**< UIクラス */
+	UI ui_; /**< UIクラス */
 	My_Light light_; /**< ライトクラス */
+
+	float frame_time_; /**< フレームの時間格納 */
 };
