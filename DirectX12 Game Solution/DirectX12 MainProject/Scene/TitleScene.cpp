@@ -63,7 +63,8 @@ NextScene TitleScene::Update(const float deltaTime)
     scene_base_.PlayBGM();
     scene_base_.UpdateText(deltaTime);
 
-    if (DXTK->KeyEvent->pressed.Enter) {
+    if (DXTK->KeyEvent->pressed.Enter ||
+        DXTK->GamePadEvent->b == GamePad::ButtonStateTracker::PRESSED) {
         start_flag_ = true;
     }
 

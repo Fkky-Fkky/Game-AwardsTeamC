@@ -56,7 +56,8 @@ NextScene ClearScene::Update(const float deltaTime)
 
     scene_base_.Update(deltaTime);
 
-    if (DXTK->KeyEvent->pressed.Enter)
+    if (DXTK->KeyEvent->pressed.Enter ||
+        DXTK->GamePadEvent->b == GamePad::ButtonStateTracker::PRESSED)
         return NextScene::TitleScene;
 
 	return NextScene::Continue;

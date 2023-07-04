@@ -12,7 +12,8 @@ void player::PlayerLeftMove::Update(const float deltaTime, Player* const player,
     SimpleMath::Vector3 pos_ = player->GetPlayerPosition();
     SimpleMath::Vector3 rot_ = player->GetPlayerRotation();
 
-    if (DXTK->KeyState->A) {
+    if (DXTK->KeyState->A ||
+        DXTK->GamePadState->thumbSticks.leftX < 0) {
         pos_.x -= PLAYER_MOVE_SPEED_ * deltaTime;
         rot_.y = PLAYER_ROTATION_ANGLE_;
     }
@@ -22,11 +23,13 @@ void player::PlayerLeftMove::Update(const float deltaTime, Player* const player,
 
     pos_.x = std::clamp(pos_.x, PLAYER_LIMIT_MIN_POS_X_, PLAYER_LIMIT_MAX_POS_X_);
 
-    if (DXTK->KeyEvent->pressed.W) {
+    if (DXTK->KeyEvent->pressed.W ||
+        DXTK->GamePadEvent->a == GamePad::ButtonStateTracker::PRESSED) {
         act_m->SwitchState(PLAYER_STATE::JUMP, player);
     }
 
-    if (DXTK->KeyEvent->pressed.Enter) {
+    if (DXTK->KeyEvent->pressed.Enter ||
+        DXTK->GamePadEvent->x == GamePad::ButtonStateTracker::PRESSED) {
         act_m->SwitchState(PLAYER_STATE::ATTACK, player);
     }
 

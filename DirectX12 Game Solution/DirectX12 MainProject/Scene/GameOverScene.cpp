@@ -55,7 +55,8 @@ NextScene GameOverScene::Update(const float deltaTime)
 	// TODO: Add your game logic here.
     scene_base_.Update(deltaTime);
 
-    if (DXTK->KeyEvent->pressed.Enter)
+    if (DXTK->KeyEvent->pressed.Enter ||
+        DXTK->GamePadEvent->b == GamePad::ButtonStateTracker::PRESSED)
         return NextScene::TitleScene;
 
 	return NextScene::Continue;
