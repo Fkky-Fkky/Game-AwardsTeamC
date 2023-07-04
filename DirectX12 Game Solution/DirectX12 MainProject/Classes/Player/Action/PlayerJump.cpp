@@ -98,20 +98,24 @@ void player::PlayerJump::JumpingMove() {
     const bool is_player_right_ward_ = rot_.y < 0;
 
     if (is_player_right_ward_) {
-        if (DXTK->KeyState->D) {
+        if (DXTK->KeyState->D ||
+            DXTK->GamePadState->thumbSticks.leftX > 0) {
             pos_.x += JUMPING_MOVE_SPEED_ * time_delta_;
             rot_.y = -PLAYER_ROTATION_ANGLE_;
         }
-        if (DXTK->KeyState->A) {
+        if (DXTK->KeyState->A ||
+            DXTK->GamePadState->thumbSticks.leftX < 0) {
             pos_.x -= JUMPING_MOVE_SPEED_REVERSE * time_delta_;
         }
     }
     else {
-        if (DXTK->KeyState->A) {
+        if (DXTK->KeyState->A ||
+            DXTK->GamePadState->thumbSticks.leftX < 0) {
             pos_.x -= JUMPING_MOVE_SPEED_ * time_delta_;
             rot_.y = PLAYER_ROTATION_ANGLE_;
         }
-        if (DXTK->KeyState->D) {
+        if (DXTK->KeyState->D ||
+            DXTK->GamePadState->thumbSticks.leftX > 0) {
             pos_.x += JUMPING_MOVE_SPEED_REVERSE * time_delta_;
         }
     }
