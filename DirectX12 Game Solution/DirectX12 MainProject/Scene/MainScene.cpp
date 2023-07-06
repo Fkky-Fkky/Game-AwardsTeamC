@@ -72,7 +72,7 @@ NextScene MainScene::Update(const float deltaTime)
 
     scene_change_.Update(deltaTime, &object_);
 
-    constexpr float FRAMES_60 = 0.0166666666666667f;
+    constexpr float FRAMES_60 = 0.016666f;
 
     if (scene_change_.IsGameStart()) {
         frame_time_ += deltaTime;
