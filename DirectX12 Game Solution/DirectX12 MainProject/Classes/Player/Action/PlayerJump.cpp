@@ -1,6 +1,7 @@
 #include "Classes/Player/Action/PlayerJump.h"
 #include "Classes/Player/Player.h"
 #include "Classes/Player/Action/PlayerActionManager.h"
+#include "Classes/Input/InputManager.h"
 
 /**
 * @brief ílÇÃèâä˙âª
@@ -98,24 +99,20 @@ void player::PlayerJump::JumpingMove() {
     const bool is_player_right_ward_ = rot_.y < 0;
 
     if (is_player_right_ward_) {
-        if (DXTK->KeyState->D ||
-            DXTK->GamePadState->thumbSticks.leftX > 0) {
+        if (InputManager::GetInstance().IsInputRightMove()) {
             pos_.x += JUMPING_MOVE_SPEED_ * time_delta_;
             rot_.y = -PLAYER_ROTATION_ANGLE_;
         }
-        if (DXTK->KeyState->A ||
-            DXTK->GamePadState->thumbSticks.leftX < 0) {
+        if (InputManager::GetInstance().IsInputLeftMove()) {
             pos_.x -= JUMPING_MOVE_SPEED_REVERSE * time_delta_;
         }
     }
     else {
-        if (DXTK->KeyState->A ||
-            DXTK->GamePadState->thumbSticks.leftX < 0) {
+        if (InputManager::GetInstance().IsInputLeftMove()) {
             pos_.x -= JUMPING_MOVE_SPEED_ * time_delta_;
             rot_.y = PLAYER_ROTATION_ANGLE_;
         }
-        if (DXTK->KeyState->D ||
-            DXTK->GamePadState->thumbSticks.leftX > 0) {
+        if (InputManager::GetInstance().IsInputRightMove()) {
             pos_.x += JUMPING_MOVE_SPEED_REVERSE * time_delta_;
         }
     }

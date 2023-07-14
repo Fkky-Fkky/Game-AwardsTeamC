@@ -1,7 +1,7 @@
 /**
 * @file LeftSlap.h
 * @brief ¶“ã‚¬•¥‚¢UŒ‚ˆ—ƒNƒ‰ƒX
-* @outhor ãƒ•½
+* @author ãƒ•½
 */
 
 #pragma once

@@ -5,6 +5,7 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 #include "Scene/SceneFactory.h"
+#include "Classes/Input/InputManager.h"
 
 // Initialize member variables.
 ClearScene::ClearScene()
@@ -56,8 +57,7 @@ NextScene ClearScene::Update(const float deltaTime)
 
     scene_base_.Update(deltaTime);
 
-    if (DXTK->KeyEvent->pressed.Enter ||
-        DXTK->GamePadEvent->b == GamePad::ButtonStateTracker::PRESSED)
+    if (InputManager::GetInstance().IsInputDecision())
         return NextScene::TitleScene;
 
 	return NextScene::Continue;

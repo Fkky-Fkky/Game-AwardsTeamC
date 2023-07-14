@@ -1,7 +1,7 @@
 /**
 * @file LeftBeat.h
 * @brief ¶’@‚«‚Â‚¯UŒ‚ˆ—ƒNƒ‰ƒX
-* @outhor ãƒ•½
+* @author ãƒ•½
 */
 
 #pragma once

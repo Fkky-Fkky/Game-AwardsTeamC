@@ -1,7 +1,7 @@
 /**
 * @file PlayerLeftMove.h
 * @brief プレイヤー左移動処理クラス
-* @outhor 吹上純平
+* @author 吹上純平
 */
 
 #pragma once
