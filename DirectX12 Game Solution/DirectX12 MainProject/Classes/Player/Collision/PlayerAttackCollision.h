@@ -1,7 +1,7 @@
 /**
 * @file PlayerAttackCollision.h
 * @brief プレイヤー攻撃コリジョン処理クラス
-* @outhor 吹上純平
+* @author 吹上純平
 */
 
 #pragma once

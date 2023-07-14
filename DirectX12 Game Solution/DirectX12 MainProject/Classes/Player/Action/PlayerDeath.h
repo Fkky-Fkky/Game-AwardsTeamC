@@ -1,7 +1,7 @@
 /**
 * @file PlayerDeath.h
 * @brief プレイヤー死亡処理クラス
-* @outhor 吹上純平
+* @author 吹上純平
 */
 
 #pragma once

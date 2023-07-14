@@ -1,7 +1,7 @@
 /**
 * @file PlayerWait.h
 * @brief プレイヤー待機処理クラス
-* @outhor 吹上純平
+* @author 吹上純平
 */
 
 #pragma once

@@ -1,7 +1,7 @@
 /**
 * @file Wait.h
 * @brief ‘Ò‹@ˆ—ƒNƒ‰ƒX
-* @outhor ãƒ•½
+* @author ãƒ•½
 */
 
 #pragma once
