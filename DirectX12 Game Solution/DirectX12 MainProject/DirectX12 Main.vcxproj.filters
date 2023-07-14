@@ -70,6 +70,9 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{f3edc01b-836b-4f44-8c9a-ccde35dbecab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Input">
+      <UniqueIdentifier>{14822d8b-412a-4101-84e2-eafbf12c5d8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\d3dx12.h">
@@ -239,6 +242,9 @@
     </ClInclude>
     <ClInclude Include="Scene\Scene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Input\InputManager.h">
+      <Filter>Classes\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
