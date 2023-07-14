@@ -137,7 +137,7 @@ void SceneBase::PlayBGM() const {
 * 
 * @param[in] deltaTime ŽžŠÔ
 */
-void SceneBase::FadeOut(const float deltaTime) {
+void SceneBase::FadeOutBGM(const float deltaTime) {
     volume_ = std::max(volume_ - VOLUME_DOWN_SPEED_ * deltaTime, VOLUME_MIN_);
     bgm_->SetVolume(volume_);
 }

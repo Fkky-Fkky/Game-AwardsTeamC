@@ -5,6 +5,7 @@
 #include "Base/pch.h"
 #include "Base/dxtk.h"
 #include "Scene/SceneFactory.h"
+#include "Classes/Input/InputManager.h"
 
 // Initialize member variables.
 TitleScene::TitleScene()
@@ -63,18 +64,23 @@ NextScene TitleScene::Update(const float deltaTime)
     scene_base_.PlayBGM();
     scene_base_.UpdateText(deltaTime);
 
-    if (DXTK->KeyEvent->pressed.Enter ||
-        DXTK->GamePadEvent->b == GamePad::ButtonStateTracker::PRESSED) {
+    if (!scene_base_.IsTextAlphaMax()) {
+        return NextScene::Continue;
+    }
+
+    if (InputManager::GetInstance().IsInputDecision()) {
         start_flag_ = true;
     }
 
-    if (start_flag_) {
-        black_alpha_ += BLACK_ALPHA_SPEED_ * deltaTime;
-        if (black_alpha_ > COLOR_MAX_) {
-            black_alpha_ = COLOR_MAX_;
-        }
-        scene_base_.FadeOut(deltaTime);
+    if (!start_flag_) {
+        return NextScene::Continue;
     }
+
+    black_alpha_ += BLACK_ALPHA_SPEED_ * deltaTime;
+    if (black_alpha_ > COLOR_MAX_) {
+        black_alpha_ = COLOR_MAX_;
+    }
+    scene_base_.FadeOutBGM(deltaTime);
 
     if (black_alpha_ >= COLOR_MAX_) {
         return NextScene::MainScene;

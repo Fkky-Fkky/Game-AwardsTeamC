@@ -37,7 +37,15 @@ public:
 	void RenderText()const;
 	void SetBGM(const LPCWSTR bgm_file);
 	void PlayBGM()const;
-	void FadeOut(const float deltaTime);
+	void FadeOutBGM(const float deltaTime);
+
+	/*
+	* @biref テキストのアルファ値が最大(255)になったか
+	* 
+	* @retval TRUE アルファ値が最大
+	* @retval FALSE アルファ値が最大ではない
+	*/
+	bool IsTextAlphaMax()const { return text_alpha_ >= COLOR_MAX_; }
 private:
 	DX12::DESCRIPTORHEAP descriptorHeap;
 	DX12::SPRITEBATCH    spriteBatch;
