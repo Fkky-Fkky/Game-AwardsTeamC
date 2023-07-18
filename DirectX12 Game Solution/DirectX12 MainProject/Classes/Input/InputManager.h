@@ -63,7 +63,7 @@ public:
 	* @retval TRUE “ü—Í‚³‚ê‚Ä‚¢‚é
 	* @retval FALSE “ü—Í‚³‚ê‚Ä‚¢‚È‚¢
 	*/
-	bool IsInputDecision() { return DXTK->KeyState->Enter || DXTK->GamePadEvent->b == GamePad::ButtonStateTracker::PRESSED; }
+	bool IsInputDecision() { return DXTK->KeyEvent->pressed.Enter || DXTK->GamePadEvent->b == GamePad::ButtonStateTracker::PRESSED; }
 
 private:
 	InputManager() {};
